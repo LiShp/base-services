@@ -8,9 +8,9 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <groupId>com.gw</groupId>
-    <artifactId>domain-hr</artifactId>
+    <artifactId>domain_hr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>domain-hr</name>
+    <name>domain_hr</name>
     <description>hr系统领域服务</description>
 
     <dependencies>

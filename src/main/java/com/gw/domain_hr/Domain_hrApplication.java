@@ -1,4 +1,4 @@
-package com.gw.domain-hr;
+package com.gw.domain_hr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,15 +12,15 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @EnableSwagger2
-@MapperScan(basePackages = "com.gw.domain-hr.mapper")
-@ComponentScan(basePackages = {"com.gw.domain-hr.*","com.gw.cloud.common.base.config"})
+@MapperScan(basePackages = "com.gw.domain_hr.mapper")
+@ComponentScan(basePackages = {"com.gw.domain_hr.*","com.gw.cloud.common.base.config"})
 @EnableFeignClients
 @EnableHystrix
 @EnableHystrixDashboard
 @SpringCloudApplication
-public class Domain-hrApplication {
+public class Domain_hrApplication {
 
-    public static void main(String[] args) {SpringApplication.run(Domain-hrApplication.class, args);}
+    public static void main(String[] args) {SpringApplication.run(Domain_hrApplication.class, args);}
 
 }
 

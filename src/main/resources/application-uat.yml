@@ -1,6 +1,6 @@
 spring:
   application:
-    name: domain-hr
+    name: domain_hr
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://10.255.30.212:3306/domain_hr?characterEncoding=utf8
