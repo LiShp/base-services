@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain-hr.mapper.DomainBasicInfoMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain-hr.entity.DomainBasicInfo">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <result column="value_no" jdbcType="INTEGER" property="valueNo" />
+        <result column="text" jdbcType="VARCHAR" property="text" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="f_key" jdbcType="VARCHAR" property="fKey" />
+        <result column="show_order" jdbcType="INTEGER" property="showOrder" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="delete" jdbcType="BIT" property="delete" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_personnel_no" jdbcType="VARCHAR" property="updatePersonnelNo" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        domain_basic_info.parent_id,
+        domain_basic_info.value_no,
+        domain_basic_info.text,
+        domain_basic_info.name,
+        domain_basic_info.f_key,
+        domain_basic_info.show_order,
+        domain_basic_info.code,
+        domain_basic_info.delete,
+        domain_basic_info.remark,
+        domain_basic_info.create_time,
+        domain_basic_info.create_personnel_no,
+        domain_basic_info.update_time,
+        domain_basic_info.update_personnel_no
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="parentId != null">
+            parent_id = #{parentId},
+        </if>
+        <if test="valueNo != null">
+            value_no = #{valueNo},
+        </if>
+        <if test="text != null">
+            text = #{text},
+        </if>
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="fKey != null">
+            f_key = #{fKey},
+        </if>
+        <if test="showOrder != null">
+            show_order = #{showOrder},
+        </if>
+        <if test="code != null">
+            code = #{code},
+        </if>
+        <if test="delete != null">
+            delete = #{delete},
+        </if>
+        <if test="remark != null">
+            remark = #{remark},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="createPersonnelNo != null">
+            create_personnel_no = #{createPersonnelNo},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime},
+        </if>
+        <if test="updatePersonnelNo != null">
+            update_personnel_no = #{updatePersonnelNo}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="parentId != null">
+            #{parentId},
+        </if>
+        <if test="valueNo != null">
+            #{valueNo},
+        </if>
+        <if test="text != null">
+            #{text},
+        </if>
+        <if test="name != null">
+            #{name},
+        </if>
+        <if test="fKey != null">
+            #{fKey},
+        </if>
+        <if test="showOrder != null">
+            #{showOrder},
+        </if>
+        <if test="code != null">
+            #{code},
+        </if>
+        <if test="delete != null">
+            #{delete},
+        </if>
+        <if test="remark != null">
+            #{remark},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="createPersonnelNo != null">
+            #{createPersonnelNo},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime},
+        </if>
+        <if test="updatePersonnelNo != null">
+            #{updatePersonnelNo}
+        </if>
+    </sql>
+
+    <sql id="Base_Where_Clause" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="parentId != null">and domain_basic_info.parent_id = #{parentId,jdbcType=INTEGER} </if>
+                <if test="valueNo != null">and domain_basic_info.value_no = #{valueNo,jdbcType=INTEGER} </if>
+                <if test="text != null and text != ''">and domain_basic_info.text = #{text,jdbcType=VARCHAR} </if>
+                <if test="name != null and name != ''">and domain_basic_info.name = #{name,jdbcType=VARCHAR} </if>
+                <if test="fKey != null and fKey != ''">and domain_basic_info.f_key = #{fKey,jdbcType=VARCHAR} </if>
+                <if test="showOrder != null">and domain_basic_info.show_order = #{showOrder,jdbcType=INTEGER} </if>
+                <if test="code != null and code != ''">and domain_basic_info.code = #{code,jdbcType=VARCHAR} </if>
+                <if test="delete != null">and domain_basic_info.delete = #{delete,jdbcType=BIT} </if>
+                <if test="remark != null and remark != ''">and domain_basic_info.remark = #{remark,jdbcType=VARCHAR} </if>
+                <if test="createTime != null">and domain_basic_info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_basic_info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
+                <if test="updateTime != null">and domain_basic_info.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
+                <if test="updatePersonnelNo != null and updatePersonnelNo != ''">and domain_basic_info.update_personnel_no = #{updatePersonnelNo,jdbcType=VARCHAR} </if>
+            </trim>
+        </where>
+        <choose>
+            <when test="sortString!=null and sortString!=''">
+                order by ${sortString}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+
+    </sql>
+</mapper>
