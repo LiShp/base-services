@@ -1,4 +1,4 @@
-package com.gw.domain-hr.entity;
+package com.gw.domain_hr.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;

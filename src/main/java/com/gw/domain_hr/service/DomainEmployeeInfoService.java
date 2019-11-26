@@ -1,9 +1,9 @@
-package com.gw.domain-hr.service;
+package com.gw.domain_hr.service;
 
 import com.gw.cloud.common.base.service.BaseService;
 import com.gw.cloud.common.base.util.QueryResult;
-import com.gw.domain-hr.mapper.DomainEmployeeInfoMapper;
-import com.gw.domain-hr.entity.DomainEmployeeInfo;
+import com.gw.domain_hr.mapper.DomainEmployeeInfoMapper;
+import com.gw.domain_hr.entity.DomainEmployeeInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

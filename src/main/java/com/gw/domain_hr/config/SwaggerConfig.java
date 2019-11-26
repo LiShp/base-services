@@ -1,4 +1,4 @@
-package com.gw.domain-hr.config;
+package com.gw.domain_hr.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

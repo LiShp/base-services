@@ -1,7 +1,7 @@
-package com.gw.domain-hr.mapper;
+package com.gw.domain_hr.mapper;
 
 import com.gw.cloud.common.base.mapper.BaseMapper;
-import com.gw.domain-hr.entity.DomainBasicInfo;
+import com.gw.domain_hr.entity.DomainBasicInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
