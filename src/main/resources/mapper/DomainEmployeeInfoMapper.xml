@@ -51,7 +51,7 @@
         <result column="card_type" jdbcType="INTEGER" property="cardType" />
         <result column="card_name" jdbcType="VARCHAR" property="cardName" />
         <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
-        <result column="delete" jdbcType="BIT" property="delete" />
+        <result column="delete_flag" jdbcType="BIT" property="delete_flag" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
@@ -107,7 +107,7 @@
         domain_employee_Info.card_type,
         domain_employee_Info.card_name,
         domain_employee_Info.card_no,
-        domain_employee_Info.delete,
+        domain_employee_Info.delete_flag,
         domain_employee_Info.remark,
         domain_employee_Info.create_time,
         domain_employee_Info.create_personnel_no,
@@ -257,8 +257,8 @@
         <if test="cardNo != null">
             card_no = #{cardNo},
         </if>
-        <if test="delete != null">
-            delete = #{delete},
+        <if test="delete_flag != null">
+            delete_flag = #{delete_flag},
         </if>
         <if test="remark != null">
             remark = #{remark},
@@ -419,8 +419,8 @@
         <if test="cardNo != null">
             #{cardNo},
         </if>
-        <if test="delete != null">
-            #{delete},
+        <if test="delete_flag != null">
+            #{delete_flag},
         </if>
         <if test="remark != null">
             #{remark},
@@ -489,7 +489,7 @@
                 <if test="cardType != null">and domain_employee_Info.card_type = #{cardType,jdbcType=INTEGER} </if>
                 <if test="cardName != null and cardName != ''">and domain_employee_Info.card_name = #{cardName,jdbcType=VARCHAR} </if>
                 <if test="cardNo != null and cardNo != ''">and domain_employee_Info.card_no = #{cardNo,jdbcType=VARCHAR} </if>
-                <if test="delete != null">and domain_employee_Info.delete = #{delete,jdbcType=BIT} </if>
+                <if test="delete_flag != null">and domain_employee_Info.delete_flag = #{delete_flag,jdbcType=BIT} </if>
                 <if test="remark != null and remark != ''">and domain_employee_Info.remark = #{remark,jdbcType=VARCHAR} </if>
                 <if test="createTime != null">and domain_employee_Info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_employee_Info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>

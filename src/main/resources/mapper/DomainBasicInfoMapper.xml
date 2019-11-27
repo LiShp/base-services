@@ -11,7 +11,7 @@
         <result column="f_key" jdbcType="VARCHAR" property="fKey" />
         <result column="show_order" jdbcType="INTEGER" property="showOrder" />
         <result column="code" jdbcType="VARCHAR" property="code" />
-        <result column="delete" jdbcType="BIT" property="delete" />
+        <result column="delete_flag" jdbcType="BIT" property="delete_flag" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
@@ -27,7 +27,7 @@
         domain_basic_info.f_key,
         domain_basic_info.show_order,
         domain_basic_info.code,
-        domain_basic_info.delete,
+        domain_basic_info.delete_flag,
         domain_basic_info.remark,
         domain_basic_info.create_time,
         domain_basic_info.create_personnel_no,
@@ -57,8 +57,8 @@
         <if test="code != null">
             code = #{code},
         </if>
-        <if test="delete != null">
-            delete = #{delete},
+        <if test="delete_flag != null">
+            delete_flag = #{delete_flag},
         </if>
         <if test="remark != null">
             remark = #{remark},
@@ -99,8 +99,8 @@
         <if test="code != null">
             #{code},
         </if>
-        <if test="delete != null">
-            #{delete},
+        <if test="delete_flag != null">
+            #{delete_flag},
         </if>
         <if test="remark != null">
             #{remark},
@@ -129,7 +129,7 @@
                 <if test="fKey != null and fKey != ''">and domain_basic_info.f_key = #{fKey,jdbcType=VARCHAR} </if>
                 <if test="showOrder != null">and domain_basic_info.show_order = #{showOrder,jdbcType=INTEGER} </if>
                 <if test="code != null and code != ''">and domain_basic_info.code = #{code,jdbcType=VARCHAR} </if>
-                <if test="delete != null">and domain_basic_info.delete = #{delete,jdbcType=BIT} </if>
+                <if test="delete_flag != null">and domain_basic_info.delete_flag = #{delete_flag,jdbcType=BIT} </if>
                 <if test="remark != null and remark != ''">and domain_basic_info.remark = #{remark,jdbcType=VARCHAR} </if>
                 <if test="createTime != null">and domain_basic_info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_basic_info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>

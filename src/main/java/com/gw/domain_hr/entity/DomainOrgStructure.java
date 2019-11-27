@@ -133,13 +133,6 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
     private Date enableTime;
 
     /**
-     * 是否删除（0否 1是）对应商旅status状态（1:启用 0:禁用） 
-     */
-    @Column(name = "`delete`")
-    @ApiModelProperty("是否删除（0否 1是）对应商旅status状态（1:启用 0:禁用） ")
-    private Boolean delete;
-
-    /**
      * 备注信息
      */
     @Column(name = "`remark`")

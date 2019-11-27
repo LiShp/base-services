@@ -58,6 +58,8 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`birth_date`")
     @ApiModelProperty("出生日期")
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date birthDate;
 
     /**
@@ -149,6 +151,8 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`graduation_date`")
     @ApiModelProperty("毕业日期")
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date graduationDate;
 
     /**
@@ -247,6 +251,8 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`join_date`")
     @ApiModelProperty("入厂日期")
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date joinDate;
 
     /**
@@ -296,6 +302,8 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`dismission_date`")
     @ApiModelProperty("离职日期")
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date dismissionDate;
 
     /**
@@ -353,13 +361,6 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`card_no`")
     @ApiModelProperty("身份证号码")
     private String cardNo;
-
-    /**
-     * 是否删除：0否 1是
-     */
-    @Column(name = "`delete`")
-    @ApiModelProperty("是否删除：0否 1是")
-    private Boolean delete;
 
     /**
      * 备注信息

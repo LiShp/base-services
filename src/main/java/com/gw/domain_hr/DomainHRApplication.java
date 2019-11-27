@@ -18,9 +18,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableHystrix
 @EnableHystrixDashboard
 @SpringCloudApplication
-public class Domain_hrApplication {
+public class DomainHRApplication {
 
-    public static void main(String[] args) {SpringApplication.run(Domain_hrApplication.class, args);}
+    public static void main(String[] args) {SpringApplication.run(DomainHRApplication.class, args);}
 
 }
 

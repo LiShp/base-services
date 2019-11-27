@@ -75,13 +75,6 @@ public class DomainBasicInfo extends AutoIncrementKeyBaseDomain<Long> {
     private String code;
 
     /**
-     * 是否删除（0：否 1：是）
-     */
-    @Column(name = "`delete`")
-    @ApiModelProperty("是否删除（0：否 1：是）")
-    private Boolean delete;
-
-    /**
      * 备注信息
      */
     @Column(name = "`remark`")
