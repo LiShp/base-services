@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gw.domain_hr.mapperdata.DataToOrgStruMapper">
+
+    <sql id="org">
+        ta.GroupID as group_code,
+        ta.G_CName as group_name,
+        ta.G_ParentID as parent_id,
+        ta.G_ShowOrder as show_order,
+        ta.G_Level as level,
+        ta.G_Tel as group_tel,
+        ta.G_Address as address,
+        ta.P_PersonnelID as personnel_no,
+        ta.G_Company as company,
+        ta.G_Module as module,
+        ta.G_SubModule as sub_module,
+        ta.G_Grade as grade,
+        ta.G_DirectLeader as direct_leader,
+        ta.G_DeptTopLeader as dept_top_leader,
+        ta.G_UnitTopLeader as unit_top_leader,
+        convert(varchar(100), ta.G_EnableDate, 20) as enable_time,
+        ta.G_Delete as delete_flag,
+        ta.G_Remark as remark,
+        convert(varchar(100), ta.G_CreateDate, 20) as create_time,
+        convert(varchar(100), ta.G_UpdateDate, 20) as update_time
+    </sql>
+
+    <select id="getFromSysGroupAll" resultType="java.util.Map">
+        select
+        <include refid="org"/>
+        from
+        sys_Group ta
+    </select>
+
+    <select id="getMaxTime" resultType="java.util.Map">
+        select
+        'domain_org_structure'  as domain_org_structure,
+        max(CONVERT(datetime, G_CreateDate, 101)) as maxCreateTime,
+        max(CONVERT(datetime, G_UpdateDate, 101)) as maxUpdateTime
+        from sys_Group
+    </select>
+
+    <select id="getFromSysGroupCreate" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        <include refid="org"/>
+        from
+        sys_Group ta
+        where
+        ta.G_CreateDate > #{maxCreateTime}
+    </select>
+
+    <select id="getFromSysGroupUpdate" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        <include refid="org"/>
+        from
+        sys_Group ta
+        where
+        ta.G_UpdateDate > #{maxUpdateTime}
+    </select>
+</mapper>

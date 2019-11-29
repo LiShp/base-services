@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gw.domain_hr.mapperdata.DataToBasicInfoMapper">
+
+    <select id="getFromSysFieldValueAll" resultType="java.util.Map">
+         select
+        ta.ValueID as id,
+        ta.V_ParentID as parent_id,
+        ta.V_ValueNo as value_no,
+        ta.V_Text as text,
+        ta.V_Name as name,
+        ta.V_F_Key as f_key,
+        ta.V_ShowOrder as show_order,
+		ta.V_Code as code,
+        ta.V_Delete as delete_flag,
+        ta.V_Remark as remark
+          from
+        sys_FieldValue ta
+    </select>
+
+    <select id="dataToBasicInfoAll" resultType="java.util.Map">
+         select
+        ta.V_ParentID as parent_id,
+        ta.V_ValueNo as value_no,
+        ta.V_Text as text,
+        ta.V_Name as name,
+        ta.V_F_Key as f_key,
+        ta.V_ShowOrder as show_order,
+        ta.V_Delete as delete_flag,
+        ta.V_Remark as remark
+          from
+        sys_FieldValue ta
+    </select>
+
+
+
+</mapper>

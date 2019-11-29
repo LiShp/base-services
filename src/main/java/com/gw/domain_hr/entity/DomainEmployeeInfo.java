@@ -40,6 +40,13 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     private String onceName;
 
     /**
+     * 姓名
+     */
+    @Column(name = "`name`")
+    @ApiModelProperty("曾用名")
+    private String name;
+
+    /**
      * 性别
      */
     @Column(name = "`sex`")

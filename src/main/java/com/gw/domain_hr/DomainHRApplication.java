@@ -7,6 +7,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -16,6 +17,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @ComponentScan(basePackages = {"com.gw.domain_hr.*","com.gw.cloud.common.base.config"})
 @EnableFeignClients
 @EnableHystrix
+@EnableScheduling
 @EnableHystrixDashboard
 @SpringCloudApplication
 public class DomainHRApplication {

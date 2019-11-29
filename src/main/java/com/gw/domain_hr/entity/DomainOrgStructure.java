@@ -25,6 +25,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 @ApiModel("")
 @Table(name = "`domain_org_structure`")
 public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
+
+    /**
+     * sys_group表的groupId
+     */
+    @Column(name = "`group_code`")
+    @ApiModelProperty("sys_group表的groupId")
+    private Integer groupCode;
+
+
     /**
      * 部门名称对应商旅deptName部门名称
      */

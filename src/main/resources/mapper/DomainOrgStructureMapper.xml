@@ -4,6 +4,7 @@
     <resultMap id="Base_Result_Map" type="com.gw.domain_hr.entity.DomainOrgStructure">
 
         <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="group_code" jdbcType="INTEGER" property="groupCode" />
         <result column="group_name" jdbcType="VARCHAR" property="groupName" />
         <result column="parent_id" jdbcType="INTEGER" property="parentId" />
         <result column="show_order" jdbcType="INTEGER" property="showOrder" />
@@ -28,6 +29,7 @@
     </resultMap>
 
     <sql id="Select_Field" >
+        domain_org_structure.group_code,
         domain_org_structure.group_name,
         domain_org_structure.parent_id,
         domain_org_structure.show_order,
@@ -52,6 +54,9 @@
     </sql>
 
     <sql id="Base_Option_Clause">
+        <if test="groupCode != null">
+            group_code = #{groupCode},
+        </if>
         <if test="groupName != null">
             group_name = #{groupName},
         </if>
@@ -186,6 +191,7 @@
     <sql id="Base_Where_Clause" >
         <where>
             <trim prefixOverrides="and">
+                <if test="groupCode != null">and domain_org_structure.group_code = #{groupCode,jdbcType=INTEGER} </if>
                 <if test="groupName != null and groupName != ''">and domain_org_structure.group_name = #{groupName,jdbcType=VARCHAR} </if>
                 <if test="parentId != null">and domain_org_structure.parent_id = #{parentId,jdbcType=INTEGER} </if>
                 <if test="showOrder != null">and domain_org_structure.show_order = #{showOrder,jdbcType=INTEGER} </if>

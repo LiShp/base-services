@@ -6,6 +6,7 @@
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
         <result column="once_name" jdbcType="VARCHAR" property="onceName" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="sex" jdbcType="BIT" property="sex" />
         <result column="marriage_status" jdbcType="BIT" property="marriageStatus" />
         <result column="birth_date" jdbcType="DATE" property="birthDate" />
@@ -62,6 +63,7 @@
     <sql id="Select_Field" >
         domain_employee_Info.personnel_no,
         domain_employee_Info.once_name,
+        domain_employee_Info.name,
         domain_employee_Info.sex,
         domain_employee_Info.marriage_status,
         domain_employee_Info.birth_date,
@@ -121,6 +123,9 @@
         </if>
         <if test="onceName != null">
             once_name = #{onceName},
+        </if>
+        <if test="name != null">
+            name = #{name},
         </if>
         <if test="sex != null">
             sex = #{sex},
@@ -444,6 +449,7 @@
             <trim prefixOverrides="and">
                 <if test="personnelNo != null and personnelNo != ''">and domain_employee_Info.personnel_no = #{personnelNo,jdbcType=VARCHAR} </if>
                 <if test="onceName != null and onceName != ''">and domain_employee_Info.once_name = #{onceName,jdbcType=VARCHAR} </if>
+                <if test="name != null and name != ''">and domain_employee_Info.name = #{name,jdbcType=VARCHAR} </if>
                 <if test="sex != null">and domain_employee_Info.sex = #{sex,jdbcType=BIT} </if>
                 <if test="marriageStatus != null">and domain_employee_Info.marriage_status = #{marriageStatus,jdbcType=BIT} </if>
                 <if test="birthDate != null">and domain_employee_Info.birth_date = #{birthDate,jdbcType=DATE} </if>
