@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
 import tk.mybatis.spring.annotation.MapperScan;
 
 import javax.sql.DataSource;
@@ -39,4 +43,11 @@ public class DataMybatisMysqlConfig {
     SqlSessionTemplate mysqlSessionTemplate() throws Exception {
         return new SqlSessionTemplate(sqlSessionFactoryMysql());
     }
+
+    @Bean(name = "mysqlTransactionManager")
+    @Primary
+    public static DataSourceTransactionManager mysqlTransactionManager(@Qualifier("dsMysql") DataSource dsMysql) {
+        return new DataSourceTransactionManager(dsMysql);
+    }
+
 }

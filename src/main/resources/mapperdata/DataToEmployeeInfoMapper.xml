@@ -2,6 +2,79 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gw.domain_hr.mapperdata.DataToBasicInfoMapper">
+<mapper namespace="com.gw.domain_hr.mapperdata.DataToEmployeeInfoMapper">
+
+    <sql id="org">
+        ta.P_PersonnelID as id,
+        ta.P_PersonnelNo as personnel_no,
+        ta.P_NName as name,
+        ta.P_OName as once_name,
+        ta.P_Sex as sex,
+        ta.P_Marriage as marriage_status,
+        ta.P_BirthDate as birth_date,
+        ta.P_NativePlace as native_place,
+        ta.P_RegisterResidence as register_residence,
+        ta.P_DwellingType as dwelling_type,
+        ta.P_Dwelling as dwelling,
+        ta.P_Weight as weight,
+        ta.P_Height as height,
+        ta.P_BloodType as blood_type,
+        ta.P_Native as natives,
+        ta.P_Diploma as diploma,
+        ta.P_Professional as professional,
+        ta.P_GraduationSchool as graduation_school,
+        ta.P_GraduationDate as graduation_date,
+        ta.P_EnglishAbility as english_ability,
+        ta.P_ComputerAbility as computer_ability,
+        ta.P_Mobile as mobile,
+        ta.P_HomePhone as home_phone,
+        ta.P_Email as email,
+        ta.P_GroupID as group_id,
+        ta.P_WorkType as work_type,
+        ta.P_Duty as duty,
+        ta.P_PositionType as position_type,
+		ta.P_PositionSerial as position_serial,
+		ta.P_Position as position,
+		ta.P_PositionLevel as position_level,
+		ta.P_JoinDate as join_date,
+		ta.P_Status as personnel_status,
+		ta.P_Foregin as foregin,
+		ta.P_PersonType as person_type,
+		ta.G_Address as work_address,
+		ta.P_PositionCode as position_code,
+		ta.P_DutyLevel as duty_level,
+		ta.P_CardType as card_type,
+		ta.P_CardName as card_name,
+		ta.P_CardNo as card_no,
+		ta.P_Delete as delete_flag,
+		ta.P_Remark as remark,
+        convert(varchar(100), ta.P_InputDate, 21) as create_time,
+        convert(varchar(100), ta.P_ModifyDate, 21) as update_time
+    </sql>
+
+    <select id="getFromHrPersonnelAll" resultType="java.util.Map">
+        select
+        <include refid="org"/>
+        from
+        hr_Personnel ta
+    </select>
+
+    <select id="getFromHrPersonnelCreate" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        <include refid="org"/>
+        from
+        hr_Personnel ta
+        where
+        ta.P_InputDate > #{maxCreateTime}
+    </select>
+
+    <select id="getFromHrPersonnelUpdate" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        <include refid="org"/>
+        from
+        hr_Personnel ta
+        where
+        ta.P_ModifyDate > #{maxUpdateTime}
+    </select>
 
 </mapper>

@@ -29,24 +29,4 @@ public interface DataInOrgStruMapper {
      */
     int deleteOrgStruAll();
 
-    /**
-     * 入库最大创建时间和最大更新时间
-     * @param map
-     * @return
-     */
-    int insertMaxTime(Map<String, Object> map);
-
-    /**
-     * 更新最大创建时间和最大更新时间
-     * @param map
-     * @return
-     */
-    int updateMaxTime(Map<String, Object> map);
-
-    /**
-     * 查询最大创建时间和最大更新时间
-     * @return
-     */
-    Map<String, Object>  getMaxTime();
-
 }

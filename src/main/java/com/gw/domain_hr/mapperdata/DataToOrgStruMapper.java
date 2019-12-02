@@ -26,11 +26,4 @@ public interface DataToOrgStruMapper {
      */
     List<Map<String, Object>> getFromSysGroupUpdate(Map<String, Object> map);
 
-    /**
-     * 获取最大时间
-     *
-     * @return
-     */
-    Map<String, Object> getMaxTime();
-
 }

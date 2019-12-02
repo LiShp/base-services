@@ -58,37 +58,6 @@
         delete from domain_org_structure where create_personnel_no = 'admin'
     </delete>
 
-    <insert id="insertMaxTime" parameterType="java.util.Map">
-        INSERT INTO domain_max_time
-        (tableName,
-        maxCreateTime,
-        maxUpdateTime
-        )
-        VALUES
-            (#{domain_org_structure},
-            #{maxCreateTime},
-            #{maxUpdateTime})
-    </insert>
-
-    <update id="updateMaxTime" parameterType="java.util.Map">
-       update domain_max_time
-       set
-       maxCreateTime = #{maxCreateTime},
-       maxUpdateTime = #{maxUpdateTime}
-       where
-       tableName = #{tableName}
-
-
-    </update>
-
-    <select id="getMaxTime" resultType="java.util.Map">
-        select
-        maxCreateTime,
-        maxUpdateTime
-        from
-        domain_max_time
-        where tableName = 'domain_org_structure'
-    </select>
 
     <update id="updateOrgStruAll" parameterType="java.util.Map">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">

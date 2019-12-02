@@ -5,8 +5,10 @@ import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
 import com.gw.cloud.common.base.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 import javax.persistence.*;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 表名：domain_employee_Info
-*/
+ */
 @Getter
 @Setter
 @ToString
@@ -349,7 +351,7 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     private Integer dutyLevel;
 
     /**
-     *  证件类型：0身份证 1护照 2学生证 3军官证 4 驾驶证 5回乡证 6台胞证 7港澳通 行证 8台湾通行证 9士兵证 10临时身份证 11户口簿 12警官证 13出生证明 14出生日期 15外国人久居留证 16国际海员证 99其他
+     * 证件类型：0身份证 1护照 2学生证 3军官证 4 驾驶证 5回乡证 6台胞证 7港澳通 行证 8台湾通行证 9士兵证 10临时身份证 11户口簿 12警官证 13出生证明 14出生日期 15外国人久居留证 16国际海员证 99其他
      */
     @Column(name = "`card_type`")
     @ApiModelProperty(" 证件类型：0身份证 1护照 2学生证 3军官证 4 驾驶证 5回乡证 6台胞证 7港澳通 行证 8台湾通行证 9士兵证 10临时身份证 11户口簿 12警官证 13出生证明 14出生日期 15外国人久居留证 16国际海员证 99其他")

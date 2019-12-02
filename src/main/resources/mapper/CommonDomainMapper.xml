@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gw.domain_hr.mapper.CommonDomainMapper">
+
+    <insert id="insertMaxTime" parameterType="java.util.Map">
+        INSERT INTO domain_max_time
+        (tableName,
+        maxCreateTime,
+        maxUpdateTime
+        )
+        VALUES
+            (#{tableName},
+            #{maxCreateTime},
+            #{maxUpdateTime})
+    </insert>
+
+    <delete id="deleteMaxTime" parameterType="java.util.Map">
+        delete from domain_max_time where tableName = #{tableName}
+    </delete>
+
+    <update id="updateMaxCreateTime" parameterType="java.util.Map">
+       update domain_max_time
+       set
+       maxCreateTime = #{maxCreateTime}
+       where
+       tableName = #{tableName}
+    </update>
+
+    <update id="updateMaxUpdateTime" parameterType="java.util.Map">
+       update domain_max_time
+       set
+       maxUpdateTime = #{maxUpdateTime}
+       where
+       tableName = #{tableName}
+    </update>
+
+    <select id="getMaxTime" resultType="java.util.Map" parameterType="java.lang.String">
+        select
+        maxCreateTime,
+        maxUpdateTime
+        from
+        domain_max_time
+        where tableName = #{tableName}
+    </select>
+
+</mapper>

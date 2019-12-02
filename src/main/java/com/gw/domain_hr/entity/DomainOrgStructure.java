@@ -5,8 +5,10 @@ import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
 import com.gw.cloud.common.base.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 import javax.persistence.*;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 表名：domain_org_structure
-*/
+ */
 @Getter
 @Setter
 @ToString

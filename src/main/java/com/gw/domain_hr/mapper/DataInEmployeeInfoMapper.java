@@ -8,6 +8,25 @@ import java.util.Map;
 @Component
 public interface DataInEmployeeInfoMapper {
 
-    List<Map<String, Object>> getNameById();
+    /**
+     * 全量入庫（入库前先清楚groupcode不为空的数据）
+     * @param list
+     * @return
+     */
+    int insertEmployeeInfoAll(List<Map<String, Object>> list);
+
+    /**
+     * 批量更新数据
+     * @param list
+     * @return
+     */
+    int updateEmployeeInfoAll(List<Map<String, Object>> list);
+
+    /**
+     * 全量删除Hr入库数据
+     *
+     * @return
+     */
+    int deleteEmployeeInfoAll();
 
 }

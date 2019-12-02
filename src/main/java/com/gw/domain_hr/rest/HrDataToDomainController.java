@@ -58,6 +58,28 @@ public class HrDataToDomainController {
         return Integer.toString(num);
     }
 
+    /**
+     * 全量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/personnelToEmployeeInfoAll")
+    public String personnelToEmployeeInfoAll() {
+        int num = hrDataToDomainService.personnelToEmployeeInfoAll();
+        return Integer.toString(num);
+    }
+
+    /**
+     * 增量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/personnelToEmployeeInfoNew")
+    public String personnelToEmployeeInfoNew() {
+        int num = hrDataToDomainService.personnelToEmployeeInfoNew();
+        return Integer.toString(num);
+    }
+
 }
 
 
