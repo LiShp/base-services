@@ -139,10 +139,8 @@ ribbon:
 mybatis:
   mapper-locations: classpath:/mapper/*Mapper.xml
   sqlserver: classpath:/mapperdata/*Mapper.xml
-  aa: classpath:/mybatis/mybatisConfig.xml
+  mybatis-locations: classpath:/mybatis/mybatisConfig.xml
   configuration:
-##    #处理返回值为null
-#    call-setters-on-nulls: true
     #开启驼峰命名转换
     map-underscore-to-camel-case: true
     #打印sql信息

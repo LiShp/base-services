@@ -33,7 +33,7 @@ public class DataMybatisSqlServerConfig {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dsSqlserver);
         factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.sqlserver")));
-        factoryBean.setConfigLocation(new DefaultResourceLoader().getResource(env.getProperty("mybatis.aa")));
+        factoryBean.setConfigLocation(new DefaultResourceLoader().getResource(env.getProperty("mybatis.mybatis-locations")));
         return factoryBean.getObject();
     }
 
