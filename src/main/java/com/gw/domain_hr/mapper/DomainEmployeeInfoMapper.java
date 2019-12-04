@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public interface DomainEmployeeInfoMapper extends BaseMapper<DomainEmployeeInfo> {
 
+    int insertEmployeeInfoSingle(DomainEmployeeInfo domainEmployeeInfo);
+
+    int updateEmployeeInfoSingleByPersonnelNo(DomainEmployeeInfo domainEmployeeInfo);
+
 }
 
 

@@ -513,4 +513,296 @@
         </choose>
 
     </sql>
+
+    <!-- ................................................................分割线以下为新封装sql...........................................................................;-->
+    <sql id="tableValue">
+        personnel_no,
+        once_name,
+        name,
+        sex,
+        marriage_status,
+        birth_date,
+        native_place,
+        register_residence,
+        dwelling_type,
+        dwelling,
+        weight,
+        height,
+        blood_type,
+        polity,
+        natives,
+        diploma,
+        professional,
+        graduation_school,
+        graduation_date,
+        english_ability,
+        computer_ability,
+        mobile,
+        home_phone,
+        email,
+        post_title,
+        group_id,
+        work_type,
+        duty,
+        position_type,
+        position_serial,
+        position,
+        position_level,
+        join_date,
+        personnel_status,
+        foregin,
+        person_type,
+        work_address,
+        dismission_reason,
+        dismission_type,
+        dismission_date,
+        position_code,
+        position_step,
+        position_son,
+        teach_level,
+        duty_level,
+        card_type,
+        card_name,
+        card_no,
+        delete_flag,
+        remark,
+        create_time,
+        create_personnel_no,
+        update_time,
+        update_personnel_no
+    </sql>
+
+    <sql id="insertValue">
+    #{personnelNo},
+    #{onceName},
+    #{name},
+    #{sex},
+    #{marriageStatus},
+    #{birthDate},
+    #{nativePlace},
+    #{registerResidence},
+    #{dwellingType},
+    #{dwelling},
+    #{weight},
+    #{height},
+    #{bloodType},
+    #{polity},
+    #{natives},
+    #{diploma},
+    #{professional},
+    #{graduationSchool},
+    #{graduationDate},
+    #{englishAbility},
+    #{computerAbility},
+    #{mobile},
+    #{homePhone},
+    #{email},
+    #{postTitle},
+    #{groupId},
+    #{workType},
+    #{duty},
+    #{positionType},
+    #{positionSerial},
+    #{position},
+    #{positionLevel},
+    #{joinDate},
+    #{personnelStatus},
+    #{foregin},
+    #{personType},
+    #{workAddress},
+    #{dismissionReason},
+    #{dismissionType},
+    #{dismissionDate},
+    #{positionCode},
+    #{positionStep},
+    #{positionSon},
+    #{teachLevel},
+    #{dutyLevel},
+    #{cardType},
+    #{cardName},
+    #{cardNo},
+    #{delete_flag},
+    #{remark},
+    #{createTime},
+    #{createPersonnelNo},
+    #{updateTime},
+    #{updatePersonnelNo}
+    </sql>
+
+        <sql id="updateValue">
+            <if test="onceName != null">
+                once_name = #{onceName},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="marriageStatus != null">
+                marriage_status = #{marriageStatus},
+            </if>
+            <if test="birthDate != null">
+                birth_date = #{birthDate},
+            </if>
+            <if test="nativePlace != null">
+                native_place = #{nativePlace},
+            </if>
+            <if test="registerResidence != null">
+                register_residence = #{registerResidence},
+            </if>
+            <if test="dwellingType != null">
+                dwelling_type = #{dwellingType},
+            </if>
+            <if test="dwelling != null">
+                dwelling = #{dwelling},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+            <if test="height != null">
+                height = #{height},
+            </if>
+            <if test="bloodType != null">
+                blood_type = #{bloodType},
+            </if>
+            <if test="polity != null">
+                polity = #{polity},
+            </if>
+            <if test="natives != null">
+                natives = #{natives},
+            </if>
+            <if test="diploma != null">
+                diploma = #{diploma},
+            </if>
+            <if test="professional != null">
+                professional = #{professional},
+            </if>
+            <if test="graduationSchool != null">
+                graduation_school = #{graduationSchool},
+            </if>
+            <if test="graduationDate != null">
+                graduation_date = #{graduationDate},
+            </if>
+            <if test="englishAbility != null">
+                english_ability = #{englishAbility},
+            </if>
+            <if test="computerAbility != null">
+                computer_ability = #{computerAbility},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="homePhone != null">
+                home_phone = #{homePhone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="postTitle != null">
+                post_title = #{postTitle},
+            </if>
+            <if test="groupId != null">
+                group_id = #{groupId},
+            </if>
+            <if test="workType != null">
+                work_type = #{workType},
+            </if>
+            <if test="duty != null">
+                duty = #{duty},
+            </if>
+            <if test="positionType != null">
+                position_type = #{positionType},
+            </if>
+            <if test="positionSerial != null">
+                position_serial = #{positionSerial},
+            </if>
+            <if test="position != null">
+                position = #{position},
+            </if>
+            <if test="positionLevel != null">
+                position_level = #{positionLevel},
+            </if>
+            <if test="joinDate != null">
+                join_date = #{joinDate},
+            </if>
+            <if test="personnelStatus != null">
+                personnel_status = #{personnelStatus},
+            </if>
+            <if test="foregin != null">
+                foregin = #{foregin},
+            </if>
+            <if test="personType != null">
+                person_type = #{personType},
+            </if>
+            <if test="workAddress != null">
+                work_address = #{workAddress},
+            </if>
+            <if test="dismissionReason != null">
+                dismission_reason = #{dismissionReason},
+            </if>
+            <if test="dismissionType != null">
+                dismission_type = #{dismissionType},
+            </if>
+            <if test="dismissionDate != null">
+                dismission_date = #{dismissionDate},
+            </if>
+            <if test="positionCode != null">
+                position_code = #{positionCode},
+            </if>
+            <if test="positionStep != null">
+                position_step = #{positionStep},
+            </if>
+            <if test="positionSon != null">
+                position_son = #{positionSon},
+            </if>
+            <if test="teachLevel != null">
+                teach_level = #{teachLevel},
+            </if>
+            <if test="dutyLevel != null">
+                duty_level = #{dutyLevel},
+            </if>
+            <if test="cardType != null">
+                card_type = #{cardType},
+            </if>
+            <if test="cardName != null">
+                card_name = #{cardName},
+            </if>
+            <if test="cardNo != null">
+                card_no = #{cardNo},
+            </if>
+            <if test="delete_flag != null">
+                delete_flag = #{delete_flag},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createPersonnelNo != null">
+                create_personnel_no = #{createPersonnelNo},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updatePersonnelNo != null">
+                update_personnel_no = #{updatePersonnelNo}
+            </if>
+        </sql>
+
+    <insert id="insertEmployeeInfoSingle" parameterType="com.gw.domain_hr.entity.DomainEmployeeInfo" >
+        insert into domain_employee_info
+        (<include refid="tableValue"/>)
+        values
+        (<include refid="insertValue"/>)
+    </insert>
+
+    <update id="updateEmployeeInfoSingleByPersonnelNo" parameterType="com.gw.domain_hr.entity.DomainEmployeeInfo">
+        update domain_employee_info
+        <set>
+            <include refid="updateValue"/>
+        </set>
+        where personnel_no = #{personnelNo}
+    </update>
 </mapper>

@@ -6,7 +6,7 @@
 
     <insert id="insertOrgStruAll" parameterType="java.util.Map">
         INSERT INTO domain_org_structure
-        (group_code,
+        (id,
         group_name,
         parent_id,
         show_order,
@@ -82,7 +82,7 @@
                 remark = #{item.remark},
                 update_time = #{item.update_time}
             </set>
-            where group_code = ${item.group_code}
+            where id = ${item.group_code}
         </foreach>
     </update>
 
