@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 public enum ResultStatusEnum {
 
-    STATUS_SUCCESS("S","成功"),
-    STATUS_ERROR("E","失败");
+    STATUS_SUCCESS("S","执行成功"),
+    STATUS_ERROR("E","执行失败");
 
 
     public String getCode() {

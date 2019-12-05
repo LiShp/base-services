@@ -225,4 +225,12 @@
         </choose>
 
     </sql>
+
+    <select id="getGroupALL" resultType="java.util.Map">
+        SELECT
+        id,
+        group_name,
+        parent_id
+        from domain_org_structure
+    </select>
 </mapper>
