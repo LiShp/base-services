@@ -7,21 +7,16 @@ import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain_hr.entity.DomainEmployeeInfo;
 import com.gw.domain_hr.enums.ResultStatusEnum;
-import com.gw.domain_hr.mapper.DataInEmployeeInfoMapper;
 import com.gw.domain_hr.service.DomainEmployeeInfoService;
-import com.gw.domain_hr.service.HrDataToDomainService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.MessageFormat;
-import java.util.List;
 
 
 @Api(value = "/domainemployeeinfo", description = "")
