@@ -36,7 +36,7 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     @ApiModelProperty("工号(系统自动生成)")
     @NotNull(message = "工号不能为null")
     @NotEmpty(message = "工号不能为空字符串")
-    @Size(max = 10, min = 10, message = "工号长度只能为9")
+    @Size(max = 10, min = 9, message = "工号长度为9-10")
     @Pattern(regexp = "^[A-Z0-9]+$", message = "工号只能包含大写字母A-Z和数字0-9")
     private String personnelNo;
 
