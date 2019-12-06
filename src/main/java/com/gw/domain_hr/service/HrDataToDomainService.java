@@ -2,10 +2,7 @@ package com.gw.domain_hr.service;
 
 import com.gw.domain_hr.commonUtils.CollectionUtil;
 import com.gw.domain_hr.enums.TableNameEnum;
-import com.gw.domain_hr.mapper.CommonDomainMapper;
-import com.gw.domain_hr.mapper.DataInBasicInfoMapper;
-import com.gw.domain_hr.mapper.DataInEmployeeInfoMapper;
-import com.gw.domain_hr.mapper.DataInOrgStruMapper;
+import com.gw.domain_hr.mapper.*;
 import com.gw.domain_hr.mapperdata.DataToBasicInfoMapper;
 import com.gw.domain_hr.mapperdata.DataToEmployeeInfoMapper;
 import com.gw.domain_hr.mapperdata.DataToOrgStruMapper;
@@ -32,17 +29,17 @@ public class HrDataToDomainService {
     @Resource
     private DataToOrgStruMapper dataToOrgStruMapper;
     @Resource
-    private DataInOrgStruMapper dataInOrgStruMapper;
+    private DomainOrgStructureMapper domainOrgStructureMapper;
 
     @Resource
     private DataToBasicInfoMapper dataToBasicInfoMapper;
     @Resource
-    private DataInBasicInfoMapper dataInBasicInfoMapper;
+    private DomainBasicInfoMapper domainBasicInfoMapper;
 
     @Resource
     private DataToEmployeeInfoMapper dataToEmployeeInfoMapper;
     @Resource
-    private DataInEmployeeInfoMapper dataInEmployeeInfoMapper;
+    private DomainEmployeeInfoMapper domainEmployeeInfoMapper;
 
     /**
      * 全量导入数据 SQLserver表sys_Group到mysql表domain_org_structure表
@@ -50,7 +47,7 @@ public class HrDataToDomainService {
      */
     @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int sysGroupToOrgStruAll() {
-        this.logger.info("..........从Sqlserver中间库sys_Group获取数据开始..........");
+        this.logger.info("从Sqlserver中间库sys_Group获取数据开始");
         int num = 0;
         List<Map<String, Object>> list = dataToOrgStruMapper.getFromSysGroupAll();
         if (!CollectionUtils.isEmpty(list)) {
@@ -58,25 +55,22 @@ public class HrDataToDomainService {
             String domainTableName = TableNameEnum.TABLE_NAME_ORGSTRUCTURE.getTableName();
 
             //操作主库主数据
-            int delete = dataInOrgStruMapper.deleteOrgStruAll();
-            this.logger.info("..........删除domain_org_structure中Hr数据共计:" + delete + "条..........");
-            num = dataInOrgStruMapper.insertOrgStruAll(list);
-            this.logger.info("..........入表domain_org_structure共计:" + num + "条..........");
+            int delete = domainOrgStructureMapper.deleteOrgStruAll();
+            this.logger.info("删除domain_org_structure中Hr数据共计:" + delete + "条");
+            num = domainOrgStructureMapper.insertOrgStruAll(list);
+            this.logger.info("入表domain_org_structure共计:" + num + "条");
 
-            //取最大创建日期
             CollectionUtil.listSortDate(list, "create_time");
             map.put("maxCreateTime", list.get(list.size() - 1).get("create_time"));
-            //取最大更新日期
             CollectionUtil.listSortDate(list, "update_time");
             map.put("maxUpdateTime", list.get(list.size() - 1).get("update_time"));
-            //最大创建时间/最大更新时间如入数据库
             map.put("tableName", domainTableName);
             this.updateMaxTime(map);
 
         } else {
-            this.logger.info("..........Sqlserver中间库sys_Group表无新增数据..........");
+            this.logger.info("Sqlserver中间库sys_Group表无新增数据");
         }
-        this.logger.info("..........从Sqlserver中间库sys_Group获取数据结束..........");
+        this.logger.info("从Sqlserver中间库sys_Group获取数据结束");
         return num;
     }
 
@@ -86,7 +80,7 @@ public class HrDataToDomainService {
      */
     @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int sysGroupToOrgStruNew() {
-        this.logger.info("..........从Sqlserver中间库sys_Group增量获取数据开始..........");
+        this.logger.info("从Sqlserver中间库sys_Group增量获取数据开始");
         int numCreate = 0;
         int numUpdate = 0;
         //第一步：获取最大创建时间 和 最大更新时间
@@ -101,24 +95,24 @@ public class HrDataToDomainService {
         Map<String, Object> mapTime = new HashMap<>();
         mapTime.put("tableName", domainTableName);
         if (!CollectionUtils.isEmpty(createlist)) {
-            numCreate = dataInOrgStruMapper.insertOrgStruAll(createlist);
-            this.logger.info("..........入表domain_org_structure共计:" + numCreate + "条..........");
+            numCreate = domainOrgStructureMapper.insertOrgStruAll(createlist);
+            this.logger.info("入表domain_org_structure共计:" + numCreate + "条");
             CollectionUtil.listSortDate(createlist, "create_time");
             mapTime.put("maxCreateTime", createlist.get(createlist.size() - 1).get("create_time"));
             commonDomainMapper.updateMaxCreateTime(mapTime);
         } else {
-            this.logger.info("..........Sqlserver中间库sys_Group表无新增数据..........");
+            this.logger.info("Sqlserver中间库sys_Group表无新增数据");
         }
         if (!CollectionUtils.isEmpty(updatelist)) {
-            numUpdate = dataInOrgStruMapper.updateOrgStruAll(updatelist);
-            this.logger.info("..........更新表domain_org_structure共计:" + numUpdate + "条..........");
+            numUpdate = domainOrgStructureMapper.updateOrgStruAll(updatelist);
+            this.logger.info("更新表domain_org_structure共计:" + numUpdate + "条");
             CollectionUtil.listSortDate(updatelist, "update_time");
             mapTime.put("maxUpdateTime", updatelist.get(updatelist.size() - 1).get("update_time"));
             commonDomainMapper.updateMaxUpdateTime(mapTime);
         } else {
-            this.logger.info("..........Sqlserver中间库sys_Group表无新更新数据..........");
+            this.logger.info("Sqlserver中间库sys_Group表无新更新数据");
         }
-        this.logger.info("..........从Sqlserver中间库sys_Group增量获取数据结束..........");
+        this.logger.info("从Sqlserver中间库sys_Group增量获取数据结束");
         return numCreate + numUpdate;
     }
 
@@ -128,16 +122,16 @@ public class HrDataToDomainService {
      */
     @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int sysFieldValueToBasicInfoAll() {
-        this.logger.info("..........从Sqlserver中间库sys_FieldValue获取数据开始..........");
+        this.logger.info("从Sqlserver中间库sys_FieldValue获取数据开始");
         int num = 0;
         List<Map<String, Object>> list = dataToBasicInfoMapper.getFromSysFieldValueAll();
         if (!CollectionUtils.isEmpty(list)) {
-            int delete = dataInBasicInfoMapper.deleteBasicInfoAll();
-            this.logger.info("..........删除domain_basic_info中Hr数据共计:" + delete + "条..........");
-            num = dataInBasicInfoMapper.insertBasicInfoAll(list);
-            this.logger.info("..........入表domain_basic_info共计:" + num + "条..........");
+            int delete = domainBasicInfoMapper.deleteBasicInfoAll();
+            this.logger.info("删除domain_basic_info中Hr数据共计:" + delete + "条");
+            num = domainBasicInfoMapper.insertBasicInfoAll(list);
+            this.logger.info("入表domain_basic_info共计:" + num + "条");
         }
-        this.logger.info("..........从Sqlserver中间库sys_FieldValue获取数据结束..........");
+        this.logger.info("从Sqlserver中间库sys_FieldValue获取数据结束");
         return num;
     }
 
@@ -147,40 +141,37 @@ public class HrDataToDomainService {
      */
     @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int personnelToEmployeeInfoAll() {
-        this.logger.info("..........从Sqlserver中间库hr_Personnel获取数据开始..........");
+        this.logger.info("从Sqlserver中间库hr_Personnel获取数据开始");
         int nums = 0;
 
         List<Map<String, Object>> list = dataToEmployeeInfoMapper.getFromHrPersonnelAll();
         if (!CollectionUtils.isEmpty(list)) {
-            this.logger.info("..........从Sqlserver中间库hr_Personnel获取数据共计" + list.size() + "..........");
+            this.logger.info("从Sqlserver中间库hr_Personnel获取数据共计" + list.size() + "");
             Map<String, Object> map = new HashMap<>();
             String domainTableName = TableNameEnum.TABLE_NAME_EMPLOYEEINFO.getTableName();
 
             //分批次处理数据
             List<List<Map<String, Object>>> splitList = CollectionUtil.splitList(list);
             //操作主库主数据
-            int delete = dataInEmployeeInfoMapper.deleteEmployeeInfoAll();
-            this.logger.info("..........删除domain_employee_info中Hr数据共计:" + delete + "条..........");
+            int delete = domainEmployeeInfoMapper.deleteEmployeeInfoAll();
+            this.logger.info("删除domain_employee_info中Hr数据共计:" + delete + "条");
             for (int i = 0; i < splitList.size(); i++) {
-                int num = dataInEmployeeInfoMapper.insertEmployeeInfoAll(splitList.get(i));
-                this.logger.info("..........第" + (i + 1) + "次入表domain_employee_info共计:" + num + "条..........");
+                int num = domainEmployeeInfoMapper.insertEmployeeInfoAll(splitList.get(i));
+                this.logger.info("第" + (i + 1) + "次入表domain_employee_info共计:" + num + "条");
                 nums += num;
             }
 
-            //取最大创建日期
             CollectionUtil.listSortDate(list, "create_time");
             map.put("maxCreateTime", list.get(list.size() - 1).get("create_time"));
-            //取最大更新日期
             CollectionUtil.listSortDate(list, "update_time");
             map.put("maxUpdateTime", list.get(list.size() - 1).get("update_time"));
-            //最大创建时间/最大更新时间如入数据库
             map.put("tableName", domainTableName);
             this.updateMaxTime(map);
 
         } else {
-            this.logger.info("..........Sqlserver中间库hr_Personnel表无新增数据..........");
+            this.logger.info("Sqlserver中间库hr_Personnel表无新增数据");
         }
-        this.logger.info("..........从Sqlserver中间库hr_Personnel获取数据结束..........");
+        this.logger.info("从Sqlserver中间库hr_Personnel获取数据结束");
         return nums;
     }
 
@@ -190,7 +181,7 @@ public class HrDataToDomainService {
      */
     @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int personnelToEmployeeInfoNew() {
-        this.logger.info("..........从Sqlserver中间库hr_Personnel增量获取数据开始..........");
+        this.logger.info("从Sqlserver中间库hr_Personnel增量获取数据开始");
         int numCreate = 0;
         int numUpdate = 0;
 
@@ -206,24 +197,24 @@ public class HrDataToDomainService {
         Map<String, Object> mapTime = new HashMap<>();
         mapTime.put("tableName", domainTableName);
         if (!CollectionUtils.isEmpty(createlist)) {
-            numCreate = dataInEmployeeInfoMapper.insertEmployeeInfoAll(createlist);
-            this.logger.info("..........入表domain_org_structure共计:" + numCreate + "条..........");
+            numCreate = domainEmployeeInfoMapper.insertEmployeeInfoAll(createlist);
+            this.logger.info("入表domain_org_structure共计:" + numCreate + "条");
             CollectionUtil.listSortDate(createlist, "create_time");
             mapTime.put("maxCreateTime", createlist.get(createlist.size() - 1).get("create_time"));
             commonDomainMapper.updateMaxCreateTime(mapTime);
         } else {
-            this.logger.info("..........Sqlserver中间库hr_Personnel表无新增数据..........");
+            this.logger.info("Sqlserver中间库hr_Personnel表无新增数据");
         }
         if (!CollectionUtils.isEmpty(updatelist)) {
-            numUpdate = dataInEmployeeInfoMapper.updateEmployeeInfoAll(updatelist);
-            this.logger.info("..........更新表domain_employee_info共计:" + numUpdate + "条..........");
+            numUpdate = domainEmployeeInfoMapper.updateEmployeeInfoAll(updatelist);
+            this.logger.info("更新表domain_employee_info共计:" + numUpdate + "条");
             CollectionUtil.listSortDate(updatelist, "update_time");
             mapTime.put("maxUpdateTime", updatelist.get(updatelist.size() - 1).get("update_time"));
             commonDomainMapper.updateMaxUpdateTime(mapTime);
         } else {
-            this.logger.info("..........Sqlserver中间库hr_Personnel表无新更新数据..........");
+            this.logger.info("Sqlserver中间库hr_Personnel表无新更新数据");
         }
-        this.logger.info("..........从Sqlserver中间库hr_Personnel增量获取数据结束..........");
+        this.logger.info("从Sqlserver中间库hr_Personnel增量获取数据结束");
         return numCreate + numUpdate;
     }
 

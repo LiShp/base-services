@@ -12,7 +12,6 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -49,11 +48,11 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
      * @param groupCode
      * @return
      */
-    public List<Map<String, Object>> getGroupById(int groupCode) {
-        List<Map<String, Object>> queryList = domainOrgStructureMapper.getGroupALL();//获取所有的节点信息
-        List<Map<String, Object>> parentList = new ArrayList<>();//父节点
-        for (Map<String, Object> map : queryList) {
-            if ((int) map.get("id") == groupCode) {
+    public List<DomainOrgStructure> getGroupById(int groupCode) {
+        List<DomainOrgStructure> queryList = domainOrgStructureMapper.getGroupALL();//获取所有的节点信息
+        List<DomainOrgStructure> parentList = new ArrayList<>();//父节点
+        for (DomainOrgStructure map : queryList) {
+            if (map.getId().intValue() == groupCode) {
                 parentList.add(map);
             }
         }
@@ -63,19 +62,20 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
 
     /**
      * 递归获取子节点
+     *
      * @param parentList
      * @param queryList
      */
-    public static void getChildren(List<Map<String, Object>> parentList, List<Map<String, Object>> queryList) {
-        for (Map<String, Object> parentMap : parentList) {
-            List<Map<String, Object>> childrenlist = new ArrayList<>();
-            for (Map<String, Object> allMap : queryList) {
-                if ((int) parentMap.get("id") == (int) allMap.get("parent_id")) {
+    public static void getChildren(List<DomainOrgStructure> parentList, List<DomainOrgStructure> queryList) {
+        for (DomainOrgStructure parentMap : parentList) {
+            List<DomainOrgStructure> childrenlist = new ArrayList<>();
+            for (DomainOrgStructure allMap : queryList) {
+                if (parentMap.getId().intValue() == allMap.getParentId()) {
                     childrenlist.add(allMap);
                 }
             }
             if (!CollectionUtils.isEmpty(childrenlist)) {
-                parentMap.put("children", childrenlist);
+                parentMap.setList(childrenlist);
                 getChildren(childrenlist, queryList);
             }
         }

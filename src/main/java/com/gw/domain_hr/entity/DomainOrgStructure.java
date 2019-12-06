@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @ApiModel("")
 @Table(name = "`domain_org_structure`")
 public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
+
+    private List list;
 
     /**
      * sys_group表的groupId
@@ -181,4 +184,11 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`update_personnel_no`")
     @ApiModelProperty("更新人(工号)")
     private String updatePersonnelNo;
+
+    /**
+     * 是否删除：0否 1是
+     */
+    @Column(name = "`delete_flag`")
+    @ApiModelProperty("是否删除：0否 1是")
+    private Boolean delete_flag;
 }

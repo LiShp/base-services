@@ -473,29 +473,4 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`delete_flag`")
     @ApiModelProperty("是否删除：0否 1是")
     private Boolean delete_flag;
-
-    public String getPersonnelNo() {
-        return personnelNo;
-    }
-
-    public void setPersonnelNo(String personnelNo) {
-        this.personnelNo = personnelNo;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
 }

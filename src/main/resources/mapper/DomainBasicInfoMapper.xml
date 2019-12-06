@@ -147,4 +147,39 @@
         </choose>
 
     </sql>
+
+    <insert id="insertBasicInfoAll" parameterType="java.util.Map">
+        INSERT INTO domain_basic_info
+        (id,
+        parent_id,
+        value_no,
+        text,
+        name,
+        f_key,
+        show_order,
+        code,
+        delete_flag,
+        remark,
+        create_personnel_no
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},
+            #{item.parent_id},
+            #{item.value_no},
+            #{item.text},
+            #{item.name},
+            #{item.f_key},
+            #{item.show_order},
+            #{item.code},
+            #{item.delete_flag},
+            #{item.remark},
+            'admin')
+        </foreach>
+
+    </insert>
+
+    <delete id="deleteBasicInfoAll">
+        delete from domain_basic_info where create_personnel_no = 'admin'
+    </delete>
 </mapper>

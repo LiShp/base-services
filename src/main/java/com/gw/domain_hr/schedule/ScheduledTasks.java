@@ -23,34 +23,34 @@ public class ScheduledTasks {
      */
     @Scheduled(cron = "0 00 10 * * ? ")
     public void scheduledBasic() {
-        this.logger.info("..........定时任务(全量导入_基础信息表数据)开始执行..........");
+        this.logger.info("定时任务(全量导入_基础信息表数据)开始执行");
         try {
             hrDataToDomainService.sysFieldValueToBasicInfoAll();
         } catch (Exception e) {
-            this.logger.error("..........从Sqlserver中间库sys_FieldValue获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库sys_FieldValue获取数据发生异常：" + e.getMessage());
         }
-        this.logger.info("..........定时任务(全量导入_基础信息表数据)结束..........");
+        this.logger.info("定时任务(全量导入_基础信息表数据)结束");
     }
 
     @Scheduled(cron = "0 10 16 * * ? ")
     public void scheduledOrg() {
-        this.logger.info("..........定时任务(增量更新_组织架构表)开始执行..........");
+        this.logger.info("定时任务(增量更新_组织架构表)开始执行");
         try {
             hrDataToDomainService.sysGroupToOrgStruNew();
         } catch (Exception e) {
-            this.logger.error("..........从Sqlserver中间库sys_Group增量获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库sys_Group增量获取数据发生异常：" + e.getMessage());
         }
-        this.logger.info("..........定时任务(增量更新_组织架构表)结束..........");
+        this.logger.info("定时任务(增量更新_组织架构表)结束");
     }
 
     @Scheduled(cron = "0 20 16 * * ? ")
     public void scheduledEmployee() {
-        this.logger.info("..........定时任务(增量更新_员工基本信息表)开始执行..........");
+        this.logger.info("定时任务(增量更新_员工基本信息表)开始执行");
         try {
             hrDataToDomainService.personnelToEmployeeInfoNew();
         } catch (Exception e) {
-            this.logger.error("..........从Sqlserver中间库hr_Personnel增量获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库hr_Personnel增量获取数据发生异常：" + e.getMessage());
         }
-        this.logger.info("..........定时任务(增量更新_员工基本信息表)结束..........");
+        this.logger.info("定时任务(增量更新_员工基本信息表)结束");
     }
 }

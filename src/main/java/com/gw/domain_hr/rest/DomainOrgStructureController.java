@@ -1,12 +1,10 @@
 package com.gw.domain_hr.rest;
 
-import com.alibaba.fastjson.JSONObject;
 import com.gw.cloud.common.base.controller.BaseController;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain_hr.entity.DomainOrgStructure;
-import com.gw.domain_hr.enums.ResultStatusEnum;
 import com.gw.domain_hr.service.DomainOrgStructureService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Map;
 
 
 @Api(value = "/domainorgstructure", description = "")
@@ -128,6 +125,7 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
 
     /**
      * 人员信息表 通过组织id获取树形结构 暂定只返回组织编码/组织名称/父级编码
+     *
      * @param id
      * @return
      */
@@ -136,26 +134,23 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
             notes = "通过组织编码获取所有组织",
             httpMethod = "GET"
     )
-    @GetMapping(value = "/getGroup/{id}")
-    public JSONObject getGroupById(@PathVariable("id") Integer id) {
-        this.logger.info("....................组织架构表_通过组织编码获取所有组织开始....................");
-        //返回JSON
-        JSONObject jsonObject = new JSONObject();
+    @GetMapping(value = "/group/{id}")
+    public JsonResult<Object> getGroupById(@PathVariable("id") Integer id) {
+        this.logger.info("组织架构表_通过组织编码获取所有组织开始");
+        JsonResult jsonResult;
         int groupCode = 0;
         if (id != null) {
             groupCode = id.intValue();
         }
         try {
-            List<Map<String, Object>> resultList = domainOrgStructureService.getGroupById(groupCode);
-            jsonObject.put("JSONArray", resultList);
-            jsonObject.put(ResultStatusEnum.STATUS_SUCCESS.getCode(), "查询成功");
-        } catch (Exception e) {
-            this.logger.error("....................组织架构表_通过组织编码获取所有组织发生异常...................." + e.getMessage());
-            jsonObject.put(ResultStatusEnum.STATUS_ERROR.getCode(), "组织架构表_通过组织编码获取所有组织发生异常" + e.getMessage());
-            return jsonObject;
+            List<DomainOrgStructure> resultList = domainOrgStructureService.getGroupById(groupCode);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
+        } catch (Exception var4) {
+            this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
         }
-        this.logger.info("....................组织架构表_通过组织编码获取所有组织结束....................");
-        return jsonObject;
+        this.logger.info("组织架构表_通过组织编码获取所有组织结束");
+        return jsonResult;
     }
 
 }

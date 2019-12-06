@@ -1,6 +1,5 @@
 package com.gw.domain_hr.rest;
 
-import com.alibaba.fastjson.JSONObject;
 import com.gw.cloud.common.base.controller.BaseController;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
@@ -11,6 +10,7 @@ import com.gw.domain_hr.service.DomainEmployeeInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -93,74 +93,55 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
         return jsonResult;
     }
 
-
-    /**
-     * 人员信息表 单条插入数据 参数校验
-     *
-     * @param domainEmployeeInfo
-     * @param errors
-     * @return
-     */
     @ApiOperation(
             value = "单条新增人员基础信息",
             notes = "单条新增人员基础信息",
             httpMethod = "POST"
     )
-    @PostMapping(value = "/insertEmployeeInfoSingle")
-    public JSONObject insertEmployeeInfoSingleByPersonnelNo(@Valid DomainEmployeeInfo domainEmployeeInfo, Errors errors) {
-        this.logger.info("....................人员基础信息表_单条插入数据开始....................");
-        //返回JSON
-        JSONObject jsonObject = new JSONObject();
-        String errorMessage = "";
+    @PostMapping(value = "/employee")
+    public JsonResult<Object> insertEmployeeInfoSingleByPersonnelNo(@RequestBody @Valid DomainEmployeeInfo domainEmployeeInfo, Errors errors) {
+        this.logger.info("人员基础信息表_单条插入数据开始");
+        JsonResult jsonResult;
         //先校验入参
         if (errors.hasErrors()) {
-            errorMessage = errors.getFieldError().toString();
-            jsonObject.put(ResultStatusEnum.STATUS_ERROR.getCode(), "入参格式错误:" + errorMessage);
-            return jsonObject;
+            String errorMessage = errors.getFieldError().toString();
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", errorMessage);
+            return jsonResult;
         }
         try {
             int num = domainEmployeeInfoService.insertEmployeeInfoSingle(domainEmployeeInfo);
-            jsonObject.put(ResultStatusEnum.STATUS_SUCCESS.getCode(), "新增成功，条数 " + num + "条");
-        } catch (Exception e) {
-            this.logger.error("....................人员基础信息表_单条插入数据发生异常...................." + e.getMessage());
-            jsonObject.put(ResultStatusEnum.STATUS_ERROR.getCode(), "单条插入数据发生异常" + e.getMessage());
-            return jsonObject;
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception var4) {
+            this.logger.error("人员基础信息表_单条插入数据发生异常" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", var4);
         }
-        this.logger.info("....................人员基础信息表_单条插入数据结束....................");
-        return jsonObject;
+        this.logger.info("人员基础信息表_单条插入数据结束");
+        return jsonResult;
     }
 
-    /**
-     * 人员信息表 单条更新数据
-     * @param domainEmployeeInfo
-     * @return
-     */
     @ApiOperation(
             value = "通过工号单条更新人员基础信息",
             notes = "通过工号单条更新人员基础信息",
-            httpMethod = "POST"
+            httpMethod = "PUT"
     )
-    @PostMapping(value = "/updateEmployeeInfoSingleByPersonnelNo")
-    public JSONObject updateEmployeeInfoSingleByPersonnelNo(DomainEmployeeInfo domainEmployeeInfo) {
-        this.logger.info("....................人员基础信息表_单条更新数据开始....................");
-        //返回JSON
-        JSONObject jsonObject = new JSONObject();
-        String personnelNo = domainEmployeeInfo.getPersonnelNo();
-        if(personnelNo.isEmpty()){
-            jsonObject.put(ResultStatusEnum.STATUS_ERROR.getCode(), "工号personnelNo不能为空");
-            return jsonObject;
-        }
+    @PutMapping(value = "/employee/{personnelno}")
+    public JsonResult<Integer> updateEmployeeInfoSingleByPersonnelNo(@RequestBody DomainEmployeeInfo domainEmployeeInfo, @PathVariable("personnelno") String personnelno) {
+        JsonResult jsonResult;
         try {
+            if (StringUtils.isEmpty(personnelno)) {
+                jsonResult = JsonResultUtil.createFailureJsonResult("更新失败！ {0}", ResultStatusEnum.STATUS_ERROR_10.getMessage());
+                return jsonResult;
+            }
+            domainEmployeeInfo.setPersonnelNo(personnelno);
             int num = domainEmployeeInfoService.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo);
-            jsonObject.put(ResultStatusEnum.STATUS_SUCCESS.getCode(), "更新成功，条数 " + num + "条");
-        } catch (Exception e) {
-            this.logger.error("....................人员基础信息表_单条更新数据发生异常...................." + e.getMessage());
-            jsonObject.put(ResultStatusEnum.STATUS_ERROR.getCode(), "单条更新数据发生异常" + e.getMessage());
-            return jsonObject;
+            jsonResult = JsonResultUtil.createSuccessJsonResult("更新成功，条数 " + num + "条");
+        } catch (Exception var4) {
+            this.logger.error("人员基础信息表_单条更新数据发生异常" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("更新失败！ {0}", var4);
         }
-        this.logger.info("....................人员基础信息表_单条更新数据结束....................");
-        return jsonObject;
+        return jsonResult;
     }
+
 }
 
 

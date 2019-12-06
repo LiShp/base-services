@@ -9,14 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
 @Transactional
 public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeInfo> {
-
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @Autowired
     private DomainEmployeeInfoMapper domainEmployeeInfoMapper;
@@ -33,22 +30,22 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
         return this.paginateQueryResultByExample(example,page,rows);
     }
 
-    public int insertEmployeeInfoSingle(DomainEmployeeInfo domainEmployeeInfo){
+    public int insertEmployeeInfoSingle(DomainEmployeeInfo domainEmployeeInfo) {
         Date createTime = domainEmployeeInfo.getCreateTime();
         Date updateTime = domainEmployeeInfo.getUpdateTime();
-        if(null == createTime){
+        if (null == createTime) {
             domainEmployeeInfo.setCreateTime(new Date());
         }
-        if(null == updateTime){
+        if (null == updateTime) {
             domainEmployeeInfo.setUpdateTime(new Date());
         }
         int num = domainEmployeeInfoMapper.insertEmployeeInfoSingle(domainEmployeeInfo);
         return num;
     }
 
-    public int updateEmployeeInfoSingleByPersonnelNo(DomainEmployeeInfo domainEmployeeInfo){
+    public int updateEmployeeInfoSingleByPersonnelNo(DomainEmployeeInfo domainEmployeeInfo) {
         Date updateTime = domainEmployeeInfo.getUpdateTime();
-        if(null == updateTime){
+        if (null == updateTime) {
             domainEmployeeInfo.setUpdateTime(new Date());
         }
         int num = domainEmployeeInfoMapper.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo);
