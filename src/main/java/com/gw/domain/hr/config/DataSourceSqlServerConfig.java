@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceSqlServerConfig {
 
-    @Bean
+    @Bean(name = "dsSqlserver")
     @ConfigurationProperties("spring.datasource.sqlserver")
     DataSource dsSqlserver() {
         return DataSourceBuilder.create().build();

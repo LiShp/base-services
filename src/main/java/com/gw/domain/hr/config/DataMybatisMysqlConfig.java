@@ -1,12 +1,9 @@
 package com.gw.domain.hr.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,11 +13,13 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tk.mybatis.spring.annotation.MapperScan;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
- * @author zoujialiang
+ * @ClassName: DataMybatisMysqlConfigs
+ * @Description: 配置类
+ * @Author: 99958168
+ * @Date: 2019-12-10 13:58
  */
 @Configuration
 @MapperScan(value = "com.gw.domain.hr.mapper", sqlSessionFactoryRef = "sqlSessionFactoryMysql")
@@ -29,8 +28,9 @@ public class DataMybatisMysqlConfig {
     @Autowired
     private Environment env;
 
-    @Resource
-    static DataSource dsMysql;
+    @Autowired
+    @Qualifier("dsMysql")
+    DataSource dsMysql;
 
 
     @Bean
@@ -48,8 +48,7 @@ public class DataMybatisMysqlConfig {
 
     @Bean(name = "mysqlTransactionManager")
     @Primary
-    public static DataSourceTransactionManager mysqlTransactionManager() {
+    public static DataSourceTransactionManager mysqlTransactionManager(@Autowired @Qualifier("dsMysql") DataSource dsMysql) {
         return new DataSourceTransactionManager(dsMysql);
     }
-
 }

@@ -25,8 +25,9 @@ public class DataMybatisSqlServerConfig {
     @Autowired
     private Environment env;
 
-    @Resource
-    static DataSource dsSqlserver;
+    @Autowired
+    @Qualifier("dsSqlserver")
+    DataSource dsSqlserver;
 
 
     @Bean
