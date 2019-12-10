@@ -12,6 +12,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -24,9 +25,8 @@ public class DataMybatisSqlServerConfig {
     @Autowired
     private Environment env;
 
-    @Autowired
-    @Qualifier("dsSqlserver")
-    DataSource dsSqlserver;
+    @Resource
+    static DataSource dsSqlserver;
 
 
     @Bean
