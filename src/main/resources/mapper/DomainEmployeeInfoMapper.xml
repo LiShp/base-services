@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gw.domain_hr.mapper.DomainEmployeeInfoMapper">
-    <resultMap id="Base_Result_Map" type="com.gw.domain_hr.entity.DomainEmployeeInfo">
+<mapper namespace="com.gw.domain.hr.mapper.DomainEmployeeInfoMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.DomainEmployeeInfo">
 
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
@@ -52,7 +52,7 @@
         <result column="card_type" jdbcType="INTEGER" property="cardType" />
         <result column="card_name" jdbcType="VARCHAR" property="cardName" />
         <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
-        <result column="delete_flag" jdbcType="BIT" property="delete_flag" />
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
@@ -262,8 +262,8 @@
         <if test="cardNo != null">
             card_no = #{cardNo},
         </if>
-        <if test="delete_flag != null">
-            delete_flag = #{delete_flag},
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag},
         </if>
         <if test="remark != null">
             remark = #{remark},
@@ -424,8 +424,8 @@
         <if test="cardNo != null">
             #{cardNo},
         </if>
-        <if test="delete_flag != null">
-            #{delete_flag},
+        <if test="deleteFlag != null">
+            #{deleteFlag},
         </if>
         <if test="remark != null">
             #{remark},
@@ -495,7 +495,7 @@
                 <if test="cardType != null">and domain_employee_Info.card_type = #{cardType,jdbcType=INTEGER} </if>
                 <if test="cardName != null and cardName != ''">and domain_employee_Info.card_name = #{cardName,jdbcType=VARCHAR} </if>
                 <if test="cardNo != null and cardNo != ''">and domain_employee_Info.card_no = #{cardNo,jdbcType=VARCHAR} </if>
-                <if test="delete_flag != null">and domain_employee_Info.delete_flag = #{delete_flag,jdbcType=BIT} </if>
+                <if test="deleteFlag != null">and domain_employee_Info.delete_flag = #{deleteFlag,jdbcType=BIT} </if>
                 <if test="remark != null and remark != ''">and domain_employee_Info.remark = #{remark,jdbcType=VARCHAR} </if>
                 <if test="createTime != null">and domain_employee_Info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_employee_Info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
@@ -621,7 +621,7 @@
     #{cardType},
     #{cardName},
     #{cardNo},
-    #{delete_flag},
+    #{deleteFlag},
     #{remark},
     #{createTime},
     #{createPersonnelNo},
@@ -631,14 +631,14 @@
 
 
 
-    <insert id="insertEmployeeInfoSingle" parameterType="com.gw.domain_hr.entity.DomainEmployeeInfo" >
+    <insert id="insertEmployeeInfoSingle" parameterType="com.gw.domain.hr.entity.DomainEmployeeInfo" >
         insert into domain_employee_info
         (<include refid="tableValue"/>)
         values
         (<include refid="insertValue"/>)
     </insert>
 
-    <update id="updateEmployeeInfoSingleByPersonnelNo" parameterType="com.gw.domain_hr.entity.DomainEmployeeInfo">
+    <update id="updateEmployeeInfoSingleByPersonnelNo" parameterType="com.gw.domain.hr.entity.DomainEmployeeInfo">
         update domain_employee_info
         <set>
             <include refid="Base_Option_Clause"/>

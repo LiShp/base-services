@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gw.domain_hr.mapper.DomainOrgStructureMapper">
-    <resultMap id="Base_Result_Map" type="com.gw.domain_hr.entity.DomainOrgStructure">
+<mapper namespace="com.gw.domain.hr.mapper.DomainOrgStructureMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.DomainOrgStructure">
 
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="group_code" jdbcType="INTEGER" property="groupCode" />
@@ -20,7 +20,7 @@
         <result column="dept_top_leader" jdbcType="VARCHAR" property="deptTopLeader" />
         <result column="unit_top_leader" jdbcType="VARCHAR" property="unitTopLeader" />
         <result column="enable_time" jdbcType="TIMESTAMP" property="enableTime" />
-        <result column="delete_flag" jdbcType="BIT" property="delete_flag" />
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
@@ -103,8 +103,8 @@
         <if test="enableTime != null">
             enable_time = #{enableTime},
         </if>
-        <if test="delete_flag != null">
-            delete_flag = #{delete_flag},
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag},
         </if>
         <if test="remark != null">
             remark = #{remark},
@@ -170,7 +170,7 @@
             #{enableTime},
         </if>
         <if test="delete_flag != null">
-            #{delete_flag},
+            #{deleteFlag},
         </if>
         <if test="remark != null">
             #{remark},
@@ -208,7 +208,7 @@
                 <if test="deptTopLeader != null and deptTopLeader != ''">and domain_org_structure.dept_top_leader = #{deptTopLeader,jdbcType=VARCHAR} </if>
                 <if test="unitTopLeader != null and unitTopLeader != ''">and domain_org_structure.unit_top_leader = #{unitTopLeader,jdbcType=VARCHAR} </if>
                 <if test="enableTime != null">and domain_org_structure.enable_time = #{enableTime,jdbcType=TIMESTAMP} </if>
-                <if test="delete_flag != null">and domain_org_structure.delete_flag = #{delete_flag,jdbcType=BIT} </if>
+                <if test="delete_flag != null">and domain_org_structure.delete_flag = #{deleteFlag,jdbcType=BIT} </if>
                 <if test="remark != null and remark != ''">and domain_org_structure.remark = #{remark,jdbcType=VARCHAR} </if>
                 <if test="createTime != null">and domain_org_structure.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_org_structure.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
@@ -227,7 +227,7 @@
 
     </sql>
 
-    <select id="getGroupALL" resultMap="Base_Result_Map">
+    <select id="getGroupAll" resultMap="Base_Result_Map">
         SELECT
         <include refid="Select_Field"/>
         from domain_org_structure
