@@ -2,6 +2,7 @@ package com.gw.domain.hr.service;
 
 import com.gw.cloud.common.base.service.BaseService;
 import com.gw.cloud.common.base.util.QueryResult;
+import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.commons.collections.CollectionUtils;
@@ -51,14 +52,15 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
      * @param groupCode
      * @return
      */
-    public List<DomainOrgStructure> getGroupById(int groupCode) {
+    public List<DomainOrgStructureNode> getGroupById(int groupCode) {
         //获取所有的节点信息
-        List<DomainOrgStructure> queryList = domainOrgStructureMapper.getGroupAll();
+        List<DomainOrgStructureNode> queryList = domainOrgStructureMapper.getGroupAll();
         //父节点
-        List<DomainOrgStructure> parentList = new ArrayList<>();
-        for (DomainOrgStructure map : queryList) {
-            if (map.getId().intValue() == groupCode) {
-                parentList.add(map);
+        List<DomainOrgStructureNode> parentList = new ArrayList<>();
+        int size = queryList.size();
+        for (int i = 0; i < size; i++) {
+            if (queryList.get(i).getId().intValue() == groupCode) {
+                parentList.add(queryList.get(i));
             }
         }
         getChildren(parentList, queryList);
@@ -71,12 +73,13 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
      * @param parentList
      * @param queryList
      */
-    public static void getChildren(List<DomainOrgStructure> parentList, List<DomainOrgStructure> queryList) {
-        for (DomainOrgStructure parentMap : parentList) {
-            List<DomainOrgStructure> childrenlist = new ArrayList<>();
-            for (DomainOrgStructure allMap : queryList) {
-                if (parentMap.getId().intValue() == allMap.getParentId()) {
-                    childrenlist.add(allMap);
+    public static void getChildren(List<DomainOrgStructureNode> parentList, List<DomainOrgStructureNode> queryList) {
+        for (DomainOrgStructureNode parentMap : parentList) {
+            List<DomainOrgStructureNode> childrenlist = new ArrayList<>();
+            int size = queryList.size();
+            for (int i = 0; i < size; i++) {
+                if (parentMap.getId().intValue() == queryList.get(i).getParentId()) {
+                    childrenlist.add(queryList.get(i));
                 }
             }
             if (!CollectionUtils.isEmpty(childrenlist)) {
@@ -85,6 +88,7 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
             }
         }
     }
+
 }
 
 

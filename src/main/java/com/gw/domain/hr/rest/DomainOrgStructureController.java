@@ -4,6 +4,7 @@ import com.gw.cloud.common.base.controller.BaseController;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
+import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import io.swagger.annotations.Api;
@@ -145,7 +146,7 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
             groupCode = id.intValue();
         }
         try {
-            List<DomainOrgStructure> resultList = domainOrgStructureService.getGroupById(groupCode);
+            List<DomainOrgStructureNode> resultList = domainOrgStructureService.getGroupById(groupCode);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());

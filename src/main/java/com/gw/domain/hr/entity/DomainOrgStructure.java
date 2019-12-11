@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 
 import lombok.EqualsAndHashCode;
@@ -29,8 +28,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @ApiModel("")
 @Table(name = "`domain_org_structure`")
 public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
-
-    private List list;
 
     /**
      * sys_group表的groupId
