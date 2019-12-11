@@ -113,4 +113,17 @@ public class DomainBasicInfo extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`update_personnel_no`")
     @ApiModelProperty("更新人(工号)")
     private String updatePersonnelNo;
+
+    /**
+     * 是否删除：0否 1是
+     */
+    @Column(name = "`delete_flag`")
+    @ApiModelProperty("是否删除：0否 1是")
+    private Boolean deleteFlag;
+
+    @Override
+    public void setDeleteFlag(Boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
 }

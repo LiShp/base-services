@@ -193,10 +193,6 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
     @ApiModelProperty("是否删除：0否 1是")
     private Boolean deleteFlag;
 
-    public Boolean getDeleteFlag() {
-        return deleteFlag;
-    }
-
     @Override
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;

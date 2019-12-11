@@ -153,7 +153,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "health,info"
+        include: "*"
       #跨域访问配置
 #      cors:
 #        allowed-origins: ""
