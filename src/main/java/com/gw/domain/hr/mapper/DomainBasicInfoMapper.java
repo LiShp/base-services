@@ -21,7 +21,7 @@ public interface DomainBasicInfoMapper extends BaseMapper<DomainBasicInfo> {
      * @param list
      * @return
      */
-    int insertBasicInfoAll(List<Map<String, Object>> list);
+    int insertBasicInfoAll(List<DomainBasicInfo> list);
 
     /**
      * 全量删除Hr入库数据

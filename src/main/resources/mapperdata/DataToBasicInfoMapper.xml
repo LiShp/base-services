@@ -4,18 +4,31 @@
 
 <mapper namespace="com.gw.domain.hr.mapperdata.DataToBasicInfoMapper">
 
-    <select id="getFromSysFieldValueAll" resultType="java.util.Map">
+    <resultMap id="Base_All_Map" type="com.gw.domain.hr.entity.DomainBasicInfo">
+        <id column="ValueID" jdbcType="BIGINT" property="id" />
+        <result column="V_ParentID" jdbcType="INTEGER" property="parentId" />
+        <result column="V_ValueNo" jdbcType="INTEGER" property="valueNo" />
+        <result column="V_Text" jdbcType="VARCHAR" property="text" />
+        <result column="V_Name" jdbcType="VARCHAR" property="name" />
+        <result column="V_F_Key" jdbcType="VARCHAR" property="fKey" />
+        <result column="V_ShowOrder" jdbcType="INTEGER" property="showOrder" />
+        <result column="V_Code" jdbcType="VARCHAR" property="code" />
+        <result column="V_Delete" jdbcType="BIT" property="deleteFlag" />
+        <result column="V_Remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <select id="getFromSysFieldValueAll" resultMap="Base_All_Map">
          select
-        ta.ValueID as id,
-        ta.V_ParentID as parent_id,
-        ta.V_ValueNo as value_no,
-        ta.V_Text as text,
-        ta.V_Name as name,
-        ta.V_F_Key as f_key,
-        ta.V_ShowOrder as show_order,
-		ta.V_Code as code,
-        ta.V_Delete as delete_flag,
-        ta.V_Remark as remark
+        ta.ValueID,
+        ta.V_ParentID,
+        ta.V_ValueNo,
+        ta.V_Text,
+        ta.V_Name,
+        ta.V_F_Key,
+        ta.V_ShowOrder,
+		ta.V_Code,
+        ta.V_Delete,
+        ta.V_Remark
           from
         sys_FieldValue ta
     </select>

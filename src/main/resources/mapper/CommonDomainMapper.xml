@@ -5,7 +5,7 @@
 <mapper namespace="com.gw.domain.hr.mapper.CommonDomainMapper">
 
     <insert id="insertMaxTime" parameterType="java.util.Map">
-        INSERT INTO domain_max_time
+        replace INTO domain_max_time
         (tableName,
         maxCreateTime,
         maxUpdateTime
@@ -20,10 +20,16 @@
         delete from domain_max_time where tableName = #{tableName}
     </delete>
 
-    <update id="updateMaxCreateTime" parameterType="java.util.Map">
+    <update id="updateMaxTime" parameterType="java.util.Map">
        update domain_max_time
-       set
-       maxCreateTime = #{maxCreateTime}
+       <set>
+           <if test="maxCreateTime != null and maxCreateTime != ''">
+               maxCreateTime = #{maxCreateTime},
+           </if>
+           <if test="maxUpdateTime != null and maxUpdateTime != ''">
+               maxUpdateTime = #{maxUpdateTime},
+           </if>
+       </set>
        where
        tableName = #{tableName}
     </update>

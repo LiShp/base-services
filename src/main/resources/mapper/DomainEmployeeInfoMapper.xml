@@ -808,7 +808,6 @@
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update domain_employee_info
             <set>
-                id = #{item.id},
                 personnel_no = #{item.personnel_no},
                 name = #{item.name},
                 once_name = #{item.once_name},

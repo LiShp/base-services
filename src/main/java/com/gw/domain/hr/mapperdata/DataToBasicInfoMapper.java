@@ -1,5 +1,6 @@
 package com.gw.domain.hr.mapperdata;
 
+import com.gw.domain.hr.entity.DomainBasicInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface DataToBasicInfoMapper {
      * sys_FieldValue获取全量数据
      * @return
      */
-    List<Map<String, Object>> getFromSysFieldValueAll();
+    List<DomainBasicInfo> getFromSysFieldValueAll();
 }

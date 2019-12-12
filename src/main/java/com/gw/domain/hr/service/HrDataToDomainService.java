@@ -1,6 +1,7 @@
 package com.gw.domain.hr.service;
 
 import com.gw.domain.hr.commonutils.CollectionUtil;
+import com.gw.domain.hr.entity.DomainBasicInfo;
 import com.gw.domain.hr.enums.TableNameEnum;
 import com.gw.domain.hr.mapper.*;
 import com.gw.domain.hr.mapperdata.DataToBasicInfoMapper;
@@ -56,7 +57,6 @@ public class HrDataToDomainService {
         if (!CollectionUtils.isEmpty(list)) {
             Map<String, Object> map = new HashMap<>(16);
             String domainTableName = TableNameEnum.TABLE_NAME_ORGSTRUCTURE.getTableName();
-
             //操作主库主数据
             int delete = domainOrgStructureMapper.deleteOrgStruAll();
             this.logger.info("删除domain_org_structure中Hr数据共计:" + delete + "条");
@@ -68,7 +68,7 @@ public class HrDataToDomainService {
             CollectionUtil.listSortDate(list, "update_time");
             map.put("maxUpdateTime", list.get(list.size() - 1).get("update_time"));
             map.put("tableName", domainTableName);
-            this.updateMaxTime(map);
+            this.insertMaxTime(map);
 
         } else {
             this.logger.info("Sqlserver中间库sys_Group表无新增数据");
@@ -102,8 +102,8 @@ public class HrDataToDomainService {
             this.logger.info("入表domain_org_structure共计:" + numCreate + "条");
             CollectionUtil.listSortDate(createlist, "create_time");
             mapTime.put("maxCreateTime", createlist.get(createlist.size() - 1).get("create_time"));
-            commonDomainMapper.updateMaxCreateTime(mapTime);
         } else {
+            mapTime.put("maxCreateTime", "");
             this.logger.info("Sqlserver中间库sys_Group表无新增数据");
         }
         if (!CollectionUtils.isEmpty(updatelist)) {
@@ -111,9 +111,12 @@ public class HrDataToDomainService {
             this.logger.info("更新表domain_org_structure共计:" + numUpdate + "条");
             CollectionUtil.listSortDate(updatelist, "update_time");
             mapTime.put("maxUpdateTime", updatelist.get(updatelist.size() - 1).get("update_time"));
-            commonDomainMapper.updateMaxUpdateTime(mapTime);
         } else {
+            mapTime.put("maxUpdateTime", "");
             this.logger.info("Sqlserver中间库sys_Group表无新更新数据");
+        }
+        if (!CollectionUtils.isEmpty(createlist) || !CollectionUtils.isEmpty(updatelist)) {
+            commonDomainMapper.updateMaxTime(mapTime);
         }
         this.logger.info("从Sqlserver中间库sys_Group增量获取数据结束");
         return numCreate + numUpdate;
@@ -127,10 +130,9 @@ public class HrDataToDomainService {
     public int sysFieldValueToBasicInfoAll() {
         this.logger.info("从Sqlserver中间库sys_FieldValue获取数据开始");
         int num = 0;
-        List<Map<String, Object>> list = dataToBasicInfoMapper.getFromSysFieldValueAll();
+        List<DomainBasicInfo> list = dataToBasicInfoMapper.getFromSysFieldValueAll();
+        this.logger.info("从Sqlserver中间库sys_FieldValue获取数据" + list.size() + "条");
         if (!CollectionUtils.isEmpty(list)) {
-            int delete = domainBasicInfoMapper.deleteBasicInfoAll();
-            this.logger.info("删除domain_basic_info中Hr数据共计:" + delete + "条");
             num = domainBasicInfoMapper.insertBasicInfoAll(list);
             this.logger.info("入表domain_basic_info共计:" + num + "条");
         }
@@ -169,7 +171,7 @@ public class HrDataToDomainService {
             CollectionUtil.listSortDate(list, "update_time");
             map.put("maxUpdateTime", list.get(list.size() - 1).get("update_time"));
             map.put("tableName", domainTableName);
-            this.updateMaxTime(map);
+            this.insertMaxTime(map);
 
         } else {
             this.logger.info("Sqlserver中间库hr_Personnel表无新增数据");
@@ -196,6 +198,8 @@ public class HrDataToDomainService {
         List<Map<String, Object>> createlist = dataToEmployeeInfoMapper.getFromHrPersonnelCreate(map);
         List<Map<String, Object>> updatelist = dataToEmployeeInfoMapper.getFromHrPersonnelUpdate(map);
 
+        this.logger.info("从Sqlserver中间库hr_Personnel增量查询数据结束");
+
         //第三步：处理Hr更新数据
         Map<String, Object> mapTime = new HashMap<>(16);
         mapTime.put("tableName", domainTableName);
@@ -204,7 +208,6 @@ public class HrDataToDomainService {
             this.logger.info("入表domain_org_structure共计:" + numCreate + "条");
             CollectionUtil.listSortDate(createlist, "create_time");
             mapTime.put("maxCreateTime", createlist.get(createlist.size() - 1).get("create_time"));
-            commonDomainMapper.updateMaxCreateTime(mapTime);
         } else {
             this.logger.info("Sqlserver中间库hr_Personnel表无新增数据");
         }
@@ -213,16 +216,17 @@ public class HrDataToDomainService {
             this.logger.info("更新表domain_employee_info共计:" + numUpdate + "条");
             CollectionUtil.listSortDate(updatelist, "update_time");
             mapTime.put("maxUpdateTime", updatelist.get(updatelist.size() - 1).get("update_time"));
-            commonDomainMapper.updateMaxUpdateTime(mapTime);
         } else {
             this.logger.info("Sqlserver中间库hr_Personnel表无新更新数据");
+        }
+        if (!CollectionUtils.isEmpty(createlist) || !CollectionUtils.isEmpty(updatelist)) {
+            commonDomainMapper.updateMaxTime(mapTime);
         }
         this.logger.info("从Sqlserver中间库hr_Personnel增量获取数据结束");
         return numCreate + numUpdate;
     }
 
-    private void updateMaxTime(Map<String, Object> map) {
-        commonDomainMapper.deleteMaxTime(map);
+    private void insertMaxTime(Map<String, Object> map) {
         commonDomainMapper.insertMaxTime(map);
     }
 

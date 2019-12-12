@@ -148,8 +148,9 @@
 
     </sql>
 
-    <insert id="insertBasicInfoAll" parameterType="java.util.Map">
-        INSERT INTO domain_basic_info
+
+    <insert id="insertBasicInfoAll" parameterType="com.gw.domain.hr.entity.DomainBasicInfo">
+        replace INTO domain_basic_info
         (id,
         parent_id,
         value_no,
@@ -165,14 +166,14 @@
         VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.id},
-            #{item.parent_id},
-            #{item.value_no},
+            #{item.parentId},
+            #{item.valueNo},
             #{item.text},
             #{item.name},
-            #{item.f_key},
-            #{item.show_order},
+            #{item.fKey},
+            #{item.showOrder},
             #{item.code},
-            #{item.delete_flag},
+            #{item.deleteFlag},
             #{item.remark},
             'admin')
         </foreach>

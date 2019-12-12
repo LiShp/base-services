@@ -34,7 +34,7 @@ public interface CommonDomainMapper {
      * @param map
      * @return
      */
-    int updateMaxCreateTime(Map<String, Object> map);
+    int updateMaxTime(Map<String, Object> map);
 
     /**
      * 最大更新时间
