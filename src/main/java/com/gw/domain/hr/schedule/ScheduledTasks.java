@@ -20,11 +20,10 @@ public class ScheduledTasks {
     private HrDataToDomainService hrDataToDomainService;
 
     /**
-     * 每天早上10点15执行 0 15 10 * * ? *"
-     * 每隔10秒执行一次
-     * 每天下午16：10-16：30每隔一分钟执行一次0 10-30 16 * * ?
+     * 每天早上凌晨1点更新一次
+     * 每月每天凌晨1点0分0秒执行一次
      */
-    @Scheduled(cron = "0 00 10 * * ? ")
+    @Scheduled(cron = "0 00 01 * * ?")
     public void scheduledBasic() {
         this.logger.info("定时任务(全量导入_基础信息表数据)开始执行");
         try {
@@ -35,7 +34,11 @@ public class ScheduledTasks {
         this.logger.info("定时任务(全量导入_基础信息表数据)结束");
     }
 
-    @Scheduled(cron = "0 10 16 * * ? ")
+    /**
+     * 每月每天早上8到20点更新 每隔4个小时更新一次
+     * 0 0 8,12,16,20 * * ?
+     */
+    @Scheduled(cron = "0 0 8,12,16,20 * * ?")
     public void scheduledOrg() {
         this.logger.info("定时任务(增量更新_组织架构表)开始执行");
         try {
@@ -46,7 +49,11 @@ public class ScheduledTasks {
         this.logger.info("定时任务(增量更新_组织架构表)结束");
     }
 
-    @Scheduled(cron = "0 20 16 * * ? ")
+    /**
+     * 每月每天早上8到20点更新 每隔5分钟更新一次
+     * 0 0/5 8-20 * * ?
+     */
+    @Scheduled(cron = "0 0/5 8-20 * * ?")
     public void scheduledEmployee() {
         this.logger.info("定时任务(增量更新_员工基本信息表)开始执行");
         try {
