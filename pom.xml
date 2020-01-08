@@ -7,10 +7,10 @@
         <artifactId>gw-cloud-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.gw</groupId>
-    <artifactId>domain_hr</artifactId>
+    <groupId>com.gw.domainservice</groupId>
+    <artifactId>staff-org-basic-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>domain_hr</name>
+    <name>staff-org-basic-service</name>
     <description>hr系统领域服务</description>
 
     <dependencies>
