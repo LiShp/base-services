@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gw.domain_hr.mapper.DomainBasicInfoMapper">
-    <resultMap id="Base_Result_Map" type="com.gw.domain_hr.entity.DomainBasicInfo">
+<mapper namespace="com.gw.domain.hr.mapper.DomainBasicInfoMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.DomainBasicInfo">
 
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="parent_id" jdbcType="INTEGER" property="parentId" />
@@ -11,7 +11,7 @@
         <result column="f_key" jdbcType="VARCHAR" property="fKey" />
         <result column="show_order" jdbcType="INTEGER" property="showOrder" />
         <result column="code" jdbcType="VARCHAR" property="code" />
-        <result column="delete_flag" jdbcType="BIT" property="delete_flag" />
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
@@ -57,8 +57,8 @@
         <if test="code != null">
             code = #{code},
         </if>
-        <if test="delete_flag != null">
-            delete_flag = #{delete_flag},
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag},
         </if>
         <if test="remark != null">
             remark = #{remark},
@@ -99,8 +99,8 @@
         <if test="code != null">
             #{code},
         </if>
-        <if test="delete_flag != null">
-            #{delete_flag},
+        <if test="deleteFlag != null">
+            #{deleteFlag},
         </if>
         <if test="remark != null">
             #{remark},
@@ -129,7 +129,7 @@
                 <if test="fKey != null and fKey != ''">and domain_basic_info.f_key = #{fKey,jdbcType=VARCHAR} </if>
                 <if test="showOrder != null">and domain_basic_info.show_order = #{showOrder,jdbcType=INTEGER} </if>
                 <if test="code != null and code != ''">and domain_basic_info.code = #{code,jdbcType=VARCHAR} </if>
-                <if test="delete_flag != null">and domain_basic_info.delete_flag = #{delete_flag,jdbcType=BIT} </if>
+                <if test="deleteFlag != null">and domain_basic_info.delete_flag = #{deleteFlag,jdbcType=BIT} </if>
                 <if test="remark != null and remark != ''">and domain_basic_info.remark = #{remark,jdbcType=VARCHAR} </if>
                 <if test="createTime != null">and domain_basic_info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_basic_info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
@@ -147,4 +147,40 @@
         </choose>
 
     </sql>
+
+
+    <insert id="insertBasicInfoAll" parameterType="com.gw.domain.hr.entity.DomainBasicInfo">
+        replace INTO domain_basic_info
+        (id,
+        parent_id,
+        value_no,
+        text,
+        name,
+        f_key,
+        show_order,
+        code,
+        delete_flag,
+        remark,
+        create_personnel_no
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},
+            #{item.parentId},
+            #{item.valueNo},
+            #{item.text},
+            #{item.name},
+            #{item.fKey},
+            #{item.showOrder},
+            #{item.code},
+            #{item.deleteFlag},
+            #{item.remark},
+            'admin')
+        </foreach>
+
+    </insert>
+
+    <delete id="deleteBasicInfoAll">
+        delete from domain_basic_info where create_personnel_no = 'admin'
+    </delete>
 </mapper>

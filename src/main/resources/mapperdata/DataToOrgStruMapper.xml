@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gw.domain_hr.mapperdata.DataToOrgStruMapper">
+<mapper namespace="com.gw.domain.hr.mapperdata.DataToOrgStruMapper">
 
     <sql id="org">
         ta.GroupID as group_code,
