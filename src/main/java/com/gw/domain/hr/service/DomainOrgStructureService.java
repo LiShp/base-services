@@ -1,8 +1,11 @@
 package com.gw.domain.hr.service;
 
 import com.gw.cloud.common.base.service.BaseService;
+import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.DomainOrgStructureNode;
+import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.EmployeeVO;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.commons.collections.CollectionUtils;
@@ -52,7 +55,7 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
      * @param groupCode
      * @return
      */
-    public List<DomainOrgStructureNode> getGroupById(int groupCode) {
+    /*public List<DomainOrgStructureNode> getGroupById(int groupCode) {
         //获取所有的节点信息
         List<DomainOrgStructureNode> queryList = domainOrgStructureMapper.getGroupAll();
         //父节点
@@ -65,6 +68,15 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
         }
         getChildren(parentList, queryList);
         return parentList;
+    }*/
+    public List<DomainOrgStructureVO> getGroupById(int groupId) {
+        //获取所有的节点信息
+        Example example = new Example(DomainOrgStructure.class);
+        example.createCriteria().andEqualTo("deleteFlag", "0")
+                .andEqualTo("parentId", groupId);
+        List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExample(example);
+        List<DomainOrgStructureVO> employeeVOList = DozerUtil.convert(orgStructureList, DomainOrgStructureVO.class);
+        return employeeVOList;
     }
 
     /**

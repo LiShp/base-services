@@ -6,6 +6,7 @@ import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.entity.DomainOrgStructure;
+import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -137,16 +138,12 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
             notes = "通过组织编码获取所有组织",
             httpMethod = "GET"
     )
-    @GetMapping(value = "/group/{id}")
-    public JsonResult<Object> getGroupById(@PathVariable("id") Integer id) {
+    @GetMapping(value = "/group/{groupId}")
+    public JsonResult<List<DomainOrgStructureVO>> getGroupById(@PathVariable("groupId") Integer groupId) {
         this.logger.info("组织架构表_通过组织编码获取所有组织开始");
         JsonResult jsonResult;
-        int groupCode = 0;
-        if (id != null) {
-            groupCode = id.intValue();
-        }
         try {
-            List<DomainOrgStructureNode> resultList = domainOrgStructureService.getGroupById(groupCode);
+            List<DomainOrgStructureVO> resultList = domainOrgStructureService.getGroupById(groupId);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
