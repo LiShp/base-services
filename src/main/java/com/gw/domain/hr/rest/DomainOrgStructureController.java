@@ -130,7 +130,7 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
     /**
      * 人员信息表 通过组织id获取树形结构 暂定只返回组织编码/组织名称/父级编码
      *
-     * @param id
+     * @param groupId
      * @return
      */
     @ApiOperation(
