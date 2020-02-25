@@ -35,6 +35,10 @@ public enum TableNameEnum {
      */
     TABLE_NAME_EMPLOYEEINFO("domain_employee_info", "DOAMIN员工信息表"),
     /**
+     * DOAMIN员工职位信息表
+     */
+    TABLE_NAME_POSITION("domain_position", "DOAMIN员工职位信息表"),
+    /**
      * 时间表
      */
     TABLE_NAME_MAXTIME("domain_max_time", "时间表");

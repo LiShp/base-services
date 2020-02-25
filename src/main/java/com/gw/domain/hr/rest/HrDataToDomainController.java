@@ -74,6 +74,24 @@ public class HrDataToDomainController {
         }
         return jsonResult;
     }
+    /**
+     * 全量导入数据 SQLserver表HR_Position到mysql表domain_position表
+     *
+     * @return
+     */
+    @GetMapping(value = "/hrPositongToAll")
+    public JsonResult<Object> hrPositongToAll() {
+        JsonResult jsonResult;
+        try {
+            int num = hrDataToDomainService.hrPositongToAll();
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception e) {
+            this.logger.error("从Sqlserver中间库HR_Position获取数据发生异常：" + e.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+        }
+        return jsonResult;
+    }
+
 
     /**
      * 全量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表

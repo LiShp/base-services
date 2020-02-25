@@ -73,7 +73,7 @@ public class CollectionUtil {
      */
     public static <T> List<List<T>> splitList(List<T> list) {
         //数据库批量操作1000条数据会报错在in的情况下，
-        int len = 10000;
+        int len = 5000;
         //声明返回对象存值
         List<List<T>> result = new ArrayList<>();
         int size = list.size();

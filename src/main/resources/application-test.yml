@@ -4,7 +4,7 @@ spring:
   datasource:
     mysql:
       driver-class-name: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql://10.255.30.212:3306/domain_hr?characterEncoding=utf8&allowMultiQueries=true
+      jdbcUrl: jdbc:mysql://10.255.29.27:3306/domain_hr?characterEncoding=utf8&allowMultiQueries=true
       username: root
       password: 123456
       # 初始化大小，最小，最大
@@ -55,7 +55,16 @@ spring:
       max-file-size: "2MB"
 
 server:
-  port: 8080
+  port: 80
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: ${EUREKA_INSTANCE_IPADDRESS}
+  client:
+    serviceUrl:
+      defaultZone: http://10.255.29.31:8761/eureka/
+
 
 #日志插件默认配置
 gwmlog:
@@ -161,5 +170,3 @@ management:
     health:
       show-details: ALWAYS
   #暴漏端点端口号 与服务端口号不冲突
-  server:
-    port: 9091

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain.hr.mapper.DomainPositionMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.DomainPosition">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="position_id" jdbcType="INTEGER" property="positionId" />
+        <result column="group_id" jdbcType="INTEGER" property="groupId" />
+        <result column="position_number" jdbcType="INTEGER" property="positionNumber" />
+        <result column="position_name" jdbcType="VARCHAR" property="positionName" />
+        <result column="summary" jdbcType="VARCHAR" property="summary" />
+        <result column="popedoma" jdbcType="VARCHAR" property="popedoma" />
+        <result column="qualification" jdbcType="VARCHAR" property="qualification" />
+        <result column="remark" jdbcType="BIT" property="remark" />
+        <result column="down_position" jdbcType="VARCHAR" property="downPosition" />
+        <result column="up_position" jdbcType="VARCHAR" property="upPosition" />
+        <result column="count" jdbcType="INTEGER" property="count" />
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_personnel_no" jdbcType="VARCHAR" property="updatePersonnelNo" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        domain_position.position_id,
+        domain_position.group_id,
+        domain_position.position_number,
+        domain_position.position_name,
+        domain_position.summary,
+        domain_position.popedoma,
+        domain_position.qualification,
+        domain_position.remark,
+        domain_position.down_position,
+        domain_position.up_position,
+        domain_position.count,
+        domain_position.delete_flag,
+        domain_position.create_time,
+        domain_position.create_personnel_no,
+        domain_position.update_time,
+        domain_position.update_personnel_no
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="positionId != null">
+            position_id = #{positionId},
+        </if>
+        <if test="groupId != null">
+            group_id = #{groupId},
+        </if>
+        <if test="positionNumber != null">
+            position_number = #{positionNumber},
+        </if>
+        <if test="positionName != null">
+            position_name = #{positionName},
+        </if>
+        <if test="summary != null">
+            summary = #{summary},
+        </if>
+        <if test="popedoma != null">
+            popedoma = #{popedoma},
+        </if>
+        <if test="qualification != null">
+            qualification = #{qualification},
+        </if>
+        <if test="remark != null">
+            remark = #{remark},
+        </if>
+        <if test="downPosition != null">
+            down_position = #{downPosition},
+        </if>
+        <if test="upPosition != null">
+            up_position = #{upPosition},
+        </if>
+        <if test="count != null">
+            count = #{count},
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="createPersonnelNo != null">
+            create_personnel_no = #{createPersonnelNo},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime},
+        </if>
+        <if test="updatePersonnelNo != null">
+            update_personnel_no = #{updatePersonnelNo}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="positionId != null">
+            #{positionId},
+        </if>
+        <if test="groupId != null">
+            #{groupId},
+        </if>
+        <if test="positionNumber != null">
+            #{positionNumber},
+        </if>
+        <if test="positionName != null">
+            #{positionName},
+        </if>
+        <if test="summary != null">
+            #{summary},
+        </if>
+        <if test="popedoma != null">
+            #{popedoma},
+        </if>
+        <if test="qualification != null">
+            #{qualification},
+        </if>
+        <if test="remark != null">
+            #{remark},
+        </if>
+        <if test="downPosition != null">
+            #{downPosition},
+        </if>
+        <if test="upPosition != null">
+            #{upPosition},
+        </if>
+        <if test="count != null">
+            #{count},
+        </if>
+        <if test="deleteFlag != null">
+            #{deleteFlag},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="createPersonnelNo != null">
+            #{createPersonnelNo},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime},
+        </if>
+        <if test="updatePersonnelNo != null">
+            #{updatePersonnelNo}
+        </if>
+    </sql>
+
+    <insert id="insertPositionAll" parameterType="com.gw.domain.hr.entity.DomainPosition">
+        insert INTO domain_position
+        (id,
+        position_id,
+        group_id,
+        position_number,
+        position_name,
+        summary,
+        popedoma,
+        qualification,
+        remark,
+        down_position,
+        up_position,
+        count,
+        delete_flag,
+        create_time,
+        create_personnel_no,
+        update_time,
+        update_personnel_no
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.positionId},
+            #{item.groupId},
+            #{item.positionNumber},
+            #{item.positionName},
+            #{item.summary},
+            #{item.popedoma},
+            #{item.qualification},
+            #{item.remark},
+            #{item.downPosition},
+            #{item.upPosition},
+            #{item.count},
+            #{item.deleteFlag},
+            now(),
+            'admin',
+            now(),
+            'admin'
+            )
+        </foreach>
+
+    </insert>
+
+    <delete id="deletePositionAll">
+       TRUNCATE TABLE domain_position
+    </delete>
+</mapper>

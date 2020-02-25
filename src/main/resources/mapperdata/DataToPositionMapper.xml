@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gw.domain.hr.mapperdata.DataToPositionMapper">
+
+    <sql id="position">
+        ta.P_PositionID as id,
+        ta.P_Position as positionId,
+        ta.P_GroupID as groupId,
+        ta.P_Number as positionNumber,
+        ta.P_CName as positionName,
+        ta.P_Summary as summary,
+        ta.P_Popedoma as popedoma,
+        ta.P_Qualification as qualification,
+        ta.P_Remark as remark,
+        ta.P_UpPosition as downPosition,
+        ta.P_DownPosition as upPosition,
+        ta.P_Count as count,
+        ta.P_Delete as deleteFlag
+    </sql>
+
+    <select id="getFromHrPositionAll" resultType="com.gw.domain.hr.entity.DomainPosition">
+        select
+        <include refid="position"/>
+        from
+        HR_Position ta
+    </select>
+
+</mapper>

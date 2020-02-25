@@ -1,6 +1,6 @@
 spring:
   application:
-    name: domain_hr
+    name: domain-staff-org-basic
   datasource:
     mysql:
       driver-class-name: com.mysql.jdbc.Driver
@@ -57,6 +57,13 @@ spring:
 
 server:
   port: 8080
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://10.255.30.214:8761/eureka/
 
 #日志插件默认配置
 gwmlog:
@@ -155,13 +162,13 @@ management:
       exposure:
         include: "*"
       #跨域访问配置
-#      cors:
-#        allowed-origins: ""
-#        allowed-methods: "get","post"
+  #      cors:
+  #        allowed-origins: ""
+  #        allowed-methods: "get","post"
   #单个端点操作
   endpoint:
     health:
       show-details: ALWAYS
   #暴漏端点端口号 与服务端口号不冲突
-  server:
-    port: 9091
+#  server:
+#    port: 9091

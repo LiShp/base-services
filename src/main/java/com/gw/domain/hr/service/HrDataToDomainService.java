@@ -2,11 +2,13 @@ package com.gw.domain.hr.service;
 
 import com.gw.domain.hr.commonutils.CollectionUtil;
 import com.gw.domain.hr.entity.DomainBasicInfo;
+import com.gw.domain.hr.entity.DomainPosition;
 import com.gw.domain.hr.enums.TableNameEnum;
 import com.gw.domain.hr.mapper.*;
 import com.gw.domain.hr.mapperdata.DataToBasicInfoMapper;
 import com.gw.domain.hr.mapperdata.DataToEmployeeInfoMapper;
 import com.gw.domain.hr.mapperdata.DataToOrgStruMapper;
+import com.gw.domain.hr.mapperdata.DataToPositionMapper;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,37 @@ public class HrDataToDomainService {
     private DataToEmployeeInfoMapper dataToEmployeeInfoMapper;
     @Resource
     private DomainEmployeeInfoMapper domainEmployeeInfoMapper;
+    @Resource
+    private DataToPositionMapper dataToPositionMapper;
+    @Resource
+    private DomainPositionMapper domainPositionMapper;
+
+    /**
+     * 全量导入数据 SQLserver表HR_Position到mysql表domain_position表
+     * 数据量5万多条，一次性任务 只能晚上更新
+     */
+    @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public int hrPositongToAll() {
+        this.logger.info("从Sqlserver中间库HR_Position获取数据开始");
+        int nums = 0;
+        List<DomainPosition> list = dataToPositionMapper.getFromHrPositionAll();
+        if (!CollectionUtils.isEmpty(list)) {
+            this.logger.info("从Sqlserver中间库HR_Position获取数据" + list.size() + "条");
+            //删除表数据
+            int deleteNum = domainPositionMapper.deletePositionAll();
+            this.logger.info("从领域服务删除职位信息" + deleteNum + "条");
+            //分批次处理数据
+            List<List<DomainPosition>> splitList = CollectionUtil.splitList(list);
+            for (int i = 0; i < splitList.size(); i++) {
+                int num = domainPositionMapper.insertPositionAll(splitList.get(i));
+                this.logger.info("第" + (i + 1) + "次入表domain_position共计:" + num + "条");
+                nums += num;
+            }
+            this.logger.info("入表domain_position共计:" + nums + "条");
+        }
+        this.logger.info("从Sqlserver中间库HR_Position获取数据结束");
+        return nums;
+    }
 
     /**
      * 全量导入数据 SQLserver表sys_Group到mysql表domain_org_structure表
