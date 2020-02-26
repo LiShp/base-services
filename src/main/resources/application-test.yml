@@ -1,6 +1,6 @@
 spring:
   application:
-    name: domain_hr
+    name: domain-hr
   datasource:
     mysql:
       driver-class-name: com.mysql.jdbc.Driver
