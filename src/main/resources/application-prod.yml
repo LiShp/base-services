@@ -30,7 +30,7 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     sqlserver:
       driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-      jdbcUrl: jdbc:sqlserver://10.255.16.26:1433;DatabaseName=gwhr
+      jdbcUrl: jdbc:sqlserver://10.255.21.26:1433;DatabaseName=gwhr
       username: HrYwzt
       password: ywzt@123.com
       initialSize: 1
