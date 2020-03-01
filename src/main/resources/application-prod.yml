@@ -57,6 +57,14 @@ spring:
 server:
   port: 80
 
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: ${EUREKA_INSTANCE_IPADDRESS}
+  client:
+    serviceUrl:
+      defaultZone: http://10.255.21.146:8761/eureka/,http://10.255.21.147:8761/eureka,http://10.255.21.148:8761/eureka
+
 #日志插件默认配置
 gwmlog:
   #平台名称，必须全小写，不可以有特殊字符，请使用部门名称简写（如：ywztb）
