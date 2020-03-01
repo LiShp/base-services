@@ -193,6 +193,7 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
         try {
             DomainEmployeeInfo domainEmployeeInfo = new DomainEmployeeInfo();
             domainEmployeeInfo.setDeleteFlag(Boolean.FALSE);
+            domainEmployeeInfo.setPersonnelStatus(1);
             domainEmployeeInfo.setGroupId(groupId);
             List<DomainEmployeeInfo> domainEmployeeInfoList = super.baseService.selectList(domainEmployeeInfo);
             if(domainEmployeeInfoList.isEmpty()) {
