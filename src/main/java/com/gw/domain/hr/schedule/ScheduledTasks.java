@@ -38,7 +38,7 @@ public class ScheduledTasks {
      * 每天早上凌晨1点30分更新一次
      * 每月每天凌晨1点30分0秒执行一次
      */
-//    @Scheduled(cron = "0 30 01 * * ?")
+    @Scheduled(cron = "0 30 01 * * ?")
     public void scheduledPosition() {
         this.logger.info("定时任务(全量导入_职位信息表数据)开始执行");
         try {
@@ -68,7 +68,7 @@ public class ScheduledTasks {
      * 每月每天早上8到20点更新 每隔5分钟更新一次
      * 0 0/5 8-20 * * ?
      */
-    @Scheduled(cron = "0 0/5 8-20 * * ?")
+    //@Scheduled(cron = "0 0/5 8-20 * * ?")
     public void scheduledEmployee() {
         this.logger.info("定时任务(增量更新_员工基本信息表)开始执行");
         try {
