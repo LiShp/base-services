@@ -4,7 +4,7 @@ spring:
   datasource:
     mysql:
       driver-class-name: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql://domain-hr1.gengweixin-mysql-domain-hr:10336/domain-hr?characterEncoding=utf8&allowMultiQueries=true
+      jdbcUrl: jdbc:mysql://domain-hr1.gengweixin-mysql-domain-hr:10366/domain-hr?characterEncoding=utf8&allowMultiQueries=true
       username: root
       password: gw-domain-hr
       # 初始化大小，最小，最大
