@@ -169,5 +169,5 @@ management:
     health:
       show-details: ALWAYS
   #暴漏端点端口号 与服务端口号不冲突
-  server:
-    port: 9091
+#  server:
+#    port: 9091
