@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -175,6 +176,36 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
                 domainEmployeeInfoVO.setParentId(domainOrgStructure.getParentId());
             }
             jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVO);
+        } catch (Exception var4) {
+            this.logger.error("通过工号查询人员基础信息异常，" ,var4);
+            jsonResult = JsonResultUtil.createFailureJsonResult("通过工号查询人员基础信息异常！ {0}", var4);
+        }
+        return jsonResult;
+    }
+
+    @ApiOperation(
+            value = "【自定义】- 通过工号列表批量查询人员基础信息",
+            notes = "【自定义】- 通过工号列表批量查询人员基础信息",
+            httpMethod = "POST"
+    )
+    @PostMapping(value = "/employees")
+    public JsonResult<List<DomainEmployeeInfoVO>> selectEmployeeInfoByPersonnelNos(@RequestBody @NotEmpty(message = "工号数组不能为空") List<String> personnelNo) {
+        JsonResult jsonResult;
+        try {
+            Example example = new Example(DomainEmployeeInfo.class);
+            example.createCriteria().andIn("personnelNo", personnelNo)
+                    .andEqualTo("personnelStatus",1);
+
+            List<DomainEmployeeInfo> domainEmployeeInfo = domainEmployeeInfoService.selectListByExample(example);
+            List<DomainEmployeeInfoVO> domainEmployeeInfoVOList = DozerUtil.convert(domainEmployeeInfo, DomainEmployeeInfoVO.class);
+            for(DomainEmployeeInfoVO info : domainEmployeeInfoVOList) {
+                Example orgExample = new Example(DomainOrgStructure.class);
+                orgExample.createCriteria().andEqualTo("id", info.getGroupId())
+                        .andEqualTo("deleteFlag", 0);
+                DomainOrgStructure domainOrgStructure = domainOrgStructureService.selectOneByExample(orgExample);
+                info.setParentId(domainOrgStructure.getParentId());
+            }
+            jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVOList);
         } catch (Exception var4) {
             this.logger.error("通过工号查询人员基础信息异常，" ,var4);
             jsonResult = JsonResultUtil.createFailureJsonResult("通过工号查询人员基础信息异常！ {0}", var4);
