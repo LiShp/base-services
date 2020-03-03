@@ -7,6 +7,7 @@ import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -144,6 +146,33 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
         JsonResult jsonResult;
         try {
             List<DomainOrgStructureVO> resultList = domainOrgStructureService.getGroupById(groupId);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
+        } catch (Exception var4) {
+            this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
+        }
+        this.logger.info("组织架构表_通过组织编码获取所有组织结束");
+        return jsonResult;
+    }
+
+    /**
+     * 人员信息表 通过组织id获取树形结构 暂定只返回组织编码/组织名称/父级编码
+     *
+     * @param groupId
+     * @return
+     */
+    @ApiOperation(
+            value = "通过组织编码查询子集组织名称和ID以及组织下的员工信息",
+            notes = "通过组织编码查询子集组织名称和ID以及组织下的员工信息",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/depthgroup/{groupId}")
+    public JsonResult<NodeVO> getDepthGroupById(@PathVariable("groupId") Long groupId) {
+        this.logger.info("组织架构表_通过组织编码获取所有组织开始");
+        JsonResult jsonResult;
+        try {
+
+            NodeVO resultList = domainOrgStructureService.getDepthGroupById(groupId);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());

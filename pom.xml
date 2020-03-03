@@ -13,6 +13,8 @@
     <name>staff-org-basic-service</name>
     <description>hr系统领域服务</description>
 
+
+
     <dependencies>
         <dependency>
             <groupId>com.gw</groupId>
