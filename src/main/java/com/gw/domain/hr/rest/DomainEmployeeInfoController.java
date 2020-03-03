@@ -153,8 +153,8 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
     }
 
     @ApiOperation(
-            value = "通过工号查询人员基础信息",
-            notes = "通过工号查询人员基础信息",
+            value = "【自定义】- 通过工号查询人员基础信息",
+            notes = "【自定义】- 通过工号查询人员基础信息",
             httpMethod = "GET"
     )
     @GetMapping(value = "/employee/{personnelNo}")
@@ -183,8 +183,8 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
     }
 
     @ApiOperation(
-            value = "根据科室ID查询员工信息",
-            notes = "根据科室ID查询员工信息",
+            value = "【自定义】- 根据科室ID查询员工信息",
+            notes = "【自定义】- 根据科室ID查询员工信息",
             httpMethod = "GET"
     )
     @GetMapping(value = "/employees/{groupId}")

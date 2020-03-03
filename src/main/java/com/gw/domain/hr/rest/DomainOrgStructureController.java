@@ -136,8 +136,8 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
      * @return
      */
     @ApiOperation(
-            value = "通过组织编码查询子集组织名称和ID",
-            notes = "通过组织编码查询子集组织名称和ID",
+            value = "【自定义】- 通过组织编码查询子集组织名称和ID",
+            notes = "【自定义】- 通过组织编码查询子集组织名称和ID",
             httpMethod = "GET"
     )
     @GetMapping(value = "/group/{groupId}")
@@ -162,8 +162,8 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
      * @return
      */
     @ApiOperation(
-            value = "通过组织编码查询子集组织名称和ID以及组织下的员工信息",
-            notes = "通过组织编码查询子集组织名称和ID以及组织下的员工信息",
+            value = "【自定义】- 通过组织编码查询子集组织名称和ID以及组织下的员工信息",
+            notes = "【自定义】- 通过组织编码查询子集组织名称和ID以及组织下的员工信息",
             httpMethod = "GET"
     )
     @GetMapping(value = "/depthgroup/{groupId}")
