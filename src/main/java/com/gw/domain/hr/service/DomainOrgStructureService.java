@@ -99,9 +99,9 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
         DomainOrgStructure currentOrg = domainOrgStructureMapper.selectOneByExample(example);
 
         NodeVO currentNode = new NodeVO();
-        currentNode.setNodeValue(currentOrg.getId().toString());
-        currentNode.setNodeName(currentOrg.getGroupName());
-        currentNode.setNodeVO(getChildren(new ArrayList<>(), groupId));
+        currentNode.setKey(currentOrg.getId().toString());
+        currentNode.setTitle(currentOrg.getGroupName());
+        currentNode.setChildren(getChildren(new ArrayList<>(), groupId));
         return currentNode;
     }
     private List<NodeVO> getChildren(List<NodeVO> nodeVOList, Long groupId){
@@ -115,8 +115,8 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
         for(DomainEmployeeInfo info : domainEmployeeInfoList){
             NodeVO nodeVO = new NodeVO();
             nodeVO.setType(1);
-            nodeVO.setNodeName(info.getName());
-            nodeVO.setNodeValue(info.getPersonnelNo());
+            nodeVO.setTitle(info.getName());
+            nodeVO.setKey(info.getPersonnelNo());
             nodeVOS.add(nodeVO);
         }
         nodeVOList.addAll(nodeVOS);
@@ -129,10 +129,10 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
             //遍历子组织下的人员信息/组织信息
             NodeVO nodeVO = new NodeVO();
             nodeVO.setType(2);
-            nodeVO.setNodeName(info.getGroupName());
-            nodeVO.setNodeValue(info.getId().toString());
+            nodeVO.setTitle(info.getGroupName());
+            nodeVO.setKey(info.getId().toString());
             List<NodeVO> childNodes = getChildren(new ArrayList<>(), info.getId());
-            nodeVO.setNodeVO(childNodes);
+            nodeVO.setChildren(childNodes);
             nodeVOList.add(nodeVO);
         }
         return nodeVOList;

@@ -25,16 +25,16 @@ public class NodeVO implements Serializable {
      */
 
     @ApiModelProperty("节点名称：组织/员工名称")
-    private String nodeName;
+    private String title;
 
     @ApiModelProperty("节点值：组织ID/员工工号")
-    private String nodeValue;
+    private String key;
 
     @ApiModelProperty("节点类型：0组织、1员工")
     private Integer type;
 
     @ApiModelProperty("子节点")
-    private List<NodeVO> nodeVO;
+    private List<NodeVO> children;
 
 
 }
