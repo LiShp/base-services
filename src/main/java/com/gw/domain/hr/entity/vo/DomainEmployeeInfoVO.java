@@ -91,6 +91,13 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     @ApiModelProperty("二级部ID")
     private Integer parentId;
 
+    /**
+     * 所在科室
+     */
+    @Column(name = "`group_name`")
+    @ApiModelProperty("二级部名称")
+    private String parentName;
+
 
     /**
      * 人员状态：1在职 2离职

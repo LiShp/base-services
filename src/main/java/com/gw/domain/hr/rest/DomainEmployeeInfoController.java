@@ -204,6 +204,7 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
                         .andEqualTo("deleteFlag", 0);
                 DomainOrgStructure domainOrgStructure = domainOrgStructureService.selectOneByExample(orgExample);
                 info.setParentId(domainOrgStructure.getParentId());
+                info.setParentName(domainOrgStructure.getGroupName());
             }
             jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVOList);
         } catch (Exception var4) {
