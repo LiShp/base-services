@@ -200,7 +200,7 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
             List<DomainEmployeeInfoVO> domainEmployeeInfoVOList = DozerUtil.convert(domainEmployeeInfo, DomainEmployeeInfoVO.class);
             for(DomainEmployeeInfoVO info : domainEmployeeInfoVOList) {
                 Example orgExample = new Example(DomainOrgStructure.class);
-                orgExample.createCriteria().andEqualTo("id", info.getGroupId())
+                orgExample.createCriteria().andEqualTo("parentId", info.getGroupId())
                         .andEqualTo("deleteFlag", 0);
                 DomainOrgStructure domainOrgStructure = domainOrgStructureService.selectOneByExample(orgExample);
                 info.setParentId(domainOrgStructure.getParentId());
