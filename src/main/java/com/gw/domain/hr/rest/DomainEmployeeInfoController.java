@@ -203,11 +203,12 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
                 orgExample.createCriteria().andEqualTo("id", info.getGroupId())
                         .andEqualTo("deleteFlag", 0);
                 DomainOrgStructure domainOrgStructure = domainOrgStructureService.selectOneByExample(orgExample);
-
-                Example parentExample = new Example(DomainOrgStructure.class);
-                parentExample.createCriteria().andEqualTo("id", domainOrgStructure.getParentId())
-                        .andEqualTo("deleteFlag", 0);
-                domainOrgStructure = domainOrgStructureService.selectOneByExample(parentExample);
+                if(domainOrgStructure.getLevel()==5) {
+                    Example parentExample = new Example(DomainOrgStructure.class);
+                    parentExample.createCriteria().andEqualTo("id", domainOrgStructure.getParentId())
+                            .andEqualTo("deleteFlag", 0);
+                    domainOrgStructure = domainOrgStructureService.selectOneByExample(parentExample);
+                }
                 info.setParentId(domainOrgStructure.getParentId());
                 info.setParentName(domainOrgStructure.getGroupName());
             }
