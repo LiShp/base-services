@@ -123,7 +123,7 @@ public class HrDataToDomainController {
             int num = hrDataToDomainService.personnelToEmployeeInfoNew();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
             jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
         }
         return jsonResult;
