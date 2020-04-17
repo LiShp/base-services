@@ -29,7 +29,7 @@ public class ScheduledTasks {
         try {
             hrDataToDomainService.sysFieldValueToBasicInfoAll();
         } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库sys_FieldValue获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库sys_FieldValue获取数据发生异常：" , e);
         }
         this.logger.info("定时任务(全量导入_基础信息表数据)结束");
     }
@@ -44,7 +44,7 @@ public class ScheduledTasks {
         try {
             hrDataToDomainService.hrPositongToAll();
         } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库hr_position获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库hr_position获取数据发生异常：" , e);
         }
         this.logger.info("定时任务(全量导入_职位信息表数据)结束");
     }
@@ -59,7 +59,7 @@ public class ScheduledTasks {
         try {
             hrDataToDomainService.sysGroupToOrgStruNew();
         } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库sys_Group增量获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库sys_Group增量获取数据发生异常：" , e);
         }
         this.logger.info("定时任务(增量更新_组织架构表)结束");
     }
@@ -74,7 +74,7 @@ public class ScheduledTasks {
         try {
             hrDataToDomainService.personnelToEmployeeInfoNew();
         } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库hr_Personnel增量获取数据发生异常：" + e.getMessage());
+            this.logger.error("从Sqlserver中间库hr_Personnel增量获取数据发生异常：" , e);
         }
         this.logger.info("定时任务(增量更新_员工基本信息表)结束");
     }
