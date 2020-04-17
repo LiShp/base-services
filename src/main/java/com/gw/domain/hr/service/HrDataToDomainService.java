@@ -280,10 +280,4 @@ public class HrDataToDomainService {
     private void insertMaxTime(Map<String, Object> map) {
         commonDomainMapper.insertMaxTime(map);
     }
-
-
-    public static void main(String[] args) {
-        System.out.println(1055/100);
-
-    }
 }
