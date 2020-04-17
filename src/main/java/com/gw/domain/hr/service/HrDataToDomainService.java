@@ -227,10 +227,12 @@ public class HrDataToDomainService {
         //第一步：获取最大创建时间 和 最大更新时间
         String domainTableName = TableNameEnum.TABLE_NAME_EMPLOYEEINFO.getTableName();
         Map<String, Object> map = commonDomainMapper.getMaxTime(domainTableName);
-
+        this.logger.info("1.map-getMaxTime:"+map);
         //第二步：获取新增的数据 和 更新的数据
         List<Map<String, Object>> createlist = dataToEmployeeInfoMapper.getFromHrPersonnelCreate(map);
         List<Map<String, Object>> updatelist = dataToEmployeeInfoMapper.getFromHrPersonnelUpdate(map);
+        this.logger.info("2.createlist.size():"+createlist.size());
+        this.logger.info("2.updatelist.size():"+updatelist.size());
 
         this.logger.info("从Sqlserver中间库hr_Personnel增量查询数据结束");
 
