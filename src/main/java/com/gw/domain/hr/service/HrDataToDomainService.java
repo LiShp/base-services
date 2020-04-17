@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -236,8 +237,17 @@ public class HrDataToDomainService {
         //第三步：处理Hr更新数据
         Map<String, Object> mapTime = new HashMap<>(16);
         mapTime.put("tableName", domainTableName);
+
         if (!CollectionUtils.isEmpty(createlist)) {
-            numCreate = domainEmployeeInfoMapper.insertEmployeeInfoAll(createlist);
+            int loopsize = createlist.size()%100==0?createlist.size()/100:(createlist.size()/100)+1;
+            for(int i =0;i<loopsize;i++) {
+                int start = i * 100;
+                int end = (i + 1) * 100;
+                end = end > createlist.size() ? createlist.size() - 1 : end;
+                List<Map<String, Object>> createlistTemp = createlist.subList(start, end);
+                numCreate += domainEmployeeInfoMapper.insertEmployeeInfoAll(createlistTemp);
+                this.logger.info("已入表domain_org_structure共计:" + numCreate + "条");
+            }
             this.logger.info("入表domain_org_structure共计:" + numCreate + "条");
             CollectionUtil.listSortDate(createlist, "create_time");
             mapTime.put("maxCreateTime", createlist.get(createlist.size() - 1).get("create_time"));
@@ -245,7 +255,15 @@ public class HrDataToDomainService {
             this.logger.info("Sqlserver中间库hr_Personnel表无新增数据");
         }
         if (!CollectionUtils.isEmpty(updatelist)) {
-            numUpdate = domainEmployeeInfoMapper.updateEmployeeInfoAll(updatelist);
+            int loopsize = updatelist.size()%100==0?updatelist.size()/100:(updatelist.size()/100)+1;
+            for(int i =0;i<loopsize;i++){
+                int start = i*100;
+                int end = (i+1)*100;
+                end = end>updatelist.size()?updatelist.size()-1:end;
+                List<Map<String, Object>> updatelistTemp = updatelist.subList(start, end);
+                numUpdate += domainEmployeeInfoMapper.updateEmployeeInfoAll(updatelistTemp);
+                this.logger.info("已更新表domain_employee_info共计:" + numUpdate + "条");
+            }
             this.logger.info("更新表domain_employee_info共计:" + numUpdate + "条");
             CollectionUtil.listSortDate(updatelist, "update_time");
             mapTime.put("maxUpdateTime", updatelist.get(updatelist.size() - 1).get("update_time"));
@@ -263,4 +281,9 @@ public class HrDataToDomainService {
         commonDomainMapper.insertMaxTime(map);
     }
 
+
+    public static void main(String[] args) {
+        System.out.println(1055/100);
+
+    }
 }
