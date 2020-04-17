@@ -146,7 +146,7 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
      * @param groupId
      * @return
      */
-    public List<EmployeeOrgVO> getDepthGroupListById(Long groupId) {
+    public List<List<String>> getDepthGroupListById(Long groupId) {
         //查询当前组织信息
         //查询当前组织下的子组织信息
         Example example = new Example(DomainOrgStructure.class);
@@ -166,16 +166,17 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
 
         List<DomainEmployeeInfo> employeeInfoList = domainEmployeeInfoService.selectListByExample(employeeExample);
 
-        List<EmployeeOrgVO> employeeOrgVOList = new ArrayList<>();
+        List<List<String>> employeeOrgVOList = new ArrayList<>();
         for(DomainEmployeeInfo employeeInfo : employeeInfoList){
-            EmployeeOrgVO employeeOrgVO = new EmployeeOrgVO();
-            employeeOrgVO.setName(employeeInfo.getName());
-            employeeOrgVO.setPersonnelNo(employeeInfo.getPersonnelNo());
-            employeeOrgVO.setId(employeeInfo.getId());
-            employeeOrgVO.setGroupName(orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getGroupName());
+            List<String> list = new ArrayList<>();
+            list.add(employeeInfo.getId().toString());
+            list.add(employeeInfo.getPersonnelNo());
+            list.add(employeeInfo.getName());
+            list.add(employeeInfo.getGroupId().toString());
+            list.add(orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getGroupName());
             Integer parentId = orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getParentId();
-            employeeOrgVO.setParentName(orgIdMap.get(Long.valueOf(parentId)).getGroupName());
-            employeeOrgVOList.add(employeeOrgVO);
+            list.add(orgIdMap.get(Long.valueOf(parentId)).getGroupName());
+            employeeOrgVOList.add(list);
         }
         return employeeOrgVOList;
     }

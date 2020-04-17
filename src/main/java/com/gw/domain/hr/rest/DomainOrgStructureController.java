@@ -196,11 +196,12 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
             httpMethod = "GET"
     )
     @GetMapping(value = "/depthgrouplist/{groupId}")
-    public JsonResult<List<EmployeeOrgVO>> getDepthGroupListById(@PathVariable("groupId") Long groupId) {
+    public JsonResult<List<List<String>>> getDepthGroupListById(@PathVariable("groupId") Long groupId) {
         this.logger.info("通过组织编码查询子级的员工列表开始");
         JsonResult jsonResult;
         try {
-            List<EmployeeOrgVO> resultList = domainOrgStructureService.getDepthGroupListById(groupId);
+
+            List<List<String>> resultList = domainOrgStructureService.getDepthGroupListById(1416L);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("通过组织编码查询子级的员工列表发生异常" , var4);
