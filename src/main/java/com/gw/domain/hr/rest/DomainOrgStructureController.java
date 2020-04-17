@@ -7,12 +7,14 @@ import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
@@ -179,6 +181,32 @@ public class DomainOrgStructureController extends BaseController<Long, DomainOrg
             jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
         }
         this.logger.info("组织架构表_通过组织编码获取所有组织结束");
+        return jsonResult;
+    }
+
+    /**
+     * 人员信息表 通过组织id获取列表结构 返回人员ID、工号、姓名、科室名称、二级部名称
+     *
+     * @param groupId
+     * @return
+     */
+    @ApiOperation(
+            value = "【自定义】- 通过组织编码查询子级的员工列表",
+            notes = "【自定义】- 通过组织编码查询子级的员工列表",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/depthgrouplist/{groupId}")
+    public JsonResult<List<EmployeeOrgVO>> getDepthGroupListById(@PathVariable("groupId") Long groupId) {
+        this.logger.info("通过组织编码查询子级的员工列表开始");
+        JsonResult jsonResult;
+        try {
+            List<EmployeeOrgVO> resultList = domainOrgStructureService.getDepthGroupListById(groupId);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
+        } catch (Exception var4) {
+            this.logger.error("通过组织编码查询子级的员工列表发生异常" , var4);
+            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
+        }
+        this.logger.info("通过组织编码查询子级的员工列表结束");
         return jsonResult;
     }
 

@@ -6,6 +6,7 @@ import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.EmployeeVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
@@ -14,10 +15,13 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zoujialiang
@@ -137,27 +141,60 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
         }
         return nodeVOList;
     }
-
     /**
-     * 递归获取子节点
-     *
-     * @param parentList
-     * @param queryList
+     * 遍历组织并携带用户信息
+     * @param groupId
+     * @return
      */
-    public static void getChildren(List<DomainOrgStructureNode> parentList, List<DomainOrgStructureNode> queryList) {
-        for (DomainOrgStructureNode parentMap : parentList) {
-            List<DomainOrgStructureNode> childrenlist = new ArrayList<>();
-            int size = queryList.size();
-            for (int i = 0; i < size; i++) {
-                if (parentMap.getId().intValue() == queryList.get(i).getParentId()) {
-                    childrenlist.add(queryList.get(i));
-                }
-            }
-            if (!CollectionUtils.isEmpty(childrenlist)) {
-                parentMap.setList(childrenlist);
-                getChildren(childrenlist, queryList);
-            }
+    public List<EmployeeOrgVO> getDepthGroupListById(Long groupId) {
+        //查询当前组织信息
+        //查询当前组织下的子组织信息
+        Example example = new Example(DomainOrgStructure.class);
+        example.createCriteria().andEqualTo("deleteFlag", "0")
+                .andEqualTo("id", groupId);
+        DomainOrgStructure currentOrg = domainOrgStructureMapper.selectOneByExample(example);
+        Assert.notNull(currentOrg, "当前组织不存在");
+        Map<Long, DomainOrgStructure> orgIdMap = new HashMap<>();
+        orgIdMap.put(groupId, currentOrg);
+
+        orgIdMap.putAll(findChildrenOrgIds(orgIdMap));
+
+        Example employeeExample = new Example(DomainEmployeeInfo.class);
+
+        employeeExample.createCriteria().andIn("groupId", orgIdMap.keySet())
+                .andEqualTo("personnelStatus", 1);
+
+        List<DomainEmployeeInfo> employeeInfoList = domainEmployeeInfoService.selectListByExample(employeeExample);
+
+        List<EmployeeOrgVO> employeeOrgVOList = new ArrayList<>();
+        for(DomainEmployeeInfo employeeInfo : employeeInfoList){
+            EmployeeOrgVO employeeOrgVO = new EmployeeOrgVO();
+            employeeOrgVO.setName(employeeInfo.getName());
+            employeeOrgVO.setPersonnelNo(employeeInfo.getPersonnelNo());
+            employeeOrgVO.setId(employeeInfo.getId());
+            employeeOrgVO.setGroupName(orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getGroupName());
+            Integer parentId = orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getParentId();
+            employeeOrgVO.setParentName(orgIdMap.get(Long.valueOf(parentId)).getGroupName());
+            employeeOrgVOList.add(employeeOrgVO);
         }
+        return employeeOrgVOList;
+    }
+
+    private Map<Long, DomainOrgStructure> findChildrenOrgIds(Map<Long, DomainOrgStructure> orgIdMapTemp){
+        Map<Long, DomainOrgStructure> orgIdMapAll = new HashMap<>();
+        for(DomainOrgStructure domainOrgStructure : orgIdMapTemp.values()){
+            Map<Long, DomainOrgStructure> orgIdMap = new HashMap<>();
+            Example example = new Example(DomainOrgStructure.class);
+            example.createCriteria().andEqualTo("deleteFlag", "0")
+                    .andEqualTo("parentId", domainOrgStructure.getId());
+            List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExample(example);
+            for(DomainOrgStructure orgStructure : orgStructureList){
+                orgIdMap.put(orgStructure.getId(), orgStructure);
+            }
+            orgIdMapAll.putAll(orgIdMap);
+            orgIdMapAll.putAll(findChildrenOrgIds(orgIdMap));
+        }
+        return orgIdMapAll;
     }
 
 }
