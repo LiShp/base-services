@@ -65,7 +65,7 @@
         from
         hr_Personnel ta
         where
-        ta.P_InputDate > #{maxCreateTime}
+        ta.P_PersonnelID = 241911
     </select>
 
     <select id="getFormHrAll" resultType="java.lang.Long" >
