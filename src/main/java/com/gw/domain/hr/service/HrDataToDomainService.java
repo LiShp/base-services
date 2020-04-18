@@ -245,7 +245,7 @@ public class HrDataToDomainService {
             for(int i =0;i<loopsize;i++) {
                 int start = i * 100;
                 int end = (i + 1) * 100;
-                end = end > createlist.size() ? createlist.size() - 1 : end;
+                end = end > createlist.size() ? createlist.size() : end;
                 List<Map<String, Object>> createlistTemp = createlist.subList(start, end);
                 numCreate += domainEmployeeInfoMapper.insertEmployeeInfoAll(createlistTemp);
                 this.logger.info("已入表domain_org_structure共计:" + numCreate + "条");
@@ -261,7 +261,7 @@ public class HrDataToDomainService {
             for(int i =0;i<loopsize;i++){
                 int start = i*100;
                 int end = (i+1)*100;
-                end = end>updatelist.size()?updatelist.size()-1:end;
+                end = end>updatelist.size()?updatelist.size():end;
                 List<Map<String, Object>> updatelistTemp = updatelist.subList(start, end);
                 numUpdate += domainEmployeeInfoMapper.updateEmployeeInfoAll(updatelistTemp);
                 this.logger.info("已更新表domain_employee_info共计:" + numUpdate + "条");

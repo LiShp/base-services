@@ -36,15 +36,15 @@ public class CollectionUtil {
      * @param key
      */
     public static void listSortDate(List<Map<String, Object>> list, String key) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         Collections.sort(list, new Comparator<Map<String, Object>>() {
             @Override
             public int compare(Map<String, Object> o1, Map<String, Object> o2) {
                 Date date1 = null;
                 Date date2 = null;
                 try {
-                    date1 = format.parse("0000-0000-00 00:00:00");
-                    date2 = format.parse("0000-0000-00 00:00:00");
+                    date1 = format.parse("0000-0000-00 00:00:00.000");
+                    date2 = format.parse("0000-0000-00 00:00:00.000");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
