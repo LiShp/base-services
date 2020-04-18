@@ -279,6 +279,19 @@ public class HrDataToDomainService {
         return numCreate + numUpdate;
     }
 
+    /**
+     * 增量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表
+     * 定时任务
+     */
+    @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public List<Long> dif() {
+
+        List<Long> hrList = dataToEmployeeInfoMapper.getFormHrAll();
+        List<Long> domainList = domainEmployeeInfoMapper.getFormDomainAll();
+        hrList.removeAll(domainList);
+        return  hrList;
+    }
+
     private void insertMaxTime(Map<String, Object> map) {
         commonDomainMapper.insertMaxTime(map);
     }

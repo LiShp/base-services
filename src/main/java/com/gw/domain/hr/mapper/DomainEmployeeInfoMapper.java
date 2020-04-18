@@ -37,6 +37,12 @@ public interface DomainEmployeeInfoMapper extends BaseMapper<DomainEmployeeInfo>
     int insertEmployeeInfoAll(List<Map<String, Object>> list);
 
     /**
+     * 全量入庫（入库前先清楚groupcode不为空的数据）
+     * @return
+     */
+    List<Long> getFormDomainAll();
+
+    /**
      * 批量更新数据
      * @param list
      * @return

@@ -25,6 +25,12 @@ public interface DataToEmployeeInfoMapper {
     List<Map<String, Object>> getFromHrPersonnelCreate(Map<String, Object> map);
 
     /**
+     * hr_Personnel获取增量数据 新增
+     * @return
+     */
+    List<Long> getFormHrAll();
+
+    /**
      * hr_Personnel获取增量数据 更新
      * @param map
      * @return

@@ -696,6 +696,14 @@
         update_time
     </sql>
 
+    <select id="getFormDomainAll" resultType="java.lang.Long" >
+        select
+        ta.id as id
+        from
+        domain_employee_info ta
+        where
+        create_time > '2020-01-01 01:01:01'
+    </select>
 
     <insert id="insertEmployeeInfoAll" parameterType="java.util.Map">
         INSERT INTO domain_employee_info
