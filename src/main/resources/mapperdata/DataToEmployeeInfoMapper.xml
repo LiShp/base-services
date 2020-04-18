@@ -68,15 +68,6 @@
         ta.P_PersonnelID = 241911
     </select>
 
-    <select id="getFormHrAll" resultType="java.lang.Long" >
-        select
-        ta.P_PersonnelID as id
-        from
-        hr_Personnel ta
-        where
-        ta.P_InputDate > '2020-01-01 01:01:01'
-    </select>
-
     <select id="getFromHrPersonnelUpdate" resultType="java.util.Map" parameterType="java.util.Map">
         select
         <include refid="org"/>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author zoujialiang
@@ -123,19 +122,6 @@ public class HrDataToDomainController {
         try {
             int num = hrDataToDomainService.personnelToEmployeeInfoNew();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
-        } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
-        }
-        return jsonResult;
-    }
-
-    @GetMapping(value = "/dif")
-    public JsonResult<List<Long>> dif(){
-        JsonResult jsonResult;
-        try {
-            List<Long> list = hrDataToDomainService.dif();
-            jsonResult = JsonResultUtil.createSuccessJsonResult(list);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
             jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
