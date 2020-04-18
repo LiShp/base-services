@@ -272,9 +272,9 @@ public class HrDataToDomainService {
         } else {
             this.logger.info("Sqlserver中间库hr_Personnel表无新更新数据");
         }
-        /*if (!CollectionUtils.isEmpty(createlist) || !CollectionUtils.isEmpty(updatelist)) {
+        if (!CollectionUtils.isEmpty(createlist) || !CollectionUtils.isEmpty(updatelist)) {
             commonDomainMapper.updateMaxTime(mapTime);
-        }*/
+        }
         this.logger.info("从Sqlserver中间库hr_Personnel增量获取数据结束");
         return numCreate + numUpdate;
     }
