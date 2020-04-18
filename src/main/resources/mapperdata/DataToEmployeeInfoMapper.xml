@@ -65,7 +65,7 @@
         from
         hr_Personnel ta
         where
-        ta.P_PersonnelID = 241911
+        ta.P_InputDate > #{maxCreateTime}
     </select>
 
     <select id="getFromHrPersonnelUpdate" resultType="java.util.Map" parameterType="java.util.Map">
