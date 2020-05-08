@@ -71,12 +71,12 @@ gwmlog:
   #平台名称，必须全小写，不可以有特殊字符，请使用部门名称简写（如：ywztb）
   platformname: "ywztb"
   #项目名称，必须全小写，不可以有特殊字符（如：mes）
-  projectname: gw
+  projectname: domain-hr
   default:
     #默认索引名称，必须全小写，不可以有特殊字符
     indexname: "default"
     #默认日志类型，必须全小写，不可以有特殊字符（如：info、debug、warn、exception、error）
-    logtype: "exception"
+    logtype: "info"
 
 feign:
   hystrix:
