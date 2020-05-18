@@ -86,7 +86,7 @@ public class HrDataToDomainService {
     @Transactional(value = "mysqlTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int sysGroupToOrgStruAll() {
         this.logger.info("从Sqlserver中间库sys_Group获取数据开始");
-        int num = 0;
+        int nums = 0;
         List<Map<String, Object>> list = dataToOrgStruMapper.getFromSysGroupAll();
         if (!CollectionUtils.isEmpty(list)) {
             Map<String, Object> map = new HashMap<>(16);
@@ -94,8 +94,15 @@ public class HrDataToDomainService {
             //操作主库主数据
             int delete = domainOrgStructureMapper.deleteOrgStruAll();
             this.logger.info("删除domain_org_structure中Hr数据共计:" + delete + "条");
-            num = domainOrgStructureMapper.insertOrgStruAll(list);
-            this.logger.info("入表domain_org_structure共计:" + num + "条");
+
+            //分批次处理数据
+            List<List<Map<String, Object>>> splitList = CollectionUtil.splitList(list);
+            for (int i = 0; i < splitList.size(); i++) {
+                int num = domainOrgStructureMapper.insertOrgStruAll(splitList.get(i));
+                this.logger.info("第" + (i + 1) + "次入表domain_employee_info共计:" + num + "条");
+                nums += num;
+            }
+            this.logger.info("入表domain_org_structure共计:" + nums + "条");
 
             CollectionUtil.listSortDate(list, "create_time");
             map.put("maxCreateTime", list.get(list.size() - 1).get("create_time"));
@@ -108,7 +115,7 @@ public class HrDataToDomainService {
             this.logger.info("Sqlserver中间库sys_Group表无新增数据");
         }
         this.logger.info("从Sqlserver中间库sys_Group获取数据结束");
-        return num;
+        return nums;
     }
 
     /**
