@@ -60,61 +60,126 @@
         <result column="update_personnel_no" jdbcType="VARCHAR" property="updatePersonnelNo" />
     </resultMap>
 
+    <resultMap id="Base_Result_Map_Emp_Org" type="com.gw.domain.hr.entity.po.DomainEmpOrgResultPo">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
+        <result column="once_name" jdbcType="VARCHAR" property="onceName" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="sex" jdbcType="BIT" property="sex" />
+        <result column="marriage_status" jdbcType="BIT" property="marriageStatus" />
+        <result column="birth_date" jdbcType="DATE" property="birthDate" />
+        <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
+        <result column="register_residence" jdbcType="VARCHAR" property="registerResidence" />
+        <result column="dwelling_type" jdbcType="BIT" property="dwellingType" />
+        <result column="dwelling" jdbcType="VARCHAR" property="dwelling" />
+        <result column="weight" jdbcType="VARCHAR" property="weight" />
+        <result column="height" jdbcType="VARCHAR" property="height" />
+        <result column="blood_type" jdbcType="BIT" property="bloodType" />
+        <result column="polity" jdbcType="BIT" property="polity" />
+        <result column="natives" jdbcType="INTEGER" property="natives" />
+        <result column="diploma" jdbcType="INTEGER" property="diploma" />
+        <result column="professional" jdbcType="VARCHAR" property="professional" />
+        <result column="graduation_school" jdbcType="VARCHAR" property="graduationSchool" />
+        <result column="graduation_date" jdbcType="DATE" property="graduationDate" />
+        <result column="english_ability" jdbcType="INTEGER" property="englishAbility" />
+        <result column="computer_ability" jdbcType="INTEGER" property="computerAbility" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="post_title" jdbcType="INTEGER" property="postTitle" />
+        <result column="group_id" jdbcType="INTEGER" property="groupId" />
+        <result column="work_type" jdbcType="INTEGER" property="workType" />
+        <result column="duty" jdbcType="INTEGER" property="duty" />
+        <result column="position_type" jdbcType="INTEGER" property="positionType" />
+        <result column="position_serial" jdbcType="INTEGER" property="positionSerial" />
+        <result column="position" jdbcType="INTEGER" property="position" />
+        <result column="position_level" jdbcType="INTEGER" property="positionLevel" />
+        <result column="join_date" jdbcType="DATE" property="joinDate" />
+        <result column="personnel_status" jdbcType="BIT" property="personnelStatus" />
+        <result column="foregin" jdbcType="BIT" property="foregin" />
+        <result column="person_type" jdbcType="INTEGER" property="personType" />
+        <result column="work_address" jdbcType="INTEGER" property="workAddress" />
+        <result column="dismission_reason" jdbcType="INTEGER" property="dismissionReason" />
+        <result column="dismission_type" jdbcType="INTEGER" property="dismissionType" />
+        <result column="dismission_date" jdbcType="DATE" property="dismissionDate" />
+        <result column="position_code" jdbcType="VARCHAR" property="positionCode" />
+        <result column="position_step" jdbcType="INTEGER" property="positionStep" />
+        <result column="position_son" jdbcType="VARCHAR" property="positionSon" />
+        <result column="teach_level" jdbcType="INTEGER" property="teachLevel" />
+        <result column="duty_level" jdbcType="INTEGER" property="dutyLevel" />
+        <result column="card_type" jdbcType="INTEGER" property="cardType" />
+        <result column="card_name" jdbcType="VARCHAR" property="cardName" />
+        <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_personnel_no" jdbcType="VARCHAR" property="updatePersonnelNo" />
+        <result column="group_name" jdbcType="TIMESTAMP" property="groupName" />
+        <result column="unit_id" jdbcType="TIMESTAMP" property="unitId" />
+        <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
+        <result column="department_id" jdbcType="TIMESTAMP" property="departmentId" />
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+
+    </resultMap>
+
     <sql id="Select_Field" >
-        domain_employee_Info.personnel_no,
-        domain_employee_Info.once_name,
-        domain_employee_Info.name,
-        domain_employee_Info.sex,
-        domain_employee_Info.marriage_status,
-        domain_employee_Info.birth_date,
-        domain_employee_Info.native_place,
-        domain_employee_Info.register_residence,
-        domain_employee_Info.dwelling_type,
-        domain_employee_Info.dwelling,
-        domain_employee_Info.weight,
-        domain_employee_Info.height,
-        domain_employee_Info.blood_type,
-        domain_employee_Info.polity,
-        domain_employee_Info.natives,
-        domain_employee_Info.diploma,
-        domain_employee_Info.professional,
-        domain_employee_Info.graduation_school,
-        domain_employee_Info.graduation_date,
-        domain_employee_Info.english_ability,
-        domain_employee_Info.computer_ability,
-        domain_employee_Info.mobile,
-        domain_employee_Info.home_phone,
-        domain_employee_Info.email,
-        domain_employee_Info.post_title,
-        domain_employee_Info.group_id,
-        domain_employee_Info.work_type,
-        domain_employee_Info.duty,
-        domain_employee_Info.position_type,
-        domain_employee_Info.position_serial,
-        domain_employee_Info.position,
-        domain_employee_Info.position_level,
-        domain_employee_Info.join_date,
-        domain_employee_Info.personnel_status,
-        domain_employee_Info.foregin,
-        domain_employee_Info.person_type,
-        domain_employee_Info.work_address,
-        domain_employee_Info.dismission_reason,
-        domain_employee_Info.dismission_type,
-        domain_employee_Info.dismission_date,
-        domain_employee_Info.position_code,
-        domain_employee_Info.position_step,
-        domain_employee_Info.position_son,
-        domain_employee_Info.teach_level,
-        domain_employee_Info.duty_level,
-        domain_employee_Info.card_type,
-        domain_employee_Info.card_name,
-        domain_employee_Info.card_no,
-        domain_employee_Info.delete_flag,
-        domain_employee_Info.remark,
-        domain_employee_Info.create_time,
-        domain_employee_Info.create_personnel_no,
-        domain_employee_Info.update_time,
-        domain_employee_Info.update_personnel_no
+        domain_employee_info.personnel_no,
+        domain_employee_info.once_name,
+        domain_employee_info.name,
+        domain_employee_info.sex,
+        domain_employee_info.marriage_status,
+        domain_employee_info.birth_date,
+        domain_employee_info.native_place,
+        domain_employee_info.register_residence,
+        domain_employee_info.dwelling_type,
+        domain_employee_info.dwelling,
+        domain_employee_info.weight,
+        domain_employee_info.height,
+        domain_employee_info.blood_type,
+        domain_employee_info.polity,
+        domain_employee_info.natives,
+        domain_employee_info.diploma,
+        domain_employee_info.professional,
+        domain_employee_info.graduation_school,
+        domain_employee_info.graduation_date,
+        domain_employee_info.english_ability,
+        domain_employee_info.computer_ability,
+        domain_employee_info.mobile,
+        domain_employee_info.home_phone,
+        domain_employee_info.email,
+        domain_employee_info.post_title,
+        domain_employee_info.group_id,
+        domain_employee_info.work_type,
+        domain_employee_info.duty,
+        domain_employee_info.position_type,
+        domain_employee_info.position_serial,
+        domain_employee_info.position,
+        domain_employee_info.position_level,
+        domain_employee_info.join_date,
+        domain_employee_info.personnel_status,
+        domain_employee_info.foregin,
+        domain_employee_info.person_type,
+        domain_employee_info.work_address,
+        domain_employee_info.dismission_reason,
+        domain_employee_info.dismission_type,
+        domain_employee_info.dismission_date,
+        domain_employee_info.position_code,
+        domain_employee_info.position_step,
+        domain_employee_info.position_son,
+        domain_employee_info.teach_level,
+        domain_employee_info.duty_level,
+        domain_employee_info.card_type,
+        domain_employee_info.card_name,
+        domain_employee_info.card_no,
+        domain_employee_info.delete_flag,
+        domain_employee_info.remark,
+        domain_employee_info.create_time,
+        domain_employee_info.create_personnel_no,
+        domain_employee_info.update_time,
+        domain_employee_info.update_personnel_no
     </sql>
 
     <sql id="Base_Option_Clause">
@@ -447,60 +512,60 @@
     <sql id="Base_Where_Clause" >
         <where>
             <trim prefixOverrides="and">
-                <if test="personnelNo != null and personnelNo != ''">and domain_employee_Info.personnel_no = #{personnelNo,jdbcType=VARCHAR} </if>
-                <if test="onceName != null and onceName != ''">and domain_employee_Info.once_name = #{onceName,jdbcType=VARCHAR} </if>
-                <if test="name != null and name != ''">and domain_employee_Info.name = #{name,jdbcType=VARCHAR} </if>
-                <if test="sex != null">and domain_employee_Info.sex = #{sex,jdbcType=BIT} </if>
-                <if test="marriageStatus != null">and domain_employee_Info.marriage_status = #{marriageStatus,jdbcType=BIT} </if>
-                <if test="birthDate != null">and domain_employee_Info.birth_date = #{birthDate,jdbcType=DATE} </if>
-                <if test="nativePlace != null and nativePlace != ''">and domain_employee_Info.native_place = #{nativePlace,jdbcType=VARCHAR} </if>
-                <if test="registerResidence != null and registerResidence != ''">and domain_employee_Info.register_residence = #{registerResidence,jdbcType=VARCHAR} </if>
-                <if test="dwellingType != null">and domain_employee_Info.dwelling_type = #{dwellingType,jdbcType=BIT} </if>
-                <if test="dwelling != null and dwelling != ''">and domain_employee_Info.dwelling = #{dwelling,jdbcType=VARCHAR} </if>
-                <if test="weight != null and weight != ''">and domain_employee_Info.weight = #{weight,jdbcType=VARCHAR} </if>
-                <if test="height != null and height != ''">and domain_employee_Info.height = #{height,jdbcType=VARCHAR} </if>
-                <if test="bloodType != null">and domain_employee_Info.blood_type = #{bloodType,jdbcType=BIT} </if>
-                <if test="polity != null">and domain_employee_Info.polity = #{polity,jdbcType=BIT} </if>
-                <if test="natives != null">and domain_employee_Info.natives = #{natives,jdbcType=INTEGER} </if>
-                <if test="diploma != null">and domain_employee_Info.diploma = #{diploma,jdbcType=INTEGER} </if>
-                <if test="professional != null and professional != ''">and domain_employee_Info.professional = #{professional,jdbcType=VARCHAR} </if>
-                <if test="graduationSchool != null and graduationSchool != ''">and domain_employee_Info.graduation_school = #{graduationSchool,jdbcType=VARCHAR} </if>
-                <if test="graduationDate != null">and domain_employee_Info.graduation_date = #{graduationDate,jdbcType=DATE} </if>
-                <if test="englishAbility != null">and domain_employee_Info.english_ability = #{englishAbility,jdbcType=INTEGER} </if>
-                <if test="computerAbility != null">and domain_employee_Info.computer_ability = #{computerAbility,jdbcType=INTEGER} </if>
-                <if test="mobile != null and mobile != ''">and domain_employee_Info.mobile = #{mobile,jdbcType=VARCHAR} </if>
-                <if test="homePhone != null and homePhone != ''">and domain_employee_Info.home_phone = #{homePhone,jdbcType=VARCHAR} </if>
-                <if test="email != null and email != ''">and domain_employee_Info.email = #{email,jdbcType=VARCHAR} </if>
-                <if test="postTitle != null">and domain_employee_Info.post_title = #{postTitle,jdbcType=INTEGER} </if>
-                <if test="groupId != null">and domain_employee_Info.group_id = #{groupId,jdbcType=INTEGER} </if>
-                <if test="workType != null">and domain_employee_Info.work_type = #{workType,jdbcType=INTEGER} </if>
-                <if test="duty != null">and domain_employee_Info.duty = #{duty,jdbcType=INTEGER} </if>
-                <if test="positionType != null">and domain_employee_Info.position_type = #{positionType,jdbcType=INTEGER} </if>
-                <if test="positionSerial != null">and domain_employee_Info.position_serial = #{positionSerial,jdbcType=INTEGER} </if>
-                <if test="position != null">and domain_employee_Info.position = #{position,jdbcType=INTEGER} </if>
-                <if test="positionLevel != null">and domain_employee_Info.position_level = #{positionLevel,jdbcType=INTEGER} </if>
-                <if test="joinDate != null">and domain_employee_Info.join_date = #{joinDate,jdbcType=DATE} </if>
-                <if test="personnelStatus != null">and domain_employee_Info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
-                <if test="foregin != null">and domain_employee_Info.foregin = #{foregin,jdbcType=BIT} </if>
-                <if test="personType != null">and domain_employee_Info.person_type = #{personType,jdbcType=INTEGER} </if>
-                <if test="workAddress != null">and domain_employee_Info.work_address = #{workAddress,jdbcType=INTEGER} </if>
-                <if test="dismissionReason != null">and domain_employee_Info.dismission_reason = #{dismissionReason,jdbcType=INTEGER} </if>
-                <if test="dismissionType != null">and domain_employee_Info.dismission_type = #{dismissionType,jdbcType=INTEGER} </if>
-                <if test="dismissionDate != null">and domain_employee_Info.dismission_date = #{dismissionDate,jdbcType=DATE} </if>
-                <if test="positionCode != null and positionCode != ''">and domain_employee_Info.position_code = #{positionCode,jdbcType=VARCHAR} </if>
-                <if test="positionStep != null">and domain_employee_Info.position_step = #{positionStep,jdbcType=INTEGER} </if>
-                <if test="positionSon != null and positionSon != ''">and domain_employee_Info.position_son = #{positionSon,jdbcType=VARCHAR} </if>
-                <if test="teachLevel != null">and domain_employee_Info.teach_level = #{teachLevel,jdbcType=INTEGER} </if>
-                <if test="dutyLevel != null">and domain_employee_Info.duty_level = #{dutyLevel,jdbcType=INTEGER} </if>
-                <if test="cardType != null">and domain_employee_Info.card_type = #{cardType,jdbcType=INTEGER} </if>
-                <if test="cardName != null and cardName != ''">and domain_employee_Info.card_name = #{cardName,jdbcType=VARCHAR} </if>
-                <if test="cardNo != null and cardNo != ''">and domain_employee_Info.card_no = #{cardNo,jdbcType=VARCHAR} </if>
-                <if test="deleteFlag != null">and domain_employee_Info.delete_flag = #{deleteFlag,jdbcType=BIT} </if>
-                <if test="remark != null and remark != ''">and domain_employee_Info.remark = #{remark,jdbcType=VARCHAR} </if>
-                <if test="createTime != null">and domain_employee_Info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
-                <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_employee_Info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
-                <if test="updateTime != null">and domain_employee_Info.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
-                <if test="updatePersonnelNo != null and updatePersonnelNo != ''">and domain_employee_Info.update_personnel_no = #{updatePersonnelNo,jdbcType=VARCHAR} </if>
+                <if test="personnelNo != null and personnelNo != ''">and domain_employee_info.personnel_no = #{personnelNo,jdbcType=VARCHAR} </if>
+                <if test="onceName != null and onceName != ''">and domain_employee_info.once_name = #{onceName,jdbcType=VARCHAR} </if>
+                <if test="name != null and name != ''">and domain_employee_info.name = #{name,jdbcType=VARCHAR} </if>
+                <if test="sex != null">and domain_employee_info.sex = #{sex,jdbcType=BIT} </if>
+                <if test="marriageStatus != null">and domain_employee_info.marriage_status = #{marriageStatus,jdbcType=BIT} </if>
+                <if test="birthDate != null">and domain_employee_info.birth_date = #{birthDate,jdbcType=DATE} </if>
+                <if test="nativePlace != null and nativePlace != ''">and domain_employee_info.native_place = #{nativePlace,jdbcType=VARCHAR} </if>
+                <if test="registerResidence != null and registerResidence != ''">and domain_employee_info.register_residence = #{registerResidence,jdbcType=VARCHAR} </if>
+                <if test="dwellingType != null">and domain_employee_info.dwelling_type = #{dwellingType,jdbcType=BIT} </if>
+                <if test="dwelling != null and dwelling != ''">and domain_employee_info.dwelling = #{dwelling,jdbcType=VARCHAR} </if>
+                <if test="weight != null and weight != ''">and domain_employee_info.weight = #{weight,jdbcType=VARCHAR} </if>
+                <if test="height != null and height != ''">and domain_employee_info.height = #{height,jdbcType=VARCHAR} </if>
+                <if test="bloodType != null">and domain_employee_info.blood_type = #{bloodType,jdbcType=BIT} </if>
+                <if test="polity != null">and domain_employee_info.polity = #{polity,jdbcType=BIT} </if>
+                <if test="natives != null">and domain_employee_info.natives = #{natives,jdbcType=INTEGER} </if>
+                <if test="diploma != null">and domain_employee_info.diploma = #{diploma,jdbcType=INTEGER} </if>
+                <if test="professional != null and professional != ''">and domain_employee_info.professional = #{professional,jdbcType=VARCHAR} </if>
+                <if test="graduationSchool != null and graduationSchool != ''">and domain_employee_info.graduation_school = #{graduationSchool,jdbcType=VARCHAR} </if>
+                <if test="graduationDate != null">and domain_employee_info.graduation_date = #{graduationDate,jdbcType=DATE} </if>
+                <if test="englishAbility != null">and domain_employee_info.english_ability = #{englishAbility,jdbcType=INTEGER} </if>
+                <if test="computerAbility != null">and domain_employee_info.computer_ability = #{computerAbility,jdbcType=INTEGER} </if>
+                <if test="mobile != null and mobile != ''">and domain_employee_info.mobile = #{mobile,jdbcType=VARCHAR} </if>
+                <if test="homePhone != null and homePhone != ''">and domain_employee_info.home_phone = #{homePhone,jdbcType=VARCHAR} </if>
+                <if test="email != null and email != ''">and domain_employee_info.email = #{email,jdbcType=VARCHAR} </if>
+                <if test="postTitle != null">and domain_employee_info.post_title = #{postTitle,jdbcType=INTEGER} </if>
+                <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
+                <if test="workType != null">and domain_employee_info.work_type = #{workType,jdbcType=INTEGER} </if>
+                <if test="duty != null">and domain_employee_info.duty = #{duty,jdbcType=INTEGER} </if>
+                <if test="positionType != null">and domain_employee_info.position_type = #{positionType,jdbcType=INTEGER} </if>
+                <if test="positionSerial != null">and domain_employee_info.position_serial = #{positionSerial,jdbcType=INTEGER} </if>
+                <if test="position != null">and domain_employee_info.position = #{position,jdbcType=INTEGER} </if>
+                <if test="positionLevel != null">and domain_employee_info.position_level = #{positionLevel,jdbcType=INTEGER} </if>
+                <if test="joinDate != null">and domain_employee_info.join_date = #{joinDate,jdbcType=DATE} </if>
+                <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
+                <if test="foregin != null">and domain_employee_info.foregin = #{foregin,jdbcType=BIT} </if>
+                <if test="personType != null">and domain_employee_info.person_type = #{personType,jdbcType=INTEGER} </if>
+                <if test="workAddress != null">and domain_employee_info.work_address = #{workAddress,jdbcType=INTEGER} </if>
+                <if test="dismissionReason != null">and domain_employee_info.dismission_reason = #{dismissionReason,jdbcType=INTEGER} </if>
+                <if test="dismissionType != null">and domain_employee_info.dismission_type = #{dismissionType,jdbcType=INTEGER} </if>
+                <if test="dismissionDate != null">and domain_employee_info.dismission_date = #{dismissionDate,jdbcType=DATE} </if>
+                <if test="positionCode != null and positionCode != ''">and domain_employee_info.position_code = #{positionCode,jdbcType=VARCHAR} </if>
+                <if test="positionStep != null">and domain_employee_info.position_step = #{positionStep,jdbcType=INTEGER} </if>
+                <if test="positionSon != null and positionSon != ''">and domain_employee_info.position_son = #{positionSon,jdbcType=VARCHAR} </if>
+                <if test="teachLevel != null">and domain_employee_info.teach_level = #{teachLevel,jdbcType=INTEGER} </if>
+                <if test="dutyLevel != null">and domain_employee_info.duty_level = #{dutyLevel,jdbcType=INTEGER} </if>
+                <if test="cardType != null">and domain_employee_info.card_type = #{cardType,jdbcType=INTEGER} </if>
+                <if test="cardName != null and cardName != ''">and domain_employee_info.card_name = #{cardName,jdbcType=VARCHAR} </if>
+                <if test="cardNo != null and cardNo != ''">and domain_employee_info.card_no = #{cardNo,jdbcType=VARCHAR} </if>
+                <if test="deleteFlag != null">and domain_employee_info.delete_flag = #{deleteFlag,jdbcType=BIT} </if>
+                <if test="remark != null and remark != ''">and domain_employee_info.remark = #{remark,jdbcType=VARCHAR} </if>
+                <if test="createTime != null">and domain_employee_info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_employee_info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
+                <if test="updateTime != null">and domain_employee_info.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
+                <if test="updatePersonnelNo != null and updatePersonnelNo != ''">and domain_employee_info.update_personnel_no = #{updatePersonnelNo,jdbcType=VARCHAR} </if>
             </trim>
         </where>
         <choose>
@@ -515,6 +580,32 @@
     </sql>
 
     <!-- ................................................................分割线以下为新封装sql...........................................................................;-->
+    <sql id="Base_Where_Clause_Emp_Org" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
+                <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
+                <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
+                <if test="createTime != null">and domain_employee_info.create_time > #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="updateTime != null">and domain_employee_info.update_time > #{updateTime,jdbcType=TIMESTAMP} </if>
+                <if test="unitId != null">and domain_org_structure.unit_id = #{unitId,jdbcType=INTEGER} </if>
+                <if test="unitName != null">and domain_org_structure.unit_name = #{unitName,jdbcType=TIMESTAMP} </if>
+                <if test="departmentId != null">and domain_org_structure.department_id = #{departmentId,jdbcType=INTEGER} </if>
+                <if test="departmentName != null">and domain_org_structure.department_name = #{departmentName,jdbcType=TIMESTAMP} </if>
+            </trim>
+            and domain_employee_info.group_id = domain_org_structure.id
+        </where>
+    </sql>
+
+    <sql id="Select_Field_Emp_Org">
+        domain_org_structure.unit_id,
+        domain_org_structure.unit_name,
+        domain_org_structure.department_id,
+        domain_org_structure.department_name,
+        domain_org_structure.group_name,
+        <include refid="Select_Field"/>
+    </sql>
+
     <sql id="tableValue">
         personnel_no,
         once_name,
@@ -646,6 +737,22 @@
         where personnel_no = #{personnelNo}
     </update>
 
+    <select id="employeeListCount" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultType="Integer">
+        select
+         count(1)
+        from domain_employee_info, domain_org_structure
+        <include refid="Base_Where_Clause_Emp_Org"/>
+    </select>
+
+    <select id="employeeList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Emp_Org">
+        select
+        <include refid="Select_Field_Emp_Org"/>
+        from domain_employee_info, domain_org_structure
+        <include refid="Base_Where_Clause_Emp_Org"/>
+        <if test="page > -1">
+            limit ${page} ,${size}
+        </if>
+    </select>
 
     <sql id="org">
         id,

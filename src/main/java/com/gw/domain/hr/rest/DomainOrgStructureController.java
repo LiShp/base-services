@@ -4,21 +4,17 @@ import com.gw.cloud.common.base.controller.BaseController;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
-import com.gw.domain.hr.entity.DomainOrgStructureNode;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
-import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

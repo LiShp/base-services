@@ -23,6 +23,10 @@
         convert(varchar(100), ta.G_EnableDate, 20) as enable_time,
         ta.G_Delete as delete_flag,
         ta.G_Remark as remark,
+        G_UnitID as unit_id,
+        G_UnitName as unit_name,
+        G_DepartmentID as department_id,
+        G_DepartmentName as department_name,
         convert(varchar(100), ta.G_CreateDate, 21) as create_time,
         convert(varchar(100), ta.G_UpdateDate, 21) as update_time
     </sql>

@@ -1,10 +1,8 @@
-package com.gw.domain.hr.entity.vo;
+package com.gw.domain.hr.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
 import com.gw.domain.hr.commonutils.DateUtil;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,57 +11,39 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
-import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 表名：domain_employee_Info
- * @author zoujialiang
+ * 表名：domain_employee_Info、domain_org_structure
+ * @author gwx
  */
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel("")
-public class EmployeeOrgVO implements Serializable {
+public class DomainEmpOrgResultPo extends DomainEmployeeInfo {
 
     /**
-     * 工号(系统自动生成)^[A-Za-z0-9]+$
+     * 组织ID
      */
-    @ApiModelProperty("工号(系统自动生成)")
-    private String personnelNo;
+    @Column(name = "group_id")
+    private Integer groupId;
 
     /**
-     * 姓名
+     * 组织名称
      */
-    @ApiModelProperty("姓名")
-    private String name;
-
-
-    /**
-     * 所在科室
-     */
-    @ApiModelProperty("所在科室名称")
-    private String groupId;
-
-    /**
-     * 所在科室
-     */
-    @ApiModelProperty("所在科室名称")
+    @Column(name = "group_id")
     private String groupName;
-
 
     /**
      * 员工状态
      */
-    @ApiModelProperty("员工状态")
     private Integer personnelStatus;
 
     /**
      * 创建时间
      */
-    @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date createTime;
@@ -72,7 +52,6 @@ public class EmployeeOrgVO implements Serializable {
     /**
      * 更新时间
      */
-    @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date updateTime;
@@ -80,26 +59,24 @@ public class EmployeeOrgVO implements Serializable {
     /**
      * unitId：单位ID
      */
-    @ApiModelProperty("单位ID")
+    @Column(name = "unit_id")
     private Integer unitId;
 
 
     /**
      * unitName：单位名称
      */
-    @ApiModelProperty("单位名称")
     private String unitName;
+
     /**
      * departmentId：部门ID
      */
-    @ApiModelProperty("部门ID")
     private Integer departmentId;
 
 
     /**
      * departmentName：部门名称
      */
-    @ApiModelProperty("部门名称")
     private String departmentName;
 
 

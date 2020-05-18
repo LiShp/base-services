@@ -5,9 +5,12 @@ import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
+import com.gw.domain.hr.commonutils.DateUtil;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructure;
+import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
 import com.gw.domain.hr.entity.vo.DomainEmployeeInfoVO;
+import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.EmployeeVO;
 import com.gw.domain.hr.service.DomainEmployeeInfoService;
 import com.gw.domain.hr.service.DomainOrgStructureService;
@@ -237,6 +240,50 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
                 jsonResult = JsonResultUtil.createSuccessJsonResult(employeeVOList);
             }
 
+        } catch (Exception var4) {
+            this.logger.error("根据groupID查询员工信息" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("根据groupID查询员工信息{0}", var4);
+        }
+        return jsonResult;
+    }
+
+    @ApiOperation(
+            value = "【自定义】- 查询员工信息列表",
+            notes = "【自定义】- 查询员工信息列表",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/employees")
+    public JsonResult<QueryResult<EmployeeOrgVO>> employees(
+            @ApiParam(name = "groupId", value = "组织ID") @RequestParam(required = false) Integer groupId,
+            @ApiParam(name = "groupName", value = "组织名称") @RequestParam(required = false) String groupName,
+            @ApiParam(name = "unitId", value = "单位ID") @RequestParam(required = false) Integer unitId,
+            @ApiParam(name = "unitName", value = "单位名称") @RequestParam(required = false) String unitName,
+            @ApiParam(name = "departmentId", value = "部门ID") @RequestParam(required = false) Integer departmentId,
+            @ApiParam(name = "departmentName", value = "部门名称") @RequestParam(required = false) String departmentName,
+            @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false) String createTime,
+            @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
+            @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows){
+        JsonResult jsonResult;
+        try {
+
+            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            domainEmpOrgRequestPo.setGroupId(groupId);
+            domainEmpOrgRequestPo.setGroupName(groupName);
+            domainEmpOrgRequestPo.setUnitId(unitId);
+            domainEmpOrgRequestPo.setUnitName(unitName);
+            domainEmpOrgRequestPo.setDepartmentId(departmentId);
+            domainEmpOrgRequestPo.setPersonnelStatus(1);
+            domainEmpOrgRequestPo.setDepartmentName(departmentName);
+
+            domainEmpOrgRequestPo.setCreateTime(DateUtil.dateStrToDate(createTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
+            domainEmpOrgRequestPo.setUpdateTime(DateUtil.dateStrToDate(updateTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
+
+
+
+            QueryResult<EmployeeOrgVO>  queryResult = domainEmployeeInfoService.employeeList(domainEmpOrgRequestPo,page, rows);
+
+            return JsonResultUtil.createSuccessJsonResult(queryResult);
         } catch (Exception var4) {
             this.logger.error("根据groupID查询员工信息" + var4.getMessage());
             jsonResult = JsonResultUtil.createFailureJsonResult("根据groupID查询员工信息{0}", var4);
