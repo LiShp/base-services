@@ -1,6 +1,5 @@
 package com.gw.domain.hr.rest;
 
-import com.gw.cloud.common.base.controller.BaseController;
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
@@ -14,6 +13,8 @@ import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.EmployeeVO;
 import com.gw.domain.hr.service.DomainEmployeeInfoService;
 import com.gw.domain.hr.service.DomainOrgStructureService;
+import com.gw.gwlog.GWMLogger;
+import com.gw.gwlog.GWMLoggerFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -24,16 +25,17 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import java.text.MessageFormat;
 import java.util.List;
 
 /**
  * @author zoujialiang
  */
-@Api(value = "/domainemployeeinfo", description = "")
+@Api(value = "/domainemployeeinfo", tags = "员工信息", description = "员工信息")
 @RestController
 @RequestMapping("/domainemployeeinfo")
-public class DomainEmployeeInfoController extends BaseController<Long, DomainEmployeeInfo> {
+public class DomainEmployeeInfoController {
+
+    protected GWMLogger logger = GWMLoggerFactory.getSimpleLogger(this.getClass());
 
     @Autowired
     private DomainEmployeeInfoService domainEmployeeInfoService;
@@ -41,75 +43,9 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
     @Autowired
     private DomainOrgStructureService domainOrgStructureService;
 
-    /**
-     * 按创建时间的时间段查询
-     *
-     * @param startDatetime 开始时间
-     * @param endDatetime   结束时间
-     * @param page          当前页码
-     * @param rows          每页显示条数
-     * @return
-     */
     @ApiOperation(
-            value = "按创建时间的时间段查询",
-            notes = "按创建时间的时间段查询",
-            httpMethod = "GET"
-    )
-    @GetMapping("/selectDomainEmployeeInfoByCreateTime")
-    public JsonResult<QueryResult<DomainEmployeeInfo>> selectDomainEmployeeInfoByCreateTime(
-            @ApiParam(name = "startDatetime", value = "开始时间") @RequestParam String startDatetime,
-            @ApiParam(name = "endDatetime", value = "结束时间") @RequestParam String endDatetime,
-            @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
-            @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
-
-        JsonResult jsonResult;
-        try {
-            QueryResult<DomainEmployeeInfo> pageResult = domainEmployeeInfoService.selectDomainEmployeeInfoByCreateTime(startDatetime, endDatetime, page, rows);
-            jsonResult = JsonResultUtil.createSuccessJsonResult(pageResult);
-        } catch (Exception e) {
-            this.logger.error(MessageFormat.format("查询失败！ {0}", e.getMessage()));
-            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", e);
-        }
-
-        return jsonResult;
-    }
-
-    /**
-     * 按更新时间的时间段查询
-     *
-     * @param startDatetime 开始时间
-     * @param endDatetime   结束时间
-     * @param page          当前页码
-     * @param rows          每页显示条数
-     * @return
-     */
-    @ApiOperation(
-            value = "按更新时间的时间段查询",
-            notes = "按更新时间的时间段查询",
-            httpMethod = "GET"
-    )
-    @GetMapping("/selectDomainEmployeeInfoByUpdateTime")
-    public JsonResult<QueryResult<DomainEmployeeInfo>> selectDomainEmployeeInfoByUpdateTime(
-            @ApiParam(name = "startDatetime", value = "开始时间") @RequestParam String startDatetime,
-            @ApiParam(name = "endDatetime", value = "结束时间") @RequestParam String endDatetime,
-            @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
-            @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
-
-        JsonResult jsonResult;
-        try {
-            QueryResult<DomainEmployeeInfo> pageResult = domainEmployeeInfoService.selectDomainEmployeeInfoByUpdateTime(startDatetime, endDatetime, page, rows);
-            jsonResult = JsonResultUtil.createSuccessJsonResult(pageResult);
-        } catch (Exception e) {
-            this.logger.error(MessageFormat.format("查询失败！ {0}", e.getMessage()));
-            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", e);
-        }
-
-        return jsonResult;
-    }
-
-    @ApiOperation(
-            value = "单条新增人员基础信息",
-            notes = "单条新增人员基础信息",
+            value = "【自定义】- 单条新增人员基础信息",
+            notes = "【自定义】- 单条新增人员基础信息",
             httpMethod = "POST"
     )
     @PostMapping(value = "/employee")
@@ -134,8 +70,8 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
     }
 
     @ApiOperation(
-            value = "通过工号单条更新人员基础信息",
-            notes = "通过工号单条更新人员基础信息",
+            value = "【自定义】- 通过工号单条更新人员基础信息",
+            notes = "【自定义】- 通过工号单条更新人员基础信息",
             httpMethod = "PUT"
     )
     @PutMapping(value = "/employee/{personnelno}")
@@ -232,7 +168,7 @@ public class DomainEmployeeInfoController extends BaseController<Long, DomainEmp
             domainEmployeeInfo.setDeleteFlag(Boolean.FALSE);
             domainEmployeeInfo.setPersonnelStatus(1);
             domainEmployeeInfo.setGroupId(groupId);
-            List<DomainEmployeeInfo> domainEmployeeInfoList = super.baseService.selectList(domainEmployeeInfo);
+            List<DomainEmployeeInfo> domainEmployeeInfoList = domainEmployeeInfoService.selectList(domainEmployeeInfo);
             if(domainEmployeeInfoList.isEmpty()) {
                 jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoList);
             }else{
