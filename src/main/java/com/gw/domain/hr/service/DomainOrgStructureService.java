@@ -5,13 +5,17 @@ import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
+import com.gw.domain.hr.entity.vo.OrgStructureVO;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
@@ -192,6 +196,35 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
             orgIdMapAll.putAll(findChildrenOrgIds(orgIdMap));
         }
         return orgIdMapAll;
+    }
+
+    /**
+     * 获取组织列表
+     * @param createTime
+     * @param updateTime
+     * @param page
+     * @param rows
+     * @return
+     */
+    public QueryResult<OrgStructureVO> getGroupList(String createTime,
+                                                    String updateTime,
+                                                    Integer page,
+                                                    Integer rows) {
+        Example example = new Example(DomainOrgStructure.class);
+
+        Example.Criteria criteria =  example.createCriteria();
+        if(!StringUtils.isEmpty(createTime)){
+            criteria.andGreaterThan("createTime", createTime);
+        }
+        if(!StringUtils.isEmpty(createTime)){
+            criteria.andGreaterThan("updateTime", updateTime);
+        }
+        RowBounds rowBounds = new RowBounds(rows, (page-1)*rows);
+        long totalRecords = domainOrgStructureMapper.selectCountByExample(example);
+        List<DomainOrgStructure> orgStructureList = super.paginateListByExample(example, page, rows);//domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);
+        List<OrgStructureVO> orgStructureVOList = DozerUtil.convert(orgStructureList, OrgStructureVO.class);
+        QueryResult<OrgStructureVO> queryResult = new QueryResult(totalRecords, orgStructureVOList, page);
+        return queryResult;
     }
 
 }

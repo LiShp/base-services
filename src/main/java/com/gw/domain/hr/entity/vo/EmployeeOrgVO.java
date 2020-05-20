@@ -57,7 +57,7 @@ public class EmployeeOrgVO implements Serializable {
     /**
      * 员工状态
      */
-    @ApiModelProperty("员工状态")
+    @ApiModelProperty("员工状态:1在职、2离职")
     private Integer personnelStatus;
 
     /**
@@ -101,6 +101,57 @@ public class EmployeeOrgVO implements Serializable {
      */
     @ApiModelProperty("部门名称")
     private String departmentName;
+
+    /**
+     * 性别：1男、2女
+     */
+    @ApiModelProperty("性别：1男、2女")
+    private Integer sex;
+
+    /**
+     * 联系电话
+     */
+    @ApiModelProperty("联系电话")
+    private String mobile;
+
+    /**
+     * 邮箱
+     */
+    @ApiModelProperty("邮箱")
+    private String email;
+
+    /**
+     * 操作人：操作人工号
+     */
+    @ApiModelProperty("操作人工号")
+    private String createPersonnelNo;
+
+    /**
+     * 员工ID
+     */
+    @ApiModelProperty("员工ID")
+    private Long id;
+
+
+    /**
+     * 是否删除：0否 1是
+     */
+    @ApiModelProperty("是否删除：0否 1是")
+    private String deleteFlag;
+
+    /**
+     * 入职日期
+     */
+    @ApiModelProperty("入职日期")
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
+    private Date joinDate;
+
+    /**
+     * 职务
+     */
+    @ApiModelProperty("职务")
+    private String dutyName;
 
 
 }

@@ -196,6 +196,7 @@ public class DomainEmployeeInfoController {
             @ApiParam(name = "unitName", value = "单位名称") @RequestParam(required = false) String unitName,
             @ApiParam(name = "departmentId", value = "部门ID") @RequestParam(required = false) Integer departmentId,
             @ApiParam(name = "departmentName", value = "部门名称") @RequestParam(required = false) String departmentName,
+            @ApiParam(name = "personnelStatus", value = "是否在职") @RequestParam(required = false, defaultValue = "1") Integer personnelStatus,
             @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false) String createTime,
             @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
             @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -209,7 +210,7 @@ public class DomainEmployeeInfoController {
             domainEmpOrgRequestPo.setUnitId(unitId);
             domainEmpOrgRequestPo.setUnitName(unitName);
             domainEmpOrgRequestPo.setDepartmentId(departmentId);
-            domainEmpOrgRequestPo.setPersonnelStatus(1);
+            domainEmpOrgRequestPo.setPersonnelStatus(personnelStatus);
             domainEmpOrgRequestPo.setDepartmentName(departmentName);
 
             domainEmpOrgRequestPo.setCreateTime(DateUtil.dateStrToDate(createTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
