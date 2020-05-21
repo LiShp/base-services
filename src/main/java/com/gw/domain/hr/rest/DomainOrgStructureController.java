@@ -115,11 +115,11 @@ public class DomainOrgStructureController {
      * @return
      */
     @ApiOperation(
-            value = "【自定义】- 查询全量组织信息列表",
-            notes = "【自定义】- 查询全量组织信息列表",
+            value = "【自定义】- 查询全量/增量组织信息列表",
+            notes = "【自定义】- 查询全量/增量组织信息列表",
             httpMethod = "GET"
     )
-    @GetMapping(value = "groups")
+    @GetMapping(value = "/groups")
     public JsonResult<QueryResult<OrgStructureVO>> getGroupList(
             @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false) String createTime,
             @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
