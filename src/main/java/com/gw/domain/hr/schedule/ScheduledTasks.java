@@ -51,7 +51,7 @@ public class ScheduledTasks {
 
     /**
      * 每月每天早上8到20点更新 每隔4个小时更新一次
-     * 0 0 8,12,16,20 * * ?
+     * 0 0 8,12,16,20 * * ? 2
      */
     @Scheduled(cron = "0 0 8,12,16,20 * * ?")
     public void scheduledOrg() {
