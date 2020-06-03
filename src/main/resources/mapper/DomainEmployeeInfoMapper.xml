@@ -584,6 +584,7 @@
     <sql id="Base_Where_Clause_Emp_Org" >
         <where>
             <trim prefixOverrides="and">
+                <if test="nameLike != null">and domain_employee_info.name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
                 <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
                 <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
                 <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>

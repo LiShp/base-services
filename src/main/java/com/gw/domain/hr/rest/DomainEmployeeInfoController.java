@@ -25,6 +25,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -43,11 +44,11 @@ public class DomainEmployeeInfoController {
     @Autowired
     private DomainOrgStructureService domainOrgStructureService;
 
-    @ApiOperation(
+    /*@ApiOperation(
             value = "【自定义】- 单条新增人员基础信息",
             notes = "【自定义】- 单条新增人员基础信息",
             httpMethod = "POST"
-    )
+    )*/
     @PostMapping(value = "/employee")
     public JsonResult<Object> insertEmployeeInfoSingleByPersonnelNo(@RequestBody @Valid DomainEmployeeInfo domainEmployeeInfo, Errors errors) {
         this.logger.info("人员基础信息表_单条插入数据开始");
@@ -69,11 +70,11 @@ public class DomainEmployeeInfoController {
         return jsonResult;
     }
 
-    @ApiOperation(
+    /*@ApiOperation(
             value = "【自定义】- 通过工号单条更新人员基础信息",
             notes = "【自定义】- 通过工号单条更新人员基础信息",
             httpMethod = "PUT"
-    )
+    )*/
     @PutMapping(value = "/employee/{personnelno}")
     public JsonResult<Integer> updateEmployeeInfoSingleByPersonnelNo(@RequestBody DomainEmployeeInfo domainEmployeeInfo, @PathVariable("personnelno") String personnelno) {
         JsonResult jsonResult;
@@ -190,6 +191,7 @@ public class DomainEmployeeInfoController {
     )
     @GetMapping(value = "/employees")
     public JsonResult<QueryResult<EmployeeOrgVO>> employees(
+            @ApiParam(name = "nameLike", value = "员工姓名") @RequestParam(required = false) String nameLike,
             @ApiParam(name = "groupId", value = "组织ID") @RequestParam(required = false) Integer groupId,
             @ApiParam(name = "groupName", value = "组织名称") @RequestParam(required = false) String groupName,
             @ApiParam(name = "unitId", value = "单位ID") @RequestParam(required = false) Integer unitId,
@@ -205,6 +207,7 @@ public class DomainEmployeeInfoController {
         try {
 
             DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            domainEmpOrgRequestPo.setNameLike(nameLike);
             domainEmpOrgRequestPo.setGroupId(groupId);
             domainEmpOrgRequestPo.setGroupName(groupName);
             domainEmpOrgRequestPo.setUnitId(unitId);

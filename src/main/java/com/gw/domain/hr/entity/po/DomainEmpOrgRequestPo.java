@@ -25,6 +25,10 @@ import java.util.Date;
 public class DomainEmpOrgRequestPo extends AutoIncrementKeyBaseDomain<Long> {
 
     /**
+     * 员工姓名
+     */
+    private String nameLike;
+    /**
      * 组织ID
      */
     private Integer groupId;
