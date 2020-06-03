@@ -19,7 +19,7 @@ import java.util.Date;
 
 /**
  * 表名：domain_employee_Info
- * @author zoujialiang
+ * @author gwx
  */
 @Getter
 @Setter

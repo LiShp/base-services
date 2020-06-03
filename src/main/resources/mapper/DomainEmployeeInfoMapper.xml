@@ -122,7 +122,8 @@
         <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
         <result column="department_id" jdbcType="TIMESTAMP" property="departmentId" />
         <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
-        <result column="text" jdbcType="VARCHAR" property="dutyName" />
+        <result column="dutyName" jdbcType="VARCHAR" property="dutyName" />
+        <result column="diplomaName" jdbcType="VARCHAR" property="diplomaName" />
     </resultMap>
 
     <sql id="Select_Field" >
@@ -596,8 +597,8 @@
                 <if test="departmentName != null">and domain_org_structure.department_name = #{departmentName,jdbcType=TIMESTAMP} </if>
             </trim>
             and domain_employee_info.group_id = domain_org_structure.id
-            and domain_employee_info.duty = domain_basic_info.value_no
-            and domain_basic_info.f_key = 'Duty'
+            and (basic2.f_key = 'Diploma' and domain_employee_info.diploma = basic2.value_no)
+            and (basic1.f_key = 'Duty' and domain_employee_info.duty = basic1.value_no)
         </where>
     </sql>
 
@@ -607,7 +608,8 @@
         domain_org_structure.department_id,
         domain_org_structure.department_name,
         domain_org_structure.group_name,
-        domain_basic_info.text,
+        basic2.text as diplomaName,
+        basic1.text as dutyName,
         <include refid="Select_Field"/>
     </sql>
 
@@ -745,14 +747,14 @@
     <select id="employeeListCount" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultType="Integer">
         select
          count(1)
-        from domain_employee_info, domain_org_structure, domain_basic_info
+        from domain_employee_info, domain_org_structure, domain_basic_info basic1, domain_basic_info basic2
         <include refid="Base_Where_Clause_Emp_Org"/>
     </select>
 
     <select id="employeeList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Emp_Org">
         select
         <include refid="Select_Field_Emp_Org"/>
-        from domain_employee_info, domain_org_structure, domain_basic_info
+        from domain_employee_info, domain_org_structure, domain_basic_info basic1, domain_basic_info basic2
         <include refid="Base_Where_Clause_Emp_Org"/>
         <if test="page > -1">
             limit ${page} ,${size}

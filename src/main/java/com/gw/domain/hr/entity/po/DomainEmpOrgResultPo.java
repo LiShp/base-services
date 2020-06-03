@@ -84,5 +84,10 @@ public class DomainEmpOrgResultPo extends DomainEmployeeInfo {
      */
     private String dutyName;
 
+    /**
+     * 学历名称
+     */
+    private String diplomaName;
+
 
 }

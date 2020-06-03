@@ -10,14 +10,12 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 表名：domain_employee_Info
- * @author zoujialiang
+ * @author gwx
  */
 @Getter
 @Setter

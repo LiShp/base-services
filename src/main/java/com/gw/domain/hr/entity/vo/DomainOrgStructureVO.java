@@ -18,7 +18,7 @@ import java.util.Date;
 
 /**
  * 表名：domain_org_structure
- * @author zoujialiang
+ * @author gwx
  */
 @Getter
 @Setter

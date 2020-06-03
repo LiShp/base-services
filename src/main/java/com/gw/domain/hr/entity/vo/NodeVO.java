@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * 表名：domain_org_structure
- * @author zoujialiang
+ * @author gwx
  */
 @Getter
 @Setter
