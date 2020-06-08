@@ -98,6 +98,11 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     @ApiModelProperty("二级部名称")
     private String parentName;
 
+    /**
+     * unitName：单位名称
+     */
+    @ApiModelProperty("单位名称")
+    private String unitName;
 
     /**
      * 人员状态：1在职 2离职

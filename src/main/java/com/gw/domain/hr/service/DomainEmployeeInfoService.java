@@ -5,6 +5,7 @@ import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
 import com.gw.domain.hr.entity.po.DomainEmpOrgResultPo;
+import com.gw.domain.hr.entity.vo.DomainEmployeeInfoVO;
 import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,17 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
         }
         int num = domainEmployeeInfoMapper.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo);
         return num;
+    }
+
+    public DomainEmployeeInfoVO employee(DomainEmpOrgRequestPo domainEmpOrgRequestPo){
+        domainEmpOrgRequestPo.setPage(-1);
+        List<DomainEmpOrgResultPo> domainEmpOrgResultPoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
+        List<DomainEmployeeInfoVO> employeeVOList = null;
+        if(!domainEmpOrgResultPoList.isEmpty()) {
+            employeeVOList = DozerUtil.convert(domainEmpOrgResultPoList, DomainEmployeeInfoVO.class);
+            return employeeVOList.get(0);
+        }
+        return null;
     }
 
     public QueryResult employeeList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows, Class clazz){

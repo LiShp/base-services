@@ -103,9 +103,12 @@ public class DomainEmployeeInfoController {
             example.createCriteria().andEqualTo("personnelNo", personnelNo)
             .andEqualTo("personnelStatus",1);
 
-            DomainEmployeeInfo domainEmployeeInfo = domainEmployeeInfoService.selectOneByExample(example);
-            DomainEmployeeInfoVO domainEmployeeInfoVO = DozerUtil.convert(domainEmployeeInfo, DomainEmployeeInfoVO.class);
-            if(domainEmployeeInfo!=null) {
+            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            domainEmpOrgRequestPo.setPersonnelNo(personnelNo);
+            domainEmpOrgRequestPo.setPersonnelStatus(1);
+
+            DomainEmployeeInfoVO domainEmployeeInfoVO = domainEmployeeInfoService.employee(domainEmpOrgRequestPo);
+            if(domainEmployeeInfoVO!=null) {
                 Example orgExample = new Example(DomainOrgStructure.class);
                 orgExample.createCriteria().andEqualTo("id", domainEmployeeInfoVO.getGroupId())
                 .andEqualTo("deleteFlag", 0);

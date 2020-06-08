@@ -4,7 +4,7 @@ spring:
   datasource:
     mysql:
       driver-class-name: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql://10.255.30.212:3306/domain_hr?characterEncoding=utf8&allowMultiQueries=true
+      jdbcUrl: jdbc:mysql://10.255.29.28:3306/domain_hr?characterEncoding=utf8&allowMultiQueries=true
       username: root
       password: 123456
       # 初始化大小，最小，最大

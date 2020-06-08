@@ -586,6 +586,7 @@
         <where>
             <trim prefixOverrides="and">
                 <if test="nameLike != null">and domain_employee_info.name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
+                <if test="personnelNo != null">and domain_employee_info.personnel_no = #{personnelNo, jdbcType=VARCHAR} </if>
                 <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
                 <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
                 <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
@@ -756,7 +757,7 @@
         <include refid="Select_Field_Emp_Org"/>
         from domain_employee_info, domain_org_structure, domain_basic_info basic1, domain_basic_info basic2
         <include refid="Base_Where_Clause_Emp_Org"/>
-        <if test="page > -1">
+        <if test="page!=null and page > -1">
             limit ${page} ,${size}
         </if>
     </select>

@@ -28,6 +28,11 @@ public class DomainEmpOrgRequestPo extends AutoIncrementKeyBaseDomain<Long> {
      * 员工姓名
      */
     private String nameLike;
+
+    /**
+     * 员工工号
+     */
+    private String personnelNo;
     /**
      * 组织ID
      */
