@@ -101,7 +101,7 @@ public class DomainOrgStructureController {
         JsonResult jsonResult;
         try {
 
-            List<List<String>> resultList = domainOrgStructureService.getDepthGroupListById(1416L);
+            List<List<String>> resultList = domainOrgStructureService.getDepthGroupListById(1411L);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("通过组织编码查询子级的员工列表发生异常" , var4);
