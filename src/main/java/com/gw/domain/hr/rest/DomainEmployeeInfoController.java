@@ -7,11 +7,9 @@ import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain.hr.commonutils.DateUtil;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructure;
+import com.gw.domain.hr.entity.DomainWorkExperience;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
-import com.gw.domain.hr.entity.vo.DomainEmployeeInfoVO;
-import com.gw.domain.hr.entity.vo.EmployeeOrgPrivacyVO;
-import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
-import com.gw.domain.hr.entity.vo.EmployeeVO;
+import com.gw.domain.hr.entity.vo.*;
 import com.gw.domain.hr.service.DomainEmployeeInfoService;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import com.gw.gwlog.GWMLogger;
@@ -119,6 +117,24 @@ public class DomainEmployeeInfoController {
         } catch (Exception var4) {
             this.logger.error("通过工号查询人员基础信息异常，" ,var4);
             jsonResult = JsonResultUtil.createFailureJsonResult("通过工号查询人员基础信息异常！ {0}", var4);
+        }
+        return jsonResult;
+    }
+
+    @ApiOperation(
+            value = "【自定义】- 通过工号查询员工照片",
+            notes = "【自定义】- 通过工号查询员工照片",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/employee/photo/{personnelNo}")
+    public JsonResult<String> selectEmployeePhotoByPersonnelNo(@PathVariable("personnelNo") String personnelNo) {
+        JsonResult jsonResult;
+        try {
+            String photoUrl = domainEmployeeInfoService.employeePhoto(personnelNo);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(photoUrl);
+        } catch (Exception var4) {
+            this.logger.error("通过工号查询员工照片，" ,var4);
+            jsonResult = JsonResultUtil.createFailureJsonResult("通过工号查询员工照片！ {0}", var4);
         }
         return jsonResult;
     }
@@ -274,6 +290,51 @@ public class DomainEmployeeInfoController {
             domainEmpOrgRequestPo.setUpdateTime(DateUtil.dateStrToDate(updateTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
 
             QueryResult<EmployeeOrgPrivacyVO>  queryResult = domainEmployeeInfoService.employeeList(domainEmpOrgRequestPo,page, rows, EmployeeOrgPrivacyVO.class);
+
+            return JsonResultUtil.createSuccessJsonResult(queryResult);
+        } catch (Exception var4) {
+            this.logger.error("根据groupID查询员工信息" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("根据groupID查询员工信息{0}", var4);
+        }
+        return jsonResult;
+    }
+
+    @ApiOperation(
+            value = "【自定义】- 查询员工工作经历信息列表",
+            notes = "【自定义】- 查询员工工作经历信息列表",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/employees/work")
+    public JsonResult<QueryResult<DomainWorkExperienceVo>> employeesWork(
+            @ApiParam(name = "nameLike", value = "员工姓名") @RequestParam(required = false) String nameLike,
+            @ApiParam(name = "groupId", value = "组织ID") @RequestParam(required = false) Integer groupId,
+            @ApiParam(name = "groupName", value = "组织名称") @RequestParam(required = false) String groupName,
+            @ApiParam(name = "unitId", value = "单位ID") @RequestParam(required = false) Integer unitId,
+            @ApiParam(name = "unitName", value = "单位名称") @RequestParam(required = false) String unitName,
+            @ApiParam(name = "departmentId", value = "部门ID") @RequestParam(required = false) Integer departmentId,
+            @ApiParam(name = "departmentName", value = "部门名称") @RequestParam(required = false) String departmentName,
+            @ApiParam(name = "personnelStatus", value = "是否在职,1在职、2离职") @RequestParam(required = false) Integer personnelStatus,
+            @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false) String createTime,
+            @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
+            @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows){
+        JsonResult jsonResult;
+        try {
+
+            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            domainEmpOrgRequestPo.setNameLike(nameLike);
+            domainEmpOrgRequestPo.setGroupId(groupId);
+            domainEmpOrgRequestPo.setGroupName(groupName);
+            domainEmpOrgRequestPo.setUnitId(unitId);
+            domainEmpOrgRequestPo.setUnitName(unitName);
+            domainEmpOrgRequestPo.setDepartmentId(departmentId);
+            domainEmpOrgRequestPo.setPersonnelStatus(personnelStatus);
+            domainEmpOrgRequestPo.setDepartmentName(departmentName);
+
+            domainEmpOrgRequestPo.setCreateTime(DateUtil.dateStrToDate(createTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
+            domainEmpOrgRequestPo.setUpdateTime(DateUtil.dateStrToDate(updateTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
+
+            QueryResult<DomainWorkExperienceVo>  queryResult = domainEmployeeInfoService.employeeWorkList(domainEmpOrgRequestPo,page, rows);
 
             return JsonResultUtil.createSuccessJsonResult(queryResult);
         } catch (Exception var4) {

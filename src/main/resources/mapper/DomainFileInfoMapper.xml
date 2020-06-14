@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain.hr.mapper.DomainFileInfoMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.DomainFileInfo">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="isImg" jdbcType="TINYINT" property="isimg" />
+        <result column="contentType" jdbcType="VARCHAR" property="contenttype" />
+        <result column="size" jdbcType="INTEGER" property="fileSize" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="source" jdbcType="VARCHAR" property="source" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+        <result column="bucket" jdbcType="VARCHAR" property="bucket" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        domain_file_info.code,
+        domain_file_info.name,
+        domain_file_info.isImg,
+        domain_file_info.contentType,
+        domain_file_info.size,
+        domain_file_info.path,
+        domain_file_info.url,
+        domain_file_info.source,
+        domain_file_info.state,
+        domain_file_info.createTime,
+        domain_file_info.updateTime,
+        domain_file_info.bucket
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="code != null">
+            code = #{code},
+        </if>
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="isimg != null">
+            isImg = #{isimg},
+        </if>
+        <if test="contenttype != null">
+            contentType = #{contenttype},
+        </if>
+        <if test="fileSize != null">
+            size = #{fileSize},
+        </if>
+        <if test="path != null">
+            path = #{path},
+        </if>
+        <if test="url != null">
+            url = #{url},
+        </if>
+        <if test="source != null">
+            source = #{source},
+        </if>
+        <if test="state != null">
+            state = #{state},
+        </if>
+        <if test="createtime != null">
+            createTime = #{createtime},
+        </if>
+        <if test="updatetime != null">
+            updateTime = #{updatetime},
+        </if>
+        <if test="bucket != null">
+            bucket = #{bucket}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="code != null">
+            #{code},
+        </if>
+        <if test="name != null">
+            #{name},
+        </if>
+        <if test="isimg != null">
+            #{isimg},
+        </if>
+        <if test="contenttype != null">
+            #{contenttype},
+        </if>
+        <if test="fileSize != null">
+            #{fileSize},
+        </if>
+        <if test="path != null">
+            #{path},
+        </if>
+        <if test="url != null">
+            #{url},
+        </if>
+        <if test="source != null">
+            #{source},
+        </if>
+        <if test="state != null">
+            #{state},
+        </if>
+        <if test="createtime != null">
+            #{createtime},
+        </if>
+        <if test="updatetime != null">
+            #{updatetime},
+        </if>
+        <if test="bucket != null">
+            #{bucket}
+        </if>
+    </sql>
+
+    <sql id="Base_Where_Clause" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="code != null and code != ''">and domain_file_info.code = #{code,jdbcType=VARCHAR} </if>
+                <if test="name != null and name != ''">and domain_file_info.name = #{name,jdbcType=VARCHAR} </if>
+                <if test="isimg != null">and domain_file_info.isImg = #{isimg,jdbcType=TINYINT} </if>
+                <if test="contenttype != null and contenttype != ''">and domain_file_info.contentType = #{contenttype,jdbcType=VARCHAR} </if>
+                <if test="fileSize != null">and domain_file_info.size = #{fileSize,jdbcType=INTEGER} </if>
+                <if test="path != null and path != ''">and domain_file_info.path = #{path,jdbcType=VARCHAR} </if>
+                <if test="url != null and url != ''">and domain_file_info.url = #{url,jdbcType=VARCHAR} </if>
+                <if test="source != null and source != ''">and domain_file_info.source = #{source,jdbcType=VARCHAR} </if>
+                <if test="state != null">and domain_file_info.state = #{state,jdbcType=INTEGER} </if>
+                <if test="createtime != null">and domain_file_info.createTime = #{createtime,jdbcType=TIMESTAMP} </if>
+                <if test="updatetime != null">and domain_file_info.updateTime = #{updatetime,jdbcType=TIMESTAMP} </if>
+                <if test="bucket != null and bucket != ''">and domain_file_info.bucket = #{bucket,jdbcType=VARCHAR} </if>
+            </trim>
+        </where>
+        <choose>
+            <when test="sortString!=null and sortString!=''">
+                order by ${sortString}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+
+    </sql>
+
+
+    <select id="selectMaxCreateTime" resultType="java.lang.String">
+        select max(createTime) from domain_file_info
+    </select>
+
+    <select id="selectMaxUpdateTime" resultType="java.lang.String">
+        select max(updateTime) from domain_file_info
+    </select>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain.hr.mapper.DomainWorkExperienceMapper">
+    <resultMap id="Base_Result_Map_Work" type="com.gw.domain.hr.entity.po.DomainWorkExperienceResultPo">
+
+        <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
+        <result column="work_experience_id" jdbcType="INTEGER" property="workExperienceId" />
+        <result column="person_id" jdbcType="INTEGER" property="personId" />
+        <result column="work_start_time" jdbcType="TIMESTAMP" property="workStartTime" />
+        <result column="work_end_time" jdbcType="TIMESTAMP" property="workEndTime" />
+        <result column="work_company" jdbcType="VARCHAR" property="workCompany" />
+        <result column="work_department" jdbcType="VARCHAR" property="workDepartment" />
+        <result column="work_group_id" jdbcType="INTEGER" property="workGroupId" />
+        <result column="work_duty" jdbcType="VARCHAR" property="workDuty" />
+        <result column="work_description" jdbcType="VARCHAR" property="workDescription" />
+        <result column="work_direct_supervisor" jdbcType="VARCHAR" property="workDirectSupervisor" />
+        <result column="supervisor_phone" jdbcType="VARCHAR" property="supervisorPhone" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        domain_work_experience.work_experience_id,
+        domain_work_experience.person_id,
+        domain_work_experience.work_start_time,
+        domain_work_experience.work_end_time,
+        domain_work_experience.work_company,
+        domain_work_experience.work_department,
+        domain_work_experience.work_group_id,
+        domain_work_experience.work_duty,
+        domain_work_experience.work_description,
+        domain_work_experience.work_direct_supervisor,
+        domain_work_experience.supervisor_phone,
+        domain_work_experience.update_time,
+        domain_work_experience.update_user_id,
+        domain_work_experience.create_time,
+        domain_work_experience.create_user_id,
+        domain_work_experience.is_delete
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="workExperienceId != null">
+            work_experience_id = #{workExperienceId},
+        </if>
+        <if test="personId != null">
+            person_id = #{personId},
+        </if>
+        <if test="workStartTime != null">
+            work_start_time = #{workStartTime},
+        </if>
+        <if test="workEndTime != null">
+            work_end_time = #{workEndTime},
+        </if>
+        <if test="workCompany != null">
+            work_company = #{workCompany},
+        </if>
+        <if test="workDepartment != null">
+            work_department = #{workDepartment},
+        </if>
+        <if test="workGroupId != null">
+            work_group_id = #{workGroupId},
+        </if>
+        <if test="workDuty != null">
+            work_duty = #{workDuty},
+        </if>
+        <if test="workDescription != null">
+            work_description = #{workDescription},
+        </if>
+        <if test="workDirectSupervisor != null">
+            work_direct_supervisor = #{workDirectSupervisor},
+        </if>
+        <if test="supervisorPhone != null">
+            supervisor_phone = #{supervisorPhone},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime},
+        </if>
+        <if test="updateUserId != null">
+            update_user_id = #{updateUserId},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="createUserId != null">
+            create_user_id = #{createUserId},
+        </if>
+        <if test="isDelete != null">
+            is_delete = #{isDelete}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="workExperienceId != null">
+            #{workExperienceId},
+        </if>
+        <if test="personId != null">
+            #{personId},
+        </if>
+        <if test="workStartTime != null">
+            #{workStartTime},
+        </if>
+        <if test="workEndTime != null">
+            #{workEndTime},
+        </if>
+        <if test="workCompany != null">
+            #{workCompany},
+        </if>
+        <if test="workDepartment != null">
+            #{workDepartment},
+        </if>
+        <if test="workGroupId != null">
+            #{workGroupId},
+        </if>
+        <if test="workDuty != null">
+            #{workDuty},
+        </if>
+        <if test="workDescription != null">
+            #{workDescription},
+        </if>
+        <if test="workDirectSupervisor != null">
+            #{workDirectSupervisor},
+        </if>
+        <if test="supervisorPhone != null">
+            #{supervisorPhone},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime},
+        </if>
+        <if test="updateUserId != null">
+            #{updateUserId},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="createUserId != null">
+            #{createUserId},
+        </if>
+        <if test="isDelete != null">
+            #{isDelete}
+        </if>
+    </sql>
+
+    <sql id="Base_Where_Clause" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="workExperienceId != null">and domain_work_experience.work_experience_id = #{workExperienceId,jdbcType=INTEGER} </if>
+                <if test="personId != null">and domain_work_experience.person_id = #{personId,jdbcType=INTEGER} </if>
+                <if test="workStartTime != null">and domain_work_experience.work_start_time = #{workStartTime,jdbcType=TIMESTAMP} </if>
+                <if test="workEndTime != null">and domain_work_experience.work_end_time = #{workEndTime,jdbcType=TIMESTAMP} </if>
+                <if test="workCompany != null and workCompany != ''">and domain_work_experience.work_company = #{workCompany,jdbcType=VARCHAR} </if>
+                <if test="workDepartment != null and workDepartment != ''">and domain_work_experience.work_department = #{workDepartment,jdbcType=VARCHAR} </if>
+                <if test="workGroupId != null">and domain_work_experience.work_group_id = #{workGroupId,jdbcType=INTEGER} </if>
+                <if test="workDuty != null and workDuty != ''">and domain_work_experience.work_duty = #{workDuty,jdbcType=VARCHAR} </if>
+                <if test="workDescription != null and workDescription != ''">and domain_work_experience.work_description = #{workDescription,jdbcType=VARCHAR} </if>
+                <if test="workDirectSupervisor != null and workDirectSupervisor != ''">and domain_work_experience.work_direct_supervisor = #{workDirectSupervisor,jdbcType=VARCHAR} </if>
+                <if test="supervisorPhone != null and supervisorPhone != ''">and domain_work_experience.supervisor_phone = #{supervisorPhone,jdbcType=VARCHAR} </if>
+                <if test="updateTime != null">and domain_work_experience.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
+                <if test="updateUserId != null">and domain_work_experience.update_user_id = #{updateUserId,jdbcType=INTEGER} </if>
+                <if test="createTime != null">and domain_work_experience.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="createUserId != null">and domain_work_experience.create_user_id = #{createUserId,jdbcType=INTEGER} </if>
+                <if test="isDelete != null">and domain_work_experience.is_delete = #{isDelete,jdbcType=INTEGER} </if>
+            </trim>
+        </where>
+        <choose>
+            <when test="sortString!=null and sortString!=''">
+                order by ${sortString}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+
+    </sql>
+
+
+    <sql id="Select_Field_Work" >
+        domain_employee_info.personnel_no,
+        domain_work_experience.person_id,
+        domain_work_experience.work_start_time,
+        domain_work_experience.work_end_time,
+        domain_work_experience.work_company,
+        domain_work_experience.work_department,
+        domain_work_experience.work_group_id,
+        domain_work_experience.work_duty,
+        domain_work_experience.work_description,
+        domain_work_experience.work_direct_supervisor,
+        domain_work_experience.supervisor_phone,
+        domain_work_experience.update_time,
+        domain_work_experience.update_user_id,
+        domain_work_experience.create_time,
+        domain_work_experience.create_user_id,
+        domain_work_experience.is_delete
+    </sql>
+
+    <sql id="Base_Where_Clause_Work" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="nameLike != null">and domain_employee_info.name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
+                <if test="personnelNo != null">and domain_employee_info.personnel_no = #{personnelNo, jdbcType=VARCHAR} </if>
+                <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
+                <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
+                <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
+                <if test="createTime != null">and domain_employee_info.create_time > #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="updateTime != null">and domain_employee_info.update_time > #{updateTime,jdbcType=TIMESTAMP} </if>
+                <if test="unitId != null">and domain_org_structure.unit_id = #{unitId,jdbcType=INTEGER} </if>
+                <if test="unitName != null">and domain_org_structure.unit_name = #{unitName,jdbcType=TIMESTAMP} </if>
+                <if test="departmentId != null">and domain_org_structure.department_id = #{departmentId,jdbcType=INTEGER} </if>
+                <if test="departmentName != null">and domain_org_structure.department_name = #{departmentName,jdbcType=TIMESTAMP} </if>
+            </trim>
+            and domain_employee_info.group_id = domain_org_structure.id
+            and domain_employee_info.id = domain_work_experience.person_id
+        </where>
+    </sql>
+
+    <select id="selectMaxCreateTime" resultType="java.lang.String">
+        select max(create_time) from domain_work_experience
+    </select>
+
+    <select id="selectMaxUpdateTime" resultType="java.lang.String">
+        select max(update_time) from domain_work_experience
+    </select>
+
+
+    <select id="employeeWorkListCount" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultType="Integer">
+        select
+        count(1)
+        from domain_employee_info, domain_org_structure, domain_work_experience
+        <include refid="Base_Where_Clause_Work"/>
+    </select>
+
+    <select id="employeeWorkList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Work">
+        select
+        <include refid="Select_Field_Work"/>
+        from domain_employee_info, domain_org_structure, domain_work_experience
+        <include refid="Base_Where_Clause_Work"/>
+        <if test="page!=null and page > -1">
+            limit ${page} ,${size}
+        </if>
+    </select>
+</mapper>

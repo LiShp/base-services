@@ -2,17 +2,13 @@ package com.gw.domain.hr.rest;
 
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
-import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
 import com.gw.domain.hr.service.HrDataToDomainService;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author zoujialiang
@@ -125,6 +121,74 @@ public class HrDataToDomainController {
         JsonResult jsonResult;
         try {
             int num = hrDataToDomainService.personnelToEmployeeInfoNew();
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception e) {
+            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 头像信息同步-全量
+     * @return
+     */
+    @GetMapping(value = "/fileInfoSyncAll")
+    public JsonResult<Object> fileInfoSyncAll() {
+        JsonResult jsonResult;
+        try {
+            int num = hrDataToDomainService.fileInfoSyncAll();
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception e) {
+            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 头像信息同步-增量
+     * @return
+     */
+    @GetMapping(value = "/fileInfoSyncNew")
+    public JsonResult<Object> fileInfoSyncNew() {
+        JsonResult jsonResult;
+        try {
+            int num = hrDataToDomainService.fileInfoSyncNew();
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception e) {
+            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 工作经历同步-全量
+     * @return
+     */
+    @GetMapping(value = "/workExperienceSyncAll")
+    public JsonResult<Object> workExperienceSyncAll() {
+        JsonResult jsonResult;
+        try {
+            int num = hrDataToDomainService.workExperienceSyncAll();
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception e) {
+            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 工作经历同步-增量
+     * @return
+     */
+    @GetMapping(value = "/workExperienceSyncNew")
+    public JsonResult<Object> workExperienceSyncNew() {
+        JsonResult jsonResult;
+        try {
+            int num = hrDataToDomainService.workExperienceSyncNew();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);

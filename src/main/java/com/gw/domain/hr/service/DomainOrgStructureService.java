@@ -5,7 +5,6 @@ import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
-import com.gw.domain.hr.entity.vo.EmployeeOrgVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureVO;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;

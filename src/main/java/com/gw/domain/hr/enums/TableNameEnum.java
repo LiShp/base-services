@@ -38,6 +38,16 @@ public enum TableNameEnum {
      * DOAMIN员工职位信息表
      */
     TABLE_NAME_POSITION("domain_position", "DOAMIN员工职位信息表"),
+
+    /**
+     * DOAMIN员工职位信息表
+     */
+    TABLE_NAME_WORK("domain_work_experience", "DOAMIN员工工作经历"),
+
+    /**
+     * DOAMIN员工职位信息表
+     */
+    TABLE_NAME_FILE("domain_file_info", "DOAMIN员工头像"),
     /**
      * 时间表
      */
