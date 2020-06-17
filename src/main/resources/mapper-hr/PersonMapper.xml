@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain.hr.mapperhr.PersonMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.hr.Person">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="person_number" jdbcType="VARCHAR" property="personNumber" />
+        <result column="is_formal" jdbcType="INTEGER" property="isFormal" />
+        <result column="is_foreign" jdbcType="INTEGER" property="isForeign" />
+        <result column="country" jdbcType="INTEGER" property="country" />
+        <result column="certificate_type" jdbcType="INTEGER" property="certificateType" />
+        <result column="certificate_number" jdbcType="VARCHAR" property="certificateNumber" />
+        <result column="id_card_number" jdbcType="VARCHAR" property="idCardNumber" />
+        <result column="certificate_name" jdbcType="VARCHAR" property="certificateName" />
+        <result column="chinese_name" jdbcType="VARCHAR" property="chineseName" />
+        <result column="name_used" jdbcType="VARCHAR" property="nameUsed" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="marriage" jdbcType="INTEGER" property="marriage" />
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+        <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
+        <result column="registered_residence" jdbcType="VARCHAR" property="registeredResidence" />
+        <result column="live_type" jdbcType="INTEGER" property="liveType" />
+        <result column="current_live_place" jdbcType="VARCHAR" property="currentLivePlace" />
+        <result column="weight" jdbcType="VARCHAR" property="weight" />
+        <result column="height" jdbcType="VARCHAR" property="height" />
+        <result column="blood_type" jdbcType="INTEGER" property="bloodType" />
+        <result column="political_affiliation" jdbcType="INTEGER" property="politicalAffiliation" />
+        <result column="nation" jdbcType="INTEGER" property="nation" />
+        <result column="health" jdbcType="VARCHAR" property="health" />
+        <result column="resume_number" jdbcType="VARCHAR" property="resumeNumber" />
+        <result column="house_number" jdbcType="VARCHAR" property="houseNumber" />
+        <result column="dwelling_unit" jdbcType="VARCHAR" property="dwellingUnit" />
+        <result column="work_address" jdbcType="INTEGER" property="workAddress" />
+        <result column="diploma" jdbcType="INTEGER" property="diploma" />
+        <result column="education_type" jdbcType="INTEGER" property="educationType" />
+        <result column="recruitment_sources" jdbcType="INTEGER" property="recruitmentSources" />
+        <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool" />
+        <result column="professional" jdbcType="VARCHAR" property="professional" />
+        <result column="graduate_time" jdbcType="TIMESTAMP" property="graduateTime" />
+        <result column="english_ability" jdbcType="INTEGER" property="englishAbility" />
+        <result column="computer_ability" jdbcType="INTEGER" property="computerAbility" />
+        <result column="certificate" jdbcType="VARCHAR" property="certificate" />
+        <result column="other_language" jdbcType="VARCHAR" property="otherLanguage" />
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+        <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="qq" jdbcType="VARCHAR" property="qq" />
+        <result column="title" jdbcType="INTEGER" property="title" />
+        <result column="group_id" jdbcType="INTEGER" property="groupId" />
+        <result column="work_type" jdbcType="INTEGER" property="workType" />
+        <result column="duty" jdbcType="INTEGER" property="duty" />
+        <result column="category" jdbcType="INTEGER" property="category" />
+        <result column="grade" jdbcType="INTEGER" property="grade" />
+        <result column="position" jdbcType="INTEGER" property="position" />
+        <result column="rank" jdbcType="INTEGER" property="rank" />
+        <result column="position_code" jdbcType="VARCHAR" property="positionCode" />
+        <result column="post_practice_stage" jdbcType="INTEGER" property="postPracticeStage" />
+        <result column="subdivision_post" jdbcType="VARCHAR" property="subdivisionPost" />
+        <result column="duty_rank" jdbcType="INTEGER" property="dutyRank" />
+        <result column="admission_date" jdbcType="TIMESTAMP" property="admissionDate" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="direct_leader_id" jdbcType="INTEGER" property="directLeaderId" />
+        <result column="approval_power_number" jdbcType="VARCHAR" property="approvalPowerNumber" />
+        <result column="bank_card" jdbcType="VARCHAR" property="bankCard" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="photo_file_code" jdbcType="VARCHAR" property="photoFileCode" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="person_remark" jdbcType="VARCHAR" property="personRemark" />
+        <result column="english_score" jdbcType="VARCHAR" property="englishScore" />
+        <result column="is_commitment" jdbcType="INTEGER" property="isCommitment" />
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+        <result column="person_mechanism" jdbcType="VARCHAR" property="personMechanism" />
+        <result column="recruiter" jdbcType="VARCHAR" property="recruiter" />
+        <result column="back_school_time" jdbcType="VARCHAR" property="backSchoolTime" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        p_person.person_number,
+        p_person.is_formal,
+        p_person.is_foreign,
+        p_person.country,
+        p_person.certificate_type,
+        p_person.certificate_number,
+        p_person.id_card_number,
+        p_person.certificate_name,
+        p_person.chinese_name,
+        p_person.name_used,
+        p_person.sex,
+        p_person.marriage,
+        p_person.birthday,
+        p_person.native_place,
+        p_person.registered_residence,
+        p_person.live_type,
+        p_person.current_live_place,
+        p_person.weight,
+        p_person.height,
+        p_person.blood_type,
+        p_person.political_affiliation,
+        p_person.nation,
+        p_person.health,
+        p_person.resume_number,
+        p_person.house_number,
+        p_person.dwelling_unit,
+        p_person.work_address,
+        p_person.diploma,
+        p_person.education_type,
+        p_person.recruitment_sources,
+        p_person.graduate_school,
+        p_person.professional,
+        p_person.graduate_time,
+        p_person.english_ability,
+        p_person.computer_ability,
+        p_person.certificate,
+        p_person.other_language,
+        p_person.phone_number,
+        p_person.home_phone,
+        p_person.email,
+        p_person.qq,
+        p_person.title,
+        p_person.group_id,
+        p_person.work_type,
+        p_person.duty,
+        p_person.category,
+        p_person.grade,
+        p_person.position,
+        p_person.rank,
+        p_person.position_code,
+        p_person.post_practice_stage,
+        p_person.subdivision_post,
+        p_person.duty_rank,
+        p_person.admission_date,
+        p_person.state,
+        p_person.direct_leader_id,
+        p_person.approval_power_number,
+        p_person.bank_card,
+        p_person.remark,
+        p_person.photo_file_code,
+        p_person.create_time,
+        p_person.create_user_id,
+        p_person.update_user_id,
+        p_person.update_time,
+        p_person.is_delete,
+        p_person.person_remark,
+        p_person.english_score,
+        p_person.is_commitment,
+        p_person.create_user_name,
+        p_person.person_mechanism,
+        p_person.recruiter,
+        p_person.back_school_time
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="personNumber != null">
+            person_number = #{personNumber},
+        </if>
+        <if test="isFormal != null">
+            is_formal = #{isFormal},
+        </if>
+        <if test="isForeign != null">
+            is_foreign = #{isForeign},
+        </if>
+        <if test="country != null">
+            country = #{country},
+        </if>
+        <if test="certificateType != null">
+            certificate_type = #{certificateType},
+        </if>
+        <if test="certificateNumber != null">
+            certificate_number = #{certificateNumber},
+        </if>
+        <if test="idCardNumber != null">
+            id_card_number = #{idCardNumber},
+        </if>
+        <if test="certificateName != null">
+            certificate_name = #{certificateName},
+        </if>
+        <if test="chineseName != null">
+            chinese_name = #{chineseName},
+        </if>
+        <if test="nameUsed != null">
+            name_used = #{nameUsed},
+        </if>
+        <if test="sex != null">
+            sex = #{sex},
+        </if>
+        <if test="marriage != null">
+            marriage = #{marriage},
+        </if>
+        <if test="birthday != null">
+            birthday = #{birthday},
+        </if>
+        <if test="nativePlace != null">
+            native_place = #{nativePlace},
+        </if>
+        <if test="registeredResidence != null">
+            registered_residence = #{registeredResidence},
+        </if>
+        <if test="liveType != null">
+            live_type = #{liveType},
+        </if>
+        <if test="currentLivePlace != null">
+            current_live_place = #{currentLivePlace},
+        </if>
+        <if test="weight != null">
+            weight = #{weight},
+        </if>
+        <if test="height != null">
+            height = #{height},
+        </if>
+        <if test="bloodType != null">
+            blood_type = #{bloodType},
+        </if>
+        <if test="politicalAffiliation != null">
+            political_affiliation = #{politicalAffiliation},
+        </if>
+        <if test="nation != null">
+            nation = #{nation},
+        </if>
+        <if test="health != null">
+            health = #{health},
+        </if>
+        <if test="resumeNumber != null">
+            resume_number = #{resumeNumber},
+        </if>
+        <if test="houseNumber != null">
+            house_number = #{houseNumber},
+        </if>
+        <if test="dwellingUnit != null">
+            dwelling_unit = #{dwellingUnit},
+        </if>
+        <if test="workAddress != null">
+            work_address = #{workAddress},
+        </if>
+        <if test="diploma != null">
+            diploma = #{diploma},
+        </if>
+        <if test="educationType != null">
+            education_type = #{educationType},
+        </if>
+        <if test="recruitmentSources != null">
+            recruitment_sources = #{recruitmentSources},
+        </if>
+        <if test="graduateSchool != null">
+            graduate_school = #{graduateSchool},
+        </if>
+        <if test="professional != null">
+            professional = #{professional},
+        </if>
+        <if test="graduateTime != null">
+            graduate_time = #{graduateTime},
+        </if>
+        <if test="englishAbility != null">
+            english_ability = #{englishAbility},
+        </if>
+        <if test="computerAbility != null">
+            computer_ability = #{computerAbility},
+        </if>
+        <if test="certificate != null">
+            certificate = #{certificate},
+        </if>
+        <if test="otherLanguage != null">
+            other_language = #{otherLanguage},
+        </if>
+        <if test="phoneNumber != null">
+            phone_number = #{phoneNumber},
+        </if>
+        <if test="homePhone != null">
+            home_phone = #{homePhone},
+        </if>
+        <if test="email != null">
+            email = #{email},
+        </if>
+        <if test="qq != null">
+            qq = #{qq},
+        </if>
+        <if test="title != null">
+            title = #{title},
+        </if>
+        <if test="groupId != null">
+            group_id = #{groupId},
+        </if>
+        <if test="workType != null">
+            work_type = #{workType},
+        </if>
+        <if test="duty != null">
+            duty = #{duty},
+        </if>
+        <if test="category != null">
+            category = #{category},
+        </if>
+        <if test="grade != null">
+            grade = #{grade},
+        </if>
+        <if test="position != null">
+            position = #{position},
+        </if>
+        <if test="rank != null">
+            rank = #{rank},
+        </if>
+        <if test="positionCode != null">
+            position_code = #{positionCode},
+        </if>
+        <if test="postPracticeStage != null">
+            post_practice_stage = #{postPracticeStage},
+        </if>
+        <if test="subdivisionPost != null">
+            subdivision_post = #{subdivisionPost},
+        </if>
+        <if test="dutyRank != null">
+            duty_rank = #{dutyRank},
+        </if>
+        <if test="admissionDate != null">
+            admission_date = #{admissionDate},
+        </if>
+        <if test="state != null">
+            state = #{state},
+        </if>
+        <if test="directLeaderId != null">
+            direct_leader_id = #{directLeaderId},
+        </if>
+        <if test="approvalPowerNumber != null">
+            approval_power_number = #{approvalPowerNumber},
+        </if>
+        <if test="bankCard != null">
+            bank_card = #{bankCard},
+        </if>
+        <if test="remark != null">
+            remark = #{remark},
+        </if>
+        <if test="photoFileCode != null">
+            photo_file_code = #{photoFileCode},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="createUserId != null">
+            create_user_id = #{createUserId},
+        </if>
+        <if test="updateUserId != null">
+            update_user_id = #{updateUserId},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime},
+        </if>
+        <if test="isDelete != null">
+            is_delete = #{isDelete},
+        </if>
+        <if test="personRemark != null">
+            person_remark = #{personRemark},
+        </if>
+        <if test="englishScore != null">
+            english_score = #{englishScore},
+        </if>
+        <if test="isCommitment != null">
+            is_commitment = #{isCommitment},
+        </if>
+        <if test="createUserName != null">
+            create_user_name = #{createUserName},
+        </if>
+        <if test="personMechanism != null">
+            person_mechanism = #{personMechanism},
+        </if>
+        <if test="recruiter != null">
+            recruiter = #{recruiter},
+        </if>
+        <if test="backSchoolTime != null">
+            back_school_time = #{backSchoolTime}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="personNumber != null">
+            #{personNumber},
+        </if>
+        <if test="isFormal != null">
+            #{isFormal},
+        </if>
+        <if test="isForeign != null">
+            #{isForeign},
+        </if>
+        <if test="country != null">
+            #{country},
+        </if>
+        <if test="certificateType != null">
+            #{certificateType},
+        </if>
+        <if test="certificateNumber != null">
+            #{certificateNumber},
+        </if>
+        <if test="idCardNumber != null">
+            #{idCardNumber},
+        </if>
+        <if test="certificateName != null">
+            #{certificateName},
+        </if>
+        <if test="chineseName != null">
+            #{chineseName},
+        </if>
+        <if test="nameUsed != null">
+            #{nameUsed},
+        </if>
+        <if test="sex != null">
+            #{sex},
+        </if>
+        <if test="marriage != null">
+            #{marriage},
+        </if>
+        <if test="birthday != null">
+            #{birthday},
+        </if>
+        <if test="nativePlace != null">
+            #{nativePlace},
+        </if>
+        <if test="registeredResidence != null">
+            #{registeredResidence},
+        </if>
+        <if test="liveType != null">
+            #{liveType},
+        </if>
+        <if test="currentLivePlace != null">
+            #{currentLivePlace},
+        </if>
+        <if test="weight != null">
+            #{weight},
+        </if>
+        <if test="height != null">
+            #{height},
+        </if>
+        <if test="bloodType != null">
+            #{bloodType},
+        </if>
+        <if test="politicalAffiliation != null">
+            #{politicalAffiliation},
+        </if>
+        <if test="nation != null">
+            #{nation},
+        </if>
+        <if test="health != null">
+            #{health},
+        </if>
+        <if test="resumeNumber != null">
+            #{resumeNumber},
+        </if>
+        <if test="houseNumber != null">
+            #{houseNumber},
+        </if>
+        <if test="dwellingUnit != null">
+            #{dwellingUnit},
+        </if>
+        <if test="workAddress != null">
+            #{workAddress},
+        </if>
+        <if test="diploma != null">
+            #{diploma},
+        </if>
+        <if test="educationType != null">
+            #{educationType},
+        </if>
+        <if test="recruitmentSources != null">
+            #{recruitmentSources},
+        </if>
+        <if test="graduateSchool != null">
+            #{graduateSchool},
+        </if>
+        <if test="professional != null">
+            #{professional},
+        </if>
+        <if test="graduateTime != null">
+            #{graduateTime},
+        </if>
+        <if test="englishAbility != null">
+            #{englishAbility},
+        </if>
+        <if test="computerAbility != null">
+            #{computerAbility},
+        </if>
+        <if test="certificate != null">
+            #{certificate},
+        </if>
+        <if test="otherLanguage != null">
+            #{otherLanguage},
+        </if>
+        <if test="phoneNumber != null">
+            #{phoneNumber},
+        </if>
+        <if test="homePhone != null">
+            #{homePhone},
+        </if>
+        <if test="email != null">
+            #{email},
+        </if>
+        <if test="qq != null">
+            #{qq},
+        </if>
+        <if test="title != null">
+            #{title},
+        </if>
+        <if test="groupId != null">
+            #{groupId},
+        </if>
+        <if test="workType != null">
+            #{workType},
+        </if>
+        <if test="duty != null">
+            #{duty},
+        </if>
+        <if test="category != null">
+            #{category},
+        </if>
+        <if test="grade != null">
+            #{grade},
+        </if>
+        <if test="position != null">
+            #{position},
+        </if>
+        <if test="rank != null">
+            #{rank},
+        </if>
+        <if test="positionCode != null">
+            #{positionCode},
+        </if>
+        <if test="postPracticeStage != null">
+            #{postPracticeStage},
+        </if>
+        <if test="subdivisionPost != null">
+            #{subdivisionPost},
+        </if>
+        <if test="dutyRank != null">
+            #{dutyRank},
+        </if>
+        <if test="admissionDate != null">
+            #{admissionDate},
+        </if>
+        <if test="state != null">
+            #{state},
+        </if>
+        <if test="directLeaderId != null">
+            #{directLeaderId},
+        </if>
+        <if test="approvalPowerNumber != null">
+            #{approvalPowerNumber},
+        </if>
+        <if test="bankCard != null">
+            #{bankCard},
+        </if>
+        <if test="remark != null">
+            #{remark},
+        </if>
+        <if test="photoFileCode != null">
+            #{photoFileCode},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="createUserId != null">
+            #{createUserId},
+        </if>
+        <if test="updateUserId != null">
+            #{updateUserId},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime},
+        </if>
+        <if test="isDelete != null">
+            #{isDelete},
+        </if>
+        <if test="personRemark != null">
+            #{personRemark},
+        </if>
+        <if test="englishScore != null">
+            #{englishScore},
+        </if>
+        <if test="isCommitment != null">
+            #{isCommitment},
+        </if>
+        <if test="createUserName != null">
+            #{createUserName},
+        </if>
+        <if test="personMechanism != null">
+            #{personMechanism},
+        </if>
+        <if test="recruiter != null">
+            #{recruiter},
+        </if>
+        <if test="backSchoolTime != null">
+            #{backSchoolTime}
+        </if>
+    </sql>
+
+    <sql id="Base_Where_Clause" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="personNumber != null and personNumber != ''">and p_person.person_number = #{personNumber,jdbcType=VARCHAR} </if>
+                <if test="isFormal != null">and p_person.is_formal = #{isFormal,jdbcType=INTEGER} </if>
+                <if test="isForeign != null">and p_person.is_foreign = #{isForeign,jdbcType=INTEGER} </if>
+                <if test="country != null">and p_person.country = #{country,jdbcType=INTEGER} </if>
+                <if test="certificateType != null">and p_person.certificate_type = #{certificateType,jdbcType=INTEGER} </if>
+                <if test="certificateNumber != null and certificateNumber != ''">and p_person.certificate_number = #{certificateNumber,jdbcType=VARCHAR} </if>
+                <if test="idCardNumber != null and idCardNumber != ''">and p_person.id_card_number = #{idCardNumber,jdbcType=VARCHAR} </if>
+                <if test="certificateName != null and certificateName != ''">and p_person.certificate_name = #{certificateName,jdbcType=VARCHAR} </if>
+                <if test="chineseName != null and chineseName != ''">and p_person.chinese_name = #{chineseName,jdbcType=VARCHAR} </if>
+                <if test="nameUsed != null and nameUsed != ''">and p_person.name_used = #{nameUsed,jdbcType=VARCHAR} </if>
+                <if test="sex != null">and p_person.sex = #{sex,jdbcType=INTEGER} </if>
+                <if test="marriage != null">and p_person.marriage = #{marriage,jdbcType=INTEGER} </if>
+                <if test="birthday != null">and p_person.birthday = #{birthday,jdbcType=TIMESTAMP} </if>
+                <if test="nativePlace != null and nativePlace != ''">and p_person.native_place = #{nativePlace,jdbcType=VARCHAR} </if>
+                <if test="registeredResidence != null and registeredResidence != ''">and p_person.registered_residence = #{registeredResidence,jdbcType=VARCHAR} </if>
+                <if test="liveType != null">and p_person.live_type = #{liveType,jdbcType=INTEGER} </if>
+                <if test="currentLivePlace != null and currentLivePlace != ''">and p_person.current_live_place = #{currentLivePlace,jdbcType=VARCHAR} </if>
+                <if test="weight != null and weight != ''">and p_person.weight = #{weight,jdbcType=VARCHAR} </if>
+                <if test="height != null and height != ''">and p_person.height = #{height,jdbcType=VARCHAR} </if>
+                <if test="bloodType != null">and p_person.blood_type = #{bloodType,jdbcType=INTEGER} </if>
+                <if test="politicalAffiliation != null">and p_person.political_affiliation = #{politicalAffiliation,jdbcType=INTEGER} </if>
+                <if test="nation != null">and p_person.nation = #{nation,jdbcType=INTEGER} </if>
+                <if test="health != null and health != ''">and p_person.health = #{health,jdbcType=VARCHAR} </if>
+                <if test="resumeNumber != null and resumeNumber != ''">and p_person.resume_number = #{resumeNumber,jdbcType=VARCHAR} </if>
+                <if test="houseNumber != null and houseNumber != ''">and p_person.house_number = #{houseNumber,jdbcType=VARCHAR} </if>
+                <if test="dwellingUnit != null and dwellingUnit != ''">and p_person.dwelling_unit = #{dwellingUnit,jdbcType=VARCHAR} </if>
+                <if test="workAddress != null">and p_person.work_address = #{workAddress,jdbcType=INTEGER} </if>
+                <if test="diploma != null">and p_person.diploma = #{diploma,jdbcType=INTEGER} </if>
+                <if test="educationType != null">and p_person.education_type = #{educationType,jdbcType=INTEGER} </if>
+                <if test="recruitmentSources != null">and p_person.recruitment_sources = #{recruitmentSources,jdbcType=INTEGER} </if>
+                <if test="graduateSchool != null and graduateSchool != ''">and p_person.graduate_school = #{graduateSchool,jdbcType=VARCHAR} </if>
+                <if test="professional != null and professional != ''">and p_person.professional = #{professional,jdbcType=VARCHAR} </if>
+                <if test="graduateTime != null">and p_person.graduate_time = #{graduateTime,jdbcType=TIMESTAMP} </if>
+                <if test="englishAbility != null">and p_person.english_ability = #{englishAbility,jdbcType=INTEGER} </if>
+                <if test="computerAbility != null">and p_person.computer_ability = #{computerAbility,jdbcType=INTEGER} </if>
+                <if test="certificate != null and certificate != ''">and p_person.certificate = #{certificate,jdbcType=VARCHAR} </if>
+                <if test="otherLanguage != null and otherLanguage != ''">and p_person.other_language = #{otherLanguage,jdbcType=VARCHAR} </if>
+                <if test="phoneNumber != null and phoneNumber != ''">and p_person.phone_number = #{phoneNumber,jdbcType=VARCHAR} </if>
+                <if test="homePhone != null and homePhone != ''">and p_person.home_phone = #{homePhone,jdbcType=VARCHAR} </if>
+                <if test="email != null and email != ''">and p_person.email = #{email,jdbcType=VARCHAR} </if>
+                <if test="qq != null and qq != ''">and p_person.qq = #{qq,jdbcType=VARCHAR} </if>
+                <if test="title != null">and p_person.title = #{title,jdbcType=INTEGER} </if>
+                <if test="groupId != null">and p_person.group_id = #{groupId,jdbcType=INTEGER} </if>
+                <if test="workType != null">and p_person.work_type = #{workType,jdbcType=INTEGER} </if>
+                <if test="duty != null">and p_person.duty = #{duty,jdbcType=INTEGER} </if>
+                <if test="category != null">and p_person.category = #{category,jdbcType=INTEGER} </if>
+                <if test="grade != null">and p_person.grade = #{grade,jdbcType=INTEGER} </if>
+                <if test="position != null">and p_person.position = #{position,jdbcType=INTEGER} </if>
+                <if test="rank != null">and p_person.rank = #{rank,jdbcType=INTEGER} </if>
+                <if test="positionCode != null and positionCode != ''">and p_person.position_code = #{positionCode,jdbcType=VARCHAR} </if>
+                <if test="postPracticeStage != null">and p_person.post_practice_stage = #{postPracticeStage,jdbcType=INTEGER} </if>
+                <if test="subdivisionPost != null and subdivisionPost != ''">and p_person.subdivision_post = #{subdivisionPost,jdbcType=VARCHAR} </if>
+                <if test="dutyRank != null">and p_person.duty_rank = #{dutyRank,jdbcType=INTEGER} </if>
+                <if test="admissionDate != null">and p_person.admission_date = #{admissionDate,jdbcType=TIMESTAMP} </if>
+                <if test="state != null">and p_person.state = #{state,jdbcType=INTEGER} </if>
+                <if test="directLeaderId != null">and p_person.direct_leader_id = #{directLeaderId,jdbcType=INTEGER} </if>
+                <if test="approvalPowerNumber != null and approvalPowerNumber != ''">and p_person.approval_power_number = #{approvalPowerNumber,jdbcType=VARCHAR} </if>
+                <if test="bankCard != null and bankCard != ''">and p_person.bank_card = #{bankCard,jdbcType=VARCHAR} </if>
+                <if test="remark != null and remark != ''">and p_person.remark = #{remark,jdbcType=VARCHAR} </if>
+                <if test="photoFileCode != null and photoFileCode != ''">and p_person.photo_file_code = #{photoFileCode,jdbcType=VARCHAR} </if>
+                <if test="createTime != null">and p_person.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="createUserId != null">and p_person.create_user_id = #{createUserId,jdbcType=INTEGER} </if>
+                <if test="updateUserId != null">and p_person.update_user_id = #{updateUserId,jdbcType=INTEGER} </if>
+                <if test="updateTime != null">and p_person.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
+                <if test="isDelete != null">and p_person.is_delete = #{isDelete,jdbcType=INTEGER} </if>
+                <if test="personRemark != null and personRemark != ''">and p_person.person_remark = #{personRemark,jdbcType=VARCHAR} </if>
+                <if test="englishScore != null and englishScore != ''">and p_person.english_score = #{englishScore,jdbcType=VARCHAR} </if>
+                <if test="isCommitment != null">and p_person.is_commitment = #{isCommitment,jdbcType=INTEGER} </if>
+                <if test="createUserName != null and createUserName != ''">and p_person.create_user_name = #{createUserName,jdbcType=VARCHAR} </if>
+                <if test="personMechanism != null and personMechanism != ''">and p_person.person_mechanism = #{personMechanism,jdbcType=VARCHAR} </if>
+                <if test="recruiter != null and recruiter != ''">and p_person.recruiter = #{recruiter,jdbcType=VARCHAR} </if>
+                <if test="backSchoolTime != null and backSchoolTime != ''">and p_person.back_school_time = #{backSchoolTime,jdbcType=VARCHAR} </if>
+            </trim>
+        </where>
+        <choose>
+            <when test="sortString!=null and sortString!=''">
+                order by ${sortString}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+
+    </sql>
+</mapper>

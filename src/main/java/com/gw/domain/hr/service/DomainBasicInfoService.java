@@ -14,22 +14,9 @@ import tk.mybatis.mapper.entity.Example;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class DomainBasicInfoService extends BaseService<Long,DomainBasicInfo> {
+public class DomainBasicInfoService  {
 
-    @Autowired
-    private DomainBasicInfoMapper domainBasicInfoMapper;
-    public QueryResult<DomainBasicInfo> selectDomainBasicInfoByCreateTime(String startDatetime, String endDatetime, int page, int rows) {
 
-        Example example = new Example(DomainBasicInfo.class);
-        example.createCriteria().andBetween("createTime", startDatetime,endDatetime);
-        return this.paginateQueryResultByExample(example,page,rows);
-    }
-    public QueryResult<DomainBasicInfo> selectDomainBasicInfoByUpdateTime(String startDatetime, String endDatetime, int page, int rows) {
-
-        Example example = new Example(DomainBasicInfo.class);
-        example.createCriteria().andBetween("updateTime", startDatetime,endDatetime);
-        return this.paginateQueryResultByExample(example,page,rows);
-    }
 
 }
 

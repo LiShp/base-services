@@ -1,7 +1,6 @@
 package com.gw.domain.hr.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
 import com.gw.cloud.common.base.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,7 +8,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.persistence.*;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,12 +21,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel("")
 @Table(name = "`domain_org_structure`")
-public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
+public class DomainOrgStructure {
 
+    @Column(name = "`id`")
+    private Long id;
     /**
      * 部门名称对应商旅deptName部门名称
      */

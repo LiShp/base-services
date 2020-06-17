@@ -7,11 +7,10 @@ import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain.hr.commonutils.DateUtil;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructure;
-import com.gw.domain.hr.entity.DomainWorkExperience;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
 import com.gw.domain.hr.entity.vo.*;
+import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.service.DomainEmployeeInfoService;
-import com.gw.domain.hr.service.DomainOrgStructureService;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
 import io.swagger.annotations.Api;
@@ -41,7 +40,8 @@ public class DomainEmployeeInfoController {
     private DomainEmployeeInfoService domainEmployeeInfoService;
 
     @Autowired
-    private DomainOrgStructureService domainOrgStructureService;
+    private DomainOrgStructureMapper domainOrgStructureMapper;
+
 
     /*@ApiOperation(
             value = "【自定义】- 单条新增人员基础信息",
@@ -110,7 +110,7 @@ public class DomainEmployeeInfoController {
                 Example orgExample = new Example(DomainOrgStructure.class);
                 orgExample.createCriteria().andEqualTo("id", domainEmployeeInfoVO.getGroupId())
                 .andEqualTo("deleteFlag", 0);
-                DomainOrgStructure domainOrgStructure = domainOrgStructureService.selectOneByExample(orgExample);
+                DomainOrgStructure domainOrgStructure = domainOrgStructureMapper.selectOneByExample(orgExample);
                 domainEmployeeInfoVO.setParentId(domainOrgStructure.getParentId());
             }
             jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVO);
@@ -158,12 +158,12 @@ public class DomainEmployeeInfoController {
                 Example orgExample = new Example(DomainOrgStructure.class);
                 orgExample.createCriteria().andEqualTo("id", info.getGroupId())
                         .andEqualTo("deleteFlag", 0);
-                DomainOrgStructure domainOrgStructure = domainOrgStructureService.selectOneByExample(orgExample);
+                DomainOrgStructure domainOrgStructure = domainOrgStructureMapper.selectOneByExample(orgExample);
                 if(domainOrgStructure.getLevel()==5) {
                     Example parentExample = new Example(DomainOrgStructure.class);
                     parentExample.createCriteria().andEqualTo("id", domainOrgStructure.getParentId())
                             .andEqualTo("deleteFlag", 0);
-                    domainOrgStructure = domainOrgStructureService.selectOneByExample(parentExample);
+                    domainOrgStructure = domainOrgStructureMapper.selectOneByExample(parentExample);
                 }
                 info.setParentId(domainOrgStructure.getParentId());
                 info.setParentName(domainOrgStructure.getGroupName());

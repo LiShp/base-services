@@ -27,34 +27,13 @@ import java.util.Map;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class DomainOrgStructureService extends BaseService<Long, DomainOrgStructure> {
+public class DomainOrgStructureService  {
 
     @Autowired
     private DomainOrgStructureMapper domainOrgStructureMapper;
 
     @Autowired
     private DomainEmployeeInfoService domainEmployeeInfoService;
-
-    public QueryResult<DomainOrgStructure> selectDomainOrgStructureByEnableTime(String startDatetime, String endDatetime, int page, int rows) {
-
-        Example example = new Example(DomainOrgStructure.class);
-        example.createCriteria().andBetween("enableTime", startDatetime, endDatetime);
-        return this.paginateQueryResultByExample(example, page, rows);
-    }
-
-    public QueryResult<DomainOrgStructure> selectDomainOrgStructureByCreateTime(String startDatetime, String endDatetime, int page, int rows) {
-
-        Example example = new Example(DomainOrgStructure.class);
-        example.createCriteria().andBetween("createTime", startDatetime, endDatetime);
-        return this.paginateQueryResultByExample(example, page, rows);
-    }
-
-    public QueryResult<DomainOrgStructure> selectDomainOrgStructureByUpdateTime(String startDatetime, String endDatetime, int page, int rows) {
-
-        Example example = new Example(DomainOrgStructure.class);
-        example.createCriteria().andBetween("updateTime", startDatetime, endDatetime);
-        return this.paginateQueryResultByExample(example, page, rows);
-    }
 
 
     /**
@@ -220,7 +199,7 @@ public class DomainOrgStructureService extends BaseService<Long, DomainOrgStruct
         }
         RowBounds rowBounds = new RowBounds(rows, (page-1)*rows);
         long totalRecords = domainOrgStructureMapper.selectCountByExample(example);
-        List<DomainOrgStructure> orgStructureList = super.paginateListByExample(example, page, rows);//domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);
+        List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);//domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);
         List<OrgStructureVO> orgStructureVOList = DozerUtil.convert(orgStructureList, OrgStructureVO.class);
         QueryResult<OrgStructureVO> queryResult = new QueryResult(totalRecords, orgStructureVOList, page);
         return queryResult;

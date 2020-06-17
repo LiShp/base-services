@@ -57,6 +57,11 @@ public interface DomainEmployeeInfoMapper extends BaseMapper<DomainEmployeeInfo>
 
     List<DomainEmpOrgResultPo> employeeList(DomainEmpOrgRequestPo domainEmpOrgRequestPo);
 
+
+
+    String selectMaxCreateTime();
+
+    String selectMaxUpdateTime();
 }
 
 

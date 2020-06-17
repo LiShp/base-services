@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain.hr.mapperhr.DictionariesMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.hr.Dictionaries">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="language" jdbcType="VARCHAR" property="language" />
+        <result column="value_no" jdbcType="INTEGER" property="valueNo" />
+        <result column="value_content" jdbcType="VARCHAR" property="valueContent" />
+        <result column="value_type" jdbcType="VARCHAR" property="valueType" />
+        <result column="value_type_name" jdbcType="VARCHAR" property="valueTypeName" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="is_it_user" jdbcType="INTEGER" property="isItUser" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        o_dictionaries.language,
+        o_dictionaries.value_no,
+        o_dictionaries.value_content,
+        o_dictionaries.value_type,
+        o_dictionaries.value_type_name,
+        o_dictionaries.parent_id,
+        o_dictionaries.is_delete,
+        o_dictionaries.remark,
+        o_dictionaries.is_it_user,
+        o_dictionaries.create_user,
+        o_dictionaries.create_time,
+        o_dictionaries.update_user,
+        o_dictionaries.update_time
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="language != null">
+            language = #{language},
+        </if>
+        <if test="valueNo != null">
+            value_no = #{valueNo},
+        </if>
+        <if test="valueContent != null">
+            value_content = #{valueContent},
+        </if>
+        <if test="valueType != null">
+            value_type = #{valueType},
+        </if>
+        <if test="valueTypeName != null">
+            value_type_name = #{valueTypeName},
+        </if>
+        <if test="parentId != null">
+            parent_id = #{parentId},
+        </if>
+        <if test="isDelete != null">
+            is_delete = #{isDelete},
+        </if>
+        <if test="remark != null">
+            remark = #{remark},
+        </if>
+        <if test="isItUser != null">
+            is_it_user = #{isItUser},
+        </if>
+        <if test="createUser != null">
+            create_user = #{createUser},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="updateUser != null">
+            update_user = #{updateUser},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="language != null">
+            #{language},
+        </if>
+        <if test="valueNo != null">
+            #{valueNo},
+        </if>
+        <if test="valueContent != null">
+            #{valueContent},
+        </if>
+        <if test="valueType != null">
+            #{valueType},
+        </if>
+        <if test="valueTypeName != null">
+            #{valueTypeName},
+        </if>
+        <if test="parentId != null">
+            #{parentId},
+        </if>
+        <if test="isDelete != null">
+            #{isDelete},
+        </if>
+        <if test="remark != null">
+            #{remark},
+        </if>
+        <if test="isItUser != null">
+            #{isItUser},
+        </if>
+        <if test="createUser != null">
+            #{createUser},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="updateUser != null">
+            #{updateUser},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime}
+        </if>
+    </sql>
+
+    <sql id="Base_Where_Clause" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="language != null and language != ''">and o_dictionaries.language = #{language,jdbcType=VARCHAR} </if>
+                <if test="valueNo != null">and o_dictionaries.value_no = #{valueNo,jdbcType=INTEGER} </if>
+                <if test="valueContent != null and valueContent != ''">and o_dictionaries.value_content = #{valueContent,jdbcType=VARCHAR} </if>
+                <if test="valueType != null and valueType != ''">and o_dictionaries.value_type = #{valueType,jdbcType=VARCHAR} </if>
+                <if test="valueTypeName != null and valueTypeName != ''">and o_dictionaries.value_type_name = #{valueTypeName,jdbcType=VARCHAR} </if>
+                <if test="parentId != null">and o_dictionaries.parent_id = #{parentId,jdbcType=INTEGER} </if>
+                <if test="isDelete != null">and o_dictionaries.is_delete = #{isDelete,jdbcType=INTEGER} </if>
+                <if test="remark != null and remark != ''">and o_dictionaries.remark = #{remark,jdbcType=VARCHAR} </if>
+                <if test="isItUser != null">and o_dictionaries.is_it_user = #{isItUser,jdbcType=INTEGER} </if>
+                <if test="createUser != null and createUser != ''">and o_dictionaries.create_user = #{createUser,jdbcType=VARCHAR} </if>
+                <if test="createTime != null">and o_dictionaries.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="updateUser != null and updateUser != ''">and o_dictionaries.update_user = #{updateUser,jdbcType=VARCHAR} </if>
+                <if test="updateTime != null">and o_dictionaries.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
+            </trim>
+        </where>
+        <choose>
+            <when test="sortString!=null and sortString!=''">
+                order by ${sortString}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+
+    </sql>
+</mapper>

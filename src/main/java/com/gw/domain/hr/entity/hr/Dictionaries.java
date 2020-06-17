@@ -1,32 +1,28 @@
-package com.gw.domain.hr.entity;
+package com.gw.domain.hr.entity.hr;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gw.cloud.common.base.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 表名：domain_basic_info
- * @author zoujialiang
+ * 表名：o_dictionaries
 */
 @Getter
 @Setter
 @ToString
-@Accessors(chain = true)
 @ApiModel("")
-@Table(name = "`domain_basic_info`")
-public class DomainBasicInfo implements Serializable {
+@Table(name = "`o_dictionaries`")
+public class Dictionaries  {
 
-    @Column(name = "`id`")
+    @Id
+    @Column(name = "`value_id`")
     private Long id;
 
 
@@ -121,20 +117,4 @@ public class DomainBasicInfo implements Serializable {
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date updateTime;
-
-    /**
-     * 更新人(工号)
-     */
-    @Column(name = "`update_personnel_no`")
-    @ApiModelProperty("更新人(工号)")
-    private String updatePersonnelNo;
-
-    /**
-     * 是否删除：0否 1是
-     */
-    @Column(name = "`delete_flag`")
-    @ApiModelProperty("是否删除：0否 1是")
-    private Boolean deleteFlag;
-
-
 }

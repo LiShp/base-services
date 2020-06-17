@@ -5,9 +5,6 @@ import com.gw.domain.hr.entity.DomainBasicInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author zoujialiang
  */
@@ -15,20 +12,9 @@ import java.util.Map;
 @Component
 public interface DomainBasicInfoMapper extends BaseMapper<DomainBasicInfo> {
 
-    /**
-     * 全量入庫
-     *
-     * @param list
-     * @return
-     */
-    int insertBasicInfoAll(List<DomainBasicInfo> list);
+    String selectMaxCreateTime();
 
-    /**
-     * 全量删除Hr入库数据
-     *
-     * @return
-     */
-    int deleteBasicInfoAll();
+    String selectMaxUpdateTime();
 
 }
 
