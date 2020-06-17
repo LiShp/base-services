@@ -86,6 +86,8 @@ public class DomainOrgStructureController {
 
     /**
      * 人员信息表 通过组织id获取列表结构 返回人员ID、工号、姓名、科室名称、二级部名称
+     * 业务中台部：1416
+     * 经营决策部：4750
      *
      * @param groupId
      * @return
@@ -101,7 +103,7 @@ public class DomainOrgStructureController {
         JsonResult jsonResult;
         try {
 
-            List<List<String>> resultList = domainOrgStructureService.getDepthGroupListById(1411L);
+            List<List<String>> resultList = domainOrgStructureService.getDepthGroupListById(groupId);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("通过组织编码查询子级的员工列表发生异常" , var4);
