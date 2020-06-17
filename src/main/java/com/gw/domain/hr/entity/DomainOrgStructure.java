@@ -30,14 +30,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
 
     /**
-     * sys_group表的groupId
-     */
-    @Column(name = "`group_code`")
-    @ApiModelProperty("sys_group表的groupId")
-    private Integer groupCode;
-
-
-    /**
      * 部门名称对应商旅deptName部门名称
      */
     @Column(name = "`group_name`")
@@ -64,7 +56,12 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`level`")
     @ApiModelProperty("所在等级")
     private Integer level;
-
+    /**
+     * 子节点数量
+     */
+    @Column(name = "`child_count`")
+    @ApiModelProperty("子节点数量")
+    private Integer childCount;
     /**
      * 部门电话
      */
@@ -80,32 +77,75 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
     private Integer address;
 
     /**
-     * 指定审批人(默认为0)旧表为 personnel_id
+     * 单位id
      */
-    @Column(name = "`personnel_no`")
-    @ApiModelProperty("指定审批人(默认为0)旧表为 personnel_id")
-    private String personnelNo;
+    @Column(name = "`unit_id`")
+    @ApiModelProperty("单位id")
+    private Integer unitId;
 
     /**
-     * 板块(子模块)
+     * 单位名称
      */
-    @Column(name = "`company`")
-    @ApiModelProperty("板块(子模块)")
-    private String company;
+    @Column(name = "`unit_name`")
+    @ApiModelProperty("单位名称")
+    private String unitName;
+
+    /**
+     * 部门id
+     */
+    @Column(name = "`department_id`")
+    @ApiModelProperty("部门id")
+    private Integer departmentId;
+
+    /**
+     * 部门名称
+     */
+    @Column(name = "`department_name`")
+    @ApiModelProperty("部门名称")
+    private String departmentName;
+
+    /**
+     * 科室id
+     */
+    @Column(name = "`team_id`")
+    @ApiModelProperty("科室id")
+    private Integer teamId;
+
+    /**
+     * 科室名称
+     */
+    @Column(name = "`team_name`")
+    @ApiModelProperty("科室名称")
+    private String teamName;
+
 
     /**
      * 业务模块:1整车业务 2零部件业务 3地产板块 4出行板块 5教育板块 6金融板块 7其他
      */
-    @Column(name = "`module`")
+    @Column(name = "`module_id`")
     @ApiModelProperty("业务模块:1整车业务 2零部件业务 3地产板块 4出行板块 5教育板块 6金融板块 7其他")
-    private String module;
+    private Integer moduleId;
+
+    /**
+     * 业务模块:1整车业务 2零部件业务 3地产板块 4出行板块 5教育板块 6金融板块 7其他
+     */
+    @Column(name = "`module_name`")
+    @ApiModelProperty("业务模块:1整车业务 2零部件业务 3地产板块 4出行板块 5教育板块 6金融板块 7其他")
+    private String moduleName;
 
     /**
      * 业务子模块： 整车业务：11研发中心 12生计中心 13制造中心 14营销中心 15职能部门 16品牌公司 零部件业务：21蜂巢 22精工 23曼德 24诺博
      */
-    @Column(name = "`sub_module`")
+    @Column(name = "`sub_module_id`")
     @ApiModelProperty("业务子模块： 整车业务：11研发中心 12生计中心 13制造中心 14营销中心 15职能部门 16品牌公司 零部件业务：21蜂巢 22精工 23曼德 24诺博")
-    private String subModule;
+    private String subModuleId;
+
+    /**
+     * 业务子模块： 整车业务：11研发中心 12生计中心 13制造中心 14营销中心 15职能部门 16品牌公司 零部件业务：21蜂巢 22精工 23曼德 24诺博
+     */
+    @Column(name = "`sub_module_name`")
+    @ApiModelProperty("业务子模块： 整车业务：11研发中心 12生计中心 13制造中心 14营销中心 15职能部门 16品牌公司 零部件业务：21蜂巢 22精工 23曼德 24诺博")
+    private String subModuleName;
 
     /**
      * 组织等级(0集团级别 10公司级 20部门级 30科室级)
@@ -122,27 +162,12 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
     private String directLeader;
 
     /**
-     * 部门最高领导工号
+     * 组织负责人姓名
      */
-    @Column(name = "`dept_top_leader`")
-    @ApiModelProperty("部门最高领导工号")
-    private String deptTopLeader;
+    @Column(name = "`direct_leader_name`")
+    @ApiModelProperty("组织负责人姓名")
+    private String directLeaderName;
 
-    /**
-     * 单位最高领导工号
-     */
-    @Column(name = "`unit_top_leader`")
-    @ApiModelProperty("单位最高领导工号")
-    private String unitTopLeader;
-
-    /**
-     * 启用时间
-     */
-    @Column(name = "`enable_time`")
-    @ApiModelProperty("启用时间")
-    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
-    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date enableTime;
 
     /**
      * 备注信息
@@ -188,11 +213,6 @@ public class DomainOrgStructure extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`delete_flag`")
     @ApiModelProperty("是否删除：0否 1是")
-    private Boolean deleteFlag;
-
-    @Override
-    public void setDeleteFlag(Boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
+    private Integer deleteFlag;
 
 }

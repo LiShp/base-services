@@ -2,10 +2,8 @@ package com.gw.domain.hr.service;
 
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.domain.hr.commonutils.CollectionUtil;
-import com.gw.domain.hr.entity.DomainBasicInfo;
-import com.gw.domain.hr.entity.DomainFileInfo;
-import com.gw.domain.hr.entity.DomainPosition;
-import com.gw.domain.hr.entity.DomainWorkExperience;
+import com.gw.domain.hr.entity.*;
+import com.gw.domain.hr.entity.hr.Group;
 import com.gw.domain.hr.entity.hr.WorkExperience;
 import com.gw.domain.hr.entity.hrfile.FileInfo;
 import com.gw.domain.hr.enums.TableNameEnum;
@@ -14,6 +12,9 @@ import com.gw.domain.hr.mapperdata.DataToBasicInfoMapper;
 import com.gw.domain.hr.mapperdata.DataToEmployeeInfoMapper;
 import com.gw.domain.hr.mapperdata.DataToOrgStruMapper;
 import com.gw.domain.hr.mapperdata.DataToPositionMapper;
+import com.gw.domain.hr.mapperhr.DictionariesMapper;
+import com.gw.domain.hr.mapperhr.GroupMapper;
+import com.gw.domain.hr.mapperhr.PersonMapper;
 import com.gw.domain.hr.mapperhr.WorkExperienceMapper;
 import com.gw.domain.hr.mapperhrfile.FileInfoMapper;
 import com.gw.gwlog.GWMLogger;
@@ -70,34 +71,15 @@ public class HrDataToDomainService {
     @Resource
     private DomainWorkExperienceMapper domainWorkExperienceMapper;
 
+    @Resource
+    private DictionariesMapper dictionariesMapper;
 
+    @Resource
+    private GroupMapper groupMapper;
 
-    /**
-     * 全量导入数据 SQLserver表HR_Position到mysql表domain_position表
-     * 数据量5万多条，一次性任务 只能晚上更新
-     */
-    @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int hrPositongToAll() {
-        this.logger.info("从Sqlserver中间库HR_Position获取数据开始");
-        int nums = 0;
-        List<DomainPosition> list = dataToPositionMapper.getFromHrPositionAll();
-        if (!CollectionUtils.isEmpty(list)) {
-            this.logger.info("从Sqlserver中间库HR_Position获取数据" + list.size() + "条");
-            //删除表数据
-            int deleteNum = domainPositionMapper.deletePositionAll();
-            this.logger.info("从领域服务删除职位信息" + deleteNum + "条");
-            //分批次处理数据
-            List<List<DomainPosition>> splitList = CollectionUtil.splitList(list);
-            for (int i = 0; i < splitList.size(); i++) {
-                int num = domainPositionMapper.insertPositionAll(splitList.get(i));
-                this.logger.info("第" + (i + 1) + "次入表domain_position共计:" + num + "条");
-                nums += num;
-            }
-            this.logger.info("入表domain_position共计:" + nums + "条");
-        }
-        this.logger.info("从Sqlserver中间库HR_Position获取数据结束");
-        return nums;
-    }
+    @Resource
+    private PersonMapper personMapper;
+
 
     /**
      * 全量导入数据 SQLserver表sys_Group到mysql表domain_org_structure表
@@ -105,83 +87,34 @@ public class HrDataToDomainService {
      */
     @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int sysGroupToOrgStruAll() {
-        this.logger.info("从Sqlserver中间库sys_Group获取数据开始");
-        int nums = 0;
-        List<Map<String, Object>> list = dataToOrgStruMapper.getFromSysGroupAll();
-        if (!CollectionUtils.isEmpty(list)) {
-            Map<String, Object> map = new HashMap<>(16);
-            String domainTableName = TableNameEnum.TABLE_NAME_ORGSTRUCTURE.getTableName();
-            //操作主库主数据
-            int delete = domainOrgStructureMapper.deleteOrgStruAll();
-            this.logger.info("删除domain_org_structure中Hr数据共计:" + delete + "条");
-
-            //分批次处理数据
-            List<List<Map<String, Object>>> splitList = CollectionUtil.splitList(list);
-            for (int i = 0; i < splitList.size(); i++) {
-                int num = domainOrgStructureMapper.insertOrgStruAll(splitList.get(i));
-                this.logger.info("第" + (i + 1) + "次入表domain_employee_info共计:" + num + "条");
-                nums += num;
-            }
-            this.logger.info("入表domain_org_structure共计:" + nums + "条");
-
-            CollectionUtil.listSortDate(list, "create_time");
-            map.put("maxCreateTime", list.get(list.size() - 1).get("create_time"));
-            CollectionUtil.listSortDate(list, "update_time");
-            map.put("maxUpdateTime", list.get(list.size() - 1).get("update_time"));
-            map.put("tableName", domainTableName);
-            this.insertMaxTime(map);
-
-        } else {
-            this.logger.info("Sqlserver中间库sys_Group表无新增数据");
-        }
-        this.logger.info("从Sqlserver中间库sys_Group获取数据结束");
-        return nums;
-    }
-
-    /**
-     * 增量导入数据 SQLserver表sys_Group到mysql表domain_org_structure表
-     * 定时任务
-     */
-    @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int sysGroupToOrgStruNew() {
-        this.logger.info("从Sqlserver中间库sys_Group增量获取数据开始");
+        this.logger.info("从HR库中o_group获取全量数据开始");
         int numCreate = 0;
-        int numUpdate = 0;
-        //第一步：获取最大创建时间 和 最大更新时间
-        String domainTableName = TableNameEnum.TABLE_NAME_ORGSTRUCTURE.getTableName();
-        Map<String, Object> map = commonDomainMapper.getMaxTime(domainTableName);
+        int deleteCount = domainOrgStructureMapper.deleteByExample(new Example(Group.class));
+        this.logger.info("删除全量数据：" + deleteCount);
 
-        //第二步：获取新增的数据 和 更新的数据
-        List<Map<String, Object>> createlist = dataToOrgStruMapper.getFromSysGroupCreate(map);
-        List<Map<String, Object>> updatelist = dataToOrgStruMapper.getFromSysGroupUpdate(map);
-
-        //第三步：处理Hr新增数据
-        Map<String, Object> mapTime = new HashMap<>(16);
-        mapTime.put("tableName", domainTableName);
-        if (!CollectionUtils.isEmpty(createlist)) {
-            numCreate = domainOrgStructureMapper.insertOrgStruAll(createlist);
-            this.logger.info("入表domain_org_structure共计:" + numCreate + "条");
-            CollectionUtil.listSortDate(createlist, "create_time");
-            mapTime.put("maxCreateTime", createlist.get(createlist.size() - 1).get("create_time"));
-        } else {
-            mapTime.put("maxCreateTime", "");
-            this.logger.info("Sqlserver中间库sys_Group表无新增数据");
+        Example countExample = new Example(Group.class);
+        countExample.orderBy("createTime");
+        int count = groupMapper.selectCountByExample(countExample);
+        int pageSize = 1000;
+        int loop = (count%pageSize==0?count/pageSize:count/pageSize+1);
+        for(int i=0; i<loop; i++){
+            RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
+            List<Group> groupList = groupMapper.selectByExampleAndRowBounds(countExample, rowBounds);
+            List<DomainOrgStructure> domainOrgStructureList = DozerUtil.convert(groupList, DomainOrgStructure.class);
+            numCreate += domainOrgStructureMapper.insertList(domainOrgStructureList);
+            this.logger.info("已入表domain_org_structure共计:" + numCreate + "条");
         }
-        if (!CollectionUtils.isEmpty(updatelist)) {
-            numUpdate = domainOrgStructureMapper.updateOrgStruAll(updatelist);
-            this.logger.info("更新表domain_org_structure共计:" + numUpdate + "条");
-            CollectionUtil.listSortDate(updatelist, "update_time");
-            mapTime.put("maxUpdateTime", updatelist.get(updatelist.size() - 1).get("update_time"));
-        } else {
-            mapTime.put("maxUpdateTime", "");
-            this.logger.info("Sqlserver中间库sys_Group表无新更新数据");
+        if(count>0){
+            Map<String, Object> mapTime = new HashMap<>(16);
+            mapTime.put("tableName", TableNameEnum.TABLE_NAME_ORGSTRUCTURE.getTableName());
+            mapTime.put("maxCreateTime", domainOrgStructureMapper.selectMaxCreateTime());
+            mapTime.put("maxUpdateTime", domainOrgStructureMapper.selectMaxUpdateTime());
+            commonDomainMapper.insertMaxTime(mapTime);
         }
-        if (!CollectionUtils.isEmpty(createlist) || !CollectionUtils.isEmpty(updatelist)) {
-            commonDomainMapper.updateMaxTime(mapTime);
-        }
-        this.logger.info("从Sqlserver中间库sys_Group增量获取数据结束");
-        return numCreate + numUpdate;
+        this.logger.info("从HR库中o_group获取全量数据结束");
+        return numCreate;
     }
+
 
     /**
      * 全量导入数据 SQLserver表sys_FieldValue到mysql表domain_basic_info表

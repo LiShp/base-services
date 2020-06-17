@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.domain.hr.mapperhr.GroupMapper">
+    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.hr.Group">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <result column="show_order" jdbcType="INTEGER" property="showOrder" />
+        <result column="group_level" jdbcType="INTEGER" property="groupLevel" />
+        <result column="child_count" jdbcType="INTEGER" property="childCount" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="department_tel" jdbcType="VARCHAR" property="departmentTel" />
+        <result column="address" jdbcType="INTEGER" property="address" />
+        <result column="unit_id" jdbcType="INTEGER" property="unitId" />
+        <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
+        <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+        <result column="module_id" jdbcType="INTEGER" property="moduleId" />
+        <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+        <result column="sub_module_id" jdbcType="INTEGER" property="subModuleId" />
+        <result column="sub_module_name" jdbcType="VARCHAR" property="subModuleName" />
+        <result column="team_id" jdbcType="INTEGER" property="teamId" />
+        <result column="team_name" jdbcType="VARCHAR" property="teamName" />
+        <result column="grade" jdbcType="INTEGER" property="grade" />
+        <result column="direct_leader_no" jdbcType="VARCHAR" property="directLeaderNo" />
+        <result column="direct_leader_name" jdbcType="VARCHAR" property="directLeaderName" />
+        <result column="create_user_number" jdbcType="VARCHAR" property="createUserNumber" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_user_number" jdbcType="VARCHAR" property="updateUserNumber" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="Select_Field" >
+        o_group.group_name,
+        o_group.parent_id,
+        o_group.show_order,
+        o_group.group_level,
+        o_group.child_count,
+        o_group.is_delete,
+        o_group.remark,
+        o_group.department_tel,
+        o_group.address,
+        o_group.unit_id,
+        o_group.unit_name,
+        o_group.department_id,
+        o_group.department_name,
+        o_group.module_id,
+        o_group.module_name,
+        o_group.sub_module_id,
+        o_group.sub_module_name,
+        o_group.team_id,
+        o_group.team_name,
+        o_group.grade,
+        o_group.direct_leader_no,
+        o_group.direct_leader_name,
+        o_group.create_user_number,
+        o_group.create_user,
+        o_group.create_time,
+        o_group.update_user_number,
+        o_group.update_user,
+        o_group.update_time
+    </sql>
+
+    <sql id="Base_Option_Clause">
+        <if test="groupName != null">
+            group_name = #{groupName},
+        </if>
+        <if test="parentId != null">
+            parent_id = #{parentId},
+        </if>
+        <if test="showOrder != null">
+            show_order = #{showOrder},
+        </if>
+        <if test="groupLevel != null">
+            group_level = #{groupLevel},
+        </if>
+        <if test="childCount != null">
+            child_count = #{childCount},
+        </if>
+        <if test="isDelete != null">
+            is_delete = #{isDelete},
+        </if>
+        <if test="remark != null">
+            remark = #{remark},
+        </if>
+        <if test="departmentTel != null">
+            department_tel = #{departmentTel},
+        </if>
+        <if test="address != null">
+            address = #{address},
+        </if>
+        <if test="unitId != null">
+            unit_id = #{unitId},
+        </if>
+        <if test="unitName != null">
+            unit_name = #{unitName},
+        </if>
+        <if test="departmentId != null">
+            department_id = #{departmentId},
+        </if>
+        <if test="departmentName != null">
+            department_name = #{departmentName},
+        </if>
+        <if test="moduleId != null">
+            module_id = #{moduleId},
+        </if>
+        <if test="moduleName != null">
+            module_name = #{moduleName},
+        </if>
+        <if test="subModuleId != null">
+            sub_module_id = #{subModuleId},
+        </if>
+        <if test="subModuleName != null">
+            sub_module_name = #{subModuleName},
+        </if>
+        <if test="teamId != null">
+            team_id = #{teamId},
+        </if>
+        <if test="teamName != null">
+            team_name = #{teamName},
+        </if>
+        <if test="grade != null">
+            grade = #{grade},
+        </if>
+        <if test="directLeaderNo != null">
+            direct_leader_no = #{directLeaderNo},
+        </if>
+        <if test="directLeaderName != null">
+            direct_leader_name = #{directLeaderName},
+        </if>
+        <if test="createUserNumber != null">
+            create_user_number = #{createUserNumber},
+        </if>
+        <if test="createUser != null">
+            create_user = #{createUser},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="updateUserNumber != null">
+            update_user_number = #{updateUserNumber},
+        </if>
+        <if test="updateUser != null">
+            update_user = #{updateUser},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+    </sql>
+
+    <sql id="Insert_Option_Clause">
+        <if test="groupName != null">
+            #{groupName},
+        </if>
+        <if test="parentId != null">
+            #{parentId},
+        </if>
+        <if test="showOrder != null">
+            #{showOrder},
+        </if>
+        <if test="groupLevel != null">
+            #{groupLevel},
+        </if>
+        <if test="childCount != null">
+            #{childCount},
+        </if>
+        <if test="isDelete != null">
+            #{isDelete},
+        </if>
+        <if test="remark != null">
+            #{remark},
+        </if>
+        <if test="departmentTel != null">
+            #{departmentTel},
+        </if>
+        <if test="address != null">
+            #{address},
+        </if>
+        <if test="unitId != null">
+            #{unitId},
+        </if>
+        <if test="unitName != null">
+            #{unitName},
+        </if>
+        <if test="departmentId != null">
+            #{departmentId},
+        </if>
+        <if test="departmentName != null">
+            #{departmentName},
+        </if>
+        <if test="moduleId != null">
+            #{moduleId},
+        </if>
+        <if test="moduleName != null">
+            #{moduleName},
+        </if>
+        <if test="subModuleId != null">
+            #{subModuleId},
+        </if>
+        <if test="subModuleName != null">
+            #{subModuleName},
+        </if>
+        <if test="teamId != null">
+            #{teamId},
+        </if>
+        <if test="teamName != null">
+            #{teamName},
+        </if>
+        <if test="grade != null">
+            #{grade},
+        </if>
+        <if test="directLeaderNo != null">
+            #{directLeaderNo},
+        </if>
+        <if test="directLeaderName != null">
+            #{directLeaderName},
+        </if>
+        <if test="createUserNumber != null">
+            #{createUserNumber},
+        </if>
+        <if test="createUser != null">
+            #{createUser},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="updateUserNumber != null">
+            #{updateUserNumber},
+        </if>
+        <if test="updateUser != null">
+            #{updateUser},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime}
+        </if>
+    </sql>
+
+    <sql id="Base_Where_Clause" >
+        <where>
+            <trim prefixOverrides="and">
+                <if test="groupName != null and groupName != ''">and o_group.group_name = #{groupName,jdbcType=VARCHAR} </if>
+                <if test="parentId != null">and o_group.parent_id = #{parentId,jdbcType=INTEGER} </if>
+                <if test="showOrder != null">and o_group.show_order = #{showOrder,jdbcType=INTEGER} </if>
+                <if test="groupLevel != null">and o_group.group_level = #{groupLevel,jdbcType=INTEGER} </if>
+                <if test="childCount != null">and o_group.child_count = #{childCount,jdbcType=INTEGER} </if>
+                <if test="isDelete != null">and o_group.is_delete = #{isDelete,jdbcType=INTEGER} </if>
+                <if test="remark != null and remark != ''">and o_group.remark = #{remark,jdbcType=VARCHAR} </if>
+                <if test="departmentTel != null and departmentTel != ''">and o_group.department_tel = #{departmentTel,jdbcType=VARCHAR} </if>
+                <if test="address != null">and o_group.address = #{address,jdbcType=INTEGER} </if>
+                <if test="unitId != null">and o_group.unit_id = #{unitId,jdbcType=INTEGER} </if>
+                <if test="unitName != null and unitName != ''">and o_group.unit_name = #{unitName,jdbcType=VARCHAR} </if>
+                <if test="departmentId != null">and o_group.department_id = #{departmentId,jdbcType=INTEGER} </if>
+                <if test="departmentName != null and departmentName != ''">and o_group.department_name = #{departmentName,jdbcType=VARCHAR} </if>
+                <if test="moduleId != null">and o_group.module_id = #{moduleId,jdbcType=INTEGER} </if>
+                <if test="moduleName != null and moduleName != ''">and o_group.module_name = #{moduleName,jdbcType=VARCHAR} </if>
+                <if test="subModuleId != null">and o_group.sub_module_id = #{subModuleId,jdbcType=INTEGER} </if>
+                <if test="subModuleName != null and subModuleName != ''">and o_group.sub_module_name = #{subModuleName,jdbcType=VARCHAR} </if>
+                <if test="teamId != null">and o_group.team_id = #{teamId,jdbcType=INTEGER} </if>
+                <if test="teamName != null and teamName != ''">and o_group.team_name = #{teamName,jdbcType=VARCHAR} </if>
+                <if test="grade != null">and o_group.grade = #{grade,jdbcType=INTEGER} </if>
+                <if test="directLeaderNo != null and directLeaderNo != ''">and o_group.direct_leader_no = #{directLeaderNo,jdbcType=VARCHAR} </if>
+                <if test="directLeaderName != null and directLeaderName != ''">and o_group.direct_leader_name = #{directLeaderName,jdbcType=VARCHAR} </if>
+                <if test="createUserNumber != null and createUserNumber != ''">and o_group.create_user_number = #{createUserNumber,jdbcType=VARCHAR} </if>
+                <if test="createUser != null and createUser != ''">and o_group.create_user = #{createUser,jdbcType=VARCHAR} </if>
+                <if test="createTime != null">and o_group.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
+                <if test="updateUserNumber != null and updateUserNumber != ''">and o_group.update_user_number = #{updateUserNumber,jdbcType=VARCHAR} </if>
+                <if test="updateUser != null and updateUser != ''">and o_group.update_user = #{updateUser,jdbcType=VARCHAR} </if>
+                <if test="updateTime != null">and o_group.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
+            </trim>
+        </where>
+        <choose>
+            <when test="sortString!=null and sortString!=''">
+                order by ${sortString}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+
+    </sql>
+</mapper>
