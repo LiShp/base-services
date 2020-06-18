@@ -1,13 +1,11 @@
 package com.gw.domain.hr.entity.hr;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
 import com.gw.cloud.common.base.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.persistence.*;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,16 +17,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(callSuper = true)
 @ApiModel("")
 @Table(name = "`p_person`")
-public class Person extends AutoIncrementKeyBaseDomain<Long> {
+public class Person  {
+
+    @Column(name = "`person_id`")
+    protected Long personId;
     /**
      * 工号
      */
     @Column(name = "`person_number`")
     @ApiModelProperty("工号")
-    private String personNumber;
+    private String personnelNo;
 
     /**
      * 是否正式员工,2:非正式工,1:正式工.
@@ -84,7 +84,7 @@ public class Person extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`chinese_name`")
     @ApiModelProperty("中文姓名")
-    private String chineseName;
+    private String name;
 
     /**
      * 曾用名
@@ -412,7 +412,7 @@ public class Person extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`state`")
     @ApiModelProperty("人员状态,1:在职,2:离职")
-    private Integer state;
+    private Integer personnelStatus;
 
     /**
      * 直接领导id

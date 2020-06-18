@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,107 +29,135 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "`domain_employee_info`")
 public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
 
+    @Column(name = "`person_id`")
+    protected Long personId;
+
     /**
-     * 工号(系统自动生成)^[A-Za-z0-9]+$
+     * 工号
      */
-    @Column(name = "`personnel_no`")
-    @ApiModelProperty("工号(系统自动生成)")
-    @NotNull(message = "工号不能为null")
-    @NotEmpty(message = "工号不能为空字符串")
-    @Size(max = 10, min = 9, message = "工号长度为9-10")
-    @Pattern(regexp = "^[A-Z0-9]+$", message = "工号只能包含大写字母A-Z和数字0-9")
+    @Column(name = "`person_number`")
+    @ApiModelProperty("工号")
     private String personnelNo;
+
+    /**
+     * 是否正式员工,2:非正式工,1:正式工.
+     */
+    @Column(name = "`is_formal`")
+    @ApiModelProperty("是否正式员工,2:非正式工,1:正式工.")
+    private Integer isFormal;
+
+    /**
+     * 是否外籍,0:否,1:是
+     */
+    @Column(name = "`is_foreign`")
+    @ApiModelProperty("是否外籍,0:否,1:是")
+    private Integer isForeign;
+
+    /**
+     * 国籍,字典表维护
+     */
+    @Column(name = "`country`")
+    @ApiModelProperty("国籍,字典表维护")
+    private Integer country;
+
+    /**
+     * 证件类型,字典表维护
+     */
+    @Column(name = "`certificate_type`")
+    @ApiModelProperty("证件类型,字典表维护")
+    private Integer certificateType;
+
+    /**
+     * 证件号码
+     */
+    @Column(name = "`certificate_number`")
+    @ApiModelProperty("证件号码")
+    private String certificateNumber;
+
+    /**
+     * 身份证号
+     */
+    @Column(name = "`id_card_number`")
+    @ApiModelProperty("身份证号")
+    private String idCardNumber;
+
+    /**
+     * 证件姓名
+     */
+    @Column(name = "`certificate_name`")
+    @ApiModelProperty("证件姓名")
+    private String certificateName;
+
+    /**
+     * 中文姓名
+     */
+    @Column(name = "`chinese_name`")
+    @ApiModelProperty("中文姓名")
+    private String name;
 
     /**
      * 曾用名
      */
-    @Column(name = "`once_name`")
+    @Column(name = "`name_used`")
     @ApiModelProperty("曾用名")
-    private String onceName;
+    private String nameUsed;
 
     /**
-     * 姓名
-     */
-    @Column(name = "`name`")
-    @ApiModelProperty("姓名")
-    @NotNull(message = "姓名不能为null")
-    @NotEmpty(message = "姓名不能为空字符串")
-    private String name;
-
-    /**
-     * 性别
+     * 性别,1:男,2:女
      */
     @Column(name = "`sex`")
-    @ApiModelProperty("性别")
-    @NotNull(message = "性别不能为null")
-    @Max(value = 2, message = "性别只能为1或者2：1女 2男")
-    @Min(value = 1, message = "性别只能为1或者2：1女 2男")
+    @ApiModelProperty("性别,1:男,2:女")
     private Integer sex;
 
     /**
-     * 婚姻状况：1未婚 2已婚 3离异 4丧偶
+     * 婚姻状况,1:未婚,2:已婚,3:离异,4:丧偶
      */
-    @Column(name = "`marriage_status`")
-    @ApiModelProperty("婚姻状况：1未婚 2已婚 3离异 4丧偶")
-    @NotNull(message = "性别不能为null")
-    @Max(value = 4, message = "婚姻状况只能为：1未婚 2已婚 3离异 4丧偶")
-    @Min(value = 1, message = "婚姻状况只能为：1未婚 2已婚 3离异 4丧偶")
-    private Integer marriageStatus;
+    @Column(name = "`marriage`")
+    @ApiModelProperty("婚姻状况,1:未婚,2:已婚,3:离异,4:丧偶")
+    private Integer marriage;
 
     /**
      * 出生日期
      */
-    @Column(name = "`birth_date`")
+    @Column(name = "`birthday`")
     @ApiModelProperty("出生日期")
-    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
-    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    @NotNull(message = "出生日期不能为null")
-    private Date birthDate;
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
+    private Date birthday;
 
     /**
      * 籍贯
      */
     @Column(name = "`native_place`")
     @ApiModelProperty("籍贯")
-    @NotNull(message = "籍贯不能为null")
-    @NotEmpty(message = "籍贯不能为空字符串")
     private String nativePlace;
 
     /**
      * 户口所在地
      */
-    @Column(name = "`register_residence`")
+    @Column(name = "`registered_residence`")
     @ApiModelProperty("户口所在地")
-    @NotNull(message = "户口所在地不能为null")
-    @NotEmpty(message = "户口所在地不能为空字符串")
-    private String registerResidence;
+    private String registeredResidence;
 
     /**
-     * 居住类型：1定居 2租住
+     * 居住类型,1:定居,2:租住
      */
-    @Column(name = "`dwelling_type`")
-    @ApiModelProperty("居住类型：1定居 2租住")
-    @NotNull(message = "户口所在地不能为null")
-    @Max(value = 2, message = "居住类型只能为1或者2：1定居 2租住")
-    @Min(value = 1, message = "居住类型只能为1或者2：1定居 2租住")
-    private Integer dwellingType;
+    @Column(name = "`live_type`")
+    @ApiModelProperty("居住类型,1:定居,2:租住")
+    private Integer liveType;
 
     /**
      * 现居住地
      */
-    @Column(name = "`dwelling`")
+    @Column(name = "`current_live_place`")
     @ApiModelProperty("现居住地")
-    @NotNull(message = "户口所在地不能为null")
-    @NotEmpty(message = "户口所在地不能为空字符串")
-    private String dwelling;
+    private String currentLivePlace;
 
     /**
      * 体重
      */
     @Column(name = "`weight`")
     @ApiModelProperty("体重")
-    @NotNull(message = "体重不能为null")
-    @NotEmpty(message = "体重不能为空字符串")
     private String weight;
 
     /**
@@ -138,106 +165,148 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
      */
     @Column(name = "`height`")
     @ApiModelProperty("身高")
-    @NotNull(message = "身高不能为null")
-    @NotEmpty(message = "身高不能为空字符串")
     private String height;
 
     /**
-     * 血型:1A型 2B型 3AB型 4O型 5不详
+     * 血型,0:不详,1:A型,2:B型,3:AB型,4:O型
      */
     @Column(name = "`blood_type`")
-    @ApiModelProperty("血型:1A型 2B型 3AB型 4O型 5不详")
-    @NotNull(message = "血型不能为null")
-    @Max(value = 5, message = "血型只能为1-5：1A型 2B型 3AB型 4O型 5不详")
-    @Min(value = 1, message = "血型只能为1-5：1A型 2B型 3AB型 4O型 5不详")
+    @ApiModelProperty("血型,0:不详,1:A型,2:B型,3:AB型,4:O型")
     private Integer bloodType;
 
     /**
-     * 政治面貌：1中国共产党党员 2共青团员 3群众
+     * 政治面貌,1:中国共产党党员,2:共青团员,3:群众
      */
-    @Column(name = "`polity`")
-    @ApiModelProperty("政治面貌：1中国共产党党员 2共青团员 3群众")
-    @Max(value = 3, message = "政治面貌只能为1-3：1中国共产党党员 2共青团员 3群众")
-    @Min(value = 1, message = "政治面貌只能为1-3：1中国共产党党员 2共青团员 3群众")
-    private Integer polity;
+    @Column(name = "`political_affiliation`")
+    @ApiModelProperty("政治面貌,1:中国共产党党员,2:共青团员,3:群众")
+    private Integer politicalAffiliation;
 
     /**
-     * 民族
+     * 民族,字典表维护
      */
-    @Column(name = "`natives`")
-    @ApiModelProperty("民族")
-    @Max(value = 59, message = "民族最大值为59")
-    @Min(value = -1, message = "民族最小值为-1")
-    private Integer natives;
+    @Column(name = "`nation`")
+    @ApiModelProperty("民族,字典表维护")
+    private Integer nation;
 
     /**
-     * 学历
+     * 健康状况,来源于入职系统
+     */
+    @Column(name = "`health`")
+    @ApiModelProperty("健康状况,来源于入职系统")
+    private String health;
+
+    /**
+     * 简历编号
+     */
+    @Column(name = "`resume_number`")
+    @ApiModelProperty("简历编号")
+    private String resumeNumber;
+
+    /**
+     * 户籍编号
+     */
+    @Column(name = "`house_number`")
+    @ApiModelProperty("户籍编号")
+    private String houseNumber;
+
+    /**
+     * 户籍所在地
+     */
+    @Column(name = "`dwelling_unit`")
+    @ApiModelProperty("户籍所在地")
+    private String dwellingUnit;
+
+    /**
+     * 工作区域,公司所在地,字典表维护
+     */
+    @Column(name = "`work_address`")
+    @ApiModelProperty("工作区域,公司所在地,字典表维护")
+    private Integer workAddress;
+
+    /**
+     * 学历,字典表维护,1:博士,2:硕士,3:本科,4:专科,5:高中,6:中专/中,7:初中,8:初中以下
      */
     @Column(name = "`diploma`")
-    @ApiModelProperty("学历")
-    @Max(value = 9, message = "学历最大值为9")
-    @Min(value = -1, message = "学历最小值为-1")
+    @ApiModelProperty("学历,字典表维护,1:博士,2:硕士,3:本科,4:专科,5:高中,6:中专/中,7:初中,8:初中以下")
     private Integer diploma;
+
+    /**
+     * 教育类型,字典表维护,1:统招,2:自考,3:成教,4:网络,5:夜校,6:公司大专班
+     */
+    @Column(name = "`education_type`")
+    @ApiModelProperty("教育类型,字典表维护,1:统招,2:自考,3:成教,4:网络,5:夜校,6:公司大专班")
+    private Integer educationType;
+
+    /**
+     * 招聘来源,字典表维护,1:校园招聘,2:普工招聘,3:有经验招聘,5:复职
+     */
+    @Column(name = "`recruitment_sources`")
+    @ApiModelProperty("招聘来源,字典表维护,1:校园招聘,2:普工招聘,3:有经验招聘,5:复职")
+    private Integer recruitmentSources;
+
+    /**
+     * 毕业学校
+     */
+    @Column(name = "`graduate_school`")
+    @ApiModelProperty("毕业学校")
+    private String graduateSchool;
 
     /**
      * 专业
      */
     @Column(name = "`professional`")
     @ApiModelProperty("专业")
-    @NotNull(message = "专业不能为null")
-    @NotEmpty(message = "专业不能为空字符串")
     private String professional;
-
-    /**
-     * 毕业学校
-     */
-    @Column(name = "`graduation_school`")
-    @ApiModelProperty("毕业学校")
-    @NotNull(message = "毕业学校不能为null")
-    @NotEmpty(message = "毕业学校不能为空字符串")
-    private String graduationSchool;
 
     /**
      * 毕业日期
      */
-    @Column(name = "`graduation_date`")
+    @Column(name = "`graduate_time`")
     @ApiModelProperty("毕业日期")
-    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
-    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    @NotNull(message = "毕业日期不能为null")
-    private Date graduationDate;
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
+    private Date graduateTime;
 
     /**
-     * 英语等级
+     * 英语等级,0:无,1:专业八级,2:专业四级,3:八级,4:六级,5:四级,6:三级,7:雅思,8:托福,字典表维护
      */
     @Column(name = "`english_ability`")
-    @ApiModelProperty("英语等级")
-    @Max(value = 9, message = "英语等级最大值为9")
-    @Min(value = -1, message = "英语等级最小值为-1")
+    @ApiModelProperty("英语等级,0:无,1:专业八级,2:专业四级,3:八级,4:六级,5:四级,6:三级,7:雅思,8:托福,字典表维护")
     private Integer englishAbility;
 
     /**
-     * 计算机等级
+     * 计算机等级,0:无,1:一级,2:二级,3:三级,4:四级,字典表维护
      */
     @Column(name = "`computer_ability`")
-    @ApiModelProperty("计算机等级")
-    @Max(value = 5, message = "计算机等级最大值为5")
-    @Min(value = -1, message = "计算机等级最小值为-1")
+    @ApiModelProperty("计算机等级,0:无,1:一级,2:二级,3:三级,4:四级,字典表维护")
     private Integer computerAbility;
 
     /**
-     * 联系方式
+     * 其他证书
      */
-    @Column(name = "`mobile`")
-    @ApiModelProperty("联系方式")
-    @Pattern(regexp = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$", message = "联系方式输入格式有误，请检查")
-    private String mobile;
+    @Column(name = "`certificate`")
+    @ApiModelProperty("其他证书")
+    private String certificate;
 
     /**
-     * 家庭电话
+     * 其他语言
+     */
+    @Column(name = "`other_language`")
+    @ApiModelProperty("其他语言")
+    private String otherLanguage;
+
+    /**
+     * 手机号码
+     */
+    @Column(name = "`phone_number`")
+    @ApiModelProperty("手机号码")
+    private String phoneNumber;
+
+    /**
+     * 家庭联系电话
      */
     @Column(name = "`home_phone`")
-    @ApiModelProperty("家庭电话")
+    @ApiModelProperty("家庭联系电话")
     private String homePhone;
 
     /**
@@ -248,182 +317,132 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     private String email;
 
     /**
-     * 职称
+     * QQ
      */
-    @Column(name = "`post_title`")
-    @ApiModelProperty("职称")
-    private Integer postTitle;
+    @Column(name = "`qq`")
+    @ApiModelProperty("QQ")
+    private String qq;
 
     /**
-     * 所在科室
+     * 职称,字典表维护
+     */
+    @Column(name = "`title`")
+    @ApiModelProperty("职称,字典表维护")
+    private Integer title;
+
+    /**
+     * 所在组织,组织表id
      */
     @Column(name = "`group_id`")
-    @ApiModelProperty("所在科室")
+    @ApiModelProperty("所在组织,组织表id")
     private Integer groupId;
 
     /**
-     * 工作类型
+     * 用工类型,1:正式人员,2:聘用人员,3:返聘人员,4:实习人员,5:劳务派遣,字典表维护
      */
     @Column(name = "`work_type`")
-    @ApiModelProperty("工作类型")
-    @Max(value = 6, message = "工作类型最大值为6")
-    @Min(value = -1, message = "工作类型最小值-1")
+    @ApiModelProperty("用工类型,1:正式人员,2:聘用人员,3:返聘人员,4:实习人员,5:劳务派遣,字典表维护")
     private Integer workType;
 
     /**
-     * 职务
+     * 职务,字典表维护,举例:董事长,本部长,总经理,科长
      */
     @Column(name = "`duty`")
-    @ApiModelProperty("职务")
+    @ApiModelProperty("职务,字典表维护,举例:董事长,本部长,总经理,科长")
     private Integer duty;
 
     /**
-     * 职类
+     * 职类,字典表维护,举例:行政服务,售后服务,配件管理,供应链,信息技术
      */
-    @Column(name = "`position_type`")
-    @ApiModelProperty("职类")
-    private Integer positionType;
+    @Column(name = "`category`")
+    @ApiModelProperty("职类,字典表维护,举例:行政服务,售后服务,配件管理,供应链,信息技术")
+    private Integer category;
 
     /**
-     * 职系
+     * 职系,字典表维护,举例:管理层,产品企划,过程设计,制造技术,售后技术
      */
-    @Column(name = "`position_serial`")
-    @ApiModelProperty("职系")
-    private Integer positionSerial;
+    @Column(name = "`grade`")
+    @ApiModelProperty("职系,字典表维护,举例:管理层,产品企划,过程设计,制造技术,售后技术")
+    private Integer grade;
 
     /**
-     * 职位
+     * 职位,字典表维护,举例:组长,班长,秘书,文员,董事长
      */
     @Column(name = "`position`")
-    @ApiModelProperty("职位")
+    @ApiModelProperty("职位,字典表维护,举例:组长,班长,秘书,文员,董事长")
     private Integer position;
 
     /**
-     * 职级
+     * 职级,字典表维护,
      */
-    @Column(name = "`position_level`")
-    @ApiModelProperty("职级")
-    private Integer positionLevel;
+    @Column(name = "`rank`")
+    @ApiModelProperty("职级,字典表维护,")
+    private Integer rank;
 
     /**
-     * 入厂日期
-     */
-    @Column(name = "`join_date`")
-    @ApiModelProperty("入厂日期")
-    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
-    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date joinDate;
-
-    /**
-     * 人员状态：1在职 2离职
-     */
-    @Column(name = "`personnel_status`")
-    @ApiModelProperty("人员状态：1在职 2离职")
-    @Max(value = 2, message = "人员状态只能为1或者2：1在职 2离职")
-    @Min(value = 1, message = "人员状态只能为1或者2：1在职 2离职")
-    private Integer personnelStatus;
-
-    /**
-     * 是否外籍人：0否 1是
-     */
-    @Column(name = "`foregin`")
-    @ApiModelProperty("是否外籍人：0否 1是")
-    private Boolean foregin;
-
-    /**
-     * 人员类型
-     */
-    @Column(name = "`person_type`")
-    @ApiModelProperty("人员类型")
-    @Max(value = 5, message = "人员类型最大值为5")
-    @Min(value = -1, message = "人员类型最小值为-1")
-    private Integer personType;
-
-    /**
-     * 工作所在地
-     */
-    @Column(name = "`work_address`")
-    @ApiModelProperty("工作所在地")
-    private Integer workAddress;
-
-    /**
-     * 离职原因
-     */
-    @Column(name = "`dismission_reason`")
-    @ApiModelProperty("离职原因")
-    private Integer dismissionReason;
-
-    /**
-     * 离职类型
-     */
-    @Column(name = "`dismission_type`")
-    @ApiModelProperty("离职类型")
-    private Integer dismissionType;
-
-    /**
-     * 离职日期
-     */
-    @Column(name = "`dismission_date`")
-    @ApiModelProperty("离职日期")
-    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE)
-    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATE, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date dismissionDate;
-
-    /**
-     * 职位编码
+     * 岗位编码
      */
     @Column(name = "`position_code`")
-    @ApiModelProperty("职位编码")
+    @ApiModelProperty("岗位编码")
     private String positionCode;
 
     /**
-     * 岗位实践阶段
+     * 岗位实践阶段,字典表维护,1试用期 2实习期 3学习期 4定岗期 ,旧版数据库有 0:-1:
      */
-    @Column(name = "`position_step`")
-    @ApiModelProperty("岗位实践阶段")
-    private Integer positionStep;
+    @Column(name = "`post_practice_stage`")
+    @ApiModelProperty("岗位实践阶段,字典表维护,1试用期 2实习期 3学习期 4定岗期 ,旧版数据库有 0:-1:")
+    private Integer postPracticeStage;
 
     /**
      * 细分岗位
      */
-    @Column(name = "`position_son`")
+    @Column(name = "`subdivision_post`")
     @ApiModelProperty("细分岗位")
-    private String positionSon;
+    private String subdivisionPost;
 
     /**
-     * 讲师级别
+     * 职务等级,字典表维护,0职员 10主管 20科级 30部级 40经理级 50总裁级
      */
-    @Column(name = "`teach_level`")
-    @ApiModelProperty("讲师级别")
-    private Integer teachLevel;
+    @Column(name = "`duty_rank`")
+    @ApiModelProperty("职务等级,字典表维护,0职员 10主管 20科级 30部级 40经理级 50总裁级")
+    private Integer dutyRank;
 
     /**
-     * 职务等级：0员工级 10 主管级 20科级 30部级 40副总级 50总经理  99高层
+     * 入厂日期
      */
-    @Column(name = "`duty_level`")
-    @ApiModelProperty("职务等级：0员工级 10 主管级 20科级 30部级 40副总级 50总经理  99高层")
-    private Integer dutyLevel;
+    @Column(name = "`admission_date`")
+    @ApiModelProperty("入厂日期")
+    @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
+    @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
+    private Date admissionDate;
 
     /**
-     * 证件类型：0身份证 1护照 2学生证 3军官证 4 驾驶证 5回乡证 6台胞证 7港澳通 行证 8台湾通行证 9士兵证 10临时身份证 11户口簿 12警官证 13出生证明 14出生日期 15外国人久居留证 16国际海员证 99其他
+     * 人员状态,1:在职,2:离职
      */
-    @Column(name = "`card_type`")
-    @ApiModelProperty(" 证件类型：0身份证 1护照 2学生证 3军官证 4 驾驶证 5回乡证 6台胞证 7港澳通 行证 8台湾通行证 9士兵证 10临时身份证 11户口簿 12警官证 13出生证明 14出生日期 15外国人久居留证 16国际海员证 99其他")
-    private Integer cardType;
+    @Column(name = "`state`")
+    @ApiModelProperty("人员状态,1:在职,2:离职")
+    private Integer personnelStatus;
 
     /**
-     * 证件姓名
+     * 直接领导id
      */
-    @Column(name = "`card_name`")
-    @ApiModelProperty("证件姓名")
-    private String cardName;
+    @Column(name = "`direct_leader_id`")
+    @ApiModelProperty("直接领导id")
+    private Integer directLeaderId;
 
     /**
-     * 身份证号码
+     * 考勤审核天数
      */
-    @Column(name = "`card_no`")
-    @ApiModelProperty("身份证号码")
-    private String cardNo;
+    @Column(name = "`approval_power_number`")
+    @ApiModelProperty("考勤审核天数")
+    private String approvalPowerNumber;
+
+    /**
+     * 银行卡号
+     */
+    @Column(name = "`bank_card`")
+    @ApiModelProperty("银行卡号")
+    private String bankCard;
 
     /**
      * 备注信息
@@ -431,6 +450,13 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`remark`")
     @ApiModelProperty("备注信息")
     private String remark;
+
+    /**
+     * 个人照片在文件服务器的文件code
+     */
+    @Column(name = "`photo_file_code`")
+    @ApiModelProperty("个人照片在文件服务器的文件code")
+    private String photoFileCode;
 
     /**
      * 创建时间
@@ -442,13 +468,18 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     private Date createTime;
 
     /**
-     * 创建人(工号)
+     * 创建人id
      */
-    @Column(name = "`create_personnel_no`")
-    @ApiModelProperty("创建人(工号)")
-    @NotNull(message = "创建人(工号)不能为null")
-    @NotEmpty(message = "创建人(工号)不能为空字符串")
-    private String createPersonnelNo;
+    @Column(name = "`create_user_id`")
+    @ApiModelProperty("创建人id")
+    private Integer createUserId;
+
+    /**
+     * 更新人id
+     */
+    @Column(name = "`update_user_id`")
+    @ApiModelProperty("更新人id")
+    private Integer updateUserId;
 
     /**
      * 更新时间
@@ -460,27 +491,58 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     private Date updateTime;
 
     /**
-     * 更新人(工号)
+     * 是否删除,0:否,1:是
      */
-    @Column(name = "`update_personnel_no`")
-    @ApiModelProperty("更新人(工号)")
-    @NotNull(message = "更新人(工号)不能为null")
-    @NotEmpty(message = "更新人(工号)不能为空字符串")
-    private String updatePersonnelNo;
+    @Column(name = "`is_delete`")
+    @ApiModelProperty("是否删除,0:否,1:是")
+    private Integer isDelete;
 
     /**
-     * 是否删除：0否 1是
+     * 人员备注,用于技术中心
      */
-    @Column(name = "`delete_flag`")
-    @ApiModelProperty("是否删除：0否 1是")
-    private Boolean deleteFlag;
+    @Column(name = "`person_remark`")
+    @ApiModelProperty("人员备注,用于技术中心")
+    private String personRemark;
 
-    public Boolean getDeleteFlag() {
-        return deleteFlag;
-    }
+    /**
+     * 英语托业成绩,由托业考试成绩更新到这里
+     */
+    @Column(name = "`english_score`")
+    @ApiModelProperty("英语托业成绩,由托业考试成绩更新到这里")
+    private String englishScore;
 
-    @Override
-    public void setDeleteFlag(Boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
+    /**
+     * 是否签订挑战者承诺书,0:不涉及,1:是,2:否
+     */
+    @Column(name = "`is_commitment`")
+    @ApiModelProperty("是否签订挑战者承诺书,0:不涉及,1:是,2:否")
+    private Integer isCommitment;
+
+    /**
+     * 创建人姓名
+     */
+    @Column(name = "`create_user_name`")
+    @ApiModelProperty("创建人姓名")
+    private String createUserName;
+
+    /**
+     * 员工所属机构(优才系统使用)
+     */
+    @Column(name = "`person_mechanism`")
+    @ApiModelProperty("员工所属机构(优才系统使用)")
+    private String personMechanism;
+
+    /**
+     * 招聘人(优才系统使用)
+     */
+    @Column(name = "`recruiter`")
+    @ApiModelProperty("招聘人(优才系统使用)")
+    private String recruiter;
+
+    /**
+     * 返校时间(优才系统使用)
+     */
+    @Column(name = "`back_school_time`")
+    @ApiModelProperty("返校时间(优才系统使用)")
+    private String backSchoolTime;
 }
