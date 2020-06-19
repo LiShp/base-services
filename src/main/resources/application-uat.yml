@@ -128,3 +128,13 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+
+oss:
+  minio:
+    userName: wuningfei
+    paasword: 123@123.com
+    host: a674a9b8dcaacbcf.test.paas.gwm.cn
+    uri: /api/v1/share
+    bucketName: hrbucket
+    expiry: 604800

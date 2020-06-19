@@ -140,3 +140,13 @@ management:
   #暴漏端点端口号 与服务端口号不冲突
 #  server:
 #    port: 9091
+
+
+oss:
+  minio:
+    userName: wuningfei
+    paasword: 123@123.com
+    host: a674a9b8dcaacbcf.test.paas.gwm.cn
+    uri: /api/v1/share
+    bucketName: hrbucket
+    expiry: 604800
