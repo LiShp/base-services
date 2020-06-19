@@ -35,21 +35,6 @@ public class ScheduledTasks {
     }
 
     /**
-     * 每天早上凌晨1点30分更新一次
-     * 每月每天凌晨1点30分0秒执行一次
-     */
-    @Scheduled(cron = "0 30 01 * * ?")
-    public void scheduledPosition() {
-        this.logger.info("定时任务(全量导入_职位信息表数据)开始执行");
-        try {
-            hrDataToDomainService.hrPositongToAll();
-        } catch (Exception e) {
-            this.logger.error("从Sqlserver中间库hr_position获取数据发生异常：" , e);
-        }
-        this.logger.info("定时任务(全量导入_职位信息表数据)结束");
-    }
-
-    /**
      * 每月每天早上8到20点更新 每隔4个小时更新一次
      * 0 0 8,12,16,20 * * ? 2
      */
@@ -57,7 +42,7 @@ public class ScheduledTasks {
     public void scheduledOrg() {
         this.logger.info("定时任务(增量更新_组织架构表)开始执行");
         try {
-            hrDataToDomainService.sysGroupToOrgStruNew();
+            //hrDataToDomainService.sysGroupToOrgStruNew();
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库sys_Group增量获取数据发生异常：" , e);
         }
