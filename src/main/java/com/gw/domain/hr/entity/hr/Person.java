@@ -114,7 +114,7 @@ public class Person  {
     @ApiModelProperty("出生日期")
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date birthday;
+    private Date birthDate;
 
     /**
      * 籍贯
@@ -291,7 +291,7 @@ public class Person  {
      */
     @Column(name = "`phone_number`")
     @ApiModelProperty("手机号码")
-    private String phoneNumber;
+    private String mobile;
 
     /**
      * 家庭联系电话
@@ -405,7 +405,7 @@ public class Person  {
     @ApiModelProperty("入厂日期")
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date admissionDate;
+    private Date joinDate;
 
     /**
      * 人员状态,1:在职,2:离职
@@ -486,7 +486,7 @@ public class Person  {
      */
     @Column(name = "`is_delete`")
     @ApiModelProperty("是否删除,0:否,1:是")
-    private Integer isDelete;
+    private Integer deleteFlag;
 
     /**
      * 人员备注,用于技术中心

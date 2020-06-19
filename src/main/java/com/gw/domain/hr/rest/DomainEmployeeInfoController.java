@@ -17,7 +17,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
@@ -42,51 +41,6 @@ public class DomainEmployeeInfoController {
     @Autowired
     private DomainOrgStructureMapper domainOrgStructureMapper;
 
-
-    /*@ApiOperation(
-            value = "【自定义】- 单条新增人员基础信息",
-            notes = "【自定义】- 单条新增人员基础信息",
-            httpMethod = "POST"
-    )*/
-    @PostMapping(value = "/employee")
-    public JsonResult<Object> insertEmployeeInfoSingleByPersonnelNo(@RequestBody @Valid DomainEmployeeInfo domainEmployeeInfo, Errors errors) {
-        this.logger.info("人员基础信息表_单条插入数据开始");
-        JsonResult jsonResult;
-        //先校验入参
-        if (errors.hasErrors()) {
-            String errorMessage = errors.getFieldError().toString();
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", errorMessage);
-            return jsonResult;
-        }
-        try {
-            int num = domainEmployeeInfoService.insertEmployeeInfoSingle(domainEmployeeInfo);
-            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
-        } catch (Exception var4) {
-            this.logger.error("人员基础信息表_单条插入数据发生异常" + var4.getMessage());
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", var4);
-        }
-        this.logger.info("人员基础信息表_单条插入数据结束");
-        return jsonResult;
-    }
-
-    /*@ApiOperation(
-            value = "【自定义】- 通过工号单条更新人员基础信息",
-            notes = "【自定义】- 通过工号单条更新人员基础信息",
-            httpMethod = "PUT"
-    )*/
-    @PutMapping(value = "/employee/{personnelno}")
-    public JsonResult<Integer> updateEmployeeInfoSingleByPersonnelNo(@RequestBody DomainEmployeeInfo domainEmployeeInfo, @PathVariable("personnelno") String personnelno) {
-        JsonResult jsonResult;
-        try {
-            domainEmployeeInfo.setPersonnelNo(personnelno);
-            int num = domainEmployeeInfoService.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo);
-            jsonResult = JsonResultUtil.createSuccessJsonResult("更新成功，条数 " + num + "条");
-        } catch (Exception var4) {
-            this.logger.error("人员基础信息表_单条更新数据发生异常" + var4.getMessage());
-            jsonResult = JsonResultUtil.createFailureJsonResult("更新失败！ {0}", var4);
-        }
-        return jsonResult;
-    }
 
     @ApiOperation(
             value = "【自定义】- 通过工号查询人员基础信息",

@@ -58,5 +58,5 @@ public class EmployeeOrgPrivacyVO extends EmployeeOrgVO {
      * 毕业学校
      */
     @ApiModelProperty("毕业学校")
-    private String graduationSchool;
+    private String graduateSchool;
 }

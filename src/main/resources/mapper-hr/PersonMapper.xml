@@ -16,7 +16,7 @@
         <result column="name_used" jdbcType="VARCHAR" property="nameUsed" />
         <result column="sex" jdbcType="INTEGER" property="sex" />
         <result column="marriage" jdbcType="INTEGER" property="marriage" />
-        <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthDate" />
         <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
         <result column="registered_residence" jdbcType="VARCHAR" property="registeredResidence" />
         <result column="live_type" jdbcType="INTEGER" property="liveType" />
@@ -41,7 +41,7 @@
         <result column="computer_ability" jdbcType="INTEGER" property="computerAbility" />
         <result column="certificate" jdbcType="VARCHAR" property="certificate" />
         <result column="other_language" jdbcType="VARCHAR" property="otherLanguage" />
-        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+        <result column="phone_number" jdbcType="VARCHAR" property="mobile" />
         <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
         <result column="email" jdbcType="VARCHAR" property="email" />
         <result column="qq" jdbcType="VARCHAR" property="qq" />
@@ -68,7 +68,7 @@
         <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
         <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="is_delete" jdbcType="INTEGER" property="deleteFlag" />
         <result column="person_remark" jdbcType="VARCHAR" property="personRemark" />
         <result column="english_score" jdbcType="VARCHAR" property="englishScore" />
         <result column="is_commitment" jdbcType="INTEGER" property="isCommitment" />
@@ -190,8 +190,8 @@
         <if test="marriage != null">
             marriage = #{marriage},
         </if>
-        <if test="birthday != null">
-            birthday = #{birthday},
+        <if test="birthDate != null">
+            birthday = #{birthDate},
         </if>
         <if test="nativePlace != null">
             native_place = #{nativePlace},
@@ -265,8 +265,8 @@
         <if test="otherLanguage != null">
             other_language = #{otherLanguage},
         </if>
-        <if test="phoneNumber != null">
-            phone_number = #{phoneNumber},
+        <if test="mobile != null">
+            phone_number = #{mobile},
         </if>
         <if test="homePhone != null">
             home_phone = #{homePhone},
@@ -313,8 +313,8 @@
         <if test="dutyRank != null">
             duty_rank = #{dutyRank},
         </if>
-        <if test="admissionDate != null">
-            admission_date = #{admissionDate},
+        <if test="joinDate != null">
+            admission_date = #{joinDate},
         </if>
         <if test="state != null">
             state = #{state},
@@ -346,8 +346,8 @@
         <if test="updateTime != null">
             update_time = #{updateTime},
         </if>
-        <if test="isDelete != null">
-            is_delete = #{isDelete},
+        <if test="deleteFlag != null">
+            is_delete = #{deleteFlag},
         </if>
         <if test="personRemark != null">
             person_remark = #{personRemark},
@@ -409,8 +409,8 @@
         <if test="marriage != null">
             #{marriage},
         </if>
-        <if test="birthday != null">
-            #{birthday},
+        <if test="birthDate != null">
+            #{birthDate},
         </if>
         <if test="nativePlace != null">
             #{nativePlace},
@@ -484,8 +484,8 @@
         <if test="otherLanguage != null">
             #{otherLanguage},
         </if>
-        <if test="phoneNumber != null">
-            #{phoneNumber},
+        <if test="mobile != null">
+            #{mobile},
         </if>
         <if test="homePhone != null">
             #{homePhone},
@@ -532,8 +532,8 @@
         <if test="dutyRank != null">
             #{dutyRank},
         </if>
-        <if test="admissionDate != null">
-            #{admissionDate},
+        <if test="joinDate != null">
+            #{joinDate},
         </if>
         <if test="state != null">
             #{state},
@@ -565,8 +565,8 @@
         <if test="updateTime != null">
             #{updateTime},
         </if>
-        <if test="isDelete != null">
-            #{isDelete},
+        <if test="deleteFlag != null">
+            #{deleteFlag},
         </if>
         <if test="personRemark != null">
             #{personRemark},
@@ -606,7 +606,7 @@
                 <if test="nameUsed != null and nameUsed != ''">and p_person.name_used = #{nameUsed,jdbcType=VARCHAR} </if>
                 <if test="sex != null">and p_person.sex = #{sex,jdbcType=INTEGER} </if>
                 <if test="marriage != null">and p_person.marriage = #{marriage,jdbcType=INTEGER} </if>
-                <if test="birthday != null">and p_person.birthday = #{birthday,jdbcType=TIMESTAMP} </if>
+                <if test="birthDate != null">and p_person.birthday = #{birthDate,jdbcType=TIMESTAMP} </if>
                 <if test="nativePlace != null and nativePlace != ''">and p_person.native_place = #{nativePlace,jdbcType=VARCHAR} </if>
                 <if test="registeredResidence != null and registeredResidence != ''">and p_person.registered_residence = #{registeredResidence,jdbcType=VARCHAR} </if>
                 <if test="liveType != null">and p_person.live_type = #{liveType,jdbcType=INTEGER} </if>
@@ -631,7 +631,7 @@
                 <if test="computerAbility != null">and p_person.computer_ability = #{computerAbility,jdbcType=INTEGER} </if>
                 <if test="certificate != null and certificate != ''">and p_person.certificate = #{certificate,jdbcType=VARCHAR} </if>
                 <if test="otherLanguage != null and otherLanguage != ''">and p_person.other_language = #{otherLanguage,jdbcType=VARCHAR} </if>
-                <if test="phoneNumber != null and phoneNumber != ''">and p_person.phone_number = #{phoneNumber,jdbcType=VARCHAR} </if>
+                <if test="mobile != null and mobile != ''">and p_person.phone_number = #{mobile,jdbcType=VARCHAR} </if>
                 <if test="homePhone != null and homePhone != ''">and p_person.home_phone = #{homePhone,jdbcType=VARCHAR} </if>
                 <if test="email != null and email != ''">and p_person.email = #{email,jdbcType=VARCHAR} </if>
                 <if test="qq != null and qq != ''">and p_person.qq = #{qq,jdbcType=VARCHAR} </if>
@@ -647,7 +647,7 @@
                 <if test="postPracticeStage != null">and p_person.post_practice_stage = #{postPracticeStage,jdbcType=INTEGER} </if>
                 <if test="subdivisionPost != null and subdivisionPost != ''">and p_person.subdivision_post = #{subdivisionPost,jdbcType=VARCHAR} </if>
                 <if test="dutyRank != null">and p_person.duty_rank = #{dutyRank,jdbcType=INTEGER} </if>
-                <if test="admissionDate != null">and p_person.admission_date = #{admissionDate,jdbcType=TIMESTAMP} </if>
+                <if test="joinDate != null">and p_person.admission_date = #{joinDate,jdbcType=TIMESTAMP} </if>
                 <if test="state != null">and p_person.state = #{state,jdbcType=INTEGER} </if>
                 <if test="directLeaderId != null">and p_person.direct_leader_id = #{directLeaderId,jdbcType=INTEGER} </if>
                 <if test="approvalPowerNumber != null and approvalPowerNumber != ''">and p_person.approval_power_number = #{approvalPowerNumber,jdbcType=VARCHAR} </if>
@@ -658,7 +658,7 @@
                 <if test="createUserId != null">and p_person.create_user_id = #{createUserId,jdbcType=INTEGER} </if>
                 <if test="updateUserId != null">and p_person.update_user_id = #{updateUserId,jdbcType=INTEGER} </if>
                 <if test="updateTime != null">and p_person.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
-                <if test="isDelete != null">and p_person.is_delete = #{isDelete,jdbcType=INTEGER} </if>
+                <if test="deleteFlag != null">and p_person.is_delete = #{deleteFlag,jdbcType=INTEGER} </if>
                 <if test="personRemark != null and personRemark != ''">and p_person.person_remark = #{personRemark,jdbcType=VARCHAR} </if>
                 <if test="englishScore != null and englishScore != ''">and p_person.english_score = #{englishScore,jdbcType=VARCHAR} </if>
                 <if test="isCommitment != null">and p_person.is_commitment = #{isCommitment,jdbcType=INTEGER} </if>

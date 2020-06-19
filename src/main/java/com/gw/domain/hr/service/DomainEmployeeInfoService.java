@@ -19,9 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.entity.Example;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,41 +47,6 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
     private String bucketName;
     @Value("${oss.minio.expiry}")
     private int expiry;
-
-    public QueryResult<DomainEmployeeInfo> selectDomainEmployeeInfoByCreateTime(String startDatetime, String endDatetime, int page, int rows) {
-
-        Example example = new Example(DomainEmployeeInfo.class);
-        example.createCriteria().andBetween("createTime", startDatetime,endDatetime);
-        return this.paginateQueryResultByExample(example,page,rows);
-    }
-    public QueryResult<DomainEmployeeInfo> selectDomainEmployeeInfoByUpdateTime(String startDatetime, String endDatetime, int page, int rows) {
-
-        Example example = new Example(DomainEmployeeInfo.class);
-        example.createCriteria().andBetween("updateTime", startDatetime,endDatetime);
-        return this.paginateQueryResultByExample(example,page,rows);
-    }
-
-    public int insertEmployeeInfoSingle(DomainEmployeeInfo domainEmployeeInfo) {
-        Date createTime = domainEmployeeInfo.getCreateTime();
-        Date updateTime = domainEmployeeInfo.getUpdateTime();
-        if (null == createTime) {
-            domainEmployeeInfo.setCreateTime(new Date());
-        }
-        if (null == updateTime) {
-            domainEmployeeInfo.setUpdateTime(new Date());
-        }
-        int num = domainEmployeeInfoMapper.insertEmployeeInfoSingle(domainEmployeeInfo);
-        return num;
-    }
-
-    public int updateEmployeeInfoSingleByPersonnelNo(DomainEmployeeInfo domainEmployeeInfo) {
-        Date updateTime = domainEmployeeInfo.getUpdateTime();
-        if (null == updateTime) {
-            domainEmployeeInfo.setUpdateTime(new Date());
-        }
-        int num = domainEmployeeInfoMapper.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo);
-        return num;
-    }
 
     public DomainEmployeeInfoVO employee(DomainEmpOrgRequestPo domainEmpOrgRequestPo){
         domainEmpOrgRequestPo.setPage(-1);

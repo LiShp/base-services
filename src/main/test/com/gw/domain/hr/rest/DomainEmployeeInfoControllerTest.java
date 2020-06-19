@@ -145,10 +145,6 @@ public class DomainEmployeeInfoControllerTest {
         //第二种方法：普通单元测试
 //        DomainEmployeeInfo domainEmployeeInfo = new DomainEmployeeInfo();
 //        domainEmployeeInfo.setName("邹艺一");
-//        domainEmployeeInfoController.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo, "");
-//        domainEmployeeInfoController.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo, "22");
-//        Mockito.when(domainEmployeeInfoService.updateEmployeeInfoSingleByPersonnelNo(any(DomainEmployeeInfo.class))).thenThrow(new RuntimeException());
-//        domainEmployeeInfoController.updateEmployeeInfoSingleByPersonnelNo(domainEmployeeInfo, "22");
     }
 } 
 

@@ -331,7 +331,7 @@ public class HrDataToDomainService {
             List<WorkExperience> workExperienceList = workExperienceMapper.selectByExampleAndRowBounds(countExample, rowBounds);
             List<DomainWorkExperience> domainWorkExperienceList = DozerUtil.convert(workExperienceList, DomainWorkExperience.class);
             numCreate += domainWorkExperienceMapper.insertList(domainWorkExperienceList);
-            this.logger.info("已入表p_work_experience共计:" + numCreate + "条");
+            this.logger.info("已入表domain_work_experience共计:" + numCreate + "条");
         }
         if(count>0){
             Map<String, Object> mapTime = new HashMap<>(16);

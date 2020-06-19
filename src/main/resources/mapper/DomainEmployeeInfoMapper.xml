@@ -1,122 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gw.domain.hr.mapper.DomainEmployeeInfoMapper">
-    <resultMap id="Base_Result_Map" type="com.gw.domain.hr.entity.DomainEmployeeInfo">
-
-        <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
-        <result column="once_name" jdbcType="VARCHAR" property="onceName" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <result column="sex" jdbcType="BIT" property="sex" />
-        <result column="marriage_status" jdbcType="BIT" property="marriageStatus" />
-        <result column="birth_date" jdbcType="DATE" property="birthDate" />
-        <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
-        <result column="register_residence" jdbcType="VARCHAR" property="registerResidence" />
-        <result column="dwelling_type" jdbcType="BIT" property="dwellingType" />
-        <result column="dwelling" jdbcType="VARCHAR" property="dwelling" />
-        <result column="weight" jdbcType="VARCHAR" property="weight" />
-        <result column="height" jdbcType="VARCHAR" property="height" />
-        <result column="blood_type" jdbcType="BIT" property="bloodType" />
-        <result column="polity" jdbcType="BIT" property="polity" />
-        <result column="natives" jdbcType="INTEGER" property="natives" />
-        <result column="diploma" jdbcType="INTEGER" property="diploma" />
-        <result column="professional" jdbcType="VARCHAR" property="professional" />
-        <result column="graduation_school" jdbcType="VARCHAR" property="graduationSchool" />
-        <result column="graduation_date" jdbcType="DATE" property="graduationDate" />
-        <result column="english_ability" jdbcType="INTEGER" property="englishAbility" />
-        <result column="computer_ability" jdbcType="INTEGER" property="computerAbility" />
-        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-        <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="post_title" jdbcType="INTEGER" property="postTitle" />
-        <result column="group_id" jdbcType="INTEGER" property="groupId" />
-        <result column="work_type" jdbcType="INTEGER" property="workType" />
-        <result column="duty" jdbcType="INTEGER" property="duty" />
-        <result column="position_type" jdbcType="INTEGER" property="positionType" />
-        <result column="position_serial" jdbcType="INTEGER" property="positionSerial" />
-        <result column="position" jdbcType="INTEGER" property="position" />
-        <result column="position_level" jdbcType="INTEGER" property="positionLevel" />
-        <result column="join_date" jdbcType="DATE" property="joinDate" />
-        <result column="personnel_status" jdbcType="BIT" property="personnelStatus" />
-        <result column="foregin" jdbcType="BIT" property="foregin" />
-        <result column="person_type" jdbcType="INTEGER" property="personType" />
-        <result column="work_address" jdbcType="INTEGER" property="workAddress" />
-        <result column="dismission_reason" jdbcType="INTEGER" property="dismissionReason" />
-        <result column="dismission_type" jdbcType="INTEGER" property="dismissionType" />
-        <result column="dismission_date" jdbcType="DATE" property="dismissionDate" />
-        <result column="position_code" jdbcType="VARCHAR" property="positionCode" />
-        <result column="position_step" jdbcType="INTEGER" property="positionStep" />
-        <result column="position_son" jdbcType="VARCHAR" property="positionSon" />
-        <result column="teach_level" jdbcType="INTEGER" property="teachLevel" />
-        <result column="duty_level" jdbcType="INTEGER" property="dutyLevel" />
-        <result column="card_type" jdbcType="INTEGER" property="cardType" />
-        <result column="card_name" jdbcType="VARCHAR" property="cardName" />
-        <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
-        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
-        <result column="remark" jdbcType="VARCHAR" property="remark" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="update_personnel_no" jdbcType="VARCHAR" property="updatePersonnelNo" />
-    </resultMap>
 
     <resultMap id="Base_Result_Map_Emp_Org" type="com.gw.domain.hr.entity.po.DomainEmpOrgResultPo">
 
-        <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
-        <result column="once_name" jdbcType="VARCHAR" property="onceName" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <result column="sex" jdbcType="BIT" property="sex" />
-        <result column="marriage_status" jdbcType="BIT" property="marriageStatus" />
-        <result column="birth_date" jdbcType="DATE" property="birthDate" />
+        <id column="person_id" jdbcType="BIGINT" property="id" />
+        <result column="person_number" jdbcType="VARCHAR" property="personnelNo" />
+        <result column="is_formal" jdbcType="INTEGER" property="isFormal" />
+        <result column="is_foreign" jdbcType="INTEGER" property="isForeign" />
+        <result column="country" jdbcType="INTEGER" property="country" />
+        <result column="certificate_type" jdbcType="INTEGER" property="certificateType" />
+        <result column="certificate_number" jdbcType="VARCHAR" property="certificateNumber" />
+        <result column="id_card_number" jdbcType="VARCHAR" property="idCardNumber" />
+        <result column="certificate_name" jdbcType="VARCHAR" property="certificateName" />
+        <result column="chinese_name" jdbcType="VARCHAR" property="name" />
+        <result column="name_used" jdbcType="VARCHAR" property="nameUsed" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="marriage" jdbcType="INTEGER" property="marriage" />
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthDate" />
         <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
-        <result column="register_residence" jdbcType="VARCHAR" property="registerResidence" />
-        <result column="dwelling_type" jdbcType="BIT" property="dwellingType" />
-        <result column="dwelling" jdbcType="VARCHAR" property="dwelling" />
+        <result column="registered_residence" jdbcType="VARCHAR" property="registeredResidence" />
+        <result column="live_type" jdbcType="INTEGER" property="liveType" />
+        <result column="current_live_place" jdbcType="VARCHAR" property="currentLivePlace" />
         <result column="weight" jdbcType="VARCHAR" property="weight" />
         <result column="height" jdbcType="VARCHAR" property="height" />
-        <result column="blood_type" jdbcType="BIT" property="bloodType" />
-        <result column="polity" jdbcType="BIT" property="polity" />
-        <result column="natives" jdbcType="INTEGER" property="natives" />
+        <result column="blood_type" jdbcType="INTEGER" property="bloodType" />
+        <result column="political_affiliation" jdbcType="INTEGER" property="politicalAffiliation" />
+        <result column="nation" jdbcType="INTEGER" property="nation" />
+        <result column="health" jdbcType="VARCHAR" property="health" />
+        <result column="resume_number" jdbcType="VARCHAR" property="resumeNumber" />
+        <result column="house_number" jdbcType="VARCHAR" property="houseNumber" />
+        <result column="dwelling_unit" jdbcType="VARCHAR" property="dwellingUnit" />
+        <result column="work_address" jdbcType="INTEGER" property="workAddress" />
         <result column="diploma" jdbcType="INTEGER" property="diploma" />
+        <result column="education_type" jdbcType="INTEGER" property="educationType" />
+        <result column="recruitment_sources" jdbcType="INTEGER" property="recruitmentSources" />
+        <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool" />
         <result column="professional" jdbcType="VARCHAR" property="professional" />
-        <result column="graduation_school" jdbcType="VARCHAR" property="graduationSchool" />
-        <result column="graduation_date" jdbcType="DATE" property="graduationDate" />
+        <result column="graduate_time" jdbcType="TIMESTAMP" property="graduateTime" />
         <result column="english_ability" jdbcType="INTEGER" property="englishAbility" />
         <result column="computer_ability" jdbcType="INTEGER" property="computerAbility" />
-        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="certificate" jdbcType="VARCHAR" property="certificate" />
+        <result column="other_language" jdbcType="VARCHAR" property="otherLanguage" />
+        <result column="phone_number" jdbcType="VARCHAR" property="mobile" />
         <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
         <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="post_title" jdbcType="INTEGER" property="postTitle" />
+        <result column="qq" jdbcType="VARCHAR" property="qq" />
+        <result column="title" jdbcType="INTEGER" property="title" />
         <result column="group_id" jdbcType="INTEGER" property="groupId" />
         <result column="work_type" jdbcType="INTEGER" property="workType" />
         <result column="duty" jdbcType="INTEGER" property="duty" />
-        <result column="position_type" jdbcType="INTEGER" property="positionType" />
-        <result column="position_serial" jdbcType="INTEGER" property="positionSerial" />
+        <result column="category" jdbcType="INTEGER" property="category" />
+        <result column="grade" jdbcType="INTEGER" property="grade" />
         <result column="position" jdbcType="INTEGER" property="position" />
-        <result column="position_level" jdbcType="INTEGER" property="positionLevel" />
-        <result column="join_date" jdbcType="DATE" property="joinDate" />
-        <result column="personnel_status" jdbcType="BIT" property="personnelStatus" />
-        <result column="foregin" jdbcType="BIT" property="foregin" />
-        <result column="person_type" jdbcType="INTEGER" property="personType" />
-        <result column="work_address" jdbcType="INTEGER" property="workAddress" />
-        <result column="dismission_reason" jdbcType="INTEGER" property="dismissionReason" />
-        <result column="dismission_type" jdbcType="INTEGER" property="dismissionType" />
-        <result column="dismission_date" jdbcType="DATE" property="dismissionDate" />
+        <result column="rank" jdbcType="INTEGER" property="rank" />
         <result column="position_code" jdbcType="VARCHAR" property="positionCode" />
-        <result column="position_step" jdbcType="INTEGER" property="positionStep" />
-        <result column="position_son" jdbcType="VARCHAR" property="positionSon" />
-        <result column="teach_level" jdbcType="INTEGER" property="teachLevel" />
-        <result column="duty_level" jdbcType="INTEGER" property="dutyLevel" />
-        <result column="card_type" jdbcType="INTEGER" property="cardType" />
-        <result column="card_name" jdbcType="VARCHAR" property="cardName" />
-        <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
-        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+        <result column="post_practice_stage" jdbcType="INTEGER" property="postPracticeStage" />
+        <result column="subdivision_post" jdbcType="VARCHAR" property="subdivisionPost" />
+        <result column="duty_rank" jdbcType="INTEGER" property="dutyRank" />
+        <result column="admission_date" jdbcType="TIMESTAMP" property="joinDate" />
+        <result column="state" jdbcType="INTEGER" property="personnelStatus" />
+        <result column="direct_leader_id" jdbcType="INTEGER" property="directLeaderId" />
+        <result column="approval_power_number" jdbcType="VARCHAR" property="approvalPowerNumber" />
+        <result column="bank_card" jdbcType="VARCHAR" property="bankCard" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="photo_file_code" jdbcType="VARCHAR" property="photoFileCode" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="create_personnel_no" jdbcType="VARCHAR" property="createPersonnelNo" />
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="update_personnel_no" jdbcType="VARCHAR" property="updatePersonnelNo" />
+        <result column="is_delete" jdbcType="INTEGER" property="deleteFlag" />
+        <result column="person_remark" jdbcType="VARCHAR" property="personRemark" />
+        <result column="english_score" jdbcType="VARCHAR" property="englishScore" />
+        <result column="is_commitment" jdbcType="INTEGER" property="isCommitment" />
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+        <result column="person_mechanism" jdbcType="VARCHAR" property="personMechanism" />
+        <result column="recruiter" jdbcType="VARCHAR" property="recruiter" />
+        <result column="back_school_time" jdbcType="VARCHAR" property="backSchoolTime" />
         <result column="group_name" jdbcType="TIMESTAMP" property="groupName" />
         <result column="unit_id" jdbcType="TIMESTAMP" property="unitId" />
         <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
@@ -127,469 +87,90 @@
     </resultMap>
 
     <sql id="Select_Field" >
-        domain_employee_info.id,
-        domain_employee_info.personnel_no,
-        domain_employee_info.once_name,
-        domain_employee_info.name,
+        domain_employee_info.person_id,
+        domain_employee_info.person_number,
+        domain_employee_info.is_formal,
+        domain_employee_info.is_foreign,
+        domain_employee_info.country,
+        domain_employee_info.certificate_type,
+        domain_employee_info.certificate_number,
+        domain_employee_info.id_card_number,
+        domain_employee_info.certificate_name,
+        domain_employee_info.chinese_name,
+        domain_employee_info.name_used,
         domain_employee_info.sex,
-        domain_employee_info.marriage_status,
-        domain_employee_info.birth_date,
+        domain_employee_info.marriage,
+        domain_employee_info.birthday,
         domain_employee_info.native_place,
-        domain_employee_info.register_residence,
-        domain_employee_info.dwelling_type,
-        domain_employee_info.dwelling,
+        domain_employee_info.registered_residence,
+        domain_employee_info.live_type,
+        domain_employee_info.current_live_place,
         domain_employee_info.weight,
         domain_employee_info.height,
         domain_employee_info.blood_type,
-        domain_employee_info.polity,
-        domain_employee_info.natives,
+        domain_employee_info.political_affiliation,
+        domain_employee_info.nation,
+        domain_employee_info.health,
+        domain_employee_info.resume_number,
+        domain_employee_info.house_number,
+        domain_employee_info.dwelling_unit,
+        domain_employee_info.work_address,
         domain_employee_info.diploma,
+        domain_employee_info.education_type,
+        domain_employee_info.recruitment_sources,
+        domain_employee_info.graduate_school,
         domain_employee_info.professional,
-        domain_employee_info.graduation_school,
-        domain_employee_info.graduation_date,
+        domain_employee_info.graduate_time,
         domain_employee_info.english_ability,
         domain_employee_info.computer_ability,
-        domain_employee_info.mobile,
+        domain_employee_info.certificate,
+        domain_employee_info.other_language,
+        domain_employee_info.phone_number,
         domain_employee_info.home_phone,
         domain_employee_info.email,
-        domain_employee_info.post_title,
+        domain_employee_info.qq,
+        domain_employee_info.title,
         domain_employee_info.group_id,
         domain_employee_info.work_type,
         domain_employee_info.duty,
-        domain_employee_info.position_type,
-        domain_employee_info.position_serial,
+        domain_employee_info.category,
+        domain_employee_info.grade,
         domain_employee_info.position,
-        domain_employee_info.position_level,
-        domain_employee_info.join_date,
-        domain_employee_info.personnel_status,
-        domain_employee_info.foregin,
-        domain_employee_info.person_type,
-        domain_employee_info.work_address,
-        domain_employee_info.dismission_reason,
-        domain_employee_info.dismission_type,
-        domain_employee_info.dismission_date,
+        domain_employee_info.rank,
         domain_employee_info.position_code,
-        domain_employee_info.position_step,
-        domain_employee_info.position_son,
-        domain_employee_info.teach_level,
-        domain_employee_info.duty_level,
-        domain_employee_info.card_type,
-        domain_employee_info.card_name,
-        domain_employee_info.card_no,
-        domain_employee_info.delete_flag,
+        domain_employee_info.post_practice_stage,
+        domain_employee_info.subdivision_post,
+        domain_employee_info.duty_rank,
+        domain_employee_info.admission_date,
+        domain_employee_info.state,
+        domain_employee_info.direct_leader_id,
+        domain_employee_info.approval_power_number,
+        domain_employee_info.bank_card,
         domain_employee_info.remark,
+        domain_employee_info.photo_file_code,
         domain_employee_info.create_time,
-        domain_employee_info.create_personnel_no,
+        domain_employee_info.create_user_id,
+        domain_employee_info.update_user_id,
         domain_employee_info.update_time,
-        domain_employee_info.update_personnel_no
-    </sql>
-
-    <sql id="Base_Option_Clause">
-        <if test="personnelNo != null">
-            personnel_no = #{personnelNo},
-        </if>
-        <if test="onceName != null">
-            once_name = #{onceName},
-        </if>
-        <if test="name != null">
-            name = #{name},
-        </if>
-        <if test="sex != null">
-            sex = #{sex},
-        </if>
-        <if test="marriageStatus != null">
-            marriage_status = #{marriageStatus},
-        </if>
-        <if test="birthDate != null">
-            birth_date = #{birthDate},
-        </if>
-        <if test="nativePlace != null">
-            native_place = #{nativePlace},
-        </if>
-        <if test="registerResidence != null">
-            register_residence = #{registerResidence},
-        </if>
-        <if test="dwellingType != null">
-            dwelling_type = #{dwellingType},
-        </if>
-        <if test="dwelling != null">
-            dwelling = #{dwelling},
-        </if>
-        <if test="weight != null">
-            weight = #{weight},
-        </if>
-        <if test="height != null">
-            height = #{height},
-        </if>
-        <if test="bloodType != null">
-            blood_type = #{bloodType},
-        </if>
-        <if test="polity != null">
-            polity = #{polity},
-        </if>
-        <if test="natives != null">
-            natives = #{natives},
-        </if>
-        <if test="diploma != null">
-            diploma = #{diploma},
-        </if>
-        <if test="professional != null">
-            professional = #{professional},
-        </if>
-        <if test="graduationSchool != null">
-            graduation_school = #{graduationSchool},
-        </if>
-        <if test="graduationDate != null">
-            graduation_date = #{graduationDate},
-        </if>
-        <if test="englishAbility != null">
-            english_ability = #{englishAbility},
-        </if>
-        <if test="computerAbility != null">
-            computer_ability = #{computerAbility},
-        </if>
-        <if test="mobile != null">
-            mobile = #{mobile},
-        </if>
-        <if test="homePhone != null">
-            home_phone = #{homePhone},
-        </if>
-        <if test="email != null">
-            email = #{email},
-        </if>
-        <if test="postTitle != null">
-            post_title = #{postTitle},
-        </if>
-        <if test="groupId != null">
-            group_id = #{groupId},
-        </if>
-        <if test="workType != null">
-            work_type = #{workType},
-        </if>
-        <if test="duty != null">
-            duty = #{duty},
-        </if>
-        <if test="positionType != null">
-            position_type = #{positionType},
-        </if>
-        <if test="positionSerial != null">
-            position_serial = #{positionSerial},
-        </if>
-        <if test="position != null">
-            position = #{position},
-        </if>
-        <if test="positionLevel != null">
-            position_level = #{positionLevel},
-        </if>
-        <if test="joinDate != null">
-            join_date = #{joinDate},
-        </if>
-        <if test="personnelStatus != null">
-            personnel_status = #{personnelStatus},
-        </if>
-        <if test="foregin != null">
-            foregin = #{foregin},
-        </if>
-        <if test="personType != null">
-            person_type = #{personType},
-        </if>
-        <if test="workAddress != null">
-            work_address = #{workAddress},
-        </if>
-        <if test="dismissionReason != null">
-            dismission_reason = #{dismissionReason},
-        </if>
-        <if test="dismissionType != null">
-            dismission_type = #{dismissionType},
-        </if>
-        <if test="dismissionDate != null">
-            dismission_date = #{dismissionDate},
-        </if>
-        <if test="positionCode != null">
-            position_code = #{positionCode},
-        </if>
-        <if test="positionStep != null">
-            position_step = #{positionStep},
-        </if>
-        <if test="positionSon != null">
-            position_son = #{positionSon},
-        </if>
-        <if test="teachLevel != null">
-            teach_level = #{teachLevel},
-        </if>
-        <if test="dutyLevel != null">
-            duty_level = #{dutyLevel},
-        </if>
-        <if test="cardType != null">
-            card_type = #{cardType},
-        </if>
-        <if test="cardName != null">
-            card_name = #{cardName},
-        </if>
-        <if test="cardNo != null">
-            card_no = #{cardNo},
-        </if>
-        <if test="deleteFlag != null">
-            delete_flag = #{deleteFlag},
-        </if>
-        <if test="remark != null">
-            remark = #{remark},
-        </if>
-        <if test="createTime != null">
-            create_time = #{createTime},
-        </if>
-        <if test="createPersonnelNo != null">
-            create_personnel_no = #{createPersonnelNo},
-        </if>
-        <if test="updateTime != null">
-            update_time = #{updateTime},
-        </if>
-        <if test="updatePersonnelNo != null">
-            update_personnel_no = #{updatePersonnelNo}
-        </if>
-    </sql>
-
-    <sql id="Insert_Option_Clause">
-        <if test="personnelNo != null">
-            #{personnelNo},
-        </if>
-        <if test="onceName != null">
-            #{onceName},
-        </if>
-        <if test="sex != null">
-            #{sex},
-        </if>
-        <if test="marriageStatus != null">
-            #{marriageStatus},
-        </if>
-        <if test="birthDate != null">
-            #{birthDate},
-        </if>
-        <if test="nativePlace != null">
-            #{nativePlace},
-        </if>
-        <if test="registerResidence != null">
-            #{registerResidence},
-        </if>
-        <if test="dwellingType != null">
-            #{dwellingType},
-        </if>
-        <if test="dwelling != null">
-            #{dwelling},
-        </if>
-        <if test="weight != null">
-            #{weight},
-        </if>
-        <if test="height != null">
-            #{height},
-        </if>
-        <if test="bloodType != null">
-            #{bloodType},
-        </if>
-        <if test="polity != null">
-            #{polity},
-        </if>
-        <if test="natives != null">
-            #{natives},
-        </if>
-        <if test="diploma != null">
-            #{diploma},
-        </if>
-        <if test="professional != null">
-            #{professional},
-        </if>
-        <if test="graduationSchool != null">
-            #{graduationSchool},
-        </if>
-        <if test="graduationDate != null">
-            #{graduationDate},
-        </if>
-        <if test="englishAbility != null">
-            #{englishAbility},
-        </if>
-        <if test="computerAbility != null">
-            #{computerAbility},
-        </if>
-        <if test="mobile != null">
-            #{mobile},
-        </if>
-        <if test="homePhone != null">
-            #{homePhone},
-        </if>
-        <if test="email != null">
-            #{email},
-        </if>
-        <if test="postTitle != null">
-            #{postTitle},
-        </if>
-        <if test="groupId != null">
-            #{groupId},
-        </if>
-        <if test="workType != null">
-            #{workType},
-        </if>
-        <if test="duty != null">
-            #{duty},
-        </if>
-        <if test="positionType != null">
-            #{positionType},
-        </if>
-        <if test="positionSerial != null">
-            #{positionSerial},
-        </if>
-        <if test="position != null">
-            #{position},
-        </if>
-        <if test="positionLevel != null">
-            #{positionLevel},
-        </if>
-        <if test="joinDate != null">
-            #{joinDate},
-        </if>
-        <if test="personnelStatus != null">
-            #{personnelStatus},
-        </if>
-        <if test="foregin != null">
-            #{foregin},
-        </if>
-        <if test="personType != null">
-            #{personType},
-        </if>
-        <if test="workAddress != null">
-            #{workAddress},
-        </if>
-        <if test="dismissionReason != null">
-            #{dismissionReason},
-        </if>
-        <if test="dismissionType != null">
-            #{dismissionType},
-        </if>
-        <if test="dismissionDate != null">
-            #{dismissionDate},
-        </if>
-        <if test="positionCode != null">
-            #{positionCode},
-        </if>
-        <if test="positionStep != null">
-            #{positionStep},
-        </if>
-        <if test="positionSon != null">
-            #{positionSon},
-        </if>
-        <if test="teachLevel != null">
-            #{teachLevel},
-        </if>
-        <if test="dutyLevel != null">
-            #{dutyLevel},
-        </if>
-        <if test="cardType != null">
-            #{cardType},
-        </if>
-        <if test="cardName != null">
-            #{cardName},
-        </if>
-        <if test="cardNo != null">
-            #{cardNo},
-        </if>
-        <if test="deleteFlag != null">
-            #{deleteFlag},
-        </if>
-        <if test="remark != null">
-            #{remark},
-        </if>
-        <if test="createTime != null">
-            #{createTime},
-        </if>
-        <if test="createPersonnelNo != null">
-            #{createPersonnelNo},
-        </if>
-        <if test="updateTime != null">
-            #{updateTime},
-        </if>
-        <if test="updatePersonnelNo != null">
-            #{updatePersonnelNo}
-        </if>
-    </sql>
-
-    <sql id="Base_Where_Clause" >
-        <where>
-            <trim prefixOverrides="and">
-                <if test="personnelNo != null and personnelNo != ''">and domain_employee_info.personnel_no = #{personnelNo,jdbcType=VARCHAR} </if>
-                <if test="onceName != null and onceName != ''">and domain_employee_info.once_name = #{onceName,jdbcType=VARCHAR} </if>
-                <if test="name != null and name != ''">and domain_employee_info.name = #{name,jdbcType=VARCHAR} </if>
-                <if test="sex != null">and domain_employee_info.sex = #{sex,jdbcType=BIT} </if>
-                <if test="marriageStatus != null">and domain_employee_info.marriage_status = #{marriageStatus,jdbcType=BIT} </if>
-                <if test="birthDate != null">and domain_employee_info.birth_date = #{birthDate,jdbcType=DATE} </if>
-                <if test="nativePlace != null and nativePlace != ''">and domain_employee_info.native_place = #{nativePlace,jdbcType=VARCHAR} </if>
-                <if test="registerResidence != null and registerResidence != ''">and domain_employee_info.register_residence = #{registerResidence,jdbcType=VARCHAR} </if>
-                <if test="dwellingType != null">and domain_employee_info.dwelling_type = #{dwellingType,jdbcType=BIT} </if>
-                <if test="dwelling != null and dwelling != ''">and domain_employee_info.dwelling = #{dwelling,jdbcType=VARCHAR} </if>
-                <if test="weight != null and weight != ''">and domain_employee_info.weight = #{weight,jdbcType=VARCHAR} </if>
-                <if test="height != null and height != ''">and domain_employee_info.height = #{height,jdbcType=VARCHAR} </if>
-                <if test="bloodType != null">and domain_employee_info.blood_type = #{bloodType,jdbcType=BIT} </if>
-                <if test="polity != null">and domain_employee_info.polity = #{polity,jdbcType=BIT} </if>
-                <if test="natives != null">and domain_employee_info.natives = #{natives,jdbcType=INTEGER} </if>
-                <if test="diploma != null">and domain_employee_info.diploma = #{diploma,jdbcType=INTEGER} </if>
-                <if test="professional != null and professional != ''">and domain_employee_info.professional = #{professional,jdbcType=VARCHAR} </if>
-                <if test="graduationSchool != null and graduationSchool != ''">and domain_employee_info.graduation_school = #{graduationSchool,jdbcType=VARCHAR} </if>
-                <if test="graduationDate != null">and domain_employee_info.graduation_date = #{graduationDate,jdbcType=DATE} </if>
-                <if test="englishAbility != null">and domain_employee_info.english_ability = #{englishAbility,jdbcType=INTEGER} </if>
-                <if test="computerAbility != null">and domain_employee_info.computer_ability = #{computerAbility,jdbcType=INTEGER} </if>
-                <if test="mobile != null and mobile != ''">and domain_employee_info.mobile = #{mobile,jdbcType=VARCHAR} </if>
-                <if test="homePhone != null and homePhone != ''">and domain_employee_info.home_phone = #{homePhone,jdbcType=VARCHAR} </if>
-                <if test="email != null and email != ''">and domain_employee_info.email = #{email,jdbcType=VARCHAR} </if>
-                <if test="postTitle != null">and domain_employee_info.post_title = #{postTitle,jdbcType=INTEGER} </if>
-                <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
-                <if test="workType != null">and domain_employee_info.work_type = #{workType,jdbcType=INTEGER} </if>
-                <if test="duty != null">and domain_employee_info.duty = #{duty,jdbcType=INTEGER} </if>
-                <if test="positionType != null">and domain_employee_info.position_type = #{positionType,jdbcType=INTEGER} </if>
-                <if test="positionSerial != null">and domain_employee_info.position_serial = #{positionSerial,jdbcType=INTEGER} </if>
-                <if test="position != null">and domain_employee_info.position = #{position,jdbcType=INTEGER} </if>
-                <if test="positionLevel != null">and domain_employee_info.position_level = #{positionLevel,jdbcType=INTEGER} </if>
-                <if test="joinDate != null">and domain_employee_info.join_date = #{joinDate,jdbcType=DATE} </if>
-                <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
-                <if test="foregin != null">and domain_employee_info.foregin = #{foregin,jdbcType=BIT} </if>
-                <if test="personType != null">and domain_employee_info.person_type = #{personType,jdbcType=INTEGER} </if>
-                <if test="workAddress != null">and domain_employee_info.work_address = #{workAddress,jdbcType=INTEGER} </if>
-                <if test="dismissionReason != null">and domain_employee_info.dismission_reason = #{dismissionReason,jdbcType=INTEGER} </if>
-                <if test="dismissionType != null">and domain_employee_info.dismission_type = #{dismissionType,jdbcType=INTEGER} </if>
-                <if test="dismissionDate != null">and domain_employee_info.dismission_date = #{dismissionDate,jdbcType=DATE} </if>
-                <if test="positionCode != null and positionCode != ''">and domain_employee_info.position_code = #{positionCode,jdbcType=VARCHAR} </if>
-                <if test="positionStep != null">and domain_employee_info.position_step = #{positionStep,jdbcType=INTEGER} </if>
-                <if test="positionSon != null and positionSon != ''">and domain_employee_info.position_son = #{positionSon,jdbcType=VARCHAR} </if>
-                <if test="teachLevel != null">and domain_employee_info.teach_level = #{teachLevel,jdbcType=INTEGER} </if>
-                <if test="dutyLevel != null">and domain_employee_info.duty_level = #{dutyLevel,jdbcType=INTEGER} </if>
-                <if test="cardType != null">and domain_employee_info.card_type = #{cardType,jdbcType=INTEGER} </if>
-                <if test="cardName != null and cardName != ''">and domain_employee_info.card_name = #{cardName,jdbcType=VARCHAR} </if>
-                <if test="cardNo != null and cardNo != ''">and domain_employee_info.card_no = #{cardNo,jdbcType=VARCHAR} </if>
-                <if test="deleteFlag != null">and domain_employee_info.delete_flag = #{deleteFlag,jdbcType=BIT} </if>
-                <if test="remark != null and remark != ''">and domain_employee_info.remark = #{remark,jdbcType=VARCHAR} </if>
-                <if test="createTime != null">and domain_employee_info.create_time = #{createTime,jdbcType=TIMESTAMP} </if>
-                <if test="createPersonnelNo != null and createPersonnelNo != ''">and domain_employee_info.create_personnel_no = #{createPersonnelNo,jdbcType=VARCHAR} </if>
-                <if test="updateTime != null">and domain_employee_info.update_time = #{updateTime,jdbcType=TIMESTAMP} </if>
-                <if test="updatePersonnelNo != null and updatePersonnelNo != ''">and domain_employee_info.update_personnel_no = #{updatePersonnelNo,jdbcType=VARCHAR} </if>
-            </trim>
-        </where>
-        <choose>
-            <when test="sortString!=null and sortString!=''">
-                order by ${sortString}
-            </when>
-            <otherwise>
-                order by id desc
-            </otherwise>
-        </choose>
-
+        domain_employee_info.is_delete,
+        domain_employee_info.person_remark,
+        domain_employee_info.english_score,
+        domain_employee_info.is_commitment,
+        domain_employee_info.create_user_name,
+        domain_employee_info.person_mechanism,
+        domain_employee_info.recruiter,
+        domain_employee_info.back_school_time
     </sql>
 
     <!-- ................................................................分割线以下为新封装sql...........................................................................;-->
     <sql id="Base_Where_Clause_Emp_Org" >
         <where>
             <trim prefixOverrides="and">
-                <if test="nameLike != null">and domain_employee_info.name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
-                <if test="personnelNo != null">and domain_employee_info.personnel_no = #{personnelNo, jdbcType=VARCHAR} </if>
+                <if test="nameLike != null">and domain_employee_info.chinese_name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
+                <if test="personnelNo != null">and domain_employee_info.person_number = #{personnelNo, jdbcType=VARCHAR} </if>
                 <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
                 <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
-                <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
+                <if test="personnelStatus != null">and domain_employee_info.state = #{personnelStatus,jdbcType=BIT} </if>
                 <if test="createTime != null">and domain_employee_info.create_time > #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="updateTime != null">and domain_employee_info.update_time > #{updateTime,jdbcType=TIMESTAMP} </if>
                 <if test="unitId != null">and domain_org_structure.unit_id = #{unitId,jdbcType=INTEGER} </if>
@@ -598,8 +179,8 @@
                 <if test="departmentName != null">and domain_org_structure.department_name = #{departmentName,jdbcType=TIMESTAMP} </if>
             </trim>
             and domain_employee_info.group_id = domain_org_structure.id
-            and (basic2.f_key = 'Diploma' and domain_employee_info.diploma = basic2.value_no)
-            and (basic1.f_key = 'Duty' and domain_employee_info.duty = basic1.value_no)
+            and (basic2.value_type = 'Diploma' and domain_employee_info.diploma = basic2.value_no)
+            and (basic1.value_type = 'Duty' and domain_employee_info.duty = basic1.value_no)
         </where>
     </sql>
 
@@ -609,141 +190,10 @@
         domain_org_structure.department_id,
         domain_org_structure.department_name,
         domain_org_structure.group_name,
-        basic2.text as diplomaName,
-        basic1.text as dutyName,
+        basic2.value_content as diplomaName,
+        basic1.value_content as dutyName,
         <include refid="Select_Field"/>
     </sql>
-
-    <sql id="tableValue">
-        personnel_no,
-        once_name,
-        name,
-        sex,
-        marriage_status,
-        birth_date,
-        native_place,
-        register_residence,
-        dwelling_type,
-        dwelling,
-        weight,
-        height,
-        blood_type,
-        polity,
-        natives,
-        diploma,
-        professional,
-        graduation_school,
-        graduation_date,
-        english_ability,
-        computer_ability,
-        mobile,
-        home_phone,
-        email,
-        post_title,
-        group_id,
-        work_type,
-        duty,
-        position_type,
-        position_serial,
-        position,
-        position_level,
-        join_date,
-        personnel_status,
-        foregin,
-        person_type,
-        work_address,
-        dismission_reason,
-        dismission_type,
-        dismission_date,
-        position_code,
-        position_step,
-        position_son,
-        teach_level,
-        duty_level,
-        card_type,
-        card_name,
-        card_no,
-        delete_flag,
-        remark,
-        create_time,
-        create_personnel_no,
-        update_time,
-        update_personnel_no
-    </sql>
-
-    <sql id="insertValue">
-    #{personnelNo},
-    #{onceName},
-    #{name},
-    #{sex},
-    #{marriageStatus},
-    #{birthDate},
-    #{nativePlace},
-    #{registerResidence},
-    #{dwellingType},
-    #{dwelling},
-    #{weight},
-    #{height},
-    #{bloodType},
-    #{polity},
-    #{natives},
-    #{diploma},
-    #{professional},
-    #{graduationSchool},
-    #{graduationDate},
-    #{englishAbility},
-    #{computerAbility},
-    #{mobile},
-    #{homePhone},
-    #{email},
-    #{postTitle},
-    #{groupId},
-    #{workType},
-    #{duty},
-    #{positionType},
-    #{positionSerial},
-    #{position},
-    #{positionLevel},
-    #{joinDate},
-    #{personnelStatus},
-    #{foregin},
-    #{personType},
-    #{workAddress},
-    #{dismissionReason},
-    #{dismissionType},
-    #{dismissionDate},
-    #{positionCode},
-    #{positionStep},
-    #{positionSon},
-    #{teachLevel},
-    #{dutyLevel},
-    #{cardType},
-    #{cardName},
-    #{cardNo},
-    #{deleteFlag},
-    #{remark},
-    #{createTime},
-    #{createPersonnelNo},
-    #{updateTime},
-    #{updatePersonnelNo}
-    </sql>
-
-
-
-    <insert id="insertEmployeeInfoSingle" parameterType="com.gw.domain.hr.entity.DomainEmployeeInfo" >
-        insert into domain_employee_info
-        (<include refid="tableValue"/>)
-        values
-        (<include refid="insertValue"/>)
-    </insert>
-
-    <update id="updateEmployeeInfoSingleByPersonnelNo" parameterType="com.gw.domain.hr.entity.DomainEmployeeInfo">
-        update domain_employee_info
-        <set>
-            <include refid="Base_Option_Clause"/>
-        </set>
-        where personnel_no = #{personnelNo}
-    </update>
 
     <select id="employeeListCount" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultType="Integer">
         select

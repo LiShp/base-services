@@ -16,26 +16,9 @@ import java.util.List;
 @Component
 public interface DomainEmployeeInfoMapper extends BaseMapper<DomainEmployeeInfo> {
 
-    /**
-     * 单条新增
-     * @param domainEmployeeInfo
-     * @return
-     */
-    int insertEmployeeInfoSingle(DomainEmployeeInfo domainEmployeeInfo);
-
-    /**
-     * 单条更新按工号
-     * @param domainEmployeeInfo
-     * @return
-     */
-    int updateEmployeeInfoSingleByPersonnelNo(DomainEmployeeInfo domainEmployeeInfo);
-
-
     int employeeListCount(DomainEmpOrgRequestPo domainEmpOrgRequestPo);
 
     List<DomainEmpOrgResultPo> employeeList(DomainEmpOrgRequestPo domainEmpOrgRequestPo);
-
-
 
     String selectMaxCreateTime();
 

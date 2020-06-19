@@ -3,7 +3,7 @@
 <mapper namespace="com.gw.domain.hr.mapper.DomainWorkExperienceMapper">
     <resultMap id="Base_Result_Map_Work" type="com.gw.domain.hr.entity.po.DomainWorkExperienceResultPo">
 
-        <result column="personnel_no" jdbcType="VARCHAR" property="personnelNo" />
+        <result column="person_number" jdbcType="VARCHAR" property="personnelNo" />
         <result column="work_experience_id" jdbcType="INTEGER" property="workExperienceId" />
         <result column="person_id" jdbcType="INTEGER" property="personId" />
         <result column="work_start_time" jdbcType="TIMESTAMP" property="workStartTime" />
@@ -177,7 +177,7 @@
 
 
     <sql id="Select_Field_Work" >
-        domain_employee_info.personnel_no,
+        domain_employee_info.person_number,
         domain_work_experience.person_id,
         domain_work_experience.work_start_time,
         domain_work_experience.work_end_time,
@@ -199,10 +199,10 @@
         <where>
             <trim prefixOverrides="and">
                 <if test="nameLike != null">and domain_employee_info.name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
-                <if test="personnelNo != null">and domain_employee_info.personnel_no = #{personnelNo, jdbcType=VARCHAR} </if>
+                <if test="personnelNo != null">and domain_employee_info.person_number = #{personnelNo, jdbcType=VARCHAR} </if>
                 <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
                 <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
-                <if test="personnelStatus != null">and domain_employee_info.personnel_status = #{personnelStatus,jdbcType=BIT} </if>
+                <if test="personnelStatus != null">and domain_employee_info.state = #{personnelStatus,jdbcType=BIT} </if>
                 <if test="createTime != null">and domain_employee_info.create_time > #{createTime,jdbcType=TIMESTAMP} </if>
                 <if test="updateTime != null">and domain_employee_info.update_time > #{updateTime,jdbcType=TIMESTAMP} </if>
                 <if test="unitId != null">and domain_org_structure.unit_id = #{unitId,jdbcType=INTEGER} </if>
@@ -211,7 +211,7 @@
                 <if test="departmentName != null">and domain_org_structure.department_name = #{departmentName,jdbcType=TIMESTAMP} </if>
             </trim>
             and domain_employee_info.group_id = domain_org_structure.id
-            and domain_employee_info.id = domain_work_experience.person_id
+            and domain_employee_info.person_id = domain_work_experience.person_id
         </where>
     </sql>
 

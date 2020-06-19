@@ -1,12 +1,12 @@
 package com.gw.domain.hr.service;
 
-import com.gw.cloud.common.base.service.BaseService;
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureVO;
+import com.gw.domain.hr.enums.NodeTypeEnum;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.ibatis.session.RowBounds;
@@ -83,6 +83,7 @@ public class DomainOrgStructureService  {
         NodeVO currentNode = new NodeVO();
         currentNode.setKey(currentOrg.getId().toString());
         currentNode.setTitle(currentOrg.getGroupName());
+        currentNode.setType(NodeTypeEnum.ROG.getCode());
         currentNode.setChildren(getChildren(new ArrayList<>(), groupId));
         return currentNode;
     }
@@ -96,7 +97,7 @@ public class DomainOrgStructureService  {
         List<NodeVO> nodeVOS = new ArrayList<>();
         for(DomainEmployeeInfo info : domainEmployeeInfoList){
             NodeVO nodeVO = new NodeVO();
-            nodeVO.setType(1);
+            nodeVO.setType(NodeTypeEnum.EMP.getCode());
             nodeVO.setTitle(info.getName());
             nodeVO.setKey(info.getPersonnelNo());
             nodeVOS.add(nodeVO);
@@ -110,7 +111,7 @@ public class DomainOrgStructureService  {
         for(DomainOrgStructure info : orgStructureList){
             //遍历子组织下的人员信息/组织信息
             NodeVO nodeVO = new NodeVO();
-            nodeVO.setType(2);
+            nodeVO.setType(NodeTypeEnum.ROG.getCode());
             nodeVO.setTitle(info.getGroupName());
             nodeVO.setKey(info.getId().toString());
             List<NodeVO> childNodes = getChildren(new ArrayList<>(), info.getId());
@@ -147,7 +148,7 @@ public class DomainOrgStructureService  {
         List<List<String>> employeeOrgVOList = new ArrayList<>();
         for(DomainEmployeeInfo employeeInfo : employeeInfoList){
             List<String> list = new ArrayList<>();
-            list.add(employeeInfo.getId().toString());
+            list.add(employeeInfo.getPersonId().toString());
             list.add(employeeInfo.getPersonnelNo());
             list.add(employeeInfo.getName());
             list.add(employeeInfo.getGroupId().toString());
