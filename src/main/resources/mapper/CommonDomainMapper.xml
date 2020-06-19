@@ -16,39 +16,4 @@
             #{maxUpdateTime})
     </insert>
 
-    <delete id="deleteMaxTime" parameterType="java.util.Map">
-        delete from domain_max_time where tableName = #{tableName}
-    </delete>
-
-    <update id="updateMaxTime" parameterType="java.util.Map">
-       update domain_max_time
-       <set>
-           <if test="maxCreateTime != null and maxCreateTime != ''">
-               maxCreateTime = #{maxCreateTime},
-           </if>
-           <if test="maxUpdateTime != null and maxUpdateTime != ''">
-               maxUpdateTime = #{maxUpdateTime},
-           </if>
-       </set>
-       where
-       tableName = #{tableName}
-    </update>
-
-    <update id="updateMaxUpdateTime" parameterType="java.util.Map">
-       update domain_max_time
-       set
-       maxUpdateTime = #{maxUpdateTime}
-       where
-       tableName = #{tableName}
-    </update>
-
-    <select id="getMaxTime" resultType="java.util.Map" parameterType="java.lang.String">
-        select
-        maxCreateTime,
-        maxUpdateTime
-        from
-        domain_max_time
-        where tableName = #{tableName}
-    </select>
-
 </mapper>

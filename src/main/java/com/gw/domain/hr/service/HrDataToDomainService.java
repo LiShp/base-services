@@ -9,7 +9,6 @@ import com.gw.domain.hr.entity.hr.WorkExperience;
 import com.gw.domain.hr.entity.hrfile.FileInfo;
 import com.gw.domain.hr.enums.TableNameEnum;
 import com.gw.domain.hr.mapper.*;
-import com.gw.domain.hr.mapperdata.DataToEmployeeInfoMapper;
 import com.gw.domain.hr.mapperhr.DictionariesMapper;
 import com.gw.domain.hr.mapperhr.GroupMapper;
 import com.gw.domain.hr.mapperhr.PersonMapper;
@@ -46,17 +45,17 @@ public class HrDataToDomainService {
     private DomainBasicInfoMapper domainBasicInfoMapper;
 
     @Resource
-    private DataToEmployeeInfoMapper dataToEmployeeInfoMapper;
-    @Resource
     private DomainEmployeeInfoMapper domainEmployeeInfoMapper;
 
     @Resource
     private FileInfoMapper fileInfoMapper;
+
     @Resource
     private DomainFileInfoMapper domainFileInfoMapper;
 
     @Resource
     private WorkExperienceMapper workExperienceMapper;
+
     @Resource
     private DomainWorkExperienceMapper domainWorkExperienceMapper;
 
