@@ -6,21 +6,27 @@ import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.commonutils.HttpReturn;
 import com.gw.domain.hr.commonutils.HttpUtil;
+import com.gw.domain.hr.entity.DomainFileInfo;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
 import com.gw.domain.hr.entity.po.DomainEmpOrgResultPo;
 import com.gw.domain.hr.entity.po.DomainWorkExperienceResultPo;
 import com.gw.domain.hr.entity.vo.DomainEmployeeInfoVO;
 import com.gw.domain.hr.entity.vo.DomainWorkExperienceVo;
+import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
+import com.gw.domain.hr.mapper.DomainFileInfoMapper;
 import com.gw.domain.hr.mapper.DomainWorkExperienceMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zoujialiang
@@ -34,6 +40,9 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
 
     @Autowired
     private DomainWorkExperienceMapper domainWorkExperienceMapper;
+
+    @Autowired
+    private DomainFileInfoMapper domainFileInfoMapper;
 
     @Value("${oss.minio.userName}")
     private String userName;
@@ -60,9 +69,25 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
     }
 
     public String employeePhoto(String personnelNo){
+
+        Example employeeExample = new Example(DomainEmployeeInfo.class);
+        employeeExample.createCriteria()
+                .andEqualTo("personnelNo", personnelNo);
+        DomainEmployeeInfo domainEmployeeInfo = domainEmployeeInfoMapper.selectOneByExample(employeeExample);
+        Assert.notNull(domainEmployeeInfo, "员工信息不存在");
+
+
+
+        Example fileExample = new Example(DomainFileInfo.class);
+        fileExample.createCriteria()
+                .andEqualTo("code", domainEmployeeInfo.getPhotoFileCode());
+        DomainFileInfo domainFileInfo = domainFileInfoMapper.selectOneByExample(fileExample);
+
+        Assert.notNull(domainFileInfo, "该员工不存在头像信息。");
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username", userName);
-        jsonObject.put("file_name", personnelNo.toUpperCase()+".jpg");
+        jsonObject.put("file_name", domainFileInfo.getName());
         jsonObject.put("bucket_name", bucketName);
         jsonObject.put("expiry", expiry);
         HttpReturn httpReturn = HttpUtil.postJSON(host, uri, jsonObject.toJSONString(),userName, paasword);
@@ -78,7 +103,7 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
     }
 
     public QueryResult employeeList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows, Class clazz){
-
+        domainEmpOrgRequestPo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
         domainEmpOrgRequestPo.setPage((page-1)*rows);
         domainEmpOrgRequestPo.setSize(rows);
 
@@ -93,7 +118,7 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
     }
 
     public QueryResult<DomainWorkExperienceVo> employeeWorkList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows){
-
+        domainEmpOrgRequestPo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
         domainEmpOrgRequestPo.setPage((page-1)*rows);
         domainEmpOrgRequestPo.setSize(rows);
 

@@ -9,6 +9,7 @@ import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
 import com.gw.domain.hr.entity.vo.*;
+import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.service.DomainEmployeeInfoService;
 import com.gw.gwlog.GWMLogger;
@@ -51,10 +52,6 @@ public class DomainEmployeeInfoController {
     public JsonResult<DomainEmployeeInfoVO> selectEmployeeInfoSingleByPersonnelNo(@PathVariable("personnelNo") String personnelNo) {
         JsonResult jsonResult;
         try {
-            Example example = new Example(DomainEmployeeInfo.class);
-            example.createCriteria().andEqualTo("personnelNo", personnelNo)
-            .andEqualTo("personnelStatus",1);
-
             DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
             domainEmpOrgRequestPo.setPersonnelNo(personnelNo);
             domainEmpOrgRequestPo.setPersonnelStatus(1);
@@ -143,6 +140,7 @@ public class DomainEmployeeInfoController {
             domainEmployeeInfo.setDeleteFlag(Boolean.FALSE);
             domainEmployeeInfo.setPersonnelStatus(1);
             domainEmployeeInfo.setGroupId(groupId);
+            domainEmployeeInfo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
             List<DomainEmployeeInfo> domainEmployeeInfoList = domainEmployeeInfoService.selectList(domainEmployeeInfo);
             if(domainEmployeeInfoList.isEmpty()) {
                 jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoList);

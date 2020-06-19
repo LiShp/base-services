@@ -6,6 +6,7 @@ import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureVO;
+import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.enums.NodeTypeEnum;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
@@ -93,6 +94,7 @@ public class DomainOrgStructureService  {
         domainEmployeeInfo.setDeleteFlag(Boolean.FALSE);
         domainEmployeeInfo.setPersonnelStatus(1);
         domainEmployeeInfo.setGroupId(groupId.intValue());
+        domainEmployeeInfo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
         List<DomainEmployeeInfo> domainEmployeeInfoList = domainEmployeeInfoService.selectList(domainEmployeeInfo);
         List<NodeVO> nodeVOS = new ArrayList<>();
         for(DomainEmployeeInfo info : domainEmployeeInfoList){
@@ -141,8 +143,8 @@ public class DomainOrgStructureService  {
         Example employeeExample = new Example(DomainEmployeeInfo.class);
 
         employeeExample.createCriteria().andIn("groupId", orgIdMap.keySet())
-                .andEqualTo("personnelStatus", 1);
-
+                .andEqualTo("personnelStatus", 1)
+                .andEqualTo("isFormal", EmployeeTypeEnum.FORMAL.getCode());
         List<DomainEmployeeInfo> employeeInfoList = domainEmployeeInfoService.selectListByExample(employeeExample);
 
         List<List<String>> employeeOrgVOList = new ArrayList<>();

@@ -10,7 +10,6 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 /**
@@ -84,6 +83,11 @@ public class DomainEmpOrgRequestPo extends AutoIncrementKeyBaseDomain<Long> {
      * departmentName：部门名称
      */
     private String departmentName;
+
+    /**
+     * 是否正式员工,2:非正式工,1:正式工.
+     */
+    private Integer isFormal;
 
 
 }

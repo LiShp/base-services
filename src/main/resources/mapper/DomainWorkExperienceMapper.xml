@@ -198,7 +198,7 @@
     <sql id="Base_Where_Clause_Work" >
         <where>
             <trim prefixOverrides="and">
-                <if test="nameLike != null">and domain_employee_info.name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
+                <if test="nameLike != null">and domain_employee_info.chinese_name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
                 <if test="personnelNo != null">and domain_employee_info.person_number = #{personnelNo, jdbcType=VARCHAR} </if>
                 <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
                 <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>

@@ -168,6 +168,7 @@
             <trim prefixOverrides="and">
                 <if test="nameLike != null">and domain_employee_info.chinese_name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
                 <if test="personnelNo != null">and domain_employee_info.person_number = #{personnelNo, jdbcType=VARCHAR} </if>
+                <if test="isFormal != null">and domain_employee_info.is_formal = #{isFormal, jdbcType=INTEGER} </if>
                 <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
                 <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
                 <if test="personnelStatus != null">and domain_employee_info.state = #{personnelStatus,jdbcType=BIT} </if>
