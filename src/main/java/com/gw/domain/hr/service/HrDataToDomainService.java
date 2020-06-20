@@ -378,10 +378,10 @@ public class HrDataToDomainService {
             List<DomainWorkExperience> domainWorkExperienceList = DozerUtil.convert(workExperienceList, DomainWorkExperience.class);
             for(DomainWorkExperience domainWorkExperience : domainWorkExperienceList) {
                 Example example = new Example(DomainWorkExperience.class);
-                example.createCriteria().andEqualTo("personId", domainWorkExperience.getPersonId());
+                example.createCriteria().andEqualTo("workExperienceId", domainWorkExperience.getWorkExperienceId());
                 numUpdate += domainWorkExperienceMapper.updateByExampleSelective(domainWorkExperience, example);
             }
-            this.logger.info("更新-已入表domain_work_experience共计:" + numCreate + "条");
+            this.logger.info("更新-已入表domain_work_experience共计:" + numUpdate + "条");
         }
         if(createCount > 0 || updateCount > 0){
             Map<String, Object> mapTime = new HashMap<>(16);

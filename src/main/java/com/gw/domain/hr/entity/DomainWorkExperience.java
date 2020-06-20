@@ -22,14 +22,12 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(callSuper = true)
 @ApiModel("工作经历表")
 @Table(name = "`domain_work_experience`")
-public class DomainWorkExperience extends AutoIncrementKeyBaseDomain<Long> {
+public class DomainWorkExperience {
     /**
      * 主键id
      */
-    @Id
     @Column(name = "`work_experience_id`")
     @ApiModelProperty("主键id")
     private Integer workExperienceId;
