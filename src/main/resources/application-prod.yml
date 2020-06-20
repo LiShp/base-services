@@ -90,13 +90,6 @@ spring:
 server:
   port: 8081
 
-eureka:
-  instance:
-    prefer-ip-address: true
-    ip-address: ${EUREKA_INSTANCE_IPADDRESS}
-  client:
-    serviceUrl:
-      defaultZone: http://10.255.21.146:8761/eureka/,http://10.255.21.147:8761/eureka,http://10.255.21.148:8761/eureka
 
 #日志插件默认配置
 gwmlog:
@@ -141,6 +134,8 @@ management:
 #  server:
 #    port: 9091
 
+swagger:
+  enabled: true
 
 oss:
   minio:

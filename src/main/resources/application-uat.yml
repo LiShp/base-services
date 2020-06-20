@@ -129,6 +129,8 @@ management:
     health:
       show-details: ALWAYS
 
+swagger:
+  enabled: true
 
 oss:
   minio:

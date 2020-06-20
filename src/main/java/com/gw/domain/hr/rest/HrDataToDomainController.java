@@ -6,6 +6,7 @@ import com.gw.domain.hr.service.HrDataToDomainService;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ public class HrDataToDomainController {
      *
      * @return
      */
-    @GetMapping(value = "/sysGroupToOrgStruAll")
+    @PostMapping(value = "/sync-org-all")
     public JsonResult<Object> sysGroupToOrgStruAll() {
         JsonResult jsonResult;
         try {
@@ -45,7 +46,7 @@ public class HrDataToDomainController {
      *
      * @return
      */
-    @GetMapping(value = "/sysFieldValueToBasicInfoAll")
+    @PostMapping(value = "/sync-basic-all")
     public JsonResult<Object> sysFieldValueToBasicInfoAll() {
         JsonResult jsonResult;
         try {
@@ -81,7 +82,7 @@ public class HrDataToDomainController {
      *
      * @return
      */
-    @GetMapping(value = "/personnelToEmployeeInfoNew")
+    @PostMapping(value = "/sync-employee-new")
     public JsonResult<Object> personnelToEmployeeInfoNew() {
         JsonResult jsonResult;
         try {
@@ -115,7 +116,7 @@ public class HrDataToDomainController {
      * 头像信息同步-增量
      * @return
      */
-    @GetMapping(value = "/fileInfoSyncNew")
+    @PostMapping(value = "/sync-file-new")
     public JsonResult<Object> fileInfoSyncNew() {
         JsonResult jsonResult;
         try {
@@ -149,7 +150,7 @@ public class HrDataToDomainController {
      * 工作经历同步-增量
      * @return
      */
-    @GetMapping(value = "/workExperienceSyncNew")
+    @PostMapping(value = "/sync-work-new")
     public JsonResult<Object> workExperienceSyncNew() {
         JsonResult jsonResult;
         try {

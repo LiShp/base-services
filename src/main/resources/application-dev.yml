@@ -91,13 +91,6 @@ spring:
 server:
   port: 8081
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://10.255.30.214:8761/eureka/
-
 #日志插件默认配置
 gwmlog:
   #平台名称，必须全小写，不可以有特殊字符，请使用部门名称简写（如：ywztb）
@@ -140,6 +133,9 @@ management:
   #暴漏端点端口号 与服务端口号不冲突
 #  server:
 #    port: 9091
+
+swagger:
+  enabled: true
 
 oss:
   minio:
