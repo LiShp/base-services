@@ -122,19 +122,4 @@ public class DomainBasicInfo implements Serializable {
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date updateTime;
 
-    /**
-     * 更新人(工号)
-     */
-    @Column(name = "`update_personnel_no`")
-    @ApiModelProperty("更新人(工号)")
-    private String updatePersonnelNo;
-
-    /**
-     * 是否删除：0否 1是
-     */
-    @Column(name = "`delete_flag`")
-    @ApiModelProperty("是否删除：0否 1是")
-    private Boolean deleteFlag;
-
-
 }

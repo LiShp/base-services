@@ -358,8 +358,8 @@ public class HrDataToDomainService {
         createExample.createCriteria().andGreaterThan("createTime", domainWorkExperienceMapper.selectMaxCreateTime());
         int createCount = workExperienceMapper.selectCountByExample(createExample);
         int pageSize = 1000;
-        int careteLoop = (createCount%pageSize==0?createCount/pageSize:createCount/pageSize+1);
-        for(int i=0; i<careteLoop; i++){
+        int createLoop = (createCount%pageSize==0?createCount/pageSize:createCount/pageSize+1);
+        for(int i=0; i<createLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
             List<WorkExperience> workExperienceList = workExperienceMapper.selectByExampleAndRowBounds(createExample, rowBounds);
             List<DomainWorkExperience> domainWorkExperienceList = DozerUtil.convert(workExperienceList, DomainWorkExperience.class);
