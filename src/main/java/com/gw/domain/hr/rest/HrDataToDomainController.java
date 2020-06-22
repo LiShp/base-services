@@ -99,7 +99,7 @@ public class HrDataToDomainController {
      * 头像信息同步-全量
      * @return
      */
-    @GetMapping(value = "/fileInfoSyncAll")
+    @PostMapping(value = "/sync-file-all")
     public JsonResult<Object> fileInfoSyncAll() {
         JsonResult jsonResult;
         try {
@@ -116,7 +116,7 @@ public class HrDataToDomainController {
      * 头像信息同步-增量
      * @return
      */
-    @PostMapping(value = "/sync-file-new")
+    //@PostMapping(value = "/sync-file-new")
     public JsonResult<Object> fileInfoSyncNew() {
         JsonResult jsonResult;
         try {
