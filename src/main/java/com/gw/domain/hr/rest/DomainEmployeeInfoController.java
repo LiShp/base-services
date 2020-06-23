@@ -171,10 +171,10 @@ public class DomainEmployeeInfoController {
             @ApiParam(name = "departmentId", value = "部门ID") @RequestParam(required = false) Integer departmentId,
             @ApiParam(name = "departmentName", value = "部门名称") @RequestParam(required = false) String departmentName,
             @ApiParam(name = "personnelStatus", value = "是否在职,1在职、2离职") @RequestParam(required = false) Integer personnelStatus,
-            @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false)
+            @ApiParam(name = "createTime", value = "大于此创建时间的数据") @RequestParam(required = false)
             @Valid @Pattern(regexp= "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{3}", message = "时间格式必须为2020-06-01 00:00:00:000格式")
                     String createTime,
-            @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
+            @ApiParam(name = "updateTime", value = "大于此更新时间的数据") @RequestParam(required = false) String updateTime,
             @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
             @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows){
         JsonResult jsonResult;
@@ -219,10 +219,10 @@ public class DomainEmployeeInfoController {
             @ApiParam(name = "departmentId", value = "部门ID") @RequestParam(required = false) Integer departmentId,
             @ApiParam(name = "departmentName", value = "部门名称") @RequestParam(required = false) String departmentName,
             @ApiParam(name = "personnelStatus", value = "是否在职,1在职、2离职") @RequestParam(required = false) Integer personnelStatus,
-            @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false)
+            @ApiParam(name = "createTime", value = "大于此创建时间的数据") @RequestParam(required = false)
             @Valid @Pattern(regexp= "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{3}", message = "时间格式必须为2020-06-01 00:00:00:000格式")
                     String createTime,
-            @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
+            @ApiParam(name = "updateTime", value = "大于此更新时间的数据") @RequestParam(required = false) String updateTime,
             @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
             @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows){
         JsonResult jsonResult;
@@ -266,8 +266,8 @@ public class DomainEmployeeInfoController {
             @ApiParam(name = "departmentId", value = "部门ID") @RequestParam(required = false) Integer departmentId,
             @ApiParam(name = "departmentName", value = "部门名称") @RequestParam(required = false) String departmentName,
             @ApiParam(name = "personnelStatus", value = "是否在职,1在职、2离职") @RequestParam(required = false) Integer personnelStatus,
-            @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false) String createTime,
-            @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
+            @ApiParam(name = "createTime", value = "大于此创建时间的数据") @RequestParam(required = false) String createTime,
+            @ApiParam(name = "updateTime", value = "大于此更新时间的数据") @RequestParam(required = false) String updateTime,
             @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
             @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows){
         JsonResult jsonResult;
