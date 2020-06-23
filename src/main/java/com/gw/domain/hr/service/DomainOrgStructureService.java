@@ -197,7 +197,7 @@ public class DomainOrgStructureService  {
         if(!StringUtils.isEmpty(createTime)){
             criteria.andGreaterThan("createTime", createTime);
         }
-        if(!StringUtils.isEmpty(createTime)){
+        if(!StringUtils.isEmpty(updateTime)){
             criteria.andGreaterThan("updateTime", updateTime);
         }
         RowBounds rowBounds = new RowBounds(rows, (page-1)*rows);
