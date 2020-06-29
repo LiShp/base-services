@@ -156,6 +156,9 @@ public class DomainOrgStructureService  {
             list.add(employeeInfo.getGroupId().toString());
             list.add(orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getGroupName());
             Integer parentId = orgIdMap.get(Long.valueOf(employeeInfo.getGroupId())).getParentId();
+            if(groupId.equals(Long.valueOf(employeeInfo.getGroupId()))){
+                parentId = employeeInfo.getGroupId();
+            }
             list.add(orgIdMap.get(Long.valueOf(parentId)).getGroupName());
             employeeOrgVOList.add(list);
         }
