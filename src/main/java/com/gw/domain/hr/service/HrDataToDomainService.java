@@ -176,7 +176,7 @@ public class HrDataToDomainService {
      * 定时任务
      */
     @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int personnelToEmployeeInfoAllUpdate() {
+    public int personnelToEmployeeInfoAllUpdate(int limit, int updateLoop) {
         this.logger.info("从HR库中p_person获取增量数据开始");
         int numUpdate = 0;
 
@@ -188,8 +188,8 @@ public class HrDataToDomainService {
 
         int pageSize = 1000;
 
-        int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
-        for(int i=0; i<updateLoop; i++){
+        //int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
+        for(int i=limit; i<updateLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
             List<Person> fileInfoList = personMapper.selectByExampleAndRowBounds(updateExample, rowBounds);
             List<DomainEmployeeInfo> domainFileInfoList = DozerUtil.convert(fileInfoList, DomainEmployeeInfo.class);

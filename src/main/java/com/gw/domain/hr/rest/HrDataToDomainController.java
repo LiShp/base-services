@@ -6,6 +6,7 @@ import com.gw.domain.hr.service.HrDataToDomainService;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -82,11 +83,11 @@ public class HrDataToDomainController {
      *
      * @return
      */
-    @PostMapping(value = "/sync-employee-all-update")
-    public JsonResult<Object> personnelToEmployeeInfoAllUpdate() {
+    @PostMapping(value = "/sync-employee-all-update/{limit}/{updateLoop}")
+    public JsonResult<Object> personnelToEmployeeInfoAllUpdate(@PathVariable(name = "limit") int limit, @PathVariable(name = "updateLoop") int updateLoop) {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.personnelToEmployeeInfoAllUpdate();
+            int num = hrDataToDomainService.personnelToEmployeeInfoAllUpdate(limit, updateLoop);
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
