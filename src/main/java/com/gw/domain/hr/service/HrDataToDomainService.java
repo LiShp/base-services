@@ -186,6 +186,12 @@ public class HrDataToDomainService {
         createExample.orderBy("createTime");
         createExample.createCriteria().andGreaterThan("createTime", domainEmployeeInfoMapper.selectMaxCreateTime());
         int createCount = personMapper.selectCountByExample(createExample);
+
+        Example updateExample = new Example(Person.class);
+        updateExample.orderBy("updateTime");
+        updateExample.createCriteria().andGreaterThan("updateTime", domainEmployeeInfoMapper.selectMaxUpdateTime());
+        int updateCount = personMapper.selectCountByExample(updateExample);
+
         int pageSize = 1000;
         int careteLoop = (createCount%pageSize==0?createCount/pageSize:createCount/pageSize+1);
         for(int i=0; i<careteLoop; i++){
@@ -196,10 +202,6 @@ public class HrDataToDomainService {
             this.logger.info("新增-已入表domain_employee_info共计:" + numCreate + "条");
         }
 
-        Example updateExample = new Example(Person.class);
-        updateExample.orderBy("updateTime");
-        updateExample.createCriteria().andGreaterThan("updateTime", domainEmployeeInfoMapper.selectMaxUpdateTime());
-        int updateCount = personMapper.selectCountByExample(updateExample);
         int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
         for(int i=0; i<updateLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
@@ -271,6 +273,12 @@ public class HrDataToDomainService {
         createExample.orderBy("createtime");
         createExample.createCriteria().andGreaterThan("createtime", domainFileInfoMapper.selectMaxCreateTime());
         int createCount = fileInfoMapper.selectCountByExample(createExample);
+
+        Example updateExample = new Example(FileInfo.class);
+        updateExample.orderBy("updatetime");
+        updateExample.createCriteria().andGreaterThan("updatetime", domainFileInfoMapper.selectMaxUpdateTime());
+        int updateCount = fileInfoMapper.selectCountByExample(updateExample);
+
         int pageSize = 1000;
         int careteLoop = (createCount%pageSize==0?createCount/pageSize:createCount/pageSize+1);
         for(int i=0; i<careteLoop; i++){
@@ -281,10 +289,6 @@ public class HrDataToDomainService {
             this.logger.info("新增-已入表domain_file_info共计:" + numCreate + "条");
         }
 
-        Example updateExample = new Example(FileInfo.class);
-        updateExample.orderBy("updatetime");
-        updateExample.createCriteria().andGreaterThan("updatetime", domainFileInfoMapper.selectMaxUpdateTime());
-        int updateCount = fileInfoMapper.selectCountByExample(updateExample);
         int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
         for(int i=0; i<updateLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
@@ -357,6 +361,12 @@ public class HrDataToDomainService {
         createExample.orderBy("createTime");
         createExample.createCriteria().andGreaterThan("createTime", domainWorkExperienceMapper.selectMaxCreateTime());
         int createCount = workExperienceMapper.selectCountByExample(createExample);
+
+        Example updateExample = new Example(WorkExperience.class);
+        updateExample.orderBy("updateTime");
+        updateExample.createCriteria().andGreaterThan("updateTime", domainFileInfoMapper.selectMaxUpdateTime());
+        int updateCount = workExperienceMapper.selectCountByExample(updateExample);
+
         int pageSize = 1000;
         int createLoop = (createCount%pageSize==0?createCount/pageSize:createCount/pageSize+1);
         for(int i=0; i<createLoop; i++){
@@ -367,10 +377,7 @@ public class HrDataToDomainService {
             this.logger.info("新增-已入表domain_work_experience共计:" + numCreate + "条");
         }
 
-        Example updateExample = new Example(WorkExperience.class);
-        updateExample.orderBy("updateTime");
-        updateExample.createCriteria().andGreaterThan("updateTime", domainFileInfoMapper.selectMaxUpdateTime());
-        int updateCount = workExperienceMapper.selectCountByExample(updateExample);
+
         int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
         for(int i=0; i<updateLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
