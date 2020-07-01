@@ -196,7 +196,10 @@ public class HrDataToDomainService {
             for(DomainEmployeeInfo employeeInfo : domainFileInfoList) {
                 Example example = new Example(DomainEmployeeInfo.class);
                 example.createCriteria().andEqualTo("personnelNo", employeeInfo.getPersonnelNo());
-                numUpdate += domainEmployeeInfoMapper.updateByExampleSelective(employeeInfo, example);
+                int result = domainEmployeeInfoMapper.updateByExampleSelective(employeeInfo, example);
+                if(result == 0){
+                    domainEmployeeInfoMapper.insert(employeeInfo);
+                }
             }
             this.logger.info("更新-已入表domain_employee_info共计:" + numUpdate + "条");
         }
