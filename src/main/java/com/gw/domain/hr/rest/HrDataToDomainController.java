@@ -82,6 +82,25 @@ public class HrDataToDomainController {
      *
      * @return
      */
+    @PostMapping(value = "/sync-employee-all-update")
+    public JsonResult<Object> personnelToEmployeeInfoAllUpdate() {
+        JsonResult jsonResult;
+        try {
+            int num = hrDataToDomainService.personnelToEmployeeInfoAllUpdate();
+            jsonResult = JsonResultUtil.createSuccessJsonResult(num);
+        } catch (Exception e) {
+            this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+        }
+        return jsonResult;
+    }
+
+
+    /**
+     * 增量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表
+     *
+     * @return
+     */
     @PostMapping(value = "/sync-employee-new")
     public JsonResult<Object> personnelToEmployeeInfoNew() {
         JsonResult jsonResult;

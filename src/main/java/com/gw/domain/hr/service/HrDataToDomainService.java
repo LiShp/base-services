@@ -171,7 +171,38 @@ public class HrDataToDomainService {
         this.logger.info("从HR库p_person中获取全量数据结束");
         return numCreate;
     }
+    /**
+     * 增量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表
+     * 定时任务
+     */
+    @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public int personnelToEmployeeInfoAllUpdate() {
+        this.logger.info("从HR库中p_person获取增量数据开始");
+        int numUpdate = 0;
 
+
+        Example updateExample = new Example(Person.class);
+        updateExample.orderBy("updateTime");
+//        updateExample.createCriteria().andGreaterThan("updateTime", domainEmployeeInfoMapper.selectMaxUpdateTime());
+        int updateCount = personMapper.selectCountByExample(updateExample);
+
+        int pageSize = 1000;
+
+        int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
+        for(int i=0; i<updateLoop; i++){
+            RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
+            List<Person> fileInfoList = personMapper.selectByExampleAndRowBounds(updateExample, rowBounds);
+            List<DomainEmployeeInfo> domainFileInfoList = DozerUtil.convert(fileInfoList, DomainEmployeeInfo.class);
+            for(DomainEmployeeInfo employeeInfo : domainFileInfoList) {
+                Example example = new Example(DomainEmployeeInfo.class);
+                example.createCriteria().andEqualTo("personnelNo", employeeInfo.getPersonnelNo());
+                numUpdate += domainEmployeeInfoMapper.updateByExampleSelective(employeeInfo, example);
+            }
+            this.logger.info("更新-已入表domain_employee_info共计:" + numUpdate + "条");
+        }
+        this.logger.info("从HR库中p_person获取增量数据结束");
+        return numUpdate;
+    }
     /**
      * 增量导入数据 SQLserver表hr_Personnel到mysql表domain_employee_info表
      * 定时任务
@@ -212,7 +243,7 @@ public class HrDataToDomainService {
                 example.createCriteria().andEqualTo("personnelNo", employeeInfo.getPersonnelNo());
                 numUpdate += domainEmployeeInfoMapper.updateByExampleSelective(employeeInfo, example);
             }
-            this.logger.info("更新-已入表domain_employee_info共计:" + numCreate + "条");
+            this.logger.info("更新-已入表domain_employee_info共计:" + numUpdate + "条");
         }
         if(createCount > 0 || updateCount > 0){
             Map<String, Object> mapTime = new HashMap<>(16);
