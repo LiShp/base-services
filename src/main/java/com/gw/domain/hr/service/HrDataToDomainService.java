@@ -398,7 +398,7 @@ public class HrDataToDomainService {
 
         Example updateExample = new Example(WorkExperience.class);
         updateExample.orderBy("updateTime");
-        updateExample.createCriteria().andGreaterThan("updateTime", domainFileInfoMapper.selectMaxUpdateTime());
+        updateExample.createCriteria().andGreaterThan("updateTime", domainWorkExperienceMapper.selectMaxUpdateTime());
         int updateCount = workExperienceMapper.selectCountByExample(updateExample);
 
         int pageSize = 1000;
