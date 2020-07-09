@@ -224,20 +224,10 @@
     </select>
 
 
-    <select id="employeeWorkListCount" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultType="Integer">
-        select
-        count(1)
-        from domain_employee_info, domain_org_structure, domain_work_experience
-        <include refid="Base_Where_Clause_Work"/>
-    </select>
-
     <select id="employeeWorkList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Work">
         select
         <include refid="Select_Field_Work"/>
         from domain_employee_info, domain_org_structure, domain_work_experience
         <include refid="Base_Where_Clause_Work"/>
-        <if test="page!=null and page > -1">
-            limit ${page} ,${size}
-        </if>
     </select>
 </mapper>

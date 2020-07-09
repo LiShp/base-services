@@ -1,6 +1,8 @@
 package com.gw.domain.hr.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gw.cloud.common.base.service.BaseService;
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
@@ -58,7 +60,6 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
     private int expiry;
 
     public DomainEmployeeInfoVO employee(DomainEmpOrgRequestPo domainEmpOrgRequestPo){
-        domainEmpOrgRequestPo.setPage(-1);
         List<DomainEmpOrgResultPo> domainEmpOrgResultPoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
         List<DomainEmployeeInfoVO> employeeVOList = null;
         if(!domainEmpOrgResultPoList.isEmpty()) {
@@ -104,31 +105,27 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
 
     public QueryResult employeeList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows, Class clazz){
         domainEmpOrgRequestPo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
-        domainEmpOrgRequestPo.setPage((page-1)*rows);
-        domainEmpOrgRequestPo.setSize(rows);
-
-        long totalRecords = domainEmployeeInfoMapper.employeeListCount(domainEmpOrgRequestPo);
+        PageHelper.startPage(page, rows);
         List<DomainEmpOrgResultPo> domainEmpOrgResultPoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
+        PageInfo<DomainEmpOrgResultPo> pageInfo = new PageInfo<>(domainEmpOrgResultPoList);
         List employeeVOList = null;
         if(!domainEmpOrgResultPoList.isEmpty()) {
             employeeVOList = DozerUtil.convert(domainEmpOrgResultPoList, clazz);
         }
-        QueryResult queryResult = new QueryResult(totalRecords, employeeVOList, page);
+        QueryResult queryResult = new QueryResult(pageInfo.getTotal(), employeeVOList, page);
         return queryResult;
     }
 
     public QueryResult<DomainWorkExperienceVo> employeeWorkList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows){
         domainEmpOrgRequestPo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
-        domainEmpOrgRequestPo.setPage((page-1)*rows);
-        domainEmpOrgRequestPo.setSize(rows);
-
-        long totalRecords = domainWorkExperienceMapper.employeeWorkListCount(domainEmpOrgRequestPo);
+        PageHelper.startPage(page, rows);
         List<DomainWorkExperienceResultPo> domainWorkExperienceResultPoList = domainWorkExperienceMapper.employeeWorkList(domainEmpOrgRequestPo);
+        PageInfo<DomainWorkExperienceResultPo> pageInfo = new PageInfo<>(domainWorkExperienceResultPoList);
         List workExperienceVoList = null;
         if(!domainWorkExperienceResultPoList.isEmpty()) {
             workExperienceVoList = DozerUtil.convert(domainWorkExperienceResultPoList, DomainWorkExperienceVo.class);
         }
-        QueryResult<DomainWorkExperienceVo> queryResult = new QueryResult(totalRecords, workExperienceVoList, page);
+        QueryResult<DomainWorkExperienceVo> queryResult = new QueryResult(pageInfo.getTotal(), workExperienceVoList, page);
         return queryResult;
     }
 

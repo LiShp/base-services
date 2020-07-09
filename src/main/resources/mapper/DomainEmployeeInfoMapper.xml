@@ -196,21 +196,121 @@
         <include refid="Select_Field"/>
     </sql>
 
-    <select id="employeeListCount" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultType="Integer">
-        select
-         count(1)
-        from domain_employee_info, domain_org_structure, domain_basic_info basic1, domain_basic_info basic2
-        <include refid="Base_Where_Clause_Emp_Org"/>
-    </select>
-
     <select id="employeeList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Emp_Org">
-        select
-        <include refid="Select_Field_Emp_Org"/>
-        from domain_employee_info, domain_org_structure, domain_basic_info basic1, domain_basic_info basic2
-        <include refid="Base_Where_Clause_Emp_Org"/>
-        <if test="page!=null and page > -1">
-            limit ${page} ,${size}
-        </if>
+       SELECT
+            employee.*,
+            basic2.value_content AS diplomaName,
+            basic1.value_content AS dutyName
+        FROM
+            (
+            SELECT
+                domain_org_structure.unit_id,
+                domain_org_structure.unit_name,
+                domain_org_structure.department_id,
+                domain_org_structure.department_name,
+                domain_org_structure.group_name,
+                domain_employee_info.person_id,
+                domain_employee_info.person_number,
+                domain_employee_info.is_formal,
+                domain_employee_info.is_foreign,
+                domain_employee_info.country,
+                domain_employee_info.certificate_type,
+                domain_employee_info.certificate_number,
+                domain_employee_info.id_card_number,
+                domain_employee_info.certificate_name,
+                domain_employee_info.chinese_name,
+                domain_employee_info.name_used,
+                domain_employee_info.sex,
+                domain_employee_info.marriage,
+                domain_employee_info.birthday,
+                domain_employee_info.native_place,
+                domain_employee_info.registered_residence,
+                domain_employee_info.live_type,
+                domain_employee_info.current_live_place,
+                domain_employee_info.weight,
+                domain_employee_info.height,
+                domain_employee_info.blood_type,
+                domain_employee_info.political_affiliation,
+                domain_employee_info.nation,
+                domain_employee_info.health,
+                domain_employee_info.resume_number,
+                domain_employee_info.house_number,
+                domain_employee_info.dwelling_unit,
+                domain_employee_info.work_address,
+                domain_employee_info.diploma,
+                domain_employee_info.education_type,
+                domain_employee_info.recruitment_sources,
+                domain_employee_info.graduate_school,
+                domain_employee_info.professional,
+                domain_employee_info.graduate_time,
+                domain_employee_info.english_ability,
+                domain_employee_info.computer_ability,
+                domain_employee_info.certificate,
+                domain_employee_info.other_language,
+                domain_employee_info.phone_number,
+                domain_employee_info.home_phone,
+                domain_employee_info.email,
+                domain_employee_info.qq,
+                domain_employee_info.title,
+                domain_employee_info.group_id,
+                domain_employee_info.work_type,
+                domain_employee_info.duty,
+                domain_employee_info.category,
+                domain_employee_info.grade,
+                domain_employee_info.position,
+                domain_employee_info.rank,
+                domain_employee_info.position_code,
+                domain_employee_info.post_practice_stage,
+                domain_employee_info.subdivision_post,
+                domain_employee_info.duty_rank,
+                domain_employee_info.admission_date,
+                domain_employee_info.state,
+                domain_employee_info.direct_leader_id,
+                domain_employee_info.approval_power_number,
+                domain_employee_info.bank_card,
+                domain_employee_info.remark,
+                domain_employee_info.photo_file_code,
+                domain_employee_info.create_time,
+                domain_employee_info.create_user_id,
+                domain_employee_info.update_user_id,
+                domain_employee_info.update_time,
+                domain_employee_info.is_delete,
+                domain_employee_info.person_remark,
+                domain_employee_info.english_score,
+                domain_employee_info.is_commitment,
+                domain_employee_info.create_user_name,
+                domain_employee_info.person_mechanism,
+                domain_employee_info.recruiter,
+                domain_employee_info.back_school_time
+            FROM
+                domain_employee_info,
+                domain_org_structure
+            <where>
+                <trim prefixOverrides="and">
+                    <if test="nameLike != null">and domain_employee_info.chinese_name like CONCAT(#{nameLike,jdbcType=VARCHAR},'%') </if>
+                    <if test="personnelNo != null">and domain_employee_info.person_number = #{personnelNo, jdbcType=VARCHAR} </if>
+                    <if test="isFormal != null">and domain_employee_info.is_formal = #{isFormal, jdbcType=INTEGER} </if>
+                    <if test="groupId != null">and domain_employee_info.group_id = #{groupId,jdbcType=INTEGER} </if>
+                    <if test="groupName != null">and domain_org_structure.group_name = #{groupName,jdbcType=INTEGER} </if>
+                    <if test="personnelStatus != null">and domain_employee_info.state = #{personnelStatus,jdbcType=BIT} </if>
+                    <if test="createTime != null">and domain_employee_info.create_time > #{createTime,jdbcType=TIMESTAMP} </if>
+                    <if test="updateTime != null">and domain_employee_info.update_time > #{updateTime,jdbcType=TIMESTAMP} </if>
+                    <if test="unitId != null">and domain_org_structure.unit_id = #{unitId,jdbcType=INTEGER} </if>
+                    <if test="unitName != null">and domain_org_structure.unit_name = #{unitName,jdbcType=TIMESTAMP} </if>
+                    <if test="departmentId != null">and domain_org_structure.department_id = #{departmentId,jdbcType=INTEGER} </if>
+                    <if test="departmentName != null">and domain_org_structure.department_name = #{departmentName,jdbcType=TIMESTAMP} </if>
+                </trim>
+                AND domain_employee_info.group_id = domain_org_structure.id
+            </where>
+            ) employee
+            LEFT JOIN domain_basic_info basic1 ON (
+                employee.duty = basic1.value_no
+                AND basic1.value_type = 'Duty'
+            )
+            LEFT JOIN domain_basic_info basic2 ON (
+                employee.diploma = basic2.value_no
+            AND basic2.value_type = 'Diploma'
+            )
     </select>
 
     <select id="selectMaxCreateTime" resultType="java.lang.String">
