@@ -32,7 +32,6 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 工号(系统自动生成)^[A-Za-z0-9]+$
      */
-    @Column(name = "`personnel_no`")
     @ApiModelProperty("工号(系统自动生成)")
     @NotNull(message = "工号不能为null")
     @NotEmpty(message = "工号不能为空字符串")
@@ -44,7 +43,6 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 姓名
      */
-    @Column(name = "`name`")
     @ApiModelProperty("姓名")
     @NotNull(message = "姓名不能为null")
     @NotEmpty(message = "姓名不能为空字符串")
@@ -53,7 +51,6 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 性别
      */
-    @Column(name = "`sex`")
     @ApiModelProperty("性别")
     @NotNull(message = "性别不能为null")
     @Max(value = 2, message = "性别只能为1或者2：1女 2男")
@@ -63,7 +60,6 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 联系方式
      */
-    @Column(name = "`mobile`")
     @ApiModelProperty("联系方式")
     @Pattern(regexp = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$", message = "联系方式输入格式有误，请检查")
     private String mobile;
@@ -72,7 +68,6 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 邮箱
      */
-    @Column(name = "`email`")
     @ApiModelProperty("邮箱")
     private String email;
 
@@ -80,21 +75,18 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 所在科室
      */
-    @Column(name = "`group_id`")
     @ApiModelProperty("所在科室")
     private Integer groupId;
 
     /**
      * 所在科室
      */
-    @Column(name = "`group_id`")
     @ApiModelProperty("二级部ID")
     private Integer parentId;
 
     /**
      * 所在科室
      */
-    @Column(name = "`group_name`")
     @ApiModelProperty("二级部名称")
     private String parentName;
 
@@ -107,7 +99,6 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 人员状态：1在职 2离职
      */
-    @Column(name = "`personnel_status`")
     @ApiModelProperty("人员状态：1在职 2离职")
     @Max(value = 2, message = "人员状态只能为1或者2：1在职 2离职")
     @Min(value = 1, message = "人员状态只能为1或者2：1在职 2离职")
@@ -116,9 +107,16 @@ public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * 是否删除：0否 1是
      */
-    @Column(name = "`delete_flag`")
     @ApiModelProperty("是否删除：0否 1是")
     private Boolean deleteFlag;
+
+    /**
+     * 入厂日期
+     */
+    @ApiModelProperty("入厂日期")
+    @DateTimeFormat(pattern = com.gw.cloud.common.base.util.DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
+    @JsonFormat(pattern = com.gw.cloud.common.base.util.DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = com.gw.cloud.common.base.util.DateUtil.DEFAULT_TIME_ZONE_TYPE)
+    private Date joinDate;
 
     public Boolean getDeleteFlag() {
         return deleteFlag;
