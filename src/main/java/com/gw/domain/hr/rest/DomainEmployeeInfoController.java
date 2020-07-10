@@ -63,6 +63,7 @@ public class DomainEmployeeInfoController {
                 .andEqualTo("deleteFlag", 0);
                 DomainOrgStructure domainOrgStructure = domainOrgStructureMapper.selectOneByExample(orgExample);
                 domainEmployeeInfoVO.setParentId(domainOrgStructure.getParentId());
+                domainEmployeeInfoVO.setParentName(domainOrgStructure.getTeamName());
             }
             jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVO);
         } catch (Exception var4) {
