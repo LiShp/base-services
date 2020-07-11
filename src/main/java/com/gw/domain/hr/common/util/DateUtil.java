@@ -1,4 +1,4 @@
-package com.gw.domain.hr.commonutils;
+package com.gw.domain.hr.common.util;
 
 import com.gw.cloud.common.base.util.StringUtil;
 

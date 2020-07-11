@@ -94,7 +94,7 @@ public class FileInfo extends AutoIncrementKeyBaseDomain<Long> {
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date createtime;
+    private Date createTime;
 
     /**
      * 更新时间

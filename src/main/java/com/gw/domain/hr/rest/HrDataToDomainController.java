@@ -2,9 +2,10 @@ package com.gw.domain.hr.rest;
 
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
-import com.gw.domain.hr.service.HrDataToDomainService;
+import com.gw.domain.hr.service.*;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,30 @@ public class HrDataToDomainController {
     @Resource
     private HrDataToDomainService hrDataToDomainService;
 
+    @Autowired
+    private SyncOrgStruAllService syncOrgStruAllService;
+
+    @Autowired
+    private SyncBasicInfoAllService syncBasicInfoAllService;
+
+    @Autowired
+    private SyncEmployeeAllService syncEmployeeAllService;
+
+    @Autowired
+    private SyncFileInfoAllService syncFileInfoAllService;
+
+    @Autowired
+    private SyncWorkAllService syncWorkAllService;
+
+    @Autowired
+    private SyncEmployeeNewService syncEmployeeNewService;
+
+    @Autowired
+    private SyncFileInfoNewService syncFileInfoNewService;
+
+    @Autowired
+    private SyncWorkNewService syncWorkNewService;
+
     /**
      * 全量导入数据 SQLserver表sys_Group到mysql表domain_org_structure表
      *
@@ -32,7 +57,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> sysGroupToOrgStruAll() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.sysGroupToOrgStruAll();
+            int num = syncOrgStruAllService.syncAll();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("..........从HR库中o_group获取全量数据发生异常：" + e.getMessage());
@@ -51,7 +76,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> sysFieldValueToBasicInfoAll() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.sysFieldValueToBasicInfoAll();
+            int num = syncBasicInfoAllService.syncAll();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库sys_FieldValue获取数据发生异常：" + e.getMessage());
@@ -69,7 +94,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> personnelToEmployeeInfoAll() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.personnelToEmployeeInfoAll();
+            int num = syncEmployeeAllService.syncAll();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取全量数据发生异常：" + e.getMessage());
@@ -106,7 +131,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> personnelToEmployeeInfoNew() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.personnelToEmployeeInfoNew();
+            int num = syncEmployeeNewService.syncNew("personnelNo");
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
@@ -123,7 +148,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> fileInfoSyncAll() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.fileInfoSyncAll();
+            int num = syncFileInfoAllService.syncAll();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
@@ -140,7 +165,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> fileInfoSyncNew() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.fileInfoSyncNew();
+            int num = syncFileInfoNewService.syncNew("code");
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
@@ -157,7 +182,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> workExperienceSyncAll() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.workExperienceSyncAll();
+            int num = syncWorkAllService.syncAll();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
@@ -174,7 +199,7 @@ public class HrDataToDomainController {
     public JsonResult<Object> workExperienceSyncNew() {
         JsonResult jsonResult;
         try {
-            int num = hrDataToDomainService.workExperienceSyncNew();
+            int num = syncWorkNewService.syncNew("workExperienceId");
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);

@@ -6,8 +6,8 @@ import com.github.pagehelper.PageInfo;
 import com.gw.cloud.common.base.service.BaseService;
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
-import com.gw.domain.hr.commonutils.HttpReturn;
-import com.gw.domain.hr.commonutils.HttpUtil;
+import com.gw.domain.hr.common.util.HttpReturn;
+import com.gw.domain.hr.common.util.HttpUtil;
 import com.gw.domain.hr.entity.DomainFileInfo;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
 import com.gw.domain.hr.entity.po.DomainEmpOrgResultPo;
@@ -28,7 +28,6 @@ import org.springframework.util.Assert;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author zoujialiang

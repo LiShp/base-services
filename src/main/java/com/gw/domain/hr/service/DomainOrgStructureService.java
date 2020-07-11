@@ -8,6 +8,7 @@ import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureVO;
 import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.enums.NodeTypeEnum;
+import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.ibatis.session.RowBounds;

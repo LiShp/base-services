@@ -4,7 +4,7 @@ import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
-import com.gw.domain.hr.commonutils.DateUtil;
+import com.gw.domain.hr.common.util.DateUtil;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;

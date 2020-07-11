@@ -2,7 +2,7 @@ package com.gw.domain.hr.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
-import com.gw.domain.hr.commonutils.DateUtil;
+import com.gw.domain.hr.common.util.DateUtil;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

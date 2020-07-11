@@ -1,7 +1,7 @@
 package com.gw.domain.hr.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gw.domain.hr.commonutils.DateUtil;
+import com.gw.domain.hr.common.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

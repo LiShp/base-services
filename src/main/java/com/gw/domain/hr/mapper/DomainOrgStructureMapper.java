@@ -1,7 +1,7 @@
 package com.gw.domain.hr.mapper;
 
-import com.gw.cloud.common.base.mapper.BaseMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
+import com.gw.domain.hr.common.mapper.DomainBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -10,11 +10,9 @@ import org.springframework.stereotype.Component;
  */
 @Mapper
 @Component
-public interface DomainOrgStructureMapper extends BaseMapper<DomainOrgStructure> {
+public interface DomainOrgStructureMapper extends DomainBaseMapper<DomainOrgStructure> {
 
-    String selectMaxCreateTime();
 
-    String selectMaxUpdateTime();
 
 }
 

@@ -1,10 +1,10 @@
 /**
  * 
  */
-package com.gw.domain.hr.commonutils;
+package com.gw.domain.hr.common.util;
 
 /**
- * @author kuangsheng@renrenche.com 2016年5月17日
+ * @author weixin
  * 
  */
 public class HttpReturn {
