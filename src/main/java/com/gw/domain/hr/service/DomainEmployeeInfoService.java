@@ -9,11 +9,11 @@ import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.common.util.HttpReturn;
 import com.gw.domain.hr.common.util.HttpUtil;
 import com.gw.domain.hr.entity.DomainFileInfo;
-import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
-import com.gw.domain.hr.entity.po.DomainEmpOrgResultPo;
-import com.gw.domain.hr.entity.po.DomainWorkExperienceResultPo;
-import com.gw.domain.hr.entity.vo.DomainEmployeeInfoVO;
-import com.gw.domain.hr.entity.vo.DomainWorkExperienceVo;
+import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPO;
+import com.gw.domain.hr.entity.po.DomainEmpOrgResponsePO;
+import com.gw.domain.hr.entity.po.DomainWorkExperienceResponsePO;
+import com.gw.domain.hr.entity.vo.DomainEmployeeInfoResponseVO;
+import com.gw.domain.hr.entity.vo.DomainWorkExperienceResponseVO;
 import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
@@ -58,11 +58,11 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
     @Value("${oss.minio.expiry}")
     private int expiry;
 
-    public DomainEmployeeInfoVO employee(DomainEmpOrgRequestPo domainEmpOrgRequestPo){
-        List<DomainEmpOrgResultPo> domainEmpOrgResultPoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
-        List<DomainEmployeeInfoVO> employeeVOList = null;
-        if(!domainEmpOrgResultPoList.isEmpty()) {
-            employeeVOList = DozerUtil.convert(domainEmpOrgResultPoList, DomainEmployeeInfoVO.class);
+    public DomainEmployeeInfoResponseVO employee(DomainEmpOrgRequestPO domainEmpOrgRequestPo){
+        List<DomainEmpOrgResponsePO> domainEmpOrgResponsePoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
+        List<DomainEmployeeInfoResponseVO> employeeVOList = null;
+        if(!domainEmpOrgResponsePoList.isEmpty()) {
+            employeeVOList = DozerUtil.convert(domainEmpOrgResponsePoList, DomainEmployeeInfoResponseVO.class);
             return employeeVOList.get(0);
         }
         return null;
@@ -102,29 +102,29 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
         }
     }
 
-    public QueryResult employeeList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows, Class clazz){
+    public QueryResult employeeList(DomainEmpOrgRequestPO domainEmpOrgRequestPo, int page, int rows, Class clazz){
         domainEmpOrgRequestPo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
         PageHelper.startPage(page, rows);
-        List<DomainEmpOrgResultPo> domainEmpOrgResultPoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
-        PageInfo<DomainEmpOrgResultPo> pageInfo = new PageInfo<>(domainEmpOrgResultPoList);
+        List<DomainEmpOrgResponsePO> domainEmpOrgResponsePoList = domainEmployeeInfoMapper.employeeList(domainEmpOrgRequestPo);
+        PageInfo<DomainEmpOrgResponsePO> pageInfo = new PageInfo<>(domainEmpOrgResponsePoList);
         List employeeVOList = null;
-        if(!domainEmpOrgResultPoList.isEmpty()) {
-            employeeVOList = DozerUtil.convert(domainEmpOrgResultPoList, clazz);
+        if(!domainEmpOrgResponsePoList.isEmpty()) {
+            employeeVOList = DozerUtil.convert(domainEmpOrgResponsePoList, clazz);
         }
         QueryResult queryResult = new QueryResult(pageInfo.getTotal(), employeeVOList, page);
         return queryResult;
     }
 
-    public QueryResult<DomainWorkExperienceVo> employeeWorkList(DomainEmpOrgRequestPo domainEmpOrgRequestPo, int page, int rows){
+    public QueryResult<DomainWorkExperienceResponseVO> employeeWorkList(DomainEmpOrgRequestPO domainEmpOrgRequestPo, int page, int rows){
         domainEmpOrgRequestPo.setIsFormal(EmployeeTypeEnum.FORMAL.getCode());
         PageHelper.startPage(page, rows);
-        List<DomainWorkExperienceResultPo> domainWorkExperienceResultPoList = domainWorkExperienceMapper.employeeWorkList(domainEmpOrgRequestPo);
-        PageInfo<DomainWorkExperienceResultPo> pageInfo = new PageInfo<>(domainWorkExperienceResultPoList);
+        List<DomainWorkExperienceResponsePO> domainWorkExperienceResponsePOList = domainWorkExperienceMapper.employeeWorkList(domainEmpOrgRequestPo);
+        PageInfo<DomainWorkExperienceResponsePO> pageInfo = new PageInfo<>(domainWorkExperienceResponsePOList);
         List workExperienceVoList = null;
-        if(!domainWorkExperienceResultPoList.isEmpty()) {
-            workExperienceVoList = DozerUtil.convert(domainWorkExperienceResultPoList, DomainWorkExperienceVo.class);
+        if(!domainWorkExperienceResponsePOList.isEmpty()) {
+            workExperienceVoList = DozerUtil.convert(domainWorkExperienceResponsePOList, DomainWorkExperienceResponseVO.class);
         }
-        QueryResult<DomainWorkExperienceVo> queryResult = new QueryResult(pageInfo.getTotal(), workExperienceVoList, page);
+        QueryResult<DomainWorkExperienceResponseVO> queryResult = new QueryResult(pageInfo.getTotal(), workExperienceVoList, page);
         return queryResult;
     }
 

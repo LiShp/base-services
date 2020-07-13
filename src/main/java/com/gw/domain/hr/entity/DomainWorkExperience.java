@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
+ * @author weixin
  * 表名：domain_work_experience
 */
 @Getter

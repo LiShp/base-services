@@ -8,8 +8,16 @@ import com.gw.cloud.common.base.mapper.BaseMapper;
  */
 public interface DomainBaseMapper<T> extends BaseMapper<T> {
 
+    /**
+     * 获取表的最大创建时间
+     * @return
+     */
     String selectMaxCreateTime();
 
+    /**
+     * 获取表的最大更新时间
+     * @return
+     */
     String selectMaxUpdateTime();
 }
 

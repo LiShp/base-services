@@ -21,7 +21,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class DomainEmpOrgRequestPo extends AutoIncrementKeyBaseDomain<Long> {
+public class DomainEmpOrgRequestPO extends AutoIncrementKeyBaseDomain<Long> {
 
     /**
      * 员工姓名

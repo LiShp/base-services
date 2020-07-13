@@ -19,7 +19,7 @@ import java.util.Date;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class DomainEmpOrgResultPo {
+public class DomainEmpOrgResponsePO {
 
     @Column(name = "`person_id`")
     private Long id;

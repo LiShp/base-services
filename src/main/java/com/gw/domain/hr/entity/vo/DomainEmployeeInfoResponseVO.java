@@ -27,7 +27,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel("")
-public class DomainEmployeeInfoVO extends AutoIncrementKeyBaseDomain<Long> {
+public class DomainEmployeeInfoResponseVO extends AutoIncrementKeyBaseDomain<Long> {
 
     /**
      * 工号(系统自动生成)^[A-Za-z0-9]+$

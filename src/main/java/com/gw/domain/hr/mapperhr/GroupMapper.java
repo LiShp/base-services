@@ -5,6 +5,9 @@ import com.gw.domain.hr.entity.hr.Group;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author weixin
+ */
 @Mapper
 @Component
 public interface GroupMapper extends BaseMapper<Group> {

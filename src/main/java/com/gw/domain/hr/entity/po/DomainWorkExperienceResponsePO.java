@@ -8,13 +8,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * @author weixin
  * 表名：domain_work_experience
 */
 @Getter
 @Setter
 @ToString
 @ApiModel("工作经历表-PO")
-public class DomainWorkExperienceResultPo extends DomainWorkExperience {
+public class DomainWorkExperienceResponsePO extends DomainWorkExperience {
     /**
      * 工号(系统自动生成)^[A-Za-z0-9]+$
      */

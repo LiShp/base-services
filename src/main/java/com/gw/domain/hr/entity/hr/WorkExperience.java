@@ -12,6 +12,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
+ * @author weixin
  * 表名：domain_work_experience
 */
 @Getter

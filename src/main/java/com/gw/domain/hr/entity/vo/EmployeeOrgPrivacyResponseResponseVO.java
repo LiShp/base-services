@@ -20,7 +20,7 @@ import java.util.Date;
 @ToString
 @Accessors(chain = true)
 @ApiModel("")
-public class EmployeeOrgPrivacyVO extends EmployeeOrgVO {
+public class EmployeeOrgPrivacyResponseResponseVO extends EmployeeOrgResponseVO {
 
     /**
      * 出生日期

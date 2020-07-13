@@ -5,6 +5,10 @@ import com.gw.domain.hr.entity.hr.WorkExperience;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author weixin
+ *
+ */
 @Mapper
 @Component
 public interface WorkExperienceMapper extends BaseMapper<WorkExperience> {

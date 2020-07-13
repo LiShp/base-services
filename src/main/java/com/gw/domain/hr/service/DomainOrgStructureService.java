@@ -3,12 +3,11 @@ package com.gw.domain.hr.service;
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
-import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.DomainOrgStructureResponseVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
-import com.gw.domain.hr.entity.vo.OrgStructureVO;
+import com.gw.domain.hr.entity.vo.OrgStructureResponseVO;
 import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.enums.NodeTypeEnum;
-import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.ibatis.session.RowBounds;
@@ -37,34 +36,13 @@ public class DomainOrgStructureService  {
     @Autowired
     private DomainEmployeeInfoService domainEmployeeInfoService;
 
-
-    /**
-     * 通过组织编码获取所有组织
-     *
-     * @param
-     * @return
-     */
-    /*public List<DomainOrgStructureNode> getGroupById(int groupCode) {
-        //获取所有的节点信息
-        List<DomainOrgStructureNode> queryList = domainOrgStructureMapper.getGroupAll();
-        //父节点
-        List<DomainOrgStructureNode> parentList = new ArrayList<>();
-        int size = queryList.size();
-        for (int i = 0; i < size; i++) {
-            if (queryList.get(i).getId().intValue() == groupCode) {
-                parentList.add(queryList.get(i));
-            }
-        }
-        getChildren(parentList, queryList);
-        return parentList;
-    }*/
-    public List<DomainOrgStructureVO> getGroupById(int groupId) {
+    public List<DomainOrgStructureResponseVO> getGroupById(int groupId) {
         //获取所有的节点信息
         Example example = new Example(DomainOrgStructure.class);
         example.createCriteria().andEqualTo("deleteFlag", "0")
                 .andEqualTo("parentId", groupId);
         List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExample(example);
-        List<DomainOrgStructureVO> employeeVOList = DozerUtil.convert(orgStructureList, DomainOrgStructureVO.class);
+        List<DomainOrgStructureResponseVO> employeeVOList = DozerUtil.convert(orgStructureList, DomainOrgStructureResponseVO.class);
         return employeeVOList;
     }
 
@@ -191,10 +169,10 @@ public class DomainOrgStructureService  {
      * @param rows
      * @return
      */
-    public QueryResult<OrgStructureVO> getGroupList(String createTime,
-                                                    String updateTime,
-                                                    Integer page,
-                                                    Integer rows) {
+    public QueryResult<OrgStructureResponseVO> getGroupList(String createTime,
+                                                            String updateTime,
+                                                            Integer page,
+                                                            Integer rows) {
         Example example = new Example(DomainOrgStructure.class);
 
         Example.Criteria criteria =  example.createCriteria();
@@ -206,9 +184,9 @@ public class DomainOrgStructureService  {
         }
         RowBounds rowBounds = new RowBounds(rows, (page-1)*rows);
         long totalRecords = domainOrgStructureMapper.selectCountByExample(example);
-        List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);//domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);
-        List<OrgStructureVO> orgStructureVOList = DozerUtil.convert(orgStructureList, OrgStructureVO.class);
-        QueryResult<OrgStructureVO> queryResult = new QueryResult(totalRecords, orgStructureVOList, page);
+        List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);
+        List<OrgStructureResponseVO> orgStructureResponseVOList = DozerUtil.convert(orgStructureList, OrgStructureResponseVO.class);
+        QueryResult<OrgStructureResponseVO> queryResult = new QueryResult(totalRecords, orgStructureResponseVOList, page);
         return queryResult;
     }
 

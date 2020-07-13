@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gw.domain.hr.mapper.DomainWorkExperienceMapper">
-    <resultMap id="Base_Result_Map_Work" type="com.gw.domain.hr.entity.po.DomainWorkExperienceResultPo">
+    <resultMap id="Base_Result_Map_Work" type="com.gw.domain.hr.entity.po.DomainWorkExperienceResponsePO">
 
         <result column="person_number" jdbcType="VARCHAR" property="personnelNo" />
         <result column="work_experience_id" jdbcType="INTEGER" property="workExperienceId" />
@@ -224,7 +224,7 @@
     </select>
 
 
-    <select id="employeeWorkList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Work">
+    <select id="employeeWorkList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPO" resultMap="Base_Result_Map_Work">
         select
         <include refid="Select_Field_Work"/>
         from domain_employee_info, domain_org_structure, domain_work_experience

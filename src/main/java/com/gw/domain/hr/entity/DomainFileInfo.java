@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
+ * @author weixin
  * 表名：domain_file_info
  * 表注释：文件信息表
 */

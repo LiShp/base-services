@@ -22,7 +22,7 @@ import java.util.Date;
 @ToString
 @Accessors(chain = true)
 @ApiModel("")
-public class EmployeeOrgVO implements Serializable {
+public class EmployeeOrgResponseVO implements Serializable {
 
     /**
      * 工号(系统自动生成)^[A-Za-z0-9]+$

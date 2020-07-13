@@ -7,7 +7,7 @@ import com.gw.cloud.common.core.util.JsonResultUtil;
 import com.gw.domain.hr.common.util.DateUtil;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.DomainOrgStructure;
-import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo;
+import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPO;
 import com.gw.domain.hr.entity.vo.*;
 import com.gw.domain.hr.enums.EmployeeTypeEnum;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
@@ -49,23 +49,23 @@ public class DomainEmployeeInfoController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/employee/{personnelNo}")
-    public JsonResult<DomainEmployeeInfoVO> selectEmployeeInfoSingleByPersonnelNo(@PathVariable("personnelNo") String personnelNo) {
+    public JsonResult<DomainEmployeeInfoResponseVO> selectEmployeeInfoSingleByPersonnelNo(@PathVariable("personnelNo") String personnelNo) {
         JsonResult jsonResult;
         try {
-            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            DomainEmpOrgRequestPO domainEmpOrgRequestPo = new DomainEmpOrgRequestPO();
             domainEmpOrgRequestPo.setPersonnelNo(personnelNo);
             domainEmpOrgRequestPo.setPersonnelStatus(1);
 
-            DomainEmployeeInfoVO domainEmployeeInfoVO = domainEmployeeInfoService.employee(domainEmpOrgRequestPo);
-            if(domainEmployeeInfoVO!=null) {
+            DomainEmployeeInfoResponseVO domainEmployeeInfoResponseVO = domainEmployeeInfoService.employee(domainEmpOrgRequestPo);
+            if(domainEmployeeInfoResponseVO !=null) {
                 Example orgExample = new Example(DomainOrgStructure.class);
-                orgExample.createCriteria().andEqualTo("id", domainEmployeeInfoVO.getGroupId())
+                orgExample.createCriteria().andEqualTo("id", domainEmployeeInfoResponseVO.getGroupId())
                 .andEqualTo("deleteFlag", 0);
                 DomainOrgStructure domainOrgStructure = domainOrgStructureMapper.selectOneByExample(orgExample);
-                domainEmployeeInfoVO.setParentId(domainOrgStructure.getParentId());
-                domainEmployeeInfoVO.setParentName(domainOrgStructure.getTeamName());
+                domainEmployeeInfoResponseVO.setParentId(domainOrgStructure.getParentId());
+                domainEmployeeInfoResponseVO.setParentName(domainOrgStructure.getTeamName());
             }
-            jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVO);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoResponseVO);
         } catch (Exception var4) {
             this.logger.error("通过工号查询人员基础信息异常，" ,var4);
             jsonResult = JsonResultUtil.createFailureJsonResult("通过工号查询人员基础信息异常！ {0}", var4);
@@ -97,7 +97,7 @@ public class DomainEmployeeInfoController {
             httpMethod = "POST"
     )
     @PostMapping(value = "/employees")
-    public JsonResult<List<DomainEmployeeInfoVO>> selectEmployeeInfoByPersonnelNos(@RequestBody @NotEmpty(message = "工号数组不能为空") List<String> personnelNo) {
+    public JsonResult<List<DomainEmployeeInfoResponseVO>> selectEmployeeInfoByPersonnelNos(@RequestBody @NotEmpty(message = "工号数组不能为空") List<String> personnelNo) {
         JsonResult jsonResult;
         try {
             Example example = new Example(DomainEmployeeInfo.class);
@@ -105,8 +105,8 @@ public class DomainEmployeeInfoController {
                     .andEqualTo("personnelStatus",1);
 
             List<DomainEmployeeInfo> domainEmployeeInfo = domainEmployeeInfoService.selectListByExample(example);
-            List<DomainEmployeeInfoVO> domainEmployeeInfoVOList = DozerUtil.convert(domainEmployeeInfo, DomainEmployeeInfoVO.class);
-            for(DomainEmployeeInfoVO info : domainEmployeeInfoVOList) {
+            List<DomainEmployeeInfoResponseVO> domainEmployeeInfoResponseVOList = DozerUtil.convert(domainEmployeeInfo, DomainEmployeeInfoResponseVO.class);
+            for(DomainEmployeeInfoResponseVO info : domainEmployeeInfoResponseVOList) {
                 Example orgExample = new Example(DomainOrgStructure.class);
                 orgExample.createCriteria().andEqualTo("id", info.getGroupId())
                         .andEqualTo("deleteFlag", 0);
@@ -120,7 +120,7 @@ public class DomainEmployeeInfoController {
                 info.setParentId(domainOrgStructure.getParentId());
                 info.setParentName(domainOrgStructure.getGroupName());
             }
-            jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoVOList);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoResponseVOList);
         } catch (Exception var4) {
             this.logger.error("通过工号查询人员基础信息异常，" ,var4);
             jsonResult = JsonResultUtil.createFailureJsonResult("通过工号查询人员基础信息异常！ {0}", var4);
@@ -134,7 +134,7 @@ public class DomainEmployeeInfoController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/employees/{groupId}")
-    public JsonResult<QueryResult<EmployeeVO>> employeesByGroup(@PathVariable("groupId") Integer groupId){
+    public JsonResult<QueryResult<EmployeeResponseVO>> employeesByGroup(@PathVariable("groupId") Integer groupId){
         JsonResult jsonResult;
         try {
             DomainEmployeeInfo domainEmployeeInfo = new DomainEmployeeInfo();
@@ -146,8 +146,8 @@ public class DomainEmployeeInfoController {
             if(domainEmployeeInfoList.isEmpty()) {
                 jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoList);
             }else{
-                List<EmployeeVO> employeeVOList = DozerUtil.convert(domainEmployeeInfoList, EmployeeVO.class);
-                jsonResult = JsonResultUtil.createSuccessJsonResult(employeeVOList);
+                List<EmployeeResponseVO> employeeResponseVOList = DozerUtil.convert(domainEmployeeInfoList, EmployeeResponseVO.class);
+                jsonResult = JsonResultUtil.createSuccessJsonResult(employeeResponseVOList);
             }
 
         } catch (Exception var4) {
@@ -163,7 +163,7 @@ public class DomainEmployeeInfoController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/employees")
-    public JsonResult<QueryResult<EmployeeOrgVO>> employees(
+    public JsonResult<QueryResult<EmployeeOrgResponseVO>> employees(
             @ApiParam(name = "nameLike", value = "员工姓名") @RequestParam(required = false) String nameLike,
             @ApiParam(name = "groupId", value = "组织ID") @RequestParam(required = false) Integer groupId,
             @ApiParam(name = "groupName", value = "组织名称") @RequestParam(required = false) String groupName,
@@ -181,7 +181,7 @@ public class DomainEmployeeInfoController {
         JsonResult jsonResult;
         try {
 
-            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            DomainEmpOrgRequestPO domainEmpOrgRequestPo = new DomainEmpOrgRequestPO();
             domainEmpOrgRequestPo.setNameLike(nameLike);
             domainEmpOrgRequestPo.setGroupId(groupId);
             domainEmpOrgRequestPo.setGroupName(groupName);
@@ -194,7 +194,7 @@ public class DomainEmployeeInfoController {
             domainEmpOrgRequestPo.setCreateTime(DateUtil.dateStrToDate(createTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
             domainEmpOrgRequestPo.setUpdateTime(DateUtil.dateStrToDate(updateTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
 
-            QueryResult<EmployeeOrgVO>  queryResult = domainEmployeeInfoService.employeeList(domainEmpOrgRequestPo,page, rows, EmployeeOrgVO.class);
+            QueryResult<EmployeeOrgResponseVO>  queryResult = domainEmployeeInfoService.employeeList(domainEmpOrgRequestPo,page, rows, EmployeeOrgResponseVO.class);
 
             return JsonResultUtil.createSuccessJsonResult(queryResult);
         } catch (Exception var4) {
@@ -211,7 +211,7 @@ public class DomainEmployeeInfoController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/employees/privacy")
-    public JsonResult<QueryResult<EmployeeOrgPrivacyVO>> employeesPrivacy(
+    public JsonResult<QueryResult<EmployeeOrgPrivacyResponseResponseVO>> employeesPrivacy(
             @ApiParam(name = "nameLike", value = "员工姓名") @RequestParam(required = false) String nameLike,
             @ApiParam(name = "groupId", value = "组织ID") @RequestParam(required = false) Integer groupId,
             @ApiParam(name = "groupName", value = "组织名称") @RequestParam(required = false) String groupName,
@@ -229,7 +229,7 @@ public class DomainEmployeeInfoController {
         JsonResult jsonResult;
         try {
 
-            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            DomainEmpOrgRequestPO domainEmpOrgRequestPo = new DomainEmpOrgRequestPO();
             domainEmpOrgRequestPo.setNameLike(nameLike);
             domainEmpOrgRequestPo.setGroupId(groupId);
             domainEmpOrgRequestPo.setGroupName(groupName);
@@ -242,7 +242,7 @@ public class DomainEmployeeInfoController {
             domainEmpOrgRequestPo.setCreateTime(DateUtil.dateStrToDate(createTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
             domainEmpOrgRequestPo.setUpdateTime(DateUtil.dateStrToDate(updateTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
 
-            QueryResult<EmployeeOrgPrivacyVO>  queryResult = domainEmployeeInfoService.employeeList(domainEmpOrgRequestPo,page, rows, EmployeeOrgPrivacyVO.class);
+            QueryResult<EmployeeOrgPrivacyResponseResponseVO>  queryResult = domainEmployeeInfoService.employeeList(domainEmpOrgRequestPo,page, rows, EmployeeOrgPrivacyResponseResponseVO.class);
 
             return JsonResultUtil.createSuccessJsonResult(queryResult);
         } catch (Exception var4) {
@@ -258,7 +258,7 @@ public class DomainEmployeeInfoController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/employees/work")
-    public JsonResult<QueryResult<DomainWorkExperienceVo>> employeesWork(
+    public JsonResult<QueryResult<DomainWorkExperienceResponseVO>> employeesWork(
             @ApiParam(name = "nameLike", value = "员工姓名") @RequestParam(required = false) String nameLike,
             @ApiParam(name = "groupId", value = "组织ID") @RequestParam(required = false) Integer groupId,
             @ApiParam(name = "groupName", value = "组织名称") @RequestParam(required = false) String groupName,
@@ -274,7 +274,7 @@ public class DomainEmployeeInfoController {
         JsonResult jsonResult;
         try {
 
-            DomainEmpOrgRequestPo domainEmpOrgRequestPo = new DomainEmpOrgRequestPo();
+            DomainEmpOrgRequestPO domainEmpOrgRequestPo = new DomainEmpOrgRequestPO();
             domainEmpOrgRequestPo.setNameLike(nameLike);
             domainEmpOrgRequestPo.setGroupId(groupId);
             domainEmpOrgRequestPo.setGroupName(groupName);
@@ -287,7 +287,7 @@ public class DomainEmployeeInfoController {
             domainEmpOrgRequestPo.setCreateTime(DateUtil.dateStrToDate(createTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
             domainEmpOrgRequestPo.setUpdateTime(DateUtil.dateStrToDate(updateTime, DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME_MICR));
 
-            QueryResult<DomainWorkExperienceVo>  queryResult = domainEmployeeInfoService.employeeWorkList(domainEmpOrgRequestPo,page, rows);
+            QueryResult<DomainWorkExperienceResponseVO>  queryResult = domainEmployeeInfoService.employeeWorkList(domainEmpOrgRequestPo,page, rows);
 
             return JsonResultUtil.createSuccessJsonResult(queryResult);
         } catch (Exception var4) {

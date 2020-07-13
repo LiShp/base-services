@@ -5,6 +5,9 @@ import com.gw.domain.hr.entity.hr.Person;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author weixin
+ */
 @Mapper
 @Component
 public interface PersonMapper extends BaseMapper<Person> {

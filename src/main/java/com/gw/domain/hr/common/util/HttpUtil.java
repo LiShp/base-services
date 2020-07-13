@@ -26,6 +26,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+/**
+ * @author weixin
+ */
 public class HttpUtil {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HttpUtil.class);

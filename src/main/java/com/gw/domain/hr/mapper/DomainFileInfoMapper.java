@@ -5,6 +5,9 @@ import com.gw.domain.hr.common.mapper.DomainBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author weixin
+ */
 @Mapper
 @Component
 public interface DomainFileInfoMapper extends DomainBaseMapper<DomainFileInfo> {

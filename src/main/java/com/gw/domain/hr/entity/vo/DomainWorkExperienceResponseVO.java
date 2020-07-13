@@ -15,13 +15,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * @author weixin
  * 表名：domain_work_experience
 */
 @Getter
 @Setter
 @ToString
-@ApiModel("工作经历表-PO")
-public class DomainWorkExperienceVo implements Serializable {
+@ApiModel("工作经历表-VO")
+public class DomainWorkExperienceResponseVO implements Serializable {
     /**
      * 本人员工id
      */
@@ -82,17 +83,6 @@ public class DomainWorkExperienceVo implements Serializable {
     @ApiModelProperty("工作内容描述")
     private String workDescription;
 
-    /**
-     * 直接主管
-     */
-    /*@ApiModelProperty("直接主管")
-    private String workDirectSupervisor;*/
-
-    /**
-     * 直接主管电话
-     */
-    /*@ApiModelProperty("直接主管电话")
-    private String supervisorPhone;*/
 
     /**
      * 更新时间

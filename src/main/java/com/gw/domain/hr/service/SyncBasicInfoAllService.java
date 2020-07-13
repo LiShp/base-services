@@ -5,7 +5,7 @@ import com.gw.domain.hr.entity.DomainBasicInfo;
 import com.gw.domain.hr.entity.hr.Dictionaries;
 import com.gw.domain.hr.mapper.DomainBasicInfoMapper;
 import com.gw.domain.hr.mapperhr.DictionariesMapper;
-import com.gw.domain.hr.service.template.SyncAllTemplate;
+import com.gw.domain.hr.service.template.AbstractSyncAllTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
-public class SyncBasicInfoAllService extends SyncAllTemplate<Dictionaries, DomainBasicInfo> {
+public class SyncBasicInfoAllService extends AbstractSyncAllTemplate<Dictionaries, DomainBasicInfo> {
 
     @Resource
     private DomainBasicInfoMapper domainBasicInfoMapper;

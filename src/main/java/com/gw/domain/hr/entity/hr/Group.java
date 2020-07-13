@@ -1,7 +1,6 @@
 package com.gw.domain.hr.entity.hr;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gw.cloud.common.base.entity.AutoIncrementKeyBaseDomain;
 import com.gw.cloud.common.base.util.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +15,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
+ * @author weixin
  * 表名：o_group
 */
 @Getter

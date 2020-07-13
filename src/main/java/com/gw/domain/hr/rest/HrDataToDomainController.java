@@ -160,8 +160,8 @@ public class HrDataToDomainController {
     /**
      * 头像信息同步-增量
      * @return
+     * @PostMapping(value = "/sync-file-new")
      */
-    //@PostMapping(value = "/sync-file-new")
     public JsonResult<Object> fileInfoSyncNew() {
         JsonResult jsonResult;
         try {

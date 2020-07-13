@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2020-07-11
  */
 
-public abstract class SyncAllTemplate<T1, T2> {
+public abstract class AbstractSyncAllTemplate<T1, T2> {
 
     private GWMLogger logger = GWMLoggerFactory.getSimpleLogger(this.getClass());
 
@@ -41,9 +41,9 @@ public abstract class SyncAllTemplate<T1, T2> {
         int loop = (count%pageSize==0?count/pageSize:count/pageSize+1);
         for(int i=0; i<loop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
-            List<T1> groupList = getHrMapper().selectByExampleAndRowBounds(countExample, rowBounds);
-            List<T2> domainOrgStructureList = DozerUtil.convert(groupList, clazzTo);
-            numCreate += getDomainMapper().insertList(domainOrgStructureList);
+            List<T1> fromList = getHrMapper().selectByExampleAndRowBounds(countExample, rowBounds);
+            List<T2> toList = DozerUtil.convert(fromList, clazzTo);
+            numCreate += getDomainMapper().insertList(toList);
             this.logger.info(MessageFormat.format("循环插入主数据，数据类型:{0}，数量:{1}", clazzTo, numCreate));
         }
 
@@ -51,8 +51,16 @@ public abstract class SyncAllTemplate<T1, T2> {
         return numCreate;
     }
 
+    /**
+     * 获取源数据Mapper
+     * @return
+     */
     public abstract BaseMapper getHrMapper();
 
+    /**
+     * 获取目标数据Mapper
+     * @return
+     */
     public abstract BaseMapper getDomainMapper();
 
 

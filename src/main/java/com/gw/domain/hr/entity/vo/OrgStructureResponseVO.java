@@ -23,7 +23,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("")
-public class OrgStructureVO extends AutoIncrementKeyBaseDomain<Long> {
+public class OrgStructureResponseVO extends AutoIncrementKeyBaseDomain<Long> {
     /**
      * sys_group表的groupId
      */

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gw.domain.hr.mapper.DomainEmployeeInfoMapper">
 
-    <resultMap id="Base_Result_Map_Emp_Org" type="com.gw.domain.hr.entity.po.DomainEmpOrgResultPo">
+    <resultMap id="Base_Result_Map_Emp_Org" type="com.gw.domain.hr.entity.po.DomainEmpOrgResponsePO">
 
         <id column="person_id" jdbcType="BIGINT" property="id" />
         <result column="person_number" jdbcType="VARCHAR" property="personnelNo" />
@@ -196,7 +196,7 @@
         <include refid="Select_Field"/>
     </sql>
 
-    <select id="employeeList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPo" resultMap="Base_Result_Map_Emp_Org">
+    <select id="employeeList" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPO" resultMap="Base_Result_Map_Emp_Org">
        SELECT
             employee.*,
             basic2.value_content AS diplomaName,

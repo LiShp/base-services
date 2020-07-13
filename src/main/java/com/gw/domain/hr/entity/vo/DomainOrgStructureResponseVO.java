@@ -25,7 +25,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("")
-public class DomainOrgStructureVO extends AutoIncrementKeyBaseDomain<Long> {
+public class DomainOrgStructureResponseVO extends AutoIncrementKeyBaseDomain<Long> {
 
     /**
      * 部门名称对应商旅deptName部门名称

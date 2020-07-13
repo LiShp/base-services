@@ -6,7 +6,7 @@ import com.gw.domain.hr.entity.hr.Person;
 import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.common.mapper.DomainBaseMapper;
 import com.gw.domain.hr.mapperhr.PersonMapper;
-import com.gw.domain.hr.service.template.SyncNewTemplate;
+import com.gw.domain.hr.service.template.AbstractSyncNewTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
-public class SyncEmployeeNewService extends SyncNewTemplate<Person, DomainEmployeeInfo> {
+public class SyncEmployeeNewService extends AbstractSyncNewTemplate<Person, DomainEmployeeInfo> {
 
     @Resource
     private DomainEmployeeInfoMapper domainEmployeeInfoMapper;

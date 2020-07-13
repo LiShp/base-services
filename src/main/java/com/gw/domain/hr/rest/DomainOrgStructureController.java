@@ -3,9 +3,9 @@ package com.gw.domain.hr.rest;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
-import com.gw.domain.hr.entity.vo.DomainOrgStructureVO;
+import com.gw.domain.hr.entity.vo.DomainOrgStructureResponseVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
-import com.gw.domain.hr.entity.vo.OrgStructureVO;
+import com.gw.domain.hr.entity.vo.OrgStructureResponseVO;
 import com.gw.domain.hr.service.DomainOrgStructureService;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
@@ -43,11 +43,11 @@ public class DomainOrgStructureController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/group/{groupId}")
-    public JsonResult<List<DomainOrgStructureVO>> getGroupById(@PathVariable("groupId") Integer groupId) {
+    public JsonResult<List<DomainOrgStructureResponseVO>> getGroupById(@PathVariable("groupId") Integer groupId) {
         this.logger.info("组织架构表_通过组织编码获取所有组织开始");
         JsonResult jsonResult;
         try {
-            List<DomainOrgStructureVO> resultList = domainOrgStructureService.getGroupById(groupId);
+            List<DomainOrgStructureResponseVO> resultList = domainOrgStructureService.getGroupById(groupId);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
@@ -122,7 +122,7 @@ public class DomainOrgStructureController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/groups")
-    public JsonResult<QueryResult<OrgStructureVO>> getGroupList(
+    public JsonResult<QueryResult<OrgStructureResponseVO>> getGroupList(
             @ApiParam(name = "createTime", value = "开始时间") @RequestParam(required = false) String createTime,
             @ApiParam(name = "updateTime", value = "更新时间") @RequestParam(required = false) String updateTime,
             @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -130,7 +130,7 @@ public class DomainOrgStructureController {
         this.logger.info("查询全量组织信息列表开始");
         JsonResult jsonResult;
         try {
-            QueryResult<OrgStructureVO> queryResult = domainOrgStructureService.getGroupList(createTime, updateTime, page, rows);
+            QueryResult<OrgStructureResponseVO> queryResult = domainOrgStructureService.getGroupList(createTime, updateTime, page, rows);
             jsonResult = JsonResultUtil.createSuccessJsonResult(queryResult);
         } catch (Exception var4) {
             this.logger.error("通过组织编码查询子级的员工列表发生异常" , var4);

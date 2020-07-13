@@ -1,21 +1,22 @@
 package com.gw.domain.hr.entity.vo;
 
-import com.gw.cloud.common.base.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
 
 /**
+ * @author weixin
  * @description 员工信息
- * @auther gwx
  * @date 2020-02-25
  */
 @Getter
 @Setter
-public class EmployeeVO implements Serializable {
+@ToString
+public class EmployeeResponseVO implements Serializable {
 
     /**
      * 工号

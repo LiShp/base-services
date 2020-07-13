@@ -6,7 +6,7 @@ import com.gw.domain.hr.entity.hrfile.FileInfo;
 import com.gw.domain.hr.mapper.DomainFileInfoMapper;
 import com.gw.domain.hr.common.mapper.DomainBaseMapper;
 import com.gw.domain.hr.mapperhrfile.FileInfoMapper;
-import com.gw.domain.hr.service.template.SyncNewTemplate;
+import com.gw.domain.hr.service.template.AbstractSyncNewTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
-public class SyncFileInfoNewService extends SyncNewTemplate<FileInfo, DomainFileInfo> {
+public class SyncFileInfoNewService extends AbstractSyncNewTemplate<FileInfo, DomainFileInfo> {
 
     @Resource
     private DomainFileInfoMapper domainFileInfoMapper;

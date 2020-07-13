@@ -6,7 +6,7 @@ import com.gw.domain.hr.entity.hr.WorkExperience;
 import com.gw.domain.hr.mapper.DomainWorkExperienceMapper;
 import com.gw.domain.hr.common.mapper.DomainBaseMapper;
 import com.gw.domain.hr.mapperhr.WorkExperienceMapper;
-import com.gw.domain.hr.service.template.SyncAllTemplate;
+import com.gw.domain.hr.service.template.AbstractSyncAllTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
-public class SyncWorkAllService extends SyncAllTemplate<WorkExperience, DomainWorkExperience> {
+public class SyncWorkAllService extends AbstractSyncAllTemplate<WorkExperience, DomainWorkExperience> {
 
     @Resource
     private WorkExperienceMapper workExperienceMapper;

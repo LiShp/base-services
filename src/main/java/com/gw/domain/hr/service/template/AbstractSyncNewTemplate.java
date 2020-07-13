@@ -22,7 +22,7 @@ import java.util.List;
  * @date 2020-07-11
  */
 
-public abstract class SyncNewTemplate<T1, T2> {
+public abstract class AbstractSyncNewTemplate<T1, T2> {
 
     private GWMLogger logger = GWMLoggerFactory.getSimpleLogger(this.getClass());
 
@@ -50,18 +50,18 @@ public abstract class SyncNewTemplate<T1, T2> {
         int careteLoop = (createCount%pageSize==0?createCount/pageSize:createCount/pageSize+1);
         for(int i=0; i<careteLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
-            List<T1> fileInfoList = getHrMapper().selectByExampleAndRowBounds(createExample, rowBounds);
-            List<T2> domainEmployeeInfoList = DozerUtil.convert(fileInfoList, clazzTo);
-            numCreate += getDomainMapper().insertList(domainEmployeeInfoList);
+            List<T1> fromList = getHrMapper().selectByExampleAndRowBounds(createExample, rowBounds);
+            List<T2> toList = DozerUtil.convert(fromList, clazzTo);
+            numCreate += getDomainMapper().insertList(toList);
             this.logger.info(MessageFormat.format("循环插入主数据，数据类型:{0}，数量:{1}", clazzTo, numCreate));
         }
 
         int updateLoop = (updateCount%pageSize==0?updateCount/pageSize:updateCount/pageSize+1);
         for(int i=0; i<updateLoop; i++){
             RowBounds rowBounds = new RowBounds(i*pageSize, pageSize);
-            List<T1> fileInfoList = getHrMapper().selectByExampleAndRowBounds(updateExample, rowBounds);
-            List<T2> domainFileInfoList = DozerUtil.convert(fileInfoList, clazzTo);
-            for(T2 targetObject : domainFileInfoList) {
+            List<T1> fromList = getHrMapper().selectByExampleAndRowBounds(updateExample, rowBounds);
+            List<T2> toList = DozerUtil.convert(fromList, clazzTo);
+            for(T2 targetObject : toList) {
                 Example example = new Example(clazzTo);
                 Field field = ReflectionUtils.findField(clazzTo, fieldName);
                 ReflectionUtils.makeAccessible(field);
@@ -69,14 +69,21 @@ public abstract class SyncNewTemplate<T1, T2> {
                 example.createCriteria().andEqualTo(fieldName, object);
                 numUpdate += getDomainMapper().updateByExampleSelective(targetObject, example);
             }
-            this.logger.info(MessageFormat.format("循环更新主数据，数据类型:{0}，数量:{1}", clazzTo, numCreate));
+            this.logger.info(MessageFormat.format("循环更新主数据，数据类型:{0}，数量:{1}", clazzTo, numUpdate));
         }
         this.logger.info(MessageFormat.format("人力资源向主数据全量同步数据结束:{0}到{1}。共同步新增数量:{2}，同步更新数量:{3}", clazzF, clazzTo, numCreate , numUpdate));
         return numCreate + numUpdate;
     }
 
+    /**
+     * 获取源数据Mapper
+     * @return
+     */
     public abstract BaseMapper getHrMapper();
-
+    /**
+     * 获取目标数据Mapper
+     * @return
+     */
     public abstract DomainBaseMapper getDomainMapper();
 
 
