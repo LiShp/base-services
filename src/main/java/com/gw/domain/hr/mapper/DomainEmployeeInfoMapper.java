@@ -3,7 +3,7 @@ package com.gw.domain.hr.mapper;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.po.DomainEmpOrgRequestPO;
 import com.gw.domain.hr.entity.po.DomainEmpOrgResponsePO;
-import com.gw.domain.hr.common.mapper.DomainBaseMapper;
+import com.gw.domain.common.mapper.DomainBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

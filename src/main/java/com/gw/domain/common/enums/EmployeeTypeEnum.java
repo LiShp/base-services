@@ -1,4 +1,4 @@
-package com.gw.domain.hr.enums;
+package com.gw.domain.common.enums;
 
 
 import lombok.Getter;
@@ -8,16 +8,16 @@ import lombok.Getter;
  * @author weixin
  */
 @Getter
-public enum NodeTypeEnum {
+public enum EmployeeTypeEnum {
 
     /**
      * STATUS_ERROR_10 工号不能为空提示
      */
-    ROG(2,"组织信息"),
-    EMP(1,"员工信息");
+    FORMAL(1,"正式工"),
+    NON_FORMAL(2,"非正式工");
 
 
-    NodeTypeEnum(Integer code, String message) {
+    EmployeeTypeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

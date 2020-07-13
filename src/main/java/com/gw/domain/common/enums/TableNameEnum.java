@@ -1,4 +1,4 @@
-package com.gw.domain.hr.enums;
+package com.gw.domain.common.enums;
 
 
 import lombok.Getter;

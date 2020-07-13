@@ -6,8 +6,8 @@ import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureResponseVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureResponseVO;
-import com.gw.domain.hr.enums.EmployeeTypeEnum;
-import com.gw.domain.hr.enums.NodeTypeEnum;
+import com.gw.domain.common.enums.EmployeeTypeEnum;
+import com.gw.domain.common.enums.NodeTypeEnum;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.ibatis.session.RowBounds;
@@ -182,7 +182,7 @@ public class DomainOrgStructureService  {
         if(!StringUtils.isEmpty(updateTime)){
             criteria.andGreaterThan("updateTime", updateTime);
         }
-        RowBounds rowBounds = new RowBounds(rows, (page-1)*rows);
+        RowBounds rowBounds = new RowBounds((page-1)*rows, rows);
         long totalRecords = domainOrgStructureMapper.selectCountByExample(example);
         List<DomainOrgStructure> orgStructureList = domainOrgStructureMapper.selectByExampleAndRowBounds(example, rowBounds);
         List<OrgStructureResponseVO> orgStructureResponseVOList = DozerUtil.convert(orgStructureList, OrgStructureResponseVO.class);

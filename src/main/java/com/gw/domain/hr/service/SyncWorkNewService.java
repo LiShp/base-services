@@ -4,7 +4,7 @@ import com.gw.cloud.common.base.mapper.BaseMapper;
 import com.gw.domain.hr.entity.DomainWorkExperience;
 import com.gw.domain.hr.entity.hr.WorkExperience;
 import com.gw.domain.hr.mapper.DomainWorkExperienceMapper;
-import com.gw.domain.hr.common.mapper.DomainBaseMapper;
+import com.gw.domain.common.mapper.DomainBaseMapper;
 import com.gw.domain.hr.mapperhr.WorkExperienceMapper;
 import com.gw.domain.hr.service.template.AbstractSyncNewTemplate;
 import org.springframework.stereotype.Service;

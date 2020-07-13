@@ -2,7 +2,7 @@ package com.gw.domain.hr.service.template;
 
 import com.gw.cloud.common.base.mapper.BaseMapper;
 import com.gw.cloud.common.base.util.DozerUtil;
-import com.gw.domain.hr.common.mapper.DomainBaseMapper;
+import com.gw.domain.common.mapper.DomainBaseMapper;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
 import org.apache.ibatis.session.RowBounds;

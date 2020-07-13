@@ -1,4 +1,4 @@
-package com.gw.domain.hr.common.mapper;
+package com.gw.domain.common.mapper;
 
 import com.gw.cloud.common.base.mapper.BaseMapper;
 

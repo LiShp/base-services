@@ -1,4 +1,4 @@
-package com.gw.domain.hr.config;
+package com.gw.domain.common.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -21,37 +21,37 @@ import javax.sql.DataSource;
  * @author gwx
  */
 @Configuration
-@MapperScan(value = "com.gw.domain.hr.mapperhr", sqlSessionFactoryRef = "hrSessionFactory")
-public class DataMybatisMysqlHrConfig {
+@MapperScan(value = "com.gw.domain.hr.mapperhrfile", sqlSessionFactoryRef = "hrFileSessionFactory")
+public class DataMybatisMysqlHrFileConfig {
 
     @Autowired
     private Environment env;
 
 
-    @Bean(name = "hrDataSource")
-    @Qualifier("hrDataSource")
-    @ConfigurationProperties(prefix="spring.datasource.mysql-hr")
+    @Bean(name = "hrFileDataSource")
+    @Qualifier("hrFileDataSource")
+    @ConfigurationProperties(prefix="spring.datasource.mysql-hr-file")
     public DataSource primaryDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "hrSessionFactory")
-    SqlSessionFactory sqlSessionFactoryMysqlHrFile(@Qualifier("hrDataSource") DataSource dataSource)
+    @Bean(name = "hrFileSessionFactory")
+    SqlSessionFactory sqlSessionFactoryMysqlHrFile(@Qualifier("hrFileDataSource") DataSource dataSource)
             throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.sql-hr-server")));
+        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.sql-hr-file-server")));
         factoryBean.setConfigLocation(new DefaultResourceLoader().getResource(env.getProperty("mybatis.mybatis-locations")));
         return factoryBean.getObject();
     }
 
-    @Bean(name = "hrTransactionManager")
-    public DataSourceTransactionManager testTransactionManager(@Qualifier("hrDataSource") DataSource dataSource) {
+    @Bean(name = "hrFileTransactionManager")
+    public DataSourceTransactionManager testTransactionManager(@Qualifier("hrFileDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "hrSqlSessionTemplate")
-    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("hrSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = "hrFileSqlSessionTemplate")
+    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("hrFileSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

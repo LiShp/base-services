@@ -12,7 +12,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @EnableSwagger2
 @MapperScan(basePackages = {"com.gw.domain.hr.mapper", "com.gw.domain.hr.mapperhr", "com.gw.domain.hr.mapperhrfile"})
-@ComponentScan(basePackages = {"com.gw.domain.hr.*","com.gw.cloud.common.base.config"})
+@ComponentScan(basePackages = {"com.gw.domain.*","com.gw.cloud.common.base.config"})
 @EnableTransactionManagement
 @SpringBootApplication
 public class DomainHrApplication {

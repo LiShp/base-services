@@ -1,4 +1,4 @@
-package com.gw.domain.hr.common.util;
+package com.gw.domain.common.util;
 
 import org.springframework.stereotype.Component;
 
