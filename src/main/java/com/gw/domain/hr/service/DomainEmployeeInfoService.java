@@ -15,6 +15,7 @@ import com.gw.domain.hr.entity.po.DomainWorkExperienceResponsePO;
 import com.gw.domain.hr.entity.vo.DomainEmployeeInfoResponseVO;
 import com.gw.domain.hr.entity.vo.DomainWorkExperienceResponseVO;
 import com.gw.domain.common.enums.EmployeeTypeEnum;
+import com.gw.domain.hr.entity.vo.EmployeeResponseVO;
 import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.mapper.DomainFileInfoMapper;
@@ -110,6 +111,17 @@ public class DomainEmployeeInfoService extends BaseService<Long,DomainEmployeeIn
         List employeeVOList = null;
         if(!domainEmpOrgResponsePoList.isEmpty()) {
             employeeVOList = DozerUtil.convert(domainEmpOrgResponsePoList, clazz);
+        }
+        QueryResult queryResult = new QueryResult(pageInfo.getTotal(), employeeVOList, page);
+        return queryResult;
+    }
+    public QueryResult employeeListAll(DomainEmpOrgRequestPO domainEmpOrgRequestPo, int page, int rows){
+        PageHelper.startPage(page, rows);
+        List<DomainEmpOrgResponsePO> domainEmpOrgResponsePoList = domainEmployeeInfoMapper.employeeListAll(domainEmpOrgRequestPo);
+        PageInfo<DomainEmpOrgResponsePO> pageInfo = new PageInfo<>(domainEmpOrgResponsePoList);
+        List employeeVOList = null;
+        if(!domainEmpOrgResponsePoList.isEmpty()) {
+            employeeVOList = DozerUtil.convert(domainEmpOrgResponsePoList, EmployeeResponseVO.class);
         }
         QueryResult queryResult = new QueryResult(pageInfo.getTotal(), employeeVOList, page);
         return queryResult;

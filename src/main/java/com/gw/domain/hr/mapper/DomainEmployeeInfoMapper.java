@@ -23,6 +23,13 @@ public interface DomainEmployeeInfoMapper extends DomainBaseMapper<DomainEmploye
      */
     List<DomainEmpOrgResponsePO> employeeList(DomainEmpOrgRequestPO domainEmpOrgRequestPo);
 
+    /**
+     * 获取员工列表
+     * @param domainEmpOrgRequestPo
+     * @return
+     */
+    List<DomainEmpOrgResponsePO> employeeListAll(DomainEmpOrgRequestPO domainEmpOrgRequestPo);
+
 }
 
 

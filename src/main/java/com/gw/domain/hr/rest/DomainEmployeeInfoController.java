@@ -204,6 +204,31 @@ public class DomainEmployeeInfoController {
         return jsonResult;
     }
 
+    @ApiOperation(
+            value = "【自定义】- 查询员工信息列表(全量)",
+            notes = "【自定义】- 查询员工信息列表(全量)",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/employees_temp")
+    public JsonResult<QueryResult<EmployeeResponseVO>> employeesAll(
+            @ApiParam(name = "personnelStatus", value = "是否在职,1在职、2离职") @RequestParam(required = false) Integer personnelStatus,
+            @ApiParam(name = "page", value = "页码（默认为1）") @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @ApiParam(name = "rows", value = "每页显示条数（默认为10）") @RequestParam(value = "rows", defaultValue = "10") Integer rows){
+        JsonResult jsonResult;
+        try {
+
+            DomainEmpOrgRequestPO domainEmpOrgRequestPo = new DomainEmpOrgRequestPO();
+            domainEmpOrgRequestPo.setPersonnelStatus(personnelStatus);
+            QueryResult<EmployeeResponseVO>  queryResult = domainEmployeeInfoService.employeeListAll(domainEmpOrgRequestPo,page, rows);
+
+            return JsonResultUtil.createSuccessJsonResult(queryResult);
+        } catch (Exception var4) {
+            this.logger.error("根据groupID查询员工信息" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("根据groupID查询员工信息{0}", var4);
+        }
+        return jsonResult;
+    }
+
 
     @ApiOperation(
             value = "【自定义】- 查询员工信息列表（包含身高/体重/学历信息）",

@@ -313,6 +313,19 @@
             )
     </select>
 
+    <select id="employeeListAll" parameterType="com.gw.domain.hr.entity.po.DomainEmpOrgRequestPO" resultMap="Base_Result_Map_Emp_Org">
+        SELECT
+        domain_employee_info.person_number,
+        domain_employee_info.chinese_name
+        FROM
+        domain_employee_info
+        <where>
+            <trim prefixOverrides="and">
+                <if test="personnelStatus != null">and domain_employee_info.state = #{personnelStatus,jdbcType=BIT} </if>
+            </trim>
+        </where>
+    </select>
+
     <select id="selectMaxCreateTime" resultType="java.lang.String">
         select max(create_time) from domain_employee_info
     </select>
