@@ -118,6 +118,12 @@ public class DomainEmployeeInfoResponseVO extends AutoIncrementKeyBaseDomain<Lon
     @JsonFormat(pattern = com.gw.cloud.common.base.util.DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = com.gw.cloud.common.base.util.DateUtil.DEFAULT_TIME_ZONE_TYPE)
     private Date joinDate;
 
+    /**
+     * 职务名称
+     */
+    @ApiModelProperty("职务名称")
+    private String dutyName;
+
     public Boolean getDeleteFlag() {
         return deleteFlag;
     }
