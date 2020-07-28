@@ -1,7 +1,9 @@
 package com.gw.domain.hr.rest;
 
+import com.gw.cloud.common.base.exception.BusinessException;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
+import com.gw.domain.common.exception.SyncException;
 import com.gw.domain.hr.service.*;
 import com.gw.gwlog.GWMLogger;
 import com.gw.gwlog.GWMLoggerFactory;
@@ -61,9 +63,22 @@ public class HrDataToDomainController {
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("..........从HR库中o_group获取全量数据发生异常：" + e.getMessage());
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            //jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            throw new SyncException(String.format("组织结构数据全量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
+    }
+
+    /**
+     * 全量导入数据 SQLserver表sys_Group到mysql表domain_org_structure表
+     *
+     * @return
+     */
+    @PostMapping(value = "/sync-test")
+    public JsonResult<Object> syncTest() {
+        JsonResult jsonResult;
+        throw new BusinessException("test");
+        //return jsonResult;
     }
 
 
@@ -80,7 +95,8 @@ public class HrDataToDomainController {
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库sys_FieldValue获取数据发生异常：" + e.getMessage());
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            //jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            throw new SyncException(String.format("基本信息数据增量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
     }
@@ -135,7 +151,8 @@ public class HrDataToDomainController {
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            //jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            throw new SyncException(String.format("员工数据增量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
     }
@@ -152,7 +169,8 @@ public class HrDataToDomainController {
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            //jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            throw new SyncException(String.format("文件数据全量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
     }
@@ -203,7 +221,8 @@ public class HrDataToDomainController {
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
-            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            //jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            throw new SyncException(String.format("工作经历数据增量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
     }
