@@ -106,7 +106,7 @@ public class DomainFileInfo extends AutoIncrementKeyBaseDomain<Long> {
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME)
     @JsonFormat(pattern = DateUtil.DEFAULT_FORMAT_PATTERN_DATETIME, timezone = DateUtil.DEFAULT_TIME_ZONE_TYPE)
-    private Date updatetime;
+    private Date updateTime;
 
     /**
      * 文件盘/桶

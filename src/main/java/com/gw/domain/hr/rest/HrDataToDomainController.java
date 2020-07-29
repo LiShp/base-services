@@ -178,8 +178,9 @@ public class HrDataToDomainController {
     /**
      * 头像信息同步-增量
      * @return
-     * @PostMapping(value = "/sync-file-new")
+     *
      */
+    @PostMapping(value = "/sync-file-new")
     public JsonResult<Object> fileInfoSyncNew() {
         JsonResult jsonResult;
         try {
@@ -188,6 +189,7 @@ public class HrDataToDomainController {
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
             jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            throw new SyncException(String.format("文件数据增量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
     }
