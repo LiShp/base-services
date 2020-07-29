@@ -165,12 +165,12 @@ public class HrDataToDomainController {
     public JsonResult<Object> fileInfoSyncAll() {
         JsonResult jsonResult;
         try {
-            int num = syncFileInfoAllService.syncAll();
+            int num = 0;//syncFileInfoAllService.syncAll();
             jsonResult = JsonResultUtil.createSuccessJsonResult(num);
         } catch (Exception e) {
             this.logger.error("从Sqlserver中间库hr_Personnel获取增量数据发生异常：" , e);
-            //jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
-            throw new SyncException(String.format("文件数据全量同步异常：%s", e.getMessage()));
+            jsonResult = JsonResultUtil.createFailureJsonResult("创建失败！ {0}", e);
+            //throw new SyncException(String.format("文件数据全量同步异常：%s", e.getMessage()));
         }
         return jsonResult;
     }
