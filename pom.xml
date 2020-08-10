@@ -22,6 +22,12 @@
             <groupId>com.gw</groupId>
             <artifactId>gw-cloud-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--springboot引入监控依赖-->
         <dependency>
@@ -92,6 +98,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.49</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
