@@ -124,6 +124,14 @@ public class DomainEmployeeInfoResponseVO extends AutoIncrementKeyBaseDomain<Lon
     @ApiModelProperty("职务名称")
     private String dutyName;
 
+    /**
+     * 职务,字典表维护,举例:董事长,本部长,总经理,科长
+     */
+    @Column(name = "`duty`")
+    @ApiModelProperty("职务,字典表维护,举例:董事长,本部长,总经理,科长")
+    private Integer duty;
+
+
     public Boolean getDeleteFlag() {
         return deleteFlag;
     }

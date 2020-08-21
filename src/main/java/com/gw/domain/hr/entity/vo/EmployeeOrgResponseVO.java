@@ -10,6 +10,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -148,6 +149,13 @@ public class EmployeeOrgResponseVO implements Serializable {
      */
     @ApiModelProperty("职务")
     private String dutyName;
+
+    /**
+     * 职务,字典表维护,举例:董事长,本部长,总经理,科长
+     */
+    @Column(name = "`duty`")
+    @ApiModelProperty("职务,字典表维护,举例:董事长,本部长,总经理,科长")
+    private Integer duty;
 
 
 
