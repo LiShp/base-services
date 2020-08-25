@@ -64,6 +64,32 @@ public class DomainOrgStructureController {
      * @return
      */
     @ApiOperation(
+            value = "【自定义】- 通过组织编码查询所有子集组织名称和ID（树形结构）",
+            notes = "【自定义】- 通过组织编码查询所有子集组织名称和ID（树形结构）",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/getGroupTreeById")
+    public JsonResult<List<DomainOrgStructureResponseVO>> getGroupTreeById(@RequestParam Integer groupId , @RequestParam(required = false) Integer level) {
+        this.logger.info("组织架构表_通过组织编码获取所有组织开始");
+        JsonResult jsonResult;
+        try {
+            List<DomainOrgStructureResponseVO> resultList = domainOrgStructureService.getGroupByTree(groupId ,level);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
+        } catch (Exception var4) {
+            this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
+        }
+        this.logger.info("组织架构表_通过组织编码获取所有组织结束");
+        return jsonResult;
+    }
+
+    /**
+     * 人员信息表 通过组织id获取树形结构 暂定只返回组织编码/组织名称/父级编码
+     *
+     * @param groupId
+     * @return
+     */
+    @ApiOperation(
             value = "【自定义】- 通过组织编码查询子集组织名称和ID以及组织下的员工信息",
             notes = "【自定义】- 通过组织编码查询子集组织名称和ID以及组织下的员工信息",
             httpMethod = "GET"

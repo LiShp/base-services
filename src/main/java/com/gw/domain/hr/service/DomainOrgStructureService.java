@@ -2,6 +2,7 @@ package com.gw.domain.hr.service;
 
 import com.gw.cloud.common.base.util.DozerUtil;
 import com.gw.cloud.common.base.util.QueryResult;
+import com.gw.domain.common.util.TreeUtil;
 import com.gw.domain.hr.entity.DomainEmployeeInfo;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureResponseVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
@@ -190,6 +191,16 @@ public class DomainOrgStructureService  {
         return queryResult;
     }
 
+    public List<DomainOrgStructureResponseVO> getGroupByTree(Integer groupId , Integer level) {
+        DomainOrgStructure domainOrgStructure = new DomainOrgStructure();
+        domainOrgStructure.setId(groupId.longValue());
+        domainOrgStructure.setLevel(level);
+        domainOrgStructure.setDeleteFlag(0);
+        DomainOrgStructureResponseVO domainOrgStructure1 = domainOrgStructureMapper.selectById(groupId);
+        List<DomainOrgStructureResponseVO> treeList= domainOrgStructureMapper.getGroupByTree(domainOrgStructure);
+        List<DomainOrgStructureResponseVO> sysChildren = new ArrayList<>();
+        return TreeUtil.findChildren(treeList, sysChildren, domainOrgStructure1.getParentId().longValue());
+    }
 }
 
 
