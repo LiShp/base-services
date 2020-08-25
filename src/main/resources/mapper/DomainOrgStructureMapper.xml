@@ -5,6 +5,7 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName" />
         <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+        <result column="level" jdbcType="INTEGER" property="level" />
     </resultMap>
     <select id="selectMaxCreateTime" resultType="java.lang.String">
         select max(create_time) from domain_org_structure
@@ -29,5 +30,15 @@
         ) t1,
         (select @pids := #{id}) t2
         ) t3 where ischild != 0 or id=#{id}
+    </select>
+
+    <select id="getGroupByName" parameterType="java.lang.String" resultMap="Base_Result_Map">
+        select * from domain_org_structure where group_name like concat('%', #{groupName}, '%')
+        and delete_flag=0
+    </select>
+
+    <select id="selectByParentId" parameterType="java.lang.Long" resultMap="Base_Result_Map">
+        select * from domain_org_structure where id=#{parentId}
+        and delete_flag=0
     </select>
 </mapper>

@@ -201,6 +201,17 @@ public class DomainOrgStructureService  {
         List<DomainOrgStructureResponseVO> sysChildren = new ArrayList<>();
         return TreeUtil.findChildren(treeList, sysChildren, domainOrgStructure1.getParentId().longValue());
     }
+
+    public List<String> getGroupByName(String groupName) {
+        List<DomainOrgStructureResponseVO> domainOrgStructures = domainOrgStructureMapper.getGroupByName(groupName);
+        ArrayList<String> list = new ArrayList<>();
+        for (DomainOrgStructureResponseVO entity : domainOrgStructures) {
+            DomainOrgStructureResponseVO structure = domainOrgStructureMapper.selectByParentId(entity.getParentId());
+            String groupName1 = entity.getGroupName()+"("+structure.getGroupName()+")";
+            list.add(groupName1);
+        }
+        return list;
+    }
 }
 
 

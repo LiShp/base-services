@@ -3,6 +3,7 @@ package com.gw.domain.hr.rest;
 import com.gw.cloud.common.base.util.QueryResult;
 import com.gw.cloud.common.core.base.result.JsonResult;
 import com.gw.cloud.common.core.util.JsonResultUtil;
+import com.gw.domain.hr.entity.DomainOrgStructure;
 import com.gw.domain.hr.entity.vo.DomainOrgStructureResponseVO;
 import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureResponseVO;
@@ -60,6 +61,32 @@ public class DomainOrgStructureController {
     /**
      * 人员信息表 通过组织id获取树形结构 暂定只返回组织编码/组织名称/父级编码
      *
+     * @param groupName
+     * @return
+     */
+    @ApiOperation(
+            value = "【自定义】- 通过组织名称查询模糊组织信息以及上级组织",
+            notes = "【自定义】- 通过组织名称查询模糊组织信息以及上级组织",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/getGroupByName/{groupName}")
+    public JsonResult<List<String>> getGroupByName(@PathVariable("groupName") String  groupName) {
+        this.logger.info("组织架构表_通过组织编码获取所有组织开始");
+        JsonResult jsonResult;
+        try {
+            List<String> resultList = domainOrgStructureService.getGroupByName(groupName);
+            jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
+        } catch (Exception var4) {
+            this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
+            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
+        }
+        this.logger.info("组织架构表_通过组织编码获取所有组织结束");
+        return jsonResult;
+    }
+
+    /**
+     * 人员信息表 通过组织id获取树形结构 暂定只返回组织编码/组织名称/父级编码
+     *
      * @param groupId
      * @return
      */
@@ -69,7 +96,8 @@ public class DomainOrgStructureController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/getGroupTreeById")
-    public JsonResult<List<DomainOrgStructureResponseVO>> getGroupTreeById(@RequestParam Integer groupId , @RequestParam(required = false) Integer level) {
+    public JsonResult<List<DomainOrgStructureResponseVO>> getGroupTreeById(@ApiParam(name = "groupId", value = "组织id")@RequestParam Integer groupId ,
+                                                                           @ApiParam(name = "level", value = "组织层级")@RequestParam(required = false) Integer level) {
         this.logger.info("组织架构表_通过组织编码获取所有组织开始");
         JsonResult jsonResult;
         try {

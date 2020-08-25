@@ -49,4 +49,11 @@ public class DomainOrgStructureResponseVO extends AutoIncrementKeyBaseDomain<Lon
     @Column(name = "`parent_id`")
     @ApiModelProperty("上级组织ID")
     private Long parentId;
+
+    /**
+     * 所在等级
+     */
+    @Column(name = "`level`")
+    @ApiModelProperty("所在等级")
+    private Integer level;
 }

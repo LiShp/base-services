@@ -19,6 +19,10 @@ public interface DomainOrgStructureMapper extends DomainBaseMapper<DomainOrgStru
     List<DomainOrgStructureResponseVO> getGroupByTree(DomainOrgStructure domainOrgStructure);
 
     DomainOrgStructureResponseVO selectById(Integer groupId);
+
+    List<DomainOrgStructureResponseVO> getGroupByName(String groupName);
+
+    DomainOrgStructureResponseVO selectByParentId(Long id);
 }
 
 

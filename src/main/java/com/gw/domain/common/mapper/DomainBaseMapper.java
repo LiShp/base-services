@@ -1,6 +1,9 @@
 package com.gw.domain.common.mapper;
 
 import com.gw.cloud.common.base.mapper.BaseMapper;
+import com.gw.domain.hr.entity.vo.DomainOrgStructureResponseVO;
+
+import java.util.List;
 
 /**
  * @author gwx
@@ -19,6 +22,7 @@ public interface DomainBaseMapper<T> extends BaseMapper<T> {
      * @return
      */
     String selectMaxUpdateTime();
+
 }
 
 
