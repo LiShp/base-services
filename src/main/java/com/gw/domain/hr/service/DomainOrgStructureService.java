@@ -202,13 +202,16 @@ public class DomainOrgStructureService  {
         return TreeUtil.findChildren(treeList, sysChildren, domainOrgStructure1.getParentId().longValue());
     }
 
-    public List<String> getGroupByName(String groupName) {
+    public List<DomainOrgStructureResponseVO> getGroupByName(String groupName) {
         List<DomainOrgStructureResponseVO> domainOrgStructures = domainOrgStructureMapper.getGroupByName(groupName);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<DomainOrgStructureResponseVO> list = new ArrayList<>();
         for (DomainOrgStructureResponseVO entity : domainOrgStructures) {
             DomainOrgStructureResponseVO structure = domainOrgStructureMapper.selectByParentId(entity.getParentId());
             String groupName1 = entity.getGroupName()+"("+structure.getGroupName()+")";
-            list.add(groupName1);
+            DomainOrgStructureResponseVO domainOrgStructureResponseVO = new DomainOrgStructureResponseVO();
+            domainOrgStructureResponseVO.setId(entity.getId());
+            domainOrgStructureResponseVO.setGroupName(groupName1);
+            list.add(domainOrgStructureResponseVO);
         }
         return list;
     }

@@ -70,11 +70,11 @@ public class DomainOrgStructureController {
             httpMethod = "GET"
     )
     @GetMapping(value = "/getGroupByName/{groupName}")
-    public JsonResult<List<String>> getGroupByName(@PathVariable("groupName") String  groupName) {
+    public JsonResult<List<DomainOrgStructureResponseVO>> getGroupByName(@PathVariable("groupName") String  groupName) {
         this.logger.info("组织架构表_通过组织编码获取所有组织开始");
         JsonResult jsonResult;
         try {
-            List<String> resultList = domainOrgStructureService.getGroupByName(groupName);
+            List<DomainOrgStructureResponseVO> resultList = domainOrgStructureService.getGroupByName(groupName);
             jsonResult = JsonResultUtil.createSuccessJsonResult(resultList);
         } catch (Exception var4) {
             this.logger.error("组织架构表_通过组织编码获取所有组织发生异常" + var4.getMessage());
