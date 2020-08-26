@@ -545,4 +545,11 @@ public class DomainEmployeeInfo extends AutoIncrementKeyBaseDomain<Long> {
     @Column(name = "`back_school_time`")
     @ApiModelProperty("返校时间(优才系统使用)")
     private String backSchoolTime;
+
+    /**
+     * 英文名称
+     */
+    @Column(name = "`english_name`")
+    @ApiModelProperty("英文名称")
+    private String englishName;
 }
