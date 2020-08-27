@@ -117,7 +117,7 @@ public class DomainEmployeeInfoController {
                             .andEqualTo("deleteFlag", 0);
                     domainOrgStructure = domainOrgStructureMapper.selectOneByExample(parentExample);
                 }
-                info.setParentId(domainOrgStructure.getParentId());
+                info.setParentId(domainOrgStructure.getTeamId());
                 info.setParentName(domainOrgStructure.getGroupName());
             }
             jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoResponseVOList);
