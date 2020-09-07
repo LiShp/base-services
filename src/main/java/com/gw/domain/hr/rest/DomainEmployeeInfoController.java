@@ -54,7 +54,6 @@ public class DomainEmployeeInfoController {
         try {
             DomainEmpOrgRequestPO domainEmpOrgRequestPo = new DomainEmpOrgRequestPO();
             domainEmpOrgRequestPo.setPersonnelNo(personnelNo);
-            domainEmpOrgRequestPo.setPersonnelStatus(1);
 
             DomainEmployeeInfoResponseVO domainEmployeeInfoResponseVO = domainEmployeeInfoService.employee(domainEmpOrgRequestPo);
             if(domainEmployeeInfoResponseVO !=null) {
