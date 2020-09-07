@@ -4,9 +4,9 @@ spring:
   datasource:
     mysql:
       driver-class-name: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql://mdm1.ywztmdm-mysql-mdm:3306/mdm_employee?characterEncoding=utf8&allowMultiQueries=true
+      jdbcUrl: jdbc:mysql://10.255.30.208:35623/mdm_employee?characterEncoding=utf8&allowMultiQueries=true
       username: root
-      password: 123@mdm.CN
+      password: 123.Com
       # 初始化大小，最小，最大
       initialSize: 1
       minIdle: 3
