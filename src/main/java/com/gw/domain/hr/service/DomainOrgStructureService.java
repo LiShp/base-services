@@ -9,6 +9,7 @@ import com.gw.domain.hr.entity.vo.NodeVO;
 import com.gw.domain.hr.entity.vo.OrgStructureResponseVO;
 import com.gw.domain.common.enums.EmployeeTypeEnum;
 import com.gw.domain.common.enums.NodeTypeEnum;
+import com.gw.domain.hr.mapper.DomainEmployeeInfoMapper;
 import com.gw.domain.hr.mapper.DomainOrgStructureMapper;
 import com.gw.domain.hr.entity.DomainOrgStructure;
 import org.apache.ibatis.session.RowBounds;
@@ -215,8 +216,29 @@ public class DomainOrgStructureService  {
         }
         return list;
     }
+
+    @Autowired
+    private DomainEmployeeInfoMapper domainEmployeeInfoMapper;
+
+    public Boolean checkGroup(Integer groupId, String userCode) {
+        Example employeeExample = new Example(DomainEmployeeInfo.class);
+        employeeExample.createCriteria()
+                .andEqualTo("personnelNo", userCode);
+        DomainEmployeeInfo domainEmployeeInfo = domainEmployeeInfoMapper.selectOneByExample(employeeExample);
+        if(domainEmployeeInfo!=null){
+            DomainOrgStructureResponseVO domainOrgStructure=null;
+            domainOrgStructure= this.domainOrgStructureMapper.selectById(domainEmployeeInfo.getGroupId());
+            for(int i=0; i<domainOrgStructure.getLevel();i++){
+                if(groupId==domainOrgStructure.getId().intValue()){
+                    return true;
+                }
+                domainOrgStructure=this.getDomainOrgStructure(domainOrgStructure.getParentId());
+            }
+        }
+        return false;
+    }
+
+    private DomainOrgStructureResponseVO getDomainOrgStructure(Long parentId) {
+        return domainOrgStructureMapper.selectById(parentId.intValue());
+    }
 }
-
-
-
-

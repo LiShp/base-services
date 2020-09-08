@@ -194,6 +194,26 @@ public class DomainOrgStructureController {
         return jsonResult;
     }
 
+    /**
+     * @return
+     */
+    @ApiOperation(
+            value = "【自定义】- 校验用户所在部门是否是某个部门之下",
+            notes = "【自定义】- 校验用户所在部门是否是某个部门之下",
+            httpMethod = "GET"
+    )
+    @GetMapping(value = "/checkGroups")
+    public JsonResult<Boolean> checkGroups( Integer groupId , String userCode) {
+        JsonResult jsonResult;
+        try {
+            jsonResult = JsonResultUtil.createSuccessJsonResult(domainOrgStructureService.checkGroup(groupId,userCode));
+        } catch (Exception var4) {
+            this.logger.error("通过组织编码查询子级的员工列表发生异常" , var4);
+            jsonResult = JsonResultUtil.createFailureJsonResult("查询失败！ {0}", var4);
+        }
+        return jsonResult;
+    }
+
 }
 
 
