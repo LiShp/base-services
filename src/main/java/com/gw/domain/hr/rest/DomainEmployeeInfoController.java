@@ -63,6 +63,8 @@ public class DomainEmployeeInfoController {
                 DomainOrgStructure domainOrgStructure = domainOrgStructureMapper.selectOneByExample(orgExample);
                 domainEmployeeInfoResponseVO.setParentId(domainOrgStructure.getParentId());
                 domainEmployeeInfoResponseVO.setParentName(domainOrgStructure.getTeamName());
+                domainEmployeeInfoResponseVO.setDirectLeader(domainOrgStructure.getDirectLeader());
+                domainEmployeeInfoResponseVO.setDirectLeaderName(domainOrgStructure.getDirectLeaderName());
             }
             jsonResult = JsonResultUtil.createSuccessJsonResult(domainEmployeeInfoResponseVO);
         } catch (Exception var4) {

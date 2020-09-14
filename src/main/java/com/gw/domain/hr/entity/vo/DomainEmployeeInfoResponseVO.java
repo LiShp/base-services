@@ -79,6 +79,18 @@ public class DomainEmployeeInfoResponseVO extends AutoIncrementKeyBaseDomain<Lon
     private Integer groupId;
 
     /**
+     * 当前组织直接领导工号
+     */
+    @ApiModelProperty("当前组织直接领导工号")
+    private String directLeader;
+
+    /**
+     * 组织负责人姓名
+     */
+    @ApiModelProperty("组织负责人姓名")
+    private String directLeaderName;
+
+    /**
      * 所在科室
      */
     @ApiModelProperty("二级部ID")
